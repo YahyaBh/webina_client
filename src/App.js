@@ -1,26 +1,22 @@
-import * as React from "react";
-import Navbar from "react-bootstrap/Navbar";
+import React , { Fragment } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "bootstrap/dist/css/bootstrap.css";
 
 import { Routes, Route, Link } from "react-router-dom";
 
 // import EditProduct from "./Components/product/edit.component";
 import ProductList from "./Components/Show";
 import CreateWebsite from "./Components/CreateWebsite";
+import Navbar from "./Components/Navbar";
+import SideBar from "./Components/SideBar";
 
 function App() {
   return (
-    <React.Fragment>
-      <Navbar bg="primary">
-        <Container>
-          <Link to={"/"} className="navbar-brand text-white">
-            WebIna
-          </Link>
-        </Container>
-      </Navbar>
+    <Fragment>
+      <Navbar/>
+
+      <SideBar/>
 
       <Container className="mt-5">
         <Row>
@@ -32,7 +28,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-    </React.Fragment>);
+    </Fragment>);
 }
 
 export default App;
