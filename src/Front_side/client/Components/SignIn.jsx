@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react'
-import { AuthContext } from '../../Admin/Components/UserContext';
+import { AuthContext } from '../../UserContext';
 
 const SignIn = () => {
 
