@@ -1,0 +1,29 @@
+.m-navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+        a {
+            display: block;
+            color: rgb(var(--black-color));
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+
+            transition: all .1s ease;
+
+            &:hover {
+                transform: scale(.95);
+                color: #38474d;
+            }
+        }
+
+
+    }
+}

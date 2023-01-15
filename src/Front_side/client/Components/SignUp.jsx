@@ -1,10 +1,9 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
-import Navbar from './Navbar'
+import React, { useState } from 'react'
 
-const SignIn = () => {
+const SignUp = () => {
 
-
+    const [name, setName] = useState('');
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
@@ -15,8 +14,10 @@ const SignIn = () => {
 
         formData.append('email', emailInput)
         formData.append('password', passwordInput)
+        formData.append('name', name)
 
-        axios.post('/api/auth/signin', formData)
+
+        axios.post('http://localhost:8000/api/signup', formData)
             .then(res => {
                 console.log(res.data)
             })
@@ -25,9 +26,10 @@ const SignIn = () => {
 
     return (
         <div>
-            <Navbar />
-
             <form onSubmit={submitForm}>
+
+                <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+
 
                 <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
 
@@ -43,4 +45,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignUp

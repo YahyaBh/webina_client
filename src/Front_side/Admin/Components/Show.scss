@@ -1,0 +1,18 @@
+.table-container-show {
+    background-color: rgba(var(--dark-color) , .7);
+    box-shadow: 0 0 60px -25px black ;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    width: 100%;
+    min-height: 300px;
+    border-radius: 5px;
+
+    div {
+        display : inline;
+    }
+
+    th , td {
+        color: rgb(var(--white-color));
+    }
+
+}

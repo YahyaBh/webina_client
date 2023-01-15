@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Show.scss'
 
 
 export default function Show() {
@@ -16,7 +18,7 @@ export default function Show() {
     const fetchProducts = async () => {
         await axios.get(`http://localhost:8000/api/websites`).then(({ data }) => {
             setWebsites(data)
-            console.log(data);
+
         })
     }
 
@@ -53,14 +55,14 @@ export default function Show() {
 
     return (
         <div className="container">
-            <div className="row">
-                <div className='col-12'>
-                    <Link className='btn btn-primary mb-2 float-end' to={"/website/create"}>
-                        Create Product
-                    </Link>
-                </div>
-                <div className="col-12">
-                    <div className="card card-body">
+            <div className="table-container-show">
+                <div className="row">
+                    <div className='col-12'>
+                        <Link className='btn btn-primary mb-2 float-end' to={'/admin/website/create'}>
+                            Create Product
+                        </Link>
+                    </div>
+                    <div className="col-12">
                         <div className="table-responsive">
                             <table className="table table-bordered mb-0 text-center">
                                 <thead>
@@ -79,7 +81,7 @@ export default function Show() {
                                                     <td>{row.website_name}</td>
                                                     <td>{row.category}</td>
                                                     <td>{row.price}$</td>
-                                                    <td>{row.DevelopingTime}</td>
+                                                    <td>{row.Developing_Time}</td>
                                                     <td>
                                                         <Link to={`/product/edit/${row.token}`} className='btn btn-secondary me-2'>
                                                             Edit

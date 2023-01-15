@@ -5,26 +5,26 @@ import './Navbar.scss'
 const Navbar = () => {
     return (
         <div>
-            <nav className='navbar'>
+            <nav className='m-navbar'>
                 <div>
 
                 </div>
 
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/websites">Home</Link>
                     </li>
                     <li>
-                        <Link to="/">About</Link>
+                        <Link to="/about">About</Link>
                     </li>
                     <li>
-                        <Link to="/">Contact</Link>
+                        <Link to="/contact">Contact</Link>
                     </li>
                     <li>
-                        <Link to="/">Sign In</Link>
+                        <Link to="/signin">Sign In</Link>
                     </li>
                     <li>
-                        <Link to="/">Sign Up</Link>
+                        <Link to="/signup">Sign Up</Link>
                     </li>
                 </ul>
             </nav>

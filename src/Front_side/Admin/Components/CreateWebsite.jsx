@@ -14,7 +14,7 @@ export default function CreateWebsite() {
     const [name, setName] = useState("")
     const [token_id] = useState(uuidv4())
     const [category, setCategory] = useState("")
-    const [developing_time, setDevTime] = useState("")
+    const [developing_time, setDevTime] = useState("1 to 30 days")
     const [price, setPrice] = useState(0)
     const [validationError, setValidationError] = useState({})
 
@@ -27,7 +27,7 @@ export default function CreateWebsite() {
         formData.append('token', token_id)
         formData.append('category', category)
         formData.append('price', price)
-        formData.append('Developing Time', developing_time)
+        formData.append('Developing_Time', developing_time)
 
 
 
@@ -36,7 +36,7 @@ export default function CreateWebsite() {
                 icon: "success",
                 text: data.message
             })
-            navigate("/")
+            navigate("/websites")
         }).catch(({ response }) => {
             if (response.status === 422) {
                 setValidationError(response.data.errors)
