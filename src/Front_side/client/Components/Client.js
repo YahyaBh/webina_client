@@ -27,24 +27,7 @@ function App() {
         <Fragment>
             <Navbar />
 
-            <div className="mt-5" style={{ marginLeft: '7%', marginTop: '2%' }}>
-                <AuthContext.Provider value={auth}>
-
-
-
-                    <Routes>
-
-                        {/* Client Space */}
-
-                        <Route exact path="/signin" element={<SignIn />} />
-                        <Route exact path="/signup" element={<SignUp />} />
-                        <Route exact path='/chat/:id' element={<Chat />} />
-
-
-                    </Routes>
-                </AuthContext.Provider>
-
-            </div>
+            
         </Fragment>);
 }
 

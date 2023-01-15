@@ -1,0 +1,82 @@
+@font-face {
+    font-family: Louis-Bold;
+    src: url('../public/Fonts/Louis/Louis\ George\ Cafe\ Bold.ttf');
+}
+
+.app__header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 800px;
+        object-fit: cover;
+        z-index: -1;
+        filter: brightness(60%);
+    }
+
+    .app__video {
+        height: 800px
+    }
+
+
+    .app__header__title {
+        font-family: Louis-Bold;
+        color: rgb(var(--white-color));
+        text-transform: uppercase;
+        float: right;
+        height: 800px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+
+        h1 {
+            font-size: 70px;
+            align-items: center;
+            display: flex;
+            text-align: center;
+
+            span {
+                font-size: 70px;
+                align-items: center;
+                display: flex;
+                text-align: center;
+                --bg-size: 400%;
+                --color-one: hsl(15 90% 55%);
+                --color-two: hsl(40 95% 55%);
+                background: linear-gradient(90deg,
+                        var(--color-one),
+                        var(--color-two),
+                        var(--color-one)) 0 0 / var(--bg-size) 100%;
+                color: transparent;
+                background-clip: text;
+
+                @media (prefers-reduced-motion: no-preference) {
+                    .boujee-text {
+                        animation: move-bg 8s linear infinite;
+                    }
+
+                    @keyframes move-bg {
+                        to {
+                            background-position: var(--bg-size) 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    p {
+        font-size: 20px;
+        display: flex;
+        text-align: center;
+    }
+}

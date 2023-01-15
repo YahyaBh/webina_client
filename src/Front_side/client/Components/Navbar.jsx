@@ -20,6 +20,10 @@ const Navbar = () => {
                     <li>
                         <Link to="/contact">Contact</Link>
                     </li>
+
+                </ul>
+
+                <ul>
                     <li>
                         <Link to="/signin">Sign In</Link>
                     </li>
