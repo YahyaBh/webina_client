@@ -4,9 +4,8 @@
 }
 
 .app__header {
-    position: relative;
     width: 100%;
-    height: 100%;
+    height: 800px;
     background-size: cover;
     background-position: center;
 
@@ -78,5 +77,212 @@
         font-size: 20px;
         display: flex;
         text-align: center;
+    }
+}
+
+
+.app__about {
+    height: 400px;
+    width: 100%;
+    align-items: center;
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 60px;
+
+
+    h2 {
+        font-family: Louis-Bold;
+        font-size: 50px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+
+.app__more__about {
+    display: flex;
+    justify-content: center;
+
+
+    .app__more__about__content {
+        border-top: 18px solid #7b7b7b;
+
+        h2 {
+            font-family: Louis-Bold;
+            font-size: 50px;
+            margin: 10px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        svg {
+            font-size: 5rem;
+            background-color: rgb(var(--heavy-color));
+            border-radius: 8px;
+            padding: 10px;
+            color: rgb(var(--white-color));
+            box-shadow: 0 0 20px 4px grey;
+        }
+
+        .app__more__about__card {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+
+            h2 {
+                font-family: Louis-Bold;
+                text-transform: uppercase;
+                letter-spacing: .2rem;
+                margin-left: 50px;
+                font-size: 35px;
+            }
+        }
+    }
+
+
+    .app__more__about__image {
+        clip-path: polygon(0 0, 100% 0, 100% 3%, 30% 100%, 0 100%, 0% 50%);
+        background-image: url('../public/Images/pexels-christina-morillo-1181263.jpg');
+        filter: brightness(50%);
+        background-size: cover;
+        height: 600px;
+        width: 2800px;
+    }
+
+}
+
+
+.app__categories {
+    display: flex;
+    flex-direction: column;
+
+    .app__categories__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    height: 30vh;
+
+    .app__categories__triangle__left {
+        width: 100%;
+        height: 300px;
+        border-top: 50px solid transparent;
+        border-left: 100px solid rgb(var(--heavy-color));
+        border-bottom: 50px solid transparent;
+    }
+
+    .app__categories__triangle__right {
+        width: 100%;
+        height: 300px;
+        border-top: 50px solid transparent;
+        border-right: 100px solid rgb(var(--heavy-color));
+        border-bottom: 50px solid transparent;
+    }
+
+    .app__categories__title {
+        font-size: 1.5rem;
+
+        h2 {
+            text-transform: uppercase;
+            font-family: Louis-Bold;
+            font-size: 60px;
+        }
+    }
+
+
+    .swipper-category {
+        height: 200px;
+        padding: 20px;
+
+    }
+
+    .app__categories__cards {
+        background-color: rgba(var(--mid-color), .34);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: 0 0 20px 10px grey;
+        padding: 20px;
+        border-radius: 30px;
+        margin : 10px;
+        margin-top: 50px;
+        .app__categories__cards__sep {
+            
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .app__categories__card {
+                margin-bottom: 20px;
+                border-radius: 30px;
+                margin: 9px;
+
+                .app__categories__card__content {
+
+                    .app__categories__card__content__image {
+                        border-radius: 30px;
+
+                        img {
+                            box-shadow: 0 0 20px 1px grey;
+                            width: 300px;
+                            height: 100%;
+                            transition: all 0.3s ease;
+                            border-radius: 30px;
+                        }
+
+
+                        &:hover {
+                            img {
+                                transform: scale(1.05);
+                                filter: brightness(30%);
+                                cursor: pointer;
+                            }
+
+                            .app__categories__card__content__title {
+                                opacity: 1;
+                                top: -40px;
+                            }
+                        }
+                    }
+
+                    .app__categories__card__content__title {
+                        position: relative;
+                        z-index: 5;
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #fff;
+                        left: 10px;
+                        bottom: 40px;
+                        opacity: 0;
+                        transition: all 0.3s ease;
+                        top: 0px;
+                    }
+                }
+            }
+        }
+
+        .app__categories__show__button {
+            width: 300px;
+            background-color: rgb(var(--heavy-color));
+            border-radius: 30px;
+            color: #fff;
+            height: 50px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: rgb(var(--white-color));
+                color: rgb(var(--black-color));
+                box-shadow: 0 0 20px 3px grey;
+            }
+        }
     }
 }
