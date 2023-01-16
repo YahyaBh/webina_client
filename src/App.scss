@@ -160,6 +160,7 @@
 .app__categories {
     display: flex;
     flex-direction: column;
+    height: auto;
 
     .app__categories__content {
         display: flex;
@@ -167,7 +168,6 @@
         align-items: center;
     }
 
-    height: 30vh;
 
     .app__categories__triangle__left {
         width: 100%;
@@ -212,10 +212,11 @@
         box-shadow: 0 0 20px 10px grey;
         padding: 20px;
         border-radius: 30px;
-        margin : 10px;
+        margin: 10px;
         margin-top: 50px;
+
         .app__categories__cards__sep {
-            
+
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -283,6 +284,48 @@
                 color: rgb(var(--black-color));
                 box-shadow: 0 0 20px 3px grey;
             }
+        }
+    }
+}
+
+
+.app__skills {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+
+
+    .app__skills__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    .app__skills__triangle__left {
+        width: 100%;
+        height: 300px;
+        border-top: 50px solid transparent;
+        border-left: 100px solid rgb(var(--heavy-color));
+        border-bottom: 50px solid transparent;
+    }
+
+    .app__skills__triangle__right {
+        width: 100%;
+        height: 300px;
+        border-top: 50px solid transparent;
+        border-right: 100px solid rgb(var(--heavy-color));
+        border-bottom: 50px solid transparent;
+    }
+
+
+    .app__skills__title {
+        font-size: 1.5rem;
+
+        h2 {
+            text-transform: uppercase;
+            font-family: Louis-Bold;
+            font-size: 60px;
         }
     }
 }

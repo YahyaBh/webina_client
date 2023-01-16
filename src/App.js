@@ -42,7 +42,8 @@ function App() {
         <div className="app__header__content">
 
           <div className="app__header__title">
-            <h1>Make Your<br /> Sales <span> Easier</span></h1>
+            <h1>Make Your Sales <span> Easier</span>
+            </h1>
             <p>We will help you react your dreams by <br /> making you the most professional website among the market</p>
           </div>
 
@@ -149,14 +150,19 @@ function App() {
           </div>
 
           <div className="show__container">
-            <button className="app__categories__show__button">Show more</button>
+            <button className="app__categories__show__button">Show All</button>
           </div>
         </div>
 
       </section>
 
-      <section style={{ height : '400vh'}} className="section">
+      <section className="app__skills mt-5">
 
+        <div className="app__skills__content">
+          <div className="app__skills__triangle__left"></div>
+          <div className="app__skills__title"><h2>WebIna_Skills</h2></div>
+          <div className="app__skills__triangle__right"></div>
+        </div>
       </section>
 
       <Routes>
