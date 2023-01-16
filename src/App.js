@@ -25,6 +25,7 @@ import "swiper/css/navigation";
 
 
 
+
 import { CgWebsite } from 'react-icons/cg'
 import { VscDebugAll } from 'react-icons/vsc'
 import { AiOutlineDeploymentUnit } from 'react-icons/ai'
@@ -35,7 +36,7 @@ function App() {
   return (
     <Fragment>
 
-      <header className="app__header">
+      <header className="app__header" id="home">
         <Navbar />
 
 
@@ -45,6 +46,14 @@ function App() {
             <h1>Make Your Sales <span> Easier</span>
             </h1>
             <p>We will help you react your dreams by <br /> making you the most professional website among the market</p>
+
+            <Link to='/signup' class="app__header__title__sign">
+              <span>GET STARTED</span>
+              <svg width="13px" height="10px" viewBox="0 0 13 10">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+              </svg>
+            </Link>
           </div>
 
           <video className="app__video" loop autoPlay={true}>
@@ -57,7 +66,7 @@ function App() {
       </header>
 
 
-      <section className="app__about">
+      <section className="app__about" id="about">
         <div className="app__about__content">
           <h2>What Is WebIna ?</h2>
           <p>WebIna is a website that helps you make your dreams
@@ -178,14 +187,12 @@ function App() {
         <Route exact path='/admin/orders' element={<Orders />} />
         <Route exact path='/admin/order/:id' element={<Orders />} />
 
-        <Route exact path='/admin/chats' element={<Chat />} />
-        <Route exact path='/admin/chat/:id' element={<Chat />} />
+
 
         <Route exact path='/admin/users' element={<Users />} />
         <Route exact path='/admin/user/:id' element={<Users />} />
 
-        <Route exact path='/admin/websites' element={<Show />} />
-        <Route exact path='/admin/website/:id' element={<Show />} />
+
 
         <Route exact path='/admin/createWebsite' element={<CreateWebsite />} />
 
@@ -193,6 +200,11 @@ function App() {
         {/* Client Space */}
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path='/websites' element={<Show />} />
+        <Route exact path='/website/:id' element={<Show />} />
+        <Route exact path='/admin/chats' element={<Chat />} />
+        <Route exact path='/admin/chat/:id' element={<Chat />} />
+
 
       </Routes>
     </Fragment>
