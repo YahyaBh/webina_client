@@ -3,9 +3,17 @@
     src: url('../public/Fonts/Louis/Louis\ George\ Cafe\ Bold.ttf');
 }
 
+body {
+    background-image: url(../public/Images/s-bg.png);
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    background-origin: border-box;
+}
+
 .app__header {
     width: 100%;
-    height: 800px;
+    height: 100vh;
     background-size: cover;
     background-position: center;
 
@@ -19,14 +27,14 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 800px;
+        height: 100vh;
         object-fit: cover;
         z-index: -1;
         filter: brightness(60%);
     }
 
     .app__video {
-        height: 800px
+        height: 100vh
     }
 
 
@@ -35,7 +43,7 @@
         color: rgb(var(--white-color));
         text-transform: uppercase;
         float: right;
-        height: 800px;
+        height: 670px;
         width: 100%;
         justify-content: center;
         display: flex;
@@ -50,7 +58,6 @@
 
         .app__header__title__sign {
             position: relative;
-            margin: auto;
             padding: 15px 20px;
             transition: all .2s ease;
 
@@ -64,20 +71,22 @@
                 display: block;
                 border-radius: 28px;
                 background: rgba(var(--mid-color), .5);
-                width: 56px;
+                width: 0px;
                 height: 56px;
-                transition: all .3s ease
+                transition: all .2s ease
             }
 
-            span {
-
+            .app__header__title__sign span {
+                display: block;
                 position: relative;
                 line-height: 18px;
                 font-weight: 900;
                 letter-spacing: .25em;
                 text-transform: uppercase;
-                vertical-align: middle;
+
             }
+
+
 
             svg {
                 position: relative;
@@ -95,13 +104,13 @@
             &:hover {
 
                 a {
-                    color: rgba(var(--heavy-color), 1);
+                    color: rgba(var(--mid-color), 1);
                 }
 
                 &:before {
                     width: 100%;
                     background: rgba(var(--heavy-color), 1);
-                    
+
                     svg {
                         transform: translateX(0);
                     }
@@ -113,47 +122,72 @@
             }
         }
 
-        h1 {
-            font-size: 70px;
-            align-items: center;
-            display: flex;
-            text-align: center;
-
-            span {
-                font-size: 70px;
-                align-items: center;
-                display: flex;
-                text-align: center;
-                --bg-size: 400%;
-                --color-one: rgb(var(--mid-color));
-                --color-two: rgb(var(--heavy-color));
-                background: linear-gradient(90deg,
-                        var(--color-one),
-                        var(--color-two),
-                        var(--color-one)) 0 0 / var(--bg-size) 100%;
-                color: transparent;
-                background-clip: text;
-                margin-left: 10px;
-
-                @media (prefers-reduced-motion: no-preference) {
-                    .boujee-text {
-                        animation: move-bg 8s linear infinite;
-                    }
-
-                    @keyframes move-bg {
-                        to {
-                            background-position: var(--bg-size) 0;
-                        }
-                    }
-                }
-            }
-        }
     }
+
+    
 
     p {
         font-size: 20px;
         display: flex;
         text-align: center;
+    }
+
+
+
+    .wrapper {
+        box-sizing: content-box;
+        height: 70px;
+        padding: 50px 30px;
+        display: flex;
+        border-radius: 8px;
+
+        h1 {
+            font-size: 50px;
+            display: inline;
+            text-align: center;
+        }
+    }
+
+    .words {
+        overflow: hidden;
+
+        span {
+            font-size: 50px;
+            display: block;
+            height: 100%;
+            padding-left: 10px;
+            color: rgb(var(--mid-color));
+            animation: spin_words 6s infinite;
+        }
+    }
+
+    
+
+    @keyframes spin_words {
+        10% {
+            transform: translateY(-112%);
+        }
+
+        25% {
+            transform: translateY(-100%);
+        }
+
+        35% {
+            transform: translateY(-212%);
+        }
+
+        50% {
+            transform: translateY(-200%);
+        }
+
+        60% {
+            transform: translateY(-312%);
+        }
+
+        75% {
+            transform: translateY(-300%);
+        }
+
     }
 }
 
@@ -182,10 +216,10 @@
 .app__more__about {
     display: flex;
     justify-content: center;
-
+    border-top: 11px solid #7b7b7b;
+    border-bottom: 11px solid #201b1a;
 
     .app__more__about__content {
-        border-top: 18px solid #7b7b7b;
 
         h2 {
             font-family: Louis-Bold;
@@ -223,11 +257,11 @@
 
 
     .app__more__about__image {
-        clip-path: polygon(0 0, 100% 0, 100% 3%, 30% 100%, 0 100%, 0% 50%);
+        clip-path: polygon(0 0, 75% 0%, 100% 0, 31% 100%, 0 100%, 0% 50%);
         background-image: url('../public/Images/pexels-christina-morillo-1181263.jpg');
         filter: brightness(50%);
         background-size: cover;
-        height: 600px;
+        height: auto;
         width: 2800px;
     }
 
@@ -243,6 +277,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
     }
 
 
@@ -280,7 +315,9 @@
     }
 
     .app__categories__cards {
-        background-color: rgba(var(--mid-color), .34);
+        background: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)), url(../public/Images/background.jpg);
+        background-position: center;
+        background-size: cover;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -289,7 +326,7 @@
         box-shadow: 0 0 20px 10px grey;
         padding: 20px;
         border-radius: 30px;
-        margin: 10px;
+        margin: 65px;
         margin-top: 50px;
 
         .app__categories__cards__sep {
@@ -310,7 +347,7 @@
                         border-radius: 30px;
 
                         img {
-                            box-shadow: 0 0 20px 1px grey;
+                            box-shadow: 0 0 20px 1px black;
                             width: 300px;
                             height: 100%;
                             transition: all 0.3s ease;
@@ -350,9 +387,9 @@
 
         .app__categories__show__button {
             width: 300px;
-            background-color: rgb(var(--heavy-color));
+            background-color: rgb(var(--mid-color));
             border-radius: 30px;
-            color: #fff;
+            color: rgb(var(--black-color));
             height: 50px;
             transition: all 0.3s ease;
 
@@ -360,6 +397,7 @@
                 background-color: rgb(var(--white-color));
                 color: rgb(var(--black-color));
                 box-shadow: 0 0 20px 3px grey;
+                transform: scale(.95);
             }
         }
     }

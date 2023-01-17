@@ -19,19 +19,23 @@
         justify-content: space-between;
 
         li {
-            a {
+            margin: 10px;
+
+            a , button {
                 display: block;
-                color: rgb(var(--black-color));
+                color: rgb(var(--white-color));
+                background-color: transparent;
+                border: transparent;
+                outline: none;
                 text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
-                color: rgb(var(--white-color));
 
                 transition: all .1s ease;
 
                 &:hover {
                     transform: scale(.95);
-                    color: #38474d;
+                    color: rgb(var(--mid-color));
                 }
             }
 

@@ -43,8 +43,27 @@ function App() {
         <div className="app__header__content">
 
           <div className="app__header__title">
-            <h1>Make Your Sales <span> Easier</span>
-            </h1>
+            {/* <div className="app__header__title__container">
+              <h1>Make Your Sales </h1>
+              <div className="words">
+                <span className="span-word">Easier</span>
+                <span className="span-word">Better</span>
+                <span className="span-word">Safer</span>
+                <span className="span-word">Faster</span>
+              </div>
+            </div> */}
+
+            <div class="wrapper">
+              <h1>Make Your Sales </h1>
+              <div class="words">
+                <span>Easier</span>
+                <span>Better</span>
+                <span>Safer</span>
+                <span>Faster</span>
+              </div>
+            </div>
+
+
             <p>We will help you react your dreams by <br /> making you the most professional website among the market</p>
 
             <Link to='/signup' class="app__header__title__sign">

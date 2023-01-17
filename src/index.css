@@ -20,6 +20,14 @@ body {
   text-decoration: none;
 }
 
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 :root {
   --bg-color: 161, 170, 173;
   --dark-color: 21, 38, 45;
