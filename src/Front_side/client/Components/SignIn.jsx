@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react'
 import { AiOutlineGoogle } from 'react-icons/ai';
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../UserContext';
+import { MdErrorOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { Navigate } from "react-router";
+import Swal from 'sweetalert2';
+import cookie from 'js-cookie';
 
 const SignIn = () => {
 
@@ -11,31 +14,37 @@ const SignIn = () => {
     const [passwordInput, setPasswordInput] = useState('');
 
 
-
     const submitForm = async (e) => {
         e.preventDefault();
 
         const formData = new FormData()
 
-        try {
-            formData.append('email', emailInput)
-            formData.append('password', passwordInput)
+        formData.append('email', emailInput)
+        formData.append('password', passwordInput)
 
-            axios.post('http://localhost:8000/api/signin', formData)
-                .then(res => {
-                    console.log(res.data)
-                    Navigate('/')
-                })
-        } catch (error) {
-            if (error.response.status === 422) {
-                console.log(error.response.data.errors);
-            }
-
-        }
-
-        // const auth = useContext(AuthContext);
-        // const token = auth.token;
+        axios.post('http://localhost:8000/api/signin', formData)
+            .then(res => {
+                if (res.status === 200) {
+                    cookie.set('token', res.data.access_token);
+                    cookie.set('user', res.data.user);
+                    Navigate(`/`);
+                    setEmailInput('');
+                    setPasswordInput('');
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Sign In Failed! With Error: ' + res.data.message,
+                        icon: <MdErrorOutline />,
+                        showConfirmButton: false,
+                        confirmButtonText: 'Sign up!',
+                        showCancelButton: true,
+                        showLoader: true,
+                    })
+                }
+            })
     }
+
+
 
     return (
         <div className='app__signin'>
