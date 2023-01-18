@@ -14,19 +14,18 @@ import SignUp from "./Front_side/client/Components/SignUp";
 import Navbar from "./Front_side/client/Components/Navbar";
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';
-import YahyaBouhsine from './Assets/Images/Skills_Dev/profile.b5697fde8b8a45586598.png';
-import HTML from './Assets/Images/Skills_Dev/pngwing.com(1).png';
-import CSS from './Assets/Images/Skills_Dev/pngwing.com.png';
-import JS from './Assets/Images/Skills_Dev/pngwing.com(2).png';
-import REACT from './Assets/Images/Skills_Dev/pngwing.com(3).png';
-import REDUX from './Assets/Images/Skills_Dev/pngwing.com(4).png';
-import PHP from './Assets/Images/Skills_Dev/pngwing.com(5).png';
-import LARAVEL from './Assets/Images/Skills_Dev/pngwing.com(6).png';
-import SASS from './Assets/Images/Skills_Dev/pngwing.com(7).png';
-import EX from './Assets/Images/Skills_Dev/pngwing.com(8).png';
-import NODEJS from './Assets/Images/Skills_Dev/pngwing.com(9).png';
-import TS from './Assets/Images/Skills_Dev/pngwing.com(10).png';
-import MYSQL from './Assets/Images/Skills_Dev/pngwing.com(11).png';
+import YahyaBouhsine from './Assets/Images/profile.b5697fde8b8a45586598.png';
+import Youness from './Assets/Images/youness.png';
+import Moujahid from './Assets/Images/FRAZZIX.png';
+
+
+import { AiFillHtml5 , AiOutlineCamera  , AiOutlineDatabase , AiOutlineCloudServer} from 'react-icons/ai';
+import { TbBrandJavascript } from 'react-icons/tb';
+import { FaLaravel } from 'react-icons/fa';
+import { DiMysql , DiNodejsSmall ,  DiReact , DiCss3 , DiSass , DiPhp , DiPhotoshop , DiIllustrator , DiVisualstudio} from 'react-icons/di';
+import { SiTypescript , SiAdobepremierepro , SiAdobeaftereffects } from 'react-icons/si';
+import { MdOutlineDesignServices , MdOutlineMiscellaneousServices} from 'react-icons/md';
+import { RiCustomerServiceLine } from 'react-icons/ri';
 
 import './App.scss'
 
@@ -208,36 +207,57 @@ function App() {
           <div className="app__skills__title"><h2>WebIna_Founders</h2></div>
         </div>
 
-
         <div className="app__skills__cards">
-          <div className="app__skills__cards__sep">
-            <div className="app__skills__card">
-              <div className="app__skills__card__content">
-                <div className="app__skills__card__content__image">
-                  <img src={YahyaBouhsine} alt="worker_1" />
-                  <h3 className="app__skills__card__content__title">&lt;&gt;Yahya Bouhsine&lt;/&gt;</h3>
-                </div>
+          <div className="app__skills__card">
+            <div className="app__skills__card__img">
+              <img src={YahyaBouhsine} alt="founders" />
+            </div>
 
-                <div className="app__skills__card__content__skills">
-                  <div className="app__skills__card__content__skills__items">
-                    <img src={HTML} alt="html" />
-                    <img src={CSS} alt="css" />
-                    <img src={JS} alt="javascript" />
-                    <img src={REACT} alt="reactjs" />
-                    <img src={REDUX} alt="redux" />
-                    <img src={PHP} alt="php" />
-                    <img src={LARAVEL} alt="laravel" />
-                    <img src={MYSQL} alt="mysql" />
-                    <img src={EX} alt="expressjs" />
-                    <img src={NODEJS} alt="nodejs" />
-                    <img src={TS} alt="typescript" />
-                  </div>
-                </div>
-              </div>
+            <div className="app__skills__card__content">
+              <h3 className="app__skills__card__content__title">Yahya Bouhsine</h3>
+              <p className="app__skills__card__content__description">Developer And Programmer of WebIna Company</p>
+              <AiFillHtml5/><TbBrandJavascript/><FaLaravel/><DiMysql/><DiNodejsSmall/><DiReact/>
+              <DiCss3/><DiSass/><DiPhp/><SiTypescript/>
+              <hr/>
             </div>
           </div>
+
+          <hr/>
+
+          <div className="app__skills__card">
+            <div className="app__skills__card__img">
+              <img className="moujahid" src={Moujahid} alt="founders" />
+            </div>
+
+            <div className="app__skills__card__content">
+              <h3 className="app__skills__card__content__title">Moujahid Nejjar</h3>
+              <p className="app__skills__card__content__description">Designer & UX/UI Designer of WebIna Company</p>
+              <AiOutlineCamera/><DiPhotoshop/><DiIllustrator/><SiAdobepremierepro/><SiAdobeaftereffects/><DiReact/>
+              <MdOutlineDesignServices/>
+              <hr/>
+            </div>
+          </div>
+
+          <hr/>
+
+          <div className="app__skills__card">
+            <div className="app__skills__card__img">
+              <img src={Youness} alt="founders" />
+            </div>
+
+            <div className="app__skills__card__content">
+              <h3 className="app__skills__card__content__title">Youness Mekki</h3>
+              <p className="app__skills__card__content__description">Security & Database Managment</p>
+              <AiOutlineDatabase/><AiOutlineCloudServer/><DiVisualstudio/><MdOutlineMiscellaneousServices/><RiCustomerServiceLine/>
+              <hr/>
+            </div>
+          </div>
+
+          <hr/>
         </div>
-      </section>
+
+        
+      </section >
 
       <Routes>
 
@@ -272,7 +292,7 @@ function App() {
 
 
       </Routes>
-    </Fragment>
+    </Fragment >
   );
 }
 
