@@ -891,18 +891,189 @@ body {
 }
 
 
+.app__signup {
 
-.app__signup__form {
-    height: 100vh;
-    width: 30%;
+    display: flex;
 
-
-    form {
+    .app__signup__form {
+        height: 100vh;
+        width: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: auto;
+            width: 70%;
+            background-color: rgba(var(--white-color));
+            padding: 20px;
+            border-radius: 10px;
+            border: none;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px 4px grey;
+
+            h2 {
+                font-family: Louis-Bold;
+            }
+
+
+            input {
+                width: 250px;
+                height: 40px;
+                margin-bottom: 20px;
+                padding: 10px;
+                border-bottom: 2px solid rgb(var(--heavy-color));
+                outline: none;
+            }
+
+            button {
+                height: 40px;
+                width: 250px;
+                background-color: rgb(var(--mid-color));
+                color: rgb(var(--black-color));
+                border-radius: 20px;
+                font-family: Louis-Bold;
+                margin-bottom: 20px;
+                transition: all .3s ease;
+
+                &:hover {
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    box-shadow: 0 0 20px 0px grey;
+                }
+            }
+
+            .app__google__signup {
+                font-size: 20px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                background-color: #db4537e0;
+                box-shadow: 0 0 20px 4px grey;
+                transition: all .3s ease;
+
+                svg {
+                    color: #FFF;
+                }
+
+                &:hover {
+                    height: 40px;
+                    width: 250px;
+                    border-radius: 20px;
+                    box-shadow: 0 0 20px 0px grey;
+
+                }
+            }
+        }
+    }
+
+
+    .app__signup__form__bg {
+        height: 100vh;
+        width: 70%;
+        background: url(./Assets/Images/signup.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(40%);
+    }
+}
+
+
+
+
+.app__signin {
+
+    display: flex;
+
+    .app__signin__form {
         height: 100vh;
         width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: auto;
+            width: 70%;
+            background-color: rgba(var(--white-color));
+            padding: 20px;
+            border-radius: 10px;
+            border: none;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px 4px grey;
+
+            h2 {
+                font-family: Louis-Bold;
+            }
+
+
+            input {
+                width: 250px;
+                height: 40px;
+                margin-bottom: 20px;
+                padding: 10px;
+                border-bottom: 2px solid rgb(var(--heavy-color));
+                outline: none;
+            }
+
+            button {
+                height: 40px;
+                width: 250px;
+                background-color: rgb(var(--mid-color));
+                color: rgb(var(--black-color));
+                border-radius: 20px;
+                font-family: Louis-Bold;
+                margin-bottom: 20px;
+                transition: all .3s ease;
+
+                &:hover {
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    box-shadow: 0 0 20px 0px grey;
+                }
+            }
+
+            .app__google__signup {
+                font-size: 20px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                background-color: #db4537e0;
+                box-shadow: 0 0 20px 4px grey;
+                transition: all .3s ease;
+
+                svg {
+                    color: #FFF;
+                }
+
+                &:hover {
+                    height: 40px;
+                    width: 250px;
+                    border-radius: 20px;
+                    box-shadow: 0 0 20px 0px grey;
+
+                }
+            }
+        }
+    }
+
+
+    .app__signin__form__bg {
+        height: 100vh;
+        width: 70%;
+        background: url(./Assets/Images/signin.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(40%);
     }
 }
