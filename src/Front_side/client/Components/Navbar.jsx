@@ -8,9 +8,9 @@ const Navbar = () => {
     return (
         <div>
             <nav className='m-navbar'>
-                <div>
+                <a href='/'>
                     <img className='navbar-logo' src="./Images/webinai.png" alt="logo" width='80px' />
-                </div>
+                </a>
 
                 <ul>
                     <li>

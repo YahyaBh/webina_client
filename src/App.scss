@@ -413,16 +413,59 @@ body {
 .app__skills {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: auto;
 
 
     .app__skills__cards {
         margin: 100px 400px;
+        transition: all .3s ease;
+
         .app__skills__card {
             display: flex;
             align-items: center;
+            transition: all .3s ease;
+
+            &:hover {
+
+                .app__skills__card__content {
+                    display: none;
+                }
+
+                .app__skills__card__img {
+                    margin: auto;
+
+                    .app__skills__card__name {
+                        opacity: 1;
+                    }
+
+                    .app__skills__card__content__role {
+                        opacity: 1;
+                    }
+
+                    img {
+                        width: 500px;
+                        border-radius: 2%;
+                        background: linear-gradient(-45deg, rgb(var(--mid-color)), rgb(var(--heavy-color)), rgb(var(--dark-color)));
+                        background-size: 400% 400%;
+                        animation: gradient 3s ease;
+                    }
+
+                    @keyframes gradient {
+                        0% {
+                            background-position: 0% 50%;
+                        }
+
+                        100% {
+                            background-position: 100% 70%;
+                        }
+                    }
+
+                }
+            }
 
             .app__skills__card__content {
+                transition: all .3s ease;
+
                 svg {
                     font-size: 40px;
                     margin-right: 5px;
@@ -430,6 +473,22 @@ body {
             }
 
             .app__skills__card__img {
+
+                .app__skills__card__name {
+                    position: absolute;
+                    opacity: 0;
+                    color: white;
+                    margin-left: 20px;
+                    margin-top: 20px;
+                }
+
+                .app__skills__card__content__role {
+                    position: absolute;
+                    opacity: 0;
+                    color: white;
+                    margin-left: 20px;
+                    margin-top: 60px;
+                }
 
 
                 img {
@@ -441,6 +500,8 @@ body {
                     box-shadow: 0 0 40px -8px black;
                     margin-right: 20px;
                     background-color: rgba(var(--mid-color), .4);
+                    transition: all .3s ease;
+
                 }
 
                 .moujahid {
@@ -459,23 +520,6 @@ body {
     }
 
 
-    .app__skills__triangle__left {
-        width: 100%;
-        height: 300px;
-        border-top: 50px solid transparent;
-        border-left: 100px solid rgb(var(--heavy-color));
-        border-bottom: 50px solid transparent;
-    }
-
-    .app__skills__triangle__right {
-        width: 100%;
-        height: 300px;
-        border-top: 50px solid transparent;
-        border-right: 100px solid rgb(var(--heavy-color));
-        border-bottom: 50px solid transparent;
-    }
-
-
     .app__skills__title {
         font-size: 1.5rem;
 
@@ -485,4 +529,329 @@ body {
             font-size: 60px;
         }
     }
+}
+
+
+
+.app__contact {
+    .app__contact__content {
+        .app__contact__title {
+            h2 {
+                text-align: center;
+
+                font-family: Louis-Bold;
+                font-size: 50px;
+            }
+        }
+    }
+
+    .app__contact__content__form__image {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+
+        .app__contact__image {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .app__contact__form {
+            display: flex;
+
+            form {
+
+                input {
+                    height: 50px;
+                    padding: 5px;
+                    border-bottom: 2px solid rgb(var(--mid-color));
+                    transition: all .3s ease;
+                }
+
+                input[type="text"]:hover,
+                input[type="email"]:hover {
+                    border-bottom: 2px solid rgb(var(--heavy-color));
+                    height: 40px;
+                }
+
+                button {
+                    height: 50px;
+                    padding: 5px;
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    transition: all .3s ease;
+
+                    &:hover {
+                        background-color: rgb(var(--mid-color));
+                        color: rgb(var(--black-color));
+                        transform: scale(.95);
+                    }
+                }
+
+                textarea {
+                    padding: 5px;
+                    height: 200px;
+                    resize: none;
+                    border-bottom: 2px solid rgb(var(--mid-color));
+                    transition: all .3s ease;
+
+                    &:hover {
+                        border-bottom: 2px solid rgb(var(--heavy-color));
+                    }
+                }
+
+                input,
+                textarea,
+                button {
+                    display: block;
+                    outline: none;
+                    margin-bottom: 20px;
+                    width: 500px;
+                }
+
+                input[type=checkbox] {
+                    justify-content: flex-start;
+                    height: 20px;
+                }
+
+            }
+        }
+    }
+}
+
+
+
+.b-contain *,
+.b-contain *::before,
+.b-contain *::after {
+    box-sizing: content-box !important;
+}
+
+.b-contain input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.b-contain span {
+    line-height: 1.54;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.b-contain {
+    display: table;
+    position: relative;
+    padding-left: 1.8rem;
+    cursor: pointer;
+    margin-bottom: .5rem;
+}
+
+.b-contain input[type="checkbox"]~.b-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    background: rgba(241, 245, 248, 1);
+    transition: background 250ms;
+    border: 1px solid rgba(184, 194, 204, 1);
+    border-radius: 0.125rem;
+}
+
+.b-contain input[type="radio"]~.b-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    background: rgba(241, 245, 248, 1);
+    transition: background 250ms;
+    border: 1px solid rgba(184, 194, 204, 1);
+    border-radius: 2.0rem;
+}
+
+.b-contain input[type="checkbox"]~.b-input::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: .45rem;
+    top: .18rem;
+    width: .25rem;
+    height: .6rem;
+    border: solid rgba(255, 255, 255, 1);
+    border-width: 0 2px 2px 0;
+    transition: background 250ms;
+    transform: rotate(45deg);
+}
+
+.b-contain input[type="radio"]~.b-input::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: .25rem;
+    top: .25rem;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 2.0rem;
+    background: rgba(255, 255, 255, 1);
+    transition: background 250ms;
+}
+
+.b-contain input:disabled~.b-input::after {
+    border-color: rgba(135, 149, 161, 1);
+}
+
+.b-contain input:checked~.b-input::after {
+    display: block;
+}
+
+.b-contain:hover input~.b-input,
+.b-contain input:focus~.b-input {
+    background: rgb(231, 238, 243);
+}
+
+.b-contain input:focus~.b-input {
+    box-shadow: 0 0 0 2px rgba(var(--mid-color), 0.5);
+}
+
+.b-contain input:checked~.b-input {
+    background: rgb(var(--mid-color));
+    border-color: rgb(var(--mid-color));
+}
+
+.b-contain input[type="checkbox"]:disabled~.b-input {
+    background: rgba(241, 245, 248, 1);
+    border-color: rgba(184, 194, 204, 1);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.b-contain input[type="radio"]:disabled~.b-input {
+    background: rgba(241, 245, 248, 1);
+    border-color: rgba(184, 194, 204, 1);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.b-contain input[type="radio"]:disabled~.b-input::after {
+    background: rgba(135, 149, 161, 1);
+}
+
+.b-contain input:checked:focus~.b-input,
+.b-contain:hover input:not([disabled]):checked~.b-input {
+    background: rgb(var(--mid-color));
+    border-color: rgb(var(--mid-color));
+}
+
+.b-contain .b-input::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3rem;
+    height: 3rem;
+    margin-left: -0.85rem;
+    margin-top: -0.85rem;
+    background: rgb(var(--mid-color));
+    border-radius: 2rem;
+    opacity: .6;
+    z-index: 99999;
+    transform: scale(0);
+}
+
+@keyframes b-ripple {
+    0% {
+        transform: scale(0);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes b-ripple-duplicate {
+    0% {
+        transform: scale(0);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.b-contain input+.b-input::before {
+    animation: b-ripple 250ms ease-out;
+}
+
+.b-contain input:checked+.b-input::before {
+    animation-name: b-ripple-duplicate;
+}
+
+.b-contain .b-input::before {
+    visibility: hidden;
+}
+
+.b-contain input:focus+.b-input::before {
+    visibility: visible;
+}
+
+.b-contain:first-child .b-input::before {
+    visibility: hidden;
+}
+
+
+
+.app__footer {
+    clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0 100%, 0 36%);
+    margin-top: 30px;
+    background-color: rgb(var(--heavy-color));
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    ul {
+        margin-top: 100px;
+
+        h3 {
+            color: rgb(var(--white-color));
+        }
+
+
+        li {
+            list-style: none;
+            a {
+                color: rgb(var(--white-color));
+                text-decoration: none;
+                transition: all .3s ease;
+                &:hover {
+                    color: rgb(var(--mid-color));
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+
+
+.privacy-policy {
+    margin: 60px;
 }
