@@ -26,21 +26,29 @@ const SignUp = () => {
 
     return (
         <div>
-            <form onSubmit={submitForm}>
+            
 
-                <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+            <div className='app__signup__form'>
+                <form onSubmit={submitForm}>
 
-
-                <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
-
-                <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
+                    <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
 
 
-                <button type='submit'>Sign In</button>
+                    <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
+
+                    <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
 
 
-            </form>
+                    <button type='submit'>Sign In</button>
 
+
+                </form>
+            </div>
+
+
+            <div className='app__signup__form__bg'>
+
+            </div>
         </div>
     )
 }

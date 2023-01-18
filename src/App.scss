@@ -827,6 +827,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+
     ul {
         margin-top: 100px;
 
@@ -837,10 +838,12 @@ body {
 
         li {
             list-style: none;
+
             a {
                 color: rgb(var(--white-color));
                 text-decoration: none;
                 transition: all .3s ease;
+
                 &:hover {
                     color: rgb(var(--mid-color));
                     transform: scale(1.1);
@@ -854,4 +857,52 @@ body {
 
 .privacy-policy {
     margin: 60px;
+}
+
+
+
+.app__not__found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+
+    h2 {
+        font-size: 60px;
+        font-family: Louis-Bold;
+    }
+
+    button {
+        width: 150px;
+        height: 40px;
+        background-color: rgb(var(--mid-color));
+        color: rgb(var(--black-color));
+        font-family: Louis-Bold;
+        border: none;
+        border-radius: 20px;
+        transition: all .3s ease;
+
+        &:hover {
+            box-shadow: 0 0 20px 4px grey;
+            background-color: rgb(var(--white-color));
+        }
+    }
+}
+
+
+
+.app__signup__form {
+    height: 100vh;
+    width: 30%;
+
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        width: 30%;
+    }
 }

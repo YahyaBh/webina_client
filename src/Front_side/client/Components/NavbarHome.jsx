@@ -4,7 +4,7 @@ import './Navbar.scss'
 import Scroll from 'react-scroll-to-element';
 
 
-const Navbar = () => {
+const NavbarHome = () => {
     return (
         <div>
             <nav className='m-navbar'>
@@ -14,25 +14,25 @@ const Navbar = () => {
 
                 <ul>
                     <li>
-                        <a href='/'>
+                        <Scroll type="id" element="home" offset={-100} timeout={100}>
                             <button>Home</button>
-                        </a>
+                        </Scroll>
                         {/* <Link to="/websites"></Link> */}
                     </li>
                     <li>
-                        <a href='/#about'>
+                        <Scroll type="id" element="about" offset={-100} timeout={100}>
                             <button>About</button>
-                        </a>
+                        </Scroll>
                     </li>
                     <li>
-                        <a href='/#founders'>
+                        <Scroll type="id" element="founders" offset={-100} timeout={100}>
                             <button>Founders</button>
-                        </a>
+                        </Scroll>
                     </li>
                     <li>
-                        <a href='/#contact'>
+                        <Scroll type="id" element="contact" offset={-100} timeout={100}>
                             <button>Contact</button>
-                        </a>
+                        </Scroll>
                     </li>
 
                 </ul>
@@ -50,4 +50,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavbarHome

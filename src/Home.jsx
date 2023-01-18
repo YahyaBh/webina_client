@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Navbar from "./Front_side/client/Components/Navbar";
+import Navbar from "./Front_side/client/Components/NavbarHome";
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';
 import YahyaBouhsine from './Assets/Images/profile.b5697fde8b8a45586598.png';
@@ -33,6 +33,8 @@ import "swiper/css/navigation";
 import { CgWebsite } from 'react-icons/cg'
 import { VscDebugAll } from 'react-icons/vsc'
 import { AiOutlineDeploymentUnit } from 'react-icons/ai'
+import NavbarHome from './Front_side/client/Components/NavbarHome';
+
 
 import AOS from "aos";
 
@@ -46,7 +48,7 @@ const Home = () => {
     return (
         <div>
             <header className="app__header" id="home">
-                <Navbar />
+                <NavbarHome />
 
 
                 <div className="app__header__content">
@@ -99,8 +101,7 @@ const Home = () => {
             </section>
 
 
-
-            <section className="app__more__about">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fill-opacity="3" d="M0,32L0,224L240,224L240,288L480,288L480,288L720,288L720,192L960,192L960,160L1200,160L1200,192L1440,192L1440,320L1200,320L1200,320L960,320L960,320L720,320L720,320L480,320L480,320L240,320L240,320L0,320L0,320Z"></path></svg>            <section className="app__more__about">
                 <div className="app__more__about__image"></div>
                 <div className="app__more__about__content">
                     <h2>More About WebIna</h2>
@@ -120,8 +121,13 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fill-opacity="3" d="M0,0L0,160L288,160L288,64L576,64L576,96L864,96L864,64L1152,64L1152,32L1440,32L1440,0L1152,0L1152,0L864,0L864,0L576,0L576,0L288,0L288,0L0,0L0,0Z"></path></svg>
+            
+            
+            
+            
+            
+            
             <section className="app__categories mt-5">
                 <div className="app__categories__content">
                     <div className="app__categories__title"><h2>WebIna_Categories</h2></div>
@@ -182,7 +188,7 @@ const Home = () => {
 
             </section>
 
-            <section className="app__skills mt-5">
+            <section className="app__skills mt-5" id='founders'>
 
                 <div className="app__skills__content">
                     <div className="app__skills__title"><h2>WebIna_Founders</h2></div>
@@ -247,7 +253,7 @@ const Home = () => {
             </section >
 
 
-            <section className="app__contact mt-5">
+            <section className="app__contact mt-5" id='contact'>
                 <div className="app__contact__content">
                     <div className="app__contact__title"><h2>Conatct_WebIna</h2></div>
                 </div>
