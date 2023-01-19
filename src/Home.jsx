@@ -3,6 +3,8 @@ import React from 'react'
 import Navbar from "./Front_side/client/Components/NavbarHome";
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';
+import ImageContact from './Assets/Images/vector_contact.png';
+
 import YahyaBouhsine from './Assets/Images/profile.b5697fde8b8a45586598.png';
 import Youness from './Assets/Images/youness.png';
 import Moujahid from './Assets/Images/FRAZZIX.png';
@@ -260,7 +262,7 @@ const Home = () => {
 
                 <div className="app__contact__content__form__image">
                     <div className="app__contact__image">
-                        <img src={ImageAbout} alt="contact" />
+                        <img src={ImageContact} alt="contact" />
                     </div>
 
 

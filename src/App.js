@@ -16,7 +16,6 @@ import PrivacyPolicy from "./Front_side/client/Components/PrivacyPolicy";
 import Home from "./Home";
 import Error from "./Error";
 
-import AuthenUser from "./Front_side/PrivateRoute";
 import PrivateRoute from "./Front_side/PrivateRoute";
 
 
@@ -33,7 +32,6 @@ function App() {
 
       <Routes>
 
-        {/* Admin Space */}
         <Route exact path='/admin' element={<Admin />} />
         <Route exact path='/admin/services' element={<Services />} />
         <Route exact path='/admin/orders' element={<Orders />} />
@@ -42,23 +40,26 @@ function App() {
         <Route exact path='/admin/user/:id' element={<Users />} />
         <Route exact path='/admin/createWebsite' element={<CreateWebsite />} />
 
-
-        {/* Client Space */}
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/signin" element={<SignIn />} />
-        <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 
-        <Route exact path='*' element={<Error />} />
 
-
-
-        {/* <PrivateRoute path="/protected"> */}
+        <Route exact path='/' element={<PrivateRoute />}>
+          <Route exact path='/' element={<Home />} />
           <Route exact path='/websites' element={<Show />} />
           <Route exact path='/website/:id' element={<Show />} />
           <Route exact path='/chats' element={<Chat />} />
           <Route exact path='/chat/:id' element={<Chat />} />
-        {/* </PrivateRoute> */}
+        </Route>
+
+
+        <Route exact path="/signin" element={<SignIn />} />
+        <Route exact path="/signup" element={<SignUp />} />
+
+
+
+        <Route exact path='*' element={<Error />} />
+
+
       </Routes>
     </Fragment >
   );

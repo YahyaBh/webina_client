@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react'
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import { Navigate } from "react-router";
 import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
@@ -27,7 +27,7 @@ const SignIn = () => {
                 if (res.status === 200) {
                     cookie.set('token', res.data.access_token);
                     cookie.set('user', res.data.user);
-                    Navigate(`/`);
+                    redirect("/")
                     setEmailInput('');
                     setPasswordInput('');
                 } else {

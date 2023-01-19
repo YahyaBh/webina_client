@@ -1,26 +1,13 @@
-import cookie from "js-cookie";
-import { Navigate, Route } from "react-router-dom";
+import cookie from 'js-cookie';
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
-function PrivateRoute({ children, ...rest }) {
-  let token = cookie.get("token");
-  ;
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        cookie ? (
-          children
-        ) : (
-          <Navigate
-            to={{
-              pathname: "/login",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
+const PrivateRoute = () => {
+  const auth = cookie.get('token'); // determine if authorized, from context or however you're doing it
+
+  // If authorized, return an outlet that will render child elements
+  // If not, return element that will navigate to login page
+  return auth ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateRoute;
