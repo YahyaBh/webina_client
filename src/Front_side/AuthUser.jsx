@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cookie from 'js-cookie';
+import Swal from 'sweetalert2';
+import { MdErrorOutline } from 'react-icons/md';
 
 export default function AuthUser() {
     const navigate = useNavigate();
@@ -20,16 +22,22 @@ export default function AuthUser() {
     const [user, setUser] = useState(getUser());
 
     const saveToken = (user, token) => {
-        cookie.set('token' , token);
-        cookie.set('user' ,user);
+        cookie.set('token', token , {secure: true, sameSite: 'none'});
+        cookie.set('user', user , {secure: true, sameSite: 'none'});
 
         navigate('/');
     }
 
     const logout = () => {
-        cookie.remove('token');
-        cookie.remove('user');
-        navigate('/');
+
+        if (cookie.get('token')) {
+            axios.post('http://localhost:8000/api/logout')
+
+            navigate('/');
+            cookie.remove('token');
+            cookie.remove('user');
+        }
+
     }
 
     const http = axios.create({

@@ -42,8 +42,8 @@ const SignUp = () => {
                 http.post('/signup', formData)
                     .then(res => {
                         if (res.status === 200) {
-                            cookie.set('token', res.data.access_token);
-                            cookie.set('user', JSON.stringify(res.data.user));
+                            cookie.set('token', res.data.access_token , {secure: true, sameSite: 'none'});
+                            cookie.set('user', JSON.stringify(res.data.user) , {secure: true, sameSite: 'none'});
                             navigate(`/`);
                             setName('');
                             setEmailInput('');
@@ -57,7 +57,7 @@ const SignUp = () => {
                                 showConfirmButton: false,
                                 confirmButtonText: 'Sign up!',
                                 showCancelButton: true,
-                                showLoader: true,
+                                
                             })
                         } else if (res.status === 400) {
                             Swal.fire({
@@ -67,7 +67,7 @@ const SignUp = () => {
                                 showConfirmButton: false,
                                 confirmButtonText: 'Sign up!',
                                 showCancelButton: true,
-                                showLoader: true,
+                                
                             })
 
                         }
@@ -80,6 +80,7 @@ const SignUp = () => {
             }
 
         } else {
+            e.preventDefault();
             Swal.fire({
                 title: 'Error!',
                 text: 'Passwords does not match',
@@ -87,7 +88,7 @@ const SignUp = () => {
                 showConfirmButton: false,
                 confirmButtonText: 'Sign up!',
                 showCancelButton: false,
-                showLoader: true,
+                
             })
         }
 

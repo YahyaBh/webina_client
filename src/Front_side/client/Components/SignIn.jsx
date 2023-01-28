@@ -14,7 +14,6 @@ const SignIn = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const { http, setToken } = AuthUser();
-    const { getToken } = AuthUser();
 
 
 
@@ -67,7 +66,7 @@ const SignIn = () => {
                         icon: "success",
                         showConfirmButton: true,
                         confirmButtonText: "Let's go!",
-                        showLoader: true,
+                        
                     })
                 } else {
                     Swal.fire({
@@ -77,7 +76,7 @@ const SignIn = () => {
                         showConfirmButton: false,
                         confirmButtonText: 'Sign up!',
                         showCancelButton: true,
-                        showLoader: true,
+                        
                     })
                     setPasswordInput('');
                     alert(res.data.message);

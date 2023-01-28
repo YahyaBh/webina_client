@@ -97,7 +97,7 @@ const Home = () => {
                                 showConfirmButton: false,
                                 confirmButtonText: 'Sign up!',
                                 showCancelButton: true,
-                                showLoader: true,
+                                
                             })
                         } else if (res.status === 401) {
                             Swal.fire({
@@ -107,7 +107,7 @@ const Home = () => {
                                 showConfirmButton: false,
                                 confirmButtonText: 'Sign up!',
                                 showCancelButton: true,
-                                showLoader: true,
+                                
                             })
 
                         }
@@ -130,7 +130,7 @@ const Home = () => {
                 showConfirmButton: false,
                 confirmButtonText: 'Sign up!',
                 showCancelButton: true,
-                showLoader: true,
+                
             })
         }
     }
