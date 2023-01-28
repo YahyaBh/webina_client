@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Show.scss'
+import AuthUser from '../../AuthUser';
+import cookie from 'js-cookie';
 
 
 export default function Show() {
 
     const [websites, setWebsites] = useState([])
+    const navigate = useNavigate();
+    const auth = cookie.get('token');
 
     useEffect(() => {
         fetchProducts()
-    }, [])
+
+        if (!getToken()) {
+            navigate('/signin')
+        }
+    })
+
 
     const fetchProducts = async () => {
         await axios.get(`http://localhost:8000/api/websites`).then(({ data }) => {
@@ -52,6 +61,7 @@ export default function Show() {
             })
         })
     }
+    const { getToken } = AuthUser();
 
     return (
         <div className="container">

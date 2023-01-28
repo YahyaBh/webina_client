@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Navbar from "./Front_side/client/Components/NavbarHome";
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
@@ -17,8 +17,8 @@ import { TbBrandJavascript } from 'react-icons/tb';
 import { FaLaravel } from 'react-icons/fa';
 import { DiMysql, DiNodejsSmall, DiReact, DiCss3, DiSass, DiPhp, DiPhotoshop, DiIllustrator, DiVisualstudio } from 'react-icons/di';
 import { SiTypescript, SiAdobepremierepro, SiAdobeaftereffects } from 'react-icons/si';
-import { MdOutlineDesignServices, MdOutlineMiscellaneousServices } from 'react-icons/md';
-import { RiCustomerServiceLine } from 'react-icons/ri';
+import { MdDone, MdError, MdOutlineDesignServices, MdOutlineMiscellaneousServices } from 'react-icons/md';
+import { RiCustomerServiceLine, RiLockPasswordFill } from 'react-icons/ri';
 
 import './App.scss'
 
@@ -39,9 +39,101 @@ import NavbarHome from './Front_side/client/Components/NavbarHome';
 
 
 import AOS from "aos";
+import AuthUser from './Front_side/AuthUser';
+import cookie from 'js-cookie';
+import Swal from 'sweetalert2';
+
+
+
 
 
 const Home = () => {
+
+    const { getToken, http } = AuthUser();
+    const [userData, setuserData] = useState({})
+
+    useEffect(() => {
+        const user = cookie.get('user');
+        if (user !== undefined && user!== null && user!== '') {
+            setuserData(JSON.parse(cookie.get('user')))
+        }
+
+    }, [])
+
+
+
+    const [name, setName] = useState('');
+    const [emailInput, setEmailInput] = useState('');
+    const [message, setMessage] = useState('');
+    const [emailSent, setSent] = useState(false);
+    const [acceptEmail, setAcceptEmail] = useState(false);
+
+
+
+    const submitForm = function (e) {
+
+        if (1 === 1) {
+            e.preventDefault();
+
+            const formData = new FormData()
+
+            formData.append('name', name)
+            formData.append('email', emailInput)
+            formData.append('message', message)
+
+            try {
+                http.post('/message/contact', formData)
+                    .then(res => {
+                        if (res.status === 200) {
+                            setName('');
+                            setEmailInput('');
+                            setMessage('');
+                            setSent(true);
+
+                            Swal.fire({
+                                title: 'Success!',
+                                text: res.data.message,
+                                icon: <MdDone />,
+                                showConfirmButton: false,
+                                confirmButtonText: 'Sign up!',
+                                showCancelButton: true,
+                                showLoader: true,
+                            })
+                        } else if (res.status === 401) {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: res.data.message,
+                                icon: <MdError />,
+                                showConfirmButton: false,
+                                confirmButtonText: 'Sign up!',
+                                showCancelButton: true,
+                                showLoader: true,
+                            })
+
+                        }
+
+
+
+                    })
+            } catch (error) {
+                console.error(error);
+            }
+
+        }
+        else {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Error!',
+                text: 'Must not be empty!',
+                icon: <MdError />,
+                showConfirmButton: false,
+                confirmButtonText: 'Sign up!',
+                showCancelButton: true,
+                showLoader: true,
+            })
+        }
+    }
 
 
     AOS.init();
@@ -56,27 +148,49 @@ const Home = () => {
                 <div className="app__header__content">
 
                     <div className="app__header__title">
+                        {!getToken() ?
 
-                        <div class="wrapper">
-                            <h1>Make Your Sales </h1>
-                            <div class="words">
-                                <span>Easier</span>
-                                <span>Better</span>
-                                <span>Safer</span>
-                                <span>Faster</span>
+                            <div className="wrapper">
+
+                                <h1>Make Your Sales </h1>
+                                <div className="words">
+                                    <span>Easier</span>
+                                    <span>Better</span>
+                                    <span>Safer</span>
+                                    <span>Faster</span>
+                                </div>
                             </div>
-                        </div>
+                            :
+                            <div className="wrapper">
+                                <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
+
+                                    {/* {userData !== {} ? userData.name.length > 7 ?
+                                        `${userData.name.substring(0, 7)}...` : userData.name
+                                        : ''} */}
+
+                                </span></h1>
+                            </div>
+
+                        }
 
 
                         <p>We will help you react your dreams by <br /> making you the most professional website among the market</p>
+                        {!getToken() ?
+                            <Link to='/signup' className="app__header__title__sign">
+                                <span className="app__header__title__sign__get">GET STARTED</span>
+                                <svg width="13px" height="10px" viewBox="0 0 13 10">
+                                    <path d="M1,5 L11,5"></path>
+                                    <polyline points="8 1 12 5 8 9"></polyline>
+                                </svg>
+                            </Link> :
+                            <Link to='/websites' className="app__header__title__sign">
+                                <span className="app__header__title__sign__get">MAKE ME A WEBSITE</span>
+                                <svg width="13px" height="10px" viewBox="0 0 13 10">
+                                    <path d="M1,5 L11,5"></path>
+                                    <polyline points="8 1 12 5 8 9"></polyline>
+                                </svg>
+                            </Link>}
 
-                        <Link to='/signup' class="app__header__title__sign">
-                            <span className="app__header__title__sign__get">GET STARTED</span>
-                            <svg width="13px" height="10px" viewBox="0 0 13 10">
-                                <path d="M1,5 L11,5"></path>
-                                <polyline points="8 1 12 5 8 9"></polyline>
-                            </svg>
-                        </Link>
                     </div>
 
                     <video className="app__video" loop autoPlay={true}>
@@ -103,7 +217,7 @@ const Home = () => {
             </section>
 
 
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fill-opacity="3" d="M0,32L0,224L240,224L240,288L480,288L480,288L720,288L720,192L960,192L960,160L1200,160L1200,192L1440,192L1440,320L1200,320L1200,320L960,320L960,320L720,320L720,320L480,320L480,320L240,320L240,320L0,320L0,320Z"></path></svg>            <section className="app__more__about">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fillOpacity="3" d="M0,32L0,224L240,224L240,288L480,288L480,288L720,288L720,192L960,192L960,160L1200,160L1200,192L1440,192L1440,320L1200,320L1200,320L960,320L960,320L720,320L720,320L480,320L480,320L240,320L240,320L0,320L0,320Z"></path></svg>            <section className="app__more__about">
                 <div className="app__more__about__image"></div>
                 <div className="app__more__about__content">
                     <h2>More About WebIna</h2>
@@ -123,14 +237,14 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fill-opacity="3" d="M0,0L0,160L288,160L288,64L576,64L576,96L864,96L864,64L1152,64L1152,32L1440,32L1440,0L1152,0L1152,0L864,0L864,0L576,0L576,0L288,0L288,0L0,0L0,0Z"></path></svg>
-            
-            
-            
-            
-            
-            
-            <section className="app__categories mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fillOpacity="3" d="M0,0L0,160L288,160L288,64L576,64L576,96L864,96L864,64L1152,64L1152,32L1440,32L1440,0L1152,0L1152,0L864,0L864,0L576,0L576,0L288,0L288,0L0,0L0,0Z"></path></svg>
+
+
+
+
+
+
+            <section className="app__categories mt-5" id='categories'>
                 <div className="app__categories__content">
                     <div className="app__categories__title"><h2>WebIna_Categories</h2></div>
                 </div>
@@ -163,7 +277,7 @@ const Home = () => {
                                 <div className="app__categories__card__content__image">
                                     <img className="app__categories__card__content" src="./Images/blog.jpg" alt="blog" />
                                     <div className="app__categories__card__content__title">Blog/News Page</div>
-                                    <div className="app__categories__card__content__description"></div>
+                                    <div className="app__categories__card__content__description">Make single web page that appears marketing promotion, marketing email or an online advertisement.</div>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +287,7 @@ const Home = () => {
                                 <div className="app__categories__card__content__image">
                                     <img className="app__categories__card__content" src="./Images/portfolio.jpg" alt="portfolio" />
                                     <div className="app__categories__card__content__title">Portfolio Website</div>
-                                    <div className="app__categories__card__content__description"></div>
+                                    <div className="app__categories__card__content__description">Make single web page that appears marketing promotion, marketing email or an online advertisement.</div>
                                 </div>
                             </div>
                         </div>
@@ -262,25 +376,31 @@ const Home = () => {
 
                 <div className="app__contact__content__form__image">
                     <div className="app__contact__image">
-                        <img src={ImageContact} alt="contact" />
+                        <img src={ImageContact} alt="contact" style={{ width: '700px' }} />
                     </div>
 
 
-                    <div className="app__contact__form">
-                        <form action="#">
-                            <input type="text" name="name" placeholder="Name" />
-                            <input type="email" name="email" placeholder="Email" />
-                            <textarea placeholder="Message" name="message" ></textarea>
+                    {!emailSent ?
+                        <div className="app__contact__form">
+                            <form onSubmit={submitForm}>
+                                <input type="text" name="name" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+                                <input type="email" name="email" placeholder="Email" onChange={(e) => setEmailInput(e.target.value)} />
+                                <textarea placeholder="Message" name="message" onChange={(e) => setMessage(e.target.value)} ></textarea>
 
-                            <label class="b-contain">
-                                <span>I Accept Receiving Marketing Emails</span>
-                                <input type="checkbox" />
-                                <div class="b-input"></div>
-                            </label>
+                                <label className="b-contain">
+                                    <span>I Accept Receiving Marketing Emails</span>
+                                    <input type="checkbox" name='accept_mails' onChange={(e) => setAcceptEmail(e.checked, console.log(e.target.checked))} />
+                                    <div className="b-input"></div>
+                                </label>
 
-                            <button type="submit">SEND MESSAGE</button>
-                        </form>
-                    </div>
+                                <button type="submit">SEND MESSAGE</button>
+                            </form>
+                        </div> :
+                        <div style={{ textAlign : 'center'}}>
+                            <h2>Thank You For Sending Your Message</h2>
+                            <p>We Will Contact You Soon</p>
+                        </div>
+                    }
                 </div>
             </section>
 
@@ -288,7 +408,7 @@ const Home = () => {
             <footer className="app__footer">
                 <div className="app__footer__content">
                     <ul>
-                        <h3></h3>
+                        <h3>Page You Should Visit</h3>
                         <li><Link to="/">Home</Link></li>
                         <li><a href="/privacy&policy">Privacy & Policy</a></li>
                         <li><Link to="/">Home</Link></li>
@@ -303,7 +423,7 @@ const Home = () => {
 
                 <div className="app__footer__content">
                     <ul>
-                        <h3>Pages</h3>
+                        <h3>Most Popular</h3>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/">Home</Link></li>
@@ -318,7 +438,7 @@ const Home = () => {
 
                 <div className="app__footer__content">
                     <ul>
-                        <h3>Pages</h3>
+                        <h3>Subscribe To Us</h3>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/">Home</Link></li>

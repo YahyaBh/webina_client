@@ -922,7 +922,7 @@ body {
 
 
             input {
-                width: 250px;
+                width: 100%;
                 height: 40px;
                 margin-bottom: 20px;
                 padding: 10px;
@@ -932,7 +932,7 @@ body {
 
             button {
                 height: 40px;
-                width: 250px;
+                width: 100%;
                 background-color: rgb(var(--mid-color));
                 color: rgb(var(--black-color));
                 border-radius: 20px;
@@ -948,6 +948,9 @@ body {
             }
 
             .app__google__signup {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 font-size: 20px;
                 border-radius: 50%;
                 width: 50px;
@@ -962,7 +965,7 @@ body {
 
                 &:hover {
                     height: 40px;
-                    width: 250px;
+                    width: 100%;
                     border-radius: 20px;
                     box-shadow: 0 0 20px 0px grey;
 
@@ -1017,7 +1020,7 @@ body {
 
 
             input {
-                width: 250px;
+                width: 100%;
                 height: 40px;
                 margin-bottom: 20px;
                 padding: 10px;
@@ -1027,7 +1030,7 @@ body {
 
             button {
                 height: 40px;
-                width: 250px;
+                width: 100%;
                 background-color: rgb(var(--mid-color));
                 color: rgb(var(--black-color));
                 border-radius: 20px;
@@ -1043,6 +1046,9 @@ body {
             }
 
             .app__google__signup {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 font-size: 20px;
                 border-radius: 50%;
                 width: 50px;
@@ -1050,14 +1056,14 @@ body {
                 background-color: #db4537e0;
                 box-shadow: 0 0 20px 4px grey;
                 transition: all .3s ease;
-
+                margin-bottom: 10px;
                 svg {
                     color: #FFF;
                 }
 
                 &:hover {
                     height: 40px;
-                    width: 250px;
+                    width: 100%;
                     border-radius: 20px;
                     box-shadow: 0 0 20px 0px grey;
 
@@ -1075,5 +1081,35 @@ body {
         background-position: center;
         background-repeat: no-repeat;
         filter: brightness(40%);
+    }
+}
+
+
+
+.app__profile__container {
+    display: flex;
+    align-items:flex-start;
+    justify-content: flex-start;
+    padding: 80px;
+    .app__profile__container__left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+
+        img {
+            width: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 4px grey;
+        }
+
+
+        h3 {
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
     }
 }

@@ -15,9 +15,8 @@ import SignUp from "./Front_side/client/Components/SignUp";
 import PrivacyPolicy from "./Front_side/client/Components/PrivacyPolicy";
 import Home from "./Home";
 import Error from "./Error";
-
-import PrivateRoute from "./Front_side/PrivateRoute";
-
+import GoogleCallBack from "./Front_side/client/Components/GoogleCallBack";
+import Profile from "./Front_side/client/Profile";
 
 
 function App() {
@@ -43,17 +42,17 @@ function App() {
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 
 
-        <Route exact path='/' element={<PrivateRoute />}>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/websites' element={<Show />} />
-          <Route exact path='/website/:id' element={<Show />} />
-          <Route exact path='/chats' element={<Chat />} />
-          <Route exact path='/chat/:id' element={<Chat />} />
-        </Route>
+        <Route exact path='/' element={<Home />} />
+        <Route exact path='/websites' element={<Show />} />
+        <Route exact path='/website/:id' element={<Show />} />
+        <Route exact path='/chats' element={<Chat />} />
+        <Route exact path='/chat/:id' element={<Chat />} />
 
 
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
+        <Route path="/auth/google" element={<GoogleCallBack />}></Route>
+        <Route exact path="/profile" element={<Profile />} />
 
 
 

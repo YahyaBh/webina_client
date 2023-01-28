@@ -1,10 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './Navbar.scss'
-import Scroll from 'react-scroll-to-element';
+import AuthUser from '../../AuthUser';
 
 
 const Navbar = () => {
+
+
+    const { getToken } = AuthUser();
+    const { token, logout } = AuthUser();
+    const logoutUser = () => {
+        if (token !== undefined) {
+            logout();
+        }
+    }
+
     return (
         <div>
             <nav className='m-navbar'>
@@ -24,6 +33,12 @@ const Navbar = () => {
                             <button>About</button>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="/#categroies">
+                            <button>Categories</button>
+                        </a>
+                    </li>
                     <li>
                         <a href='/#founders'>
                             <button>Founders</button>
@@ -37,14 +52,29 @@ const Navbar = () => {
 
                 </ul>
 
-                <ul>
-                    <li>
-                        <a href="/signin">Sign In</a>
-                    </li>
-                    <li>
-                        <a href="/signup">Sign Up</a>
-                    </li>
-                </ul>
+                {!getToken ?
+
+                    <ul>
+                        <li>
+                            <a href="/signin">Sign In</a>
+                        </li>
+                        <li>
+                            <a href="/signup">Sign Up</a>
+                        </li>
+                    </ul>
+                    :
+
+                    <ul>
+                        <li>
+                            <a href="/profile">Profile</a>
+                        </li>
+                        <li>
+                            <a href="/orders">Orders</a>
+                        </li>
+                        <li>
+                            <a href="/" onClick={logoutUser}>Log Out</a>
+                        </li>
+                    </ul>}
             </nav>
         </div>
     )
