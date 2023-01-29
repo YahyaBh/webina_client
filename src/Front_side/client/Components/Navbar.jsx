@@ -1,16 +1,34 @@
 import React from 'react'
 import './Navbar.scss'
 import AuthUser from '../../AuthUser';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
 
-
+    const navigate = useNavigate();
     const { getToken } = AuthUser();
-    const { token, logout } = AuthUser();
-    const logoutUser = () => {
+    const { token } = AuthUser();
+
+
+    const logoutUser = (e) => {
+        e.preventDefault();
         if (token !== undefined) {
-            logout();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will logout from this account!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#FFFF66',
+                cancelButtonText: 'Not Yet',
+                confirmButtonText: 'Yes, sign out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/logout')
+                }
+            })
         }
     }
 
@@ -26,7 +44,6 @@ const Navbar = () => {
                         <a href='/'>
                             <button>Home</button>
                         </a>
-                        {/* <Link to="/websites"></Link> */}
                     </li>
                     <li>
                         <a href='/#about'>

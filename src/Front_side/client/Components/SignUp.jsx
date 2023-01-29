@@ -7,6 +7,8 @@ import cookie from 'js-cookie';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { MdDone, MdErrorOutline } from 'react-icons/md';
 import AuthUser from '../../AuthUser';
+import Loading from '../../../Assets/Images/WEBINA2.png';
+
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -15,17 +17,36 @@ const SignUp = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [verify_passwordInput, setVerPasswordInput] = useState('');
-
     const { http, getToken } = AuthUser();
+    const [registerUrl, setRegisterUrl] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    useLayoutEffect(() => {
+
+    useEffect(() => {
         const token = cookie.get('token')
         if (token) {
             navigate('/');
         }
+        fetch('http://localhost:8000/api/auth/google', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    setLoading(false);
+                    return response.json();
+                }
+                throw new Error('Something went wrong!');
+            })
+            .then((data) => setRegisterUrl(data.url))
+            .catch((error) => console.error(error));
     }, [])
 
     const submitForm = function (e) {
+
+
 
         if (passwordInput === verify_passwordInput) {
 
@@ -42,8 +63,8 @@ const SignUp = () => {
                 http.post('/signup', formData)
                     .then(res => {
                         if (res.status === 200) {
-                            cookie.set('token', res.data.access_token , {secure: true, sameSite: 'none'});
-                            cookie.set('user', JSON.stringify(res.data.user) , {secure: true, sameSite: 'none'});
+                            cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
+                            cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
                             navigate(`/`);
                             setName('');
                             setEmailInput('');
@@ -53,11 +74,9 @@ const SignUp = () => {
                             Swal.fire({
                                 title: 'Success!',
                                 text: res.data.message,
-                                icon: <MdDone />,
-                                showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
-                                showCancelButton: true,
-                                
+                                icon: "success",
+                                showConfirmButton: true,
+                                confirmButtonText: "Let's go!",
                             })
                         } else if (res.status === 400) {
                             Swal.fire({
@@ -67,7 +86,7 @@ const SignUp = () => {
                                 showConfirmButton: false,
                                 confirmButtonText: 'Sign up!',
                                 showCancelButton: true,
-                                
+
                             })
 
                         }
@@ -88,7 +107,7 @@ const SignUp = () => {
                 showConfirmButton: false,
                 confirmButtonText: 'Sign up!',
                 showCancelButton: false,
-                
+
             })
         }
 
@@ -99,41 +118,46 @@ const SignUp = () => {
 
 
     return (
-        <div className='app__signup'>
-            <a href='/' style={{ width: '50px', height: '50px' }}>
-                <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
-            </a>
+        loading ?
+        <div className='loading-container'>
+        <img src={Loading} alt="loading-web" />
+    </div>
+            :
+            <div className='app__signup'>
+                <a href='/' style={{ width: '50px', height: '50px' }}>
+                    <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
+                </a>
 
-            <div className='app__signup__form'>
-                <form onSubmit={submitForm}>
-                    <h2>SIGN UP</h2>
+                <div className='app__signup__form'>
+                    <form onSubmit={submitForm}>
+                        <h2>SIGN UP</h2>
 
 
-                    <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
 
 
-                    <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
+                        <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
 
-                    <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
+                        <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
 
-                    <input type="password" name="verify_pass" placeholder="Verify Password" value={verify_passwordInput} onChange={(e) => setVerPasswordInput(e.target.value)} />
+                        <input type="password" name="verify_pass" placeholder="Verify Password" value={verify_passwordInput} onChange={(e) => setVerPasswordInput(e.target.value)} />
 
-                    <button type="submit" className='app__google__signup'><AiOutlineGoogle /></button>
+                        <a type="submit" className='app__google__signup' href={registerUrl}><AiOutlineGoogle /></a>
 
-                    <button type='submit'>Sign Up</button>
+                        <button type='submit'>Sign Up</button>
 
-                    <p>Already Have An Account ? <a href='/signin'>Sign In</a></p>
+                        <p>Already Have An Account ? <a href='/signin'>Sign In</a></p>
 
-                </form>
+                    </form>
 
+                </div>
+                <p style={{ position: 'absolute', bottom: 0, margin: '5px' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
+
+
+                <div className='app__signup__form__bg'>
+
+                </div>
             </div>
-            <p style={{ position: 'absolute', bottom: 0, margin: '5px' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
-
-
-            <div className='app__signup__form__bg'>
-
-            </div>
-        </div>
     )
 }
 

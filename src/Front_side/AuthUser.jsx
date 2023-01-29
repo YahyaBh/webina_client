@@ -28,18 +28,6 @@ export default function AuthUser() {
         navigate('/');
     }
 
-    const logout = () => {
-
-        if (cookie.get('token')) {
-            axios.post('http://localhost:8000/api/logout')
-
-            navigate('/');
-            cookie.remove('token');
-            cookie.remove('user');
-        }
-
-    }
-
     const http = axios.create({
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -54,7 +42,6 @@ export default function AuthUser() {
         token,
         user,
         getToken,
-        http,
-        logout
+        http
     }
 }

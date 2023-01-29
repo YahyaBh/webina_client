@@ -16,7 +16,8 @@ import PrivacyPolicy from "./Front_side/client/Components/PrivacyPolicy";
 import Home from "./Home";
 import Error from "./Error";
 import GoogleCallBack from "./Front_side/client/Components/GoogleCallBack";
-import Profile from "./Front_side/client/Profile";
+import Profile from "./Front_side/client/Components/Profile";
+import Logout from "./Front_side/client/Components/Logout";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
 

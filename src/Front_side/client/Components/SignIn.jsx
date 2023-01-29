@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
 import AuthUser from '../../AuthUser';
 import { useLayoutEffect } from 'react';
+import Loading from '../../../Assets/Images/WEBINA2.png';
+
 
 const SignIn = () => {
 
@@ -14,11 +16,8 @@ const SignIn = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const { http, setToken } = AuthUser();
-
-
-
-
     const [loginUrl, setLoginUrl] = useState(null);
+    const [loading , setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -35,6 +34,7 @@ const SignIn = () => {
         })
             .then((response) => {
                 if (response.ok) {
+                    setLoading(false);
                     return response.json();
                 }
                 throw new Error('Something went wrong!');
@@ -92,6 +92,11 @@ const SignIn = () => {
 
 
     return (
+        loading ? 
+        <div className='loading-container'>
+                <img src={Loading} alt="loading-web" />
+            </div>
+        :
         <div className='app__signin'>
             <a href='/' style={{ width: '50px', height: '50px' }}>
                 <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
