@@ -1152,6 +1152,7 @@ body {
 
     .app__profile__container__right {
         width: 50%;
+
         .app__profile__container__right__form__container {
 
             form {
@@ -1163,6 +1164,7 @@ body {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
+
                 input {
                     display: block;
                     width: 80%;
@@ -1180,7 +1182,7 @@ body {
                     transition: all .3s ease;
 
                     &:hover {
-                        color : #fff;
+                        color: #fff;
                         background-color: rgb(var(--heavy-color));
                         box-shadow: 0 0 20px 4px grey;
                         transform: scale(1.1);
@@ -1276,4 +1278,12 @@ body {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+
+.app__profile__delete__accout {
+    width: 200px;
+    background-color: #c45656 !important;
+    margin-top: 500px;
+    position: absolute;
 }

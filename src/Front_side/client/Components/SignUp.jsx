@@ -22,6 +22,9 @@ const SignUp = () => {
     const [loading, setLoading] = useState(true);
 
 
+    const [id, setId] = useState('');
+    const [token, setToken] = useState('');
+
     useEffect(() => {
         const token = cookie.get('token')
         if (token) {
@@ -45,12 +48,10 @@ const SignUp = () => {
     }, [])
 
     const submitForm = function (e) {
-
-
+        e.preventDefault();
 
         if (passwordInput === verify_passwordInput) {
 
-            e.preventDefault();
 
             const formData = new FormData()
 
@@ -59,25 +60,71 @@ const SignUp = () => {
             formData.append('password_confirmation', verify_passwordInput)
             formData.append('name', name)
 
+            const checkEmailData = new FormData()
+
+
             try {
                 http.post('/signup', formData)
                     .then(res => {
                         if (res.status === 200) {
-                            cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
-                            cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
-                            navigate(`/`);
-                            setName('');
-                            setEmailInput('');
-                            setPasswordInput('');
-                            setVerPasswordInput('');
+                            // checkEmailData.append('email', emailInput)
+                            // checkEmailData.append('token', res.data.access_token)
+
+
+                            http.post('/email/verification', checkEmailData)
+                                .then(res_ver => {
+                                    if (res_ver.status === 200) {
+
+                                        setId(res.data.user);
+                                        setToken(res.data.access_token);
+
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: res.data.message,
+                                            icon: <MdErrorOutline />,
+                                            showConfirmButton: false,
+                                            confirmButtonText: 'Sign up!',
+                                            showCancelButton: true,
+
+                                        })
+                                    }
+                                })
 
                             Swal.fire({
-                                title: 'Success!',
-                                text: res.data.message,
-                                icon: "success",
+                                title: 'Registred!',
+                                text: 'Please check your email to verify your account.',
+                                icon: "warning",
                                 showConfirmButton: true,
-                                confirmButtonText: "Let's go!",
-                            })
+                                confirmButtonText: "I checked it!",
+                            }).then(function () {
+                                http.post(`/email/verify/${id}/${token}/${emailInput}`)
+                                    .then(res => {
+                                        if (res.status === 200) {
+                                            console.log('You are now redirected in!');
+                                            cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
+                                            cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
+                                            navigate(`/`);
+                                            setName('');
+                                            setEmailInput('');
+                                            setPasswordInput('');
+                                            setVerPasswordInput('');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: error.data.message,
+                                            icon: <MdErrorOutline />,
+                                            showConfirmButton: false,
+                                            confirmButtonText: 'Sign up!',
+                                            showCancelButton: true,
+
+                                        })
+                                    })
+                            });
+
+
                         } else if (res.status === 400) {
                             Swal.fire({
                                 title: 'Error!',
@@ -89,17 +136,23 @@ const SignUp = () => {
 
                             })
 
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: res.data.message,
+                                icon: <MdErrorOutline />,
+                                showConfirmButton: false,
+                                confirmButtonText: 'Sign up!',
+                                showCancelButton: true,
+
+                            })
                         }
-
-
-
                     })
             } catch (error) {
                 console.error(error);
             }
 
         } else {
-            e.preventDefault();
             Swal.fire({
                 title: 'Error!',
                 text: 'Passwords does not match',
@@ -119,9 +172,9 @@ const SignUp = () => {
 
     return (
         loading ?
-        <div className='loading-container'>
-        <img src={Loading} alt="loading-web" />
-    </div>
+            <div className='loading-container'>
+                <img src={Loading} alt="loading-web" />
+            </div>
             :
             <div className='app__signup'>
                 <a href='/' style={{ width: '50px', height: '50px' }}>

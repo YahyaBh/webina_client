@@ -196,7 +196,7 @@ const Profile = () => {
         Swal.fire({
             title: 'Are you sure?',
             type: 'warning',
-            html: `<input type="password" id="password" class="swal2-input" placeholder="Password">`,
+            html: `<input type="text" id="password" class="swal2-input" placeholder="Password">`,
             confirmButtonText: 'Delete Account',
             confirmButtonColor: '#DD6B55',
             showCancelButton: true,
@@ -227,7 +227,7 @@ const Profile = () => {
                 .then(res => {
                     if (res.status === 200) {
                         navigate('/logout');
-                    } else if(res.status === 401) {
+                    } else if (res.status === 401) {
                         Swal.fire({
                             title: 'Error!',
                             text: res.data.message,
@@ -268,7 +268,7 @@ const Profile = () => {
                     <div className='app__profile__container__left'>
                         <div className='app__profile__container__left__img__container'>
                             <img onClick={updateImage} className='app__profile__container__left__img' src={userData ? userData.avatar : ''} alt='profile' />
-                            <AiFillCamera />
+                            <AiFillCamera title='Change picture' />
                         </div>
                         <h3>{userData ? userData.name : ''}</h3>
                         <h5>Created {userData ? moment(userData.created_at.split('T')[0] + ' ' + userData.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5>
@@ -285,12 +285,14 @@ const Profile = () => {
                                 <input type='password' value={newPass} onChange={(e) => setNewPass(e.target.value)} placeholder='New Password' name='new_password' />
 
                                 <button type='submit' >UPDATE USER</button>
+
+                                <button className='app__profile__delete__accout' onClick={deletUser}>DELETE ACCOUNT</button>
+
                             </form>
 
 
 
 
-                            <button className='app__profile__delete__accout' onClick={deletUser}>DELETE ACCOUNT</button>
                         </div>
                     </div>
                 </div>
