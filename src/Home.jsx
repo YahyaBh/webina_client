@@ -12,13 +12,15 @@ import Moujahid from './Assets/Images/FRAZZIX.png';
 import { Link } from 'react-router-dom';
 
 
-import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
+import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer, AiOutlineFieldTime } from 'react-icons/ai';
 import { TbBrandJavascript } from 'react-icons/tb';
 import { FaLaravel } from 'react-icons/fa';
 import { DiMysql, DiNodejsSmall, DiReact, DiCss3, DiSass, DiPhp, DiPhotoshop, DiIllustrator, DiVisualstudio } from 'react-icons/di';
 import { SiTypescript, SiAdobepremierepro, SiAdobeaftereffects } from 'react-icons/si';
 import { MdDone, MdError, MdOutlineDesignServices, MdOutlineMiscellaneousServices } from 'react-icons/md';
-import { RiCustomerServiceLine, RiLockPasswordFill } from 'react-icons/ri';
+import { RiCustomerServiceLine, RiLockPasswordFill, RiCustomerService2Line } from 'react-icons/ri';
+import { BiDollarCircle } from 'react-icons/bi';
+
 
 import './App.scss'
 
@@ -76,7 +78,7 @@ const Home = () => {
             return () => window.removeEventListener('load', onPageLoad);
         }
 
-        
+
 
 
 
@@ -226,7 +228,13 @@ const Home = () => {
                         <p>WebIna is a website that helps you make your dreams
                             easier and build you a full appliaction for your business , you can easly choose any website
                             from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
+                        <div className="app__about__list">
+                            <h4><BiDollarCircle /> Best Prices In The Market</h4>
+                            <h4><AiOutlineFieldTime /> Fast Website Developing Time</h4>
+                            <h4><RiCustomerService2Line /> 24/7 Customer Services Assistance</h4>
+                        </div>
                     </div>
+
 
                     <div className="app__about__image">
                         <img src={ImageAbout} alt="about_us" width='500px' />
@@ -314,9 +322,11 @@ const Home = () => {
                             {/* <SwiperCategories /> */}
                         </div>
 
-                        <div className="show__container">
-                            <button className="app__categories__show__button">Show All</button>
-                        </div>
+
+                    </div>
+
+                    <div className="show__container">
+                        <button className="app__categories__show__button">Show All</button>
                     </div>
 
                 </section>

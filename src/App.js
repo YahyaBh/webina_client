@@ -18,6 +18,7 @@ import Error from "./Error";
 import GoogleCallBack from "./Front_side/client/Components/GoogleCallBack";
 import Profile from "./Front_side/client/Components/Profile";
 import Logout from "./Front_side/client/Components/Logout";
+import Websites from "./Front_side/client/Components/Websites";
 
 
 function App() {
@@ -44,10 +45,14 @@ function App() {
 
 
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/websites' element={<Show />} />
-        <Route exact path='/website/:id' element={<Show />} />
-        <Route exact path='/chats' element={<Chat />} />
-        <Route exact path='/chat/:id' element={<Chat />} />
+        <Route exact path='/websites' element={<Websites/>} />
+
+
+
+        {/* <Route exact path='/websites' element={<Show />} /> */}
+        {/* <Route exact path='/website/:id' element={<Show />} /> */}
+        {/* <Route exact path='/chats' element={<Chat />} /> */}
+        {/* <Route exact path='/chat/:id' element={<Chat />} /> */}
 
 
         <Route exact path="/signin" element={<SignIn />} />
@@ -68,33 +73,3 @@ function App() {
 
 export default App;
 
-
-
-
-// function SwiperCategories() {
-//   return (
-//     <Swiper
-//       slidesPerView={3}
-//       spaceBetween={30}
-//       slidesPerGroup={3}
-//       loop={true}
-//       loopFillGroupWithBlank={true}
-//       pagination={{
-//         clickable: true,
-//       }}
-//       navigation={true}
-//       modules={[Pagination, Navigation]}
-//       className="swipper-category"
-//     >
-//       <SwiperSlide>Slide 1</SwiperSlide>
-//       <SwiperSlide>Slide 2</SwiperSlide>
-//       <SwiperSlide>Slide 3</SwiperSlide>
-//       <SwiperSlide>Slide 4</SwiperSlide>
-//       <SwiperSlide>Slide 5</SwiperSlide>
-//       <SwiperSlide>Slide 6</SwiperSlide>
-//       <SwiperSlide>Slide 7</SwiperSlide>
-//       <SwiperSlide>Slide 8</SwiperSlide>
-//       <SwiperSlide>Slide 9</SwiperSlide>
-//     </Swiper>
-//   )
-// }

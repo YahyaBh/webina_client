@@ -159,7 +159,7 @@ const SignUp = () => {
                         title: 'Welcome back!',
                         icon: "success",
                         showConfirmButton: true,
-                        confirmButtonColor: '#000',
+                        confirmButtonColor: '#ffe662',
                         confirmButtonText: "OK!",
                     })
                     cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
