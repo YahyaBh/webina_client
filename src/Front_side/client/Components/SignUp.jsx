@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { AiOutlineGoogle } from 'react-icons/ai';
+import { AiOutlineClockCircle, AiOutlineGoogle } from 'react-icons/ai';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
@@ -21,9 +21,8 @@ const SignUp = () => {
     const [registerUrl, setRegisterUrl] = useState(null);
     const [loading, setLoading] = useState(true);
 
-
     const [id, setId] = useState('');
-    const [token, setToken] = useState('');
+    const [token_checker, setTokenChecker] = useState('');
 
     useEffect(() => {
         const token = cookie.get('token')
@@ -52,6 +51,14 @@ const SignUp = () => {
 
         if (passwordInput === verify_passwordInput) {
 
+            Swal.fire({
+                title: 'Just a second...',
+                html: '<img src="http://localhost:3000/Images/Infinity-1s-200px.gif">',
+                customClass: {
+                    icon: 'no-border'
+                },
+                showConfirmButton: false,
+            })
 
             const formData = new FormData()
 
@@ -63,20 +70,21 @@ const SignUp = () => {
             const checkEmailData = new FormData()
 
 
+
+
             try {
                 http.post('/signup', formData)
                     .then(res => {
                         if (res.status === 200) {
-                            // checkEmailData.append('email', emailInput)
-                            // checkEmailData.append('token', res.data.access_token)
-
+                            checkEmailData.append('email', emailInput)
+                            checkEmailData.append('token', res.data.access_token)
 
                             http.post('/email/verification', checkEmailData)
                                 .then(res_ver => {
                                     if (res_ver.status === 200) {
+                                        setId(res.data.id);
+                                        setTokenChecker(res.data.access_token);
 
-                                        setId(res.data.user);
-                                        setToken(res.data.access_token);
 
                                     } else {
                                         Swal.fire({
@@ -90,39 +98,16 @@ const SignUp = () => {
                                         })
                                     }
                                 })
-
                             Swal.fire({
                                 title: 'Registred!',
                                 text: 'Please check your email to verify your account.',
                                 icon: "warning",
                                 showConfirmButton: true,
+                                confirmButtonColor: '#000',
                                 confirmButtonText: "I checked it!",
-                            }).then(function () {
-                                http.post(`/email/verify/${id}/${token}/${emailInput}`)
-                                    .then(res => {
-                                        if (res.status === 200) {
-                                            console.log('You are now redirected in!');
-                                            cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
-                                            cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
-                                            navigate(`/`);
-                                            setName('');
-                                            setEmailInput('');
-                                            setPasswordInput('');
-                                            setVerPasswordInput('');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        Swal.fire({
-                                            title: 'Error!',
-                                            text: error.data.message,
-                                            icon: <MdErrorOutline />,
-                                            showConfirmButton: false,
-                                            confirmButtonText: 'Sign up!',
-                                            showCancelButton: true,
-
-                                        })
-                                    })
-                            });
+                            }).then(
+                                checkVerification
+                            );
 
 
                         } else if (res.status === 400) {
@@ -163,10 +148,62 @@ const SignUp = () => {
 
             })
         }
+    }
 
 
+    const checkVerification = () => {
+        http.post(`/email/verify/${id}/${token_checker}/${emailInput}`)
+            .then(res => {
+                if (res.status === 200) {
+                    Swal.fire({
+                        title: 'Welcome back!',
+                        icon: "success",
+                        showConfirmButton: true,
+                        confirmButtonColor: '#000',
+                        confirmButtonText: "OK!",
+                    })
+                    cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
+                    cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
+                    navigate(`/`);
+                    setName('');
+                    setEmailInput('');
+                    setPasswordInput('');
+                    setVerPasswordInput('');
+                } else {
+                    Swal.fire({
+                        title: 'Registred!',
+                        text: 'Please check your email to verify your account.',
+                        icon: "danger",
+                        showConfirmButton: true,
+                        confirmButtonColor: '#000',
+                        confirmButtonText: "I checked it!",
+                    })
+                        .then(
+                            Swal.fire({
+                                title: 'Registred!',
+                                text: 'Please check your email to verify your account.',
+                                icon: "danger",
+                                showConfirmButton: true,
+                                confirmButtonColor: '#000',
+                                confirmButtonText: "I checked it!",
+                            })
+                                .then(
+                                    checkVerification
+                                )
+                        )
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.data.message,
+                    icon: <MdErrorOutline />,
+                    showConfirmButton: false,
+                    confirmButtonText: 'Sign up!',
+                    showCancelButton: true,
 
-
+                })
+            })
     }
 
 
