@@ -52,11 +52,11 @@ const NavbarHome = ({ userData }) => {
                                 <button>Categories</button>
                             </Scroll>
                         </li>
-                        <li>
+                        {/* <li>
                             <Scroll type="id" element="founders" offset={-100} timeout={100}>
                                 <button>Founders</button>
                             </Scroll>
-                        </li>
+                        </li> */}
                         <li>
                             <Scroll type="id" element="contact" offset={-100} timeout={100}>
                                 <button>Contact</button>
@@ -93,9 +93,7 @@ const NavbarHome = ({ userData }) => {
                             </Scroll>
                         </li>
                         <li>
-                            <Scroll type="id" element="founders" offset={-100} timeout={100}>
-                                <button>Founders</button>
-                            </Scroll>
+                                <a href='/websites'>Websites</a>
                         </li>
                         <li>
                             <Scroll type="id" element="contact" offset={-100} timeout={100}>

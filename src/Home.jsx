@@ -44,6 +44,7 @@ import AOS from "aos";
 import AuthUser from './Front_side/AuthUser';
 import cookie from 'js-cookie';
 import Swal from 'sweetalert2';
+import Footer from './Front_side/client/Components/Footer';
 
 
 
@@ -326,7 +327,7 @@ const Home = () => {
                     </div>
 
                     <div className="show__container">
-                        <button className="app__categories__show__button">Show All</button>
+                        <a href='/websites' className="app__categories__show__button">Show All</a>
                     </div>
 
                 </section>
@@ -432,52 +433,7 @@ const Home = () => {
                 </section>
 
 
-                <footer className="app__footer">
-                    <div className="app__footer__content">
-                        <ul>
-                            <h3>Page You Should Visit</h3>
-                            <li><Link to="/">Home</Link></li>
-                            <li><a href="/privacy&policy">Privacy & Policy</a></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                        </ul>
-                    </div>
-
-                    <div className="app__footer__content">
-                        <ul>
-                            <h3>Most Popular</h3>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                        </ul>
-                    </div>
-
-                    <div className="app__footer__content">
-                        <ul>
-                            <h3>Subscribe To Us</h3>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Home</Link></li>
-                        </ul>
-                    </div>
-                </footer>
+                <Footer/>
             </div>
     )
 }

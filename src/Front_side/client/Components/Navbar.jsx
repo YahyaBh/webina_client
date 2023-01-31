@@ -3,13 +3,24 @@ import './Navbar.scss'
 import AuthUser from '../../AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import cookie from 'js-cookie';
+import { useState } from 'react';
 
 
-const Navbar = () => {
+const Navbar = ({userData}) => {
 
     const navigate = useNavigate();
     const { getToken } = AuthUser();
     const { token } = AuthUser();
+
+    const [authed, setAuthed] = useState(false);
+
+    useEffect(() => {
+        if (!cookie.get('token')) {
+            setAuthed(true)
+        }
+    }, [])
 
 
     const logoutUser = (e) => {
@@ -69,7 +80,7 @@ const Navbar = () => {
 
                 </ul>
 
-                {!getToken ?
+                {authed && userData ?
 
                     <ul>
                         <li>
@@ -81,17 +92,21 @@ const Navbar = () => {
                     </ul>
                     :
 
-                    <ul>
-                        <li>
-                            <a href="/profile">Profile</a>
-                        </li>
-                        <li>
-                            <a href="/orders">Orders</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={logoutUser}>Log Out</a>
-                        </li>
-                    </ul>}
+                    <div className="dropdown">
+                        <span><img src={userData.avatar} alt={userData.name} /></span>
+                        <div className="dropdown-content">
+                            <li>
+                                <a href="/profile">Profile</a>
+                            </li>
+                            <li>
+                                <a href="/orders">Orders</a>
+                            </li>
+                            <li>
+                                <a href="/" onClick={logoutUser}>Log Out</a>
+                            </li>
+                        </div>
+                    </div>
+                }
             </nav>
         </div>
     )

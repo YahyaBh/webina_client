@@ -1,12 +1,10 @@
 .m-navbar {
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10px 20px;
 
-    div .navbar-logo {
-        
-    }
+
 
     ul {
         list-style-type: none;
@@ -15,13 +13,14 @@
         overflow: hidden;
         background-color: transparent;
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
+        align-items: center;
 
         li {
             margin: 10px;
 
-            a , button {
+            a,
+            button {
                 display: block;
                 color: rgb(var(--white-color));
                 background-color: transparent;

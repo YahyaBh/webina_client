@@ -156,7 +156,7 @@ const SignUp = () => {
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({
-                        title: 'Welcome back!',
+                        title: 'Welcome To WebIna!',
                         icon: "success",
                         showConfirmButton: true,
                         confirmButtonColor: '#ffe662',
@@ -170,27 +170,7 @@ const SignUp = () => {
                     setPasswordInput('');
                     setVerPasswordInput('');
                 } else {
-                    Swal.fire({
-                        title: 'Registred!',
-                        text: 'Please check your email to verify your account.',
-                        icon: "danger",
-                        showConfirmButton: true,
-                        confirmButtonColor: '#000',
-                        confirmButtonText: "I checked it!",
-                    })
-                        .then(
-                            Swal.fire({
-                                title: 'Registred!',
-                                text: 'Please check your email to verify your account.',
-                                icon: "danger",
-                                showConfirmButton: true,
-                                confirmButtonColor: '#000',
-                                confirmButtonText: "I checked it!",
-                            })
-                                .then(
-                                    checkVerification
-                                )
-                        )
+                    checkVerification();
                 }
             })
             .catch(error => {
