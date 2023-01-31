@@ -1410,6 +1410,27 @@ body {
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
+        border-radius: 12px;
+        flex-direction: column;
+    }
+
+    .app__swipper__website__details {
+        position: relative;
+        transition: all .3s ease;
+        cursor: pointer;
+        padding: 10px;
+        text-align: left;
+
+        .main__details {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: row;
+            justify-content: space-between;
+
+            h3 {
+                text-transform: capitalize;
+            }
+        }
     }
 
     .swiper-slide img {
@@ -1417,15 +1438,16 @@ body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        
+        border-radius: 12px;
+        transition: all .3s ease;
     }
 
     .swiper {
         width: 100%;
-        height: 300px;
+        height: 100%;
         margin: 20px auto;
-        box-shadow: 0 0 10px 5px grey;
-        
+
+
     }
 
     .append-buttons {
@@ -1444,5 +1466,7 @@ body {
         margin: 0 10px;
         font-size: 13px;
     }
+
+
 
 }

@@ -103,9 +103,9 @@ const NavbarHome = ({ userData }) => {
                             </Scroll>
                         </li>
 
-                        <div class="dropdown">
+                        <div className="dropdown">
                             <span><img src={userData.avatar} alt={userData.name} /></span>
-                            <div class="dropdown-content">
+                            <div className="dropdown-content">
                                 <li>
                                     <a href="/profile">Profile</a>
                                 </li>

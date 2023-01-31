@@ -181,22 +181,10 @@ const Profile = () => {
 
     const deletUser = (e) => {
 
-        // Swal.fire({
-        //     title: "Are you sure?",
-        //     html: `<input onChange=${e => setPasswordChecker(e.target.value)} type="text" id="password" class="swal2-input" placeholder="Password">`,
-        //     type: "warning",
-        //     showCancelButton: true,
-        //     confirmButtonColor: "#DD6B55",
-        //     confirmButtonText: "Yes, submit it!",
-        //     closeOnConfirm: false
-        // }, function (isConfirm) {
-        //     if (isConfirm) deleteAccount();
-        // });
-
         Swal.fire({
             title: 'Are you sure?',
             type: 'warning',
-            html: `<input type="text" id="password" class="swal2-input" placeholder="Password">`,
+            html: `<input type="text" id="password" className="swal2-input" placeholder="Password">`,
             confirmButtonText: 'Delete Account',
             confirmButtonColor: '#DD6B55',
             showCancelButton: true,
