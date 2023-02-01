@@ -22,8 +22,8 @@ export default function AuthUser() {
     const [user, setUser] = useState(getUser());
 
     const saveToken = (user, token) => {
-        cookie.set('token', token , {secure: true, sameSite: 'none'});
-        cookie.set('user', user , {secure: true, sameSite: 'none'});
+        cookie.set('token', token, { secure: true, sameSite: 'none' });
+        cookie.set('user', user, { secure: true, sameSite: 'none' });
 
         navigate('/');
     }
@@ -36,6 +36,22 @@ export default function AuthUser() {
         }
     });
 
+
+    const sec_http = async () => {
+        if (getToken()) {
+            axios.create({
+                baseURL: "http://localhost:8000/api",
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "user_token": getToken()
+                }
+            });
+
+        } else {
+            console.error('Unauthorized access');
+        }
+    }
 
     return {
         setToken: saveToken,

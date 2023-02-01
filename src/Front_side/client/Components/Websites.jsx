@@ -29,13 +29,14 @@ const Websites = () => {
     const [loading, setLoading] = useState(true);
 
 
-    const [userData , setUserData] = useState(JSON.parse(cookie.get('user')));
+    const [userData, setUserData] = useState({});
 
 
     useEffect(() => {
 
         getWebsites();
         console.log(cookie.get('user'));
+
 
 
     }, [])
@@ -45,13 +46,24 @@ const Websites = () => {
         try {
             await http.get('/websites')
                 .then(res => {
-                    setWebsites(res.data.websites);
+                    if (res.status === 200) {
+                        setWebsites(res.data.websites);
+                    } else {
+                        Swal.fire({
+                            title: 'Oops...',
+                            text: res.data.message,
+                            icon: 'error'
+                        })
+                    }
                 })
             await http.post('/recent/websites')
                 .then(res => {
                     setRecentWebsites(res.data.websites);
                 })
 
+            if (cookie.get('user')) {
+                setUserData(JSON.parse(cookie.get('user')));
+            }
             setLoading(false);
 
 
@@ -60,8 +72,8 @@ const Websites = () => {
                     title: 'Your are not logged in',
                     text: 'Please login in order continue',
                     icon: 'info',
-                    confirmButtonText :'Login',
-                    confirmButtonColor : 'rgb(var(--heavy-color))'
+                    confirmButtonText: 'Login',
+                    confirmButtonColor: 'rgb(var(--heavy-color))'
                 }).then(function (isConfirm) {
                     if (isConfirm) {
                         navigate('/signin');

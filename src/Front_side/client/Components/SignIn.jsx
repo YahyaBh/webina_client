@@ -17,7 +17,7 @@ const SignIn = () => {
     const [passwordInput, setPasswordInput] = useState('');
     const { http, setToken } = AuthUser();
     const [loginUrl, setLoginUrl] = useState(null);
-    const [loading , setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -53,6 +53,20 @@ const SignIn = () => {
         formData.append('email', emailInput)
         formData.append('password', passwordInput)
 
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+
+
         http.post('/signin', formData)
             .then(res => {
                 if (res.status === 200) {
@@ -60,13 +74,9 @@ const SignIn = () => {
                     navigate("/")
                     setEmailInput('');
                     setPasswordInput('');
-                    Swal.fire({
-                        title: 'Success!',
-                        text: res.data.message,
-                        icon: "success",
-                        showConfirmButton: true,
-                        confirmButtonText: "Let's go!",
-                        
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Signed in successfully'
                     })
                 } else {
                     Swal.fire({
@@ -76,7 +86,7 @@ const SignIn = () => {
                         showConfirmButton: false,
                         confirmButtonText: 'Sign up!',
                         showCancelButton: true,
-                        
+
                     })
                     setPasswordInput('');
                     alert(res.data.message);
@@ -92,40 +102,40 @@ const SignIn = () => {
 
 
     return (
-        loading ? 
-        <div className='loading-container'>
+        loading ?
+            <div className='loading-container'>
                 <img src={Loading} alt="loading-web" />
             </div>
-        :
-        <div className='app__signin'>
-            <a href='/' style={{ width: '50px', height: '50px' }}>
-                <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
-            </a>
+            :
+            <div className='app__signin'>
+                <a href='/' style={{ width: '50px', height: '50px' }}>
+                    <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
+                </a>
 
-            <div className='app__signin__form'>
-                <form onSubmit={submitForm}>
-                    <h2>SIGN IN</h2>
-
-
-                    <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
-
-                    <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
+                <div className='app__signin__form'>
+                    <form onSubmit={submitForm}>
+                        <h2>SIGN IN</h2>
 
 
-                    <a type="submit" className='app__google__signup' href={loginUrl}><AiOutlineGoogle /></a>
+                        <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
 
-                    <button type='submit'>Sign In</button>
+                        <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
 
-                    <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>
 
-                </form>
+                        <a type="submit" className='app__google__signup' href={loginUrl}><AiOutlineGoogle /></a>
+
+                        <button type='submit'>Sign In</button>
+
+                        <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>
+
+                    </form>
+
+                </div>
+                <p style={{ position: 'absolute', bottom: 0, margin: '5px' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
+
+                <div className='app__signin__form__bg'></div>
 
             </div>
-            <p style={{ position: 'absolute', bottom: 0, margin: '5px' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
-
-            <div className='app__signin__form__bg'></div>
-
-        </div>
     )
 }
 

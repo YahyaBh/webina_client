@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import cookie from 'js-cookie';
 import { useState } from 'react';
+import WebInaLogo from '../../../Assets/Images/webinai.png'
 
-
-const Navbar = ({userData}) => {
+const Navbar = ({ userData }) => {
 
     const navigate = useNavigate();
     const { getToken } = AuthUser();
@@ -45,69 +45,77 @@ const Navbar = ({userData}) => {
 
     return (
         <div>
-            <nav className='m-navbar'>
-                <a href='/'>
-                    <img className='navbar-logo' src="./Images/webinai.png" alt="logo" width='80px' />
-                </a>
+            {!getToken() ?
 
-                <ul>
-                    <li>
-                        <a href='/'>
-                            <button>Home</button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href='/#about'>
-                            <button>About</button>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/#categroies">
-                            <button>Categories</button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href='/#founders'>
-                            <button>Founders</button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href='/#contact'>
-                            <button>Contact</button>
-                        </a>
-                    </li>
-
-                </ul>
-
-                {authed && userData ?
+                <nav className='m-navbar'>
+                    <a href='/'>
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                    </a>
 
                     <ul>
+                        <li>
+                            <a href='/'>About</a>
+                        </li>
+                        <li>
+                            <a href='/'>Categories</a>
+                        </li>
+                        <li>
+                            <a href='/'>Websites</a>
+                        </li>
+                        <li>
+                            <a href='/'>Contact</a>
+                        </li>
+
                         <li>
                             <a href="/signin">Sign In</a>
                         </li>
                         <li>
                             <a href="/signup">Sign Up</a>
                         </li>
-                    </ul>
-                    :
 
-                    <div className="dropdown">
-                        <span><img src={userData.avatar} alt={userData.name} /></span>
-                        <div className="dropdown-content">
-                            <li>
-                                <a href="/profile">Profile</a>
-                            </li>
-                            <li>
-                                <a href="/orders">Orders</a>
-                            </li>
-                            <li>
-                                <a href="/" onClick={logoutUser}>Log Out</a>
-                            </li>
+                    </ul>
+
+                </nav>
+
+                :
+
+
+                <nav className='m-navbar'>
+                    <a href='/'>
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                    </a>
+                    <ul>
+                        <li>
+                            <a href='/'>About</a>
+                        </li>
+                        <li>
+                            <a href='/'>Categories</a>
+                        </li>
+                        <li>
+                            <a href='/websites'>Websites</a>
+                        </li>
+                        <li>
+                            <a href='/'>Contact</a>
+                        </li>
+
+                        <div className="dropdown">
+                            <span><img src={userData.avatar} alt={userData.name} /></span>
+                            <div className="dropdown-content">
+                                <li>
+                                    <a href="/profile">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="/orders">Orders</a>
+                                </li>
+                                <li>
+                                    <a href='/' onClick={logoutUser}>Log Out</a>
+                                </li>
+                            </div>
                         </div>
-                    </div>
-                }
-            </nav>
+
+                    </ul>
+                </nav>
+            }
         </div>
     )
 }

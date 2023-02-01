@@ -19,6 +19,7 @@ import GoogleCallBack from "./Front_side/client/Components/GoogleCallBack";
 import Profile from "./Front_side/client/Components/Profile";
 import Logout from "./Front_side/client/Components/Logout";
 import Websites from "./Front_side/client/Components/Websites";
+import Website from "./Front_side/client/Components/Website";
 
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
 
         <Route exact path='/' element={<Home />} />
         <Route exact path='/websites' element={<Websites/>} />
+        <Route exact path='/website/:token' element={<Website/>} />
+
 
 
 

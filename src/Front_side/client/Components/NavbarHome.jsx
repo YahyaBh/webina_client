@@ -4,6 +4,7 @@ import Scroll from 'react-scroll-to-element';
 import AuthUser from '../../AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import WebInaLogo from '../../../Assets/Images/webinai.png';
 
 
 const NavbarHome = ({ userData }) => {
@@ -38,7 +39,7 @@ const NavbarHome = ({ userData }) => {
 
                 <nav className='m-navbar'>
                     <a href='/'>
-                        <img className='navbar-logo' src="./Images/webinai.png" alt="logo" width='80px' />
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
                     </a>
 
                     <ul>
@@ -79,7 +80,7 @@ const NavbarHome = ({ userData }) => {
 
                 <nav className='m-navbar'>
                     <a href='/'>
-                        <img className='navbar-logo' src="./Images/webinai.png" alt="logo" width='80px' />
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
                     </a>
                     <ul>
                         <li>

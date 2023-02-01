@@ -1813,3 +1813,79 @@ body {
         }
     }
 }
+
+
+
+.app__signle__website__header {
+
+    .swal2-container.swal2-backdrop-show,
+    .swal2-container.swal2-noanimation {
+        background: rgba(0, 0, 0, .95) !important;
+    }
+
+    .app__signle__website__image__container {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+
+        &:hover {
+            img {
+                transform: scale(.9);
+                filter: brightness(20%);
+            }
+
+            .image__data {
+                svg {
+                    opacity: 1;
+                }
+
+                h5 {
+                    opacity: 1;
+                }
+            }
+        }
+
+        img {
+            width: 80%;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            top: 30px;
+            position: relative;
+            transition: all .3s ease;
+
+
+        }
+
+
+        .image__data {
+
+            svg {
+                opacity: 0;
+                position: absolute;
+                z-index: 3;
+                color: #fff;
+                font-size: 40px;
+                transition: all .3s ease;
+                top: 50%;
+                left: 50%;
+            }
+
+            h5 {
+                opacity: 0;
+                position: absolute;
+                z-index: 3;
+                color: #fff;
+                font-size: 40px;
+                transition: all .3s ease;
+                top: 55%;
+                left: 43%;
+            }
+        }
+    }
+
+}
