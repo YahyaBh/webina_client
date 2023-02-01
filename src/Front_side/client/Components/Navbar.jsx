@@ -8,17 +8,18 @@ import cookie from 'js-cookie';
 import { useState } from 'react';
 import WebInaLogo from '../../../Assets/Images/webinai.png'
 
-const Navbar = ({ userData }) => {
+const Navbar = () => {
 
     const navigate = useNavigate();
     const { getToken } = AuthUser();
     const { token } = AuthUser();
 
-    const [authed, setAuthed] = useState(false);
+    const [userData, setUserData] = useState({});
+
 
     useEffect(() => {
-        if (!cookie.get('token')) {
-            setAuthed(true)
+        if (cookie.get('token')) {
+            setUserData(JSON.parse(cookie.get('user')));
         }
     }, [])
 

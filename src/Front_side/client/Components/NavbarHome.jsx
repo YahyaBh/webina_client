@@ -5,14 +5,28 @@ import AuthUser from '../../AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import WebInaLogo from '../../../Assets/Images/webinai.png';
+import { useEffect } from 'react';
+import cookie from 'js-cookie';
+import { useState } from 'react';
 
 
-const NavbarHome = ({ userData }) => {
+const NavbarHome = () => {
 
 
     const navigate = useNavigate();
     const { getToken } = AuthUser();
-    const { token, logout } = AuthUser();
+    const { token } = AuthUser();
+
+    const [ userData , setUserData ] = useState({});
+
+
+
+    useEffect(() => {
+        if (cookie.get('token')) {
+            setUserData(JSON.parse(cookie.get('user')));
+        }
+    }, [])
+
 
     const logoutUser = (e) => {
         e.preventDefault();
@@ -94,7 +108,7 @@ const NavbarHome = ({ userData }) => {
                             </Scroll>
                         </li>
                         <li>
-                                <a href='/websites'>Websites</a>
+                            <a href='/websites'>Websites</a>
                         </li>
                         <li>
                             <Scroll type="id" element="contact" offset={-100} timeout={100}>

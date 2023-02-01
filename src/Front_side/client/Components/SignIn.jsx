@@ -78,21 +78,19 @@ const SignIn = () => {
                         icon: 'success',
                         title: 'Signed in successfully'
                     })
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: res.data.message,
-                        icon: <MdErrorOutline />,
-                        showConfirmButton: false,
-                        confirmButtonText: 'Sign up!',
-                        showCancelButton: true,
-
-                    })
-                    setPasswordInput('');
-                    alert(res.data.message);
-
                 }
 
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Password or email is incorrect',
+                    icon: <MdErrorOutline />,
+                    showConfirmButton: false,
+                    confirmButtonText: 'Sign up!',
+                    showCancelButton: true,
+                })
+                setPasswordInput('');
             })
 
 

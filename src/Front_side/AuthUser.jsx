@@ -37,27 +37,23 @@ export default function AuthUser() {
     });
 
 
-    const sec_http = async () => {
-        if (getToken()) {
-            axios.create({
-                baseURL: "http://localhost:8000/api",
-                headers: {
-                    "Content-type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "user_token": getToken()
-                }
-            });
-
-        } else {
-            console.error('Unauthorized access');
+    const sec_http = cookie.get('token') ? axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "user_token": getToken()
         }
-    }
+    }) : console.log('Not authorized');
+
+
 
     return {
         setToken: saveToken,
         token,
         user,
         getToken,
-        http
+        http,
+        sec_http
     }
 }

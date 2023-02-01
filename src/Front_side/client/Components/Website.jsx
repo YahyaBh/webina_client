@@ -8,15 +8,16 @@ import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import { Fragment } from 'react';
 import Swal from 'sweetalert2';
-import { BsImage } from 'react-icons/bs';
-
+import { BsImage, BsBoxSeam, BsCashStack } from 'react-icons/bs';
+import { Ri24HoursFill } from 'react-icons/ri';
+import Footer from './Footer';
 const Website = () => {
 
 
     // Get ID from URL
     const params = useParams();
 
-    const { http } = AuthUser();
+    const { http, sec_http } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
@@ -31,7 +32,7 @@ const Website = () => {
 
 
     const getWebsite = async () => {
-        await http.get(`/website/${params.token}`)
+        await sec_http.get(`/website/${params.token}`)
             .then(res => {
                 setWebsiteData(res.data.website);
             })
@@ -62,6 +63,28 @@ const Website = () => {
         }
     }
 
+    const buyWebsite = async () => {
+        setLoading(true)
+        await sec_http.post(`/website/${params.token}`)
+            .then(res => {
+                setWebsiteData(res.data.website);
+            })
+
+        setUserData(JSON.parse(cookie.get('user')));
+        setLoading(false)
+    }
+
+    const findSimiliar = async () => {
+        setLoading(true)
+        await sec_http.post(`/website/${params.token}`)
+            .then(res => {
+                setWebsiteData(res.data.website);
+            })
+
+        setUserData(JSON.parse(cookie.get('user')));
+        setLoading(false)
+    }
+
     return (
         loading ?
             <div className='loading-container'>
@@ -81,9 +104,45 @@ const Website = () => {
                             <BsImage />
                             <h5>Show Full Image</h5>
                         </div>
-                        <img  src={websiteData.image} alt={websiteData.website_name} />
+                        <img src={websiteData.image} alt={websiteData.website_name} />
                     </div>
                 </header>
+
+                <section className='app__single__website__details'>
+                    <h2>{websiteData.website_name}</h2>
+
+                    <h4>{websiteData.description}</h4>
+
+                    <h5>Only : {websiteData.price}$ {websiteData.old_price ? <sub><del>{websiteData.old_price}</del></sub> : ''}</h5>
+
+                    <div className='app__single__website__buttons'>
+                        <button onClick={buyWebsite}>Buy Website</button>
+                        <button onClick={findSimiliar}>Find Similiar</button>
+                    </div>
+
+
+                    <div className='app__single__website__spec__container'>
+                        <div className='app__single__website__spec'>
+                            <ul>
+                                {websiteData.specifications ? websiteData.specifications.split(',').map((item, index) => { return (<li key={index}>{item}</li>) }) : ''}
+
+                            </ul>
+                        </div>
+
+                        <div className="app__single__website__spec__sec">
+                            <ul>
+                                <li><Ri24HoursFill /> 24/7 Online Assistance</li>
+
+                                <li><BsBoxSeam /> Fast Delivery</li>
+
+                                <li><BsCashStack /> Competitive Price</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+
+                <Footer />
             </Fragment>
     )
 }

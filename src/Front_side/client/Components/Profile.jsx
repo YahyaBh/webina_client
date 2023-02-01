@@ -24,7 +24,7 @@ const Profile = () => {
 
     const token = cookie.get('token');
     const navigate = useNavigate();
-    const { http } = AuthUser();
+    const { http , sec_http } = AuthUser();
 
     useEffect(() => {
         if (token) {
@@ -33,7 +33,7 @@ const Profile = () => {
             formData.append('email', JSON.parse(cookie.get('user')).email);
             formData.append('remember_token', cookie.get('token'));
             try {
-                http.post('/user', formData)
+                sec_http.post('/user', formData)
                     .then(res => {
 
                         if (res.status === 200) {
@@ -89,19 +89,19 @@ const Profile = () => {
         formData.append('new_password', newPass);
         formData.append('remember_token', cookie.get('token'));
         try {
-            http.post('/user/update', formData)
+            sec_http.post('/user/update', formData)
                 .then(res => {
                     if (res.status === 200) {
                         setUserData(res.data.user);
                         setName(res.data.user.name);
                         setEmail(res.data.user.email);
                         setImage(res.data.user.avatar);
-                        navigate('/profile')
+                        navigate('/')
                     }
 
                     if (res.status === 401) {
                         setTimeout(() => {
-                            navigate('/');
+                            navigate('/profile');
                         }, 2000);
                         Swal.fire({
                             title: 'Error!',
@@ -180,7 +180,6 @@ const Profile = () => {
     }
 
     const deletUser = (e) => {
-
         Swal.fire({
             title: 'Are you sure?',
             type: 'warning',
@@ -211,7 +210,7 @@ const Profile = () => {
         formData.append('password_check', e);
 
         try {
-            http.post('/user/delete', formData)
+            sec_http.post('/user/delete', formData)
                 .then(res => {
                     if (res.status === 200) {
                         navigate('/logout');

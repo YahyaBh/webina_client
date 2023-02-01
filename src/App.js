@@ -5,7 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Admin from "./Front_side/Admin/Components/Admin";
 import Show from "./Front_side/Admin/Components/Show";
 import Services from "./Front_side/Admin/Components/Services";
-import Orders from "./Front_side/Admin/Components/Orders";
+import Orders from "./Front_side/client/Components/Orders";
 import CreateWebsite from "./Front_side/Admin/Components/CreateWebsite";
 import Chat from "./Front_side/Admin/Components/Chat";
 import Users from "./Front_side/Admin/Components/Users";
@@ -63,7 +63,7 @@ function App() {
         <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
-
+        <Route exact path="/orders" element={<Orders />} />
 
 
         <Route exact path='*' element={<Error />} />
