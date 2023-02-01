@@ -194,7 +194,7 @@ const Home = () => {
                             }
 
 
-                            <p>We will help you react your dreams by <br /> making you the most professional website among the market</p>
+                            <p>We will help you make your dreams come true by <br /> making you the most professional website among the market</p>
                             {!getToken() ?
                                 <Link to='/signup' className="app__header__title__sign">
                                     <span className="app__header__title__sign__get">GET STARTED</span>
