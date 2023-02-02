@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import AuthUser from '../../AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png';
@@ -22,6 +22,7 @@ const Website = () => {
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
+    const navigate = useNavigate();
 
 
 
@@ -35,6 +36,16 @@ const Website = () => {
         await sec_http.get(`/website/${params.token}`)
             .then(res => {
                 setWebsiteData(res.data.website);
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    icon : 'error'
+                })
+                setTimeout(() => {
+                    navigate('/websites')
+                }, 2000);
             })
 
         setUserData(JSON.parse(cookie.get('user')));
@@ -90,7 +101,7 @@ const Website = () => {
             <div className='loading-container'>
                 < img src={Loading} alt="loading-web" />
             </div >
-            :
+            : websiteData ?
             <Fragment>
                 <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
                     <Navbar userData={userData} />
@@ -144,6 +155,10 @@ const Website = () => {
 
                 <Footer />
             </Fragment>
+
+            :
+            navigate('/websites')
+
     )
 }
 

@@ -8,6 +8,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { MdDone, MdErrorOutline } from 'react-icons/md';
 import AuthUser from '../../AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import Logo from '../../../Assets/Images/webinai.png';
 
 
 const SignUp = () => {
@@ -152,7 +153,7 @@ const SignUp = () => {
 
 
     const checkVerification = () => {
-        http.post(`/email/verify/${id}/${token_checker}/${emailInput}`)
+        http.post(`/email/verify/${emailInput}`)
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({
@@ -195,7 +196,7 @@ const SignUp = () => {
             :
             <div className='app__signup'>
                 <a href='/' style={{ width: '50px', height: '50px' }}>
-                    <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
+                    <img src={Logo} alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
                 </a>
 
                 <div className='app__signup__form'>

@@ -138,7 +138,10 @@ const Profile = () => {
             showCancelButton: true
         }).then((result) => {
             if (result.value) {
-                console.log("Result: " + result.value);
+                Swal.fire({
+                    icon: 'success',
+                    text : result.value,
+                })
             }
         });
 

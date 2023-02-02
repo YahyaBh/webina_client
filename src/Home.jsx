@@ -417,7 +417,7 @@ const Home = () => {
 
                                     <label className="b-contain">
                                         <span>I Accept Receiving Marketing Emails</span>
-                                        <input type="checkbox" name='accept_mails' onChange={(e) => setAcceptEmail(e.checked, console.log(e.target.checked))} />
+                                        <input type="checkbox" name='accept_mails' onChange={(e) => setAcceptEmail(e.checked)} />
                                         <div className="b-input"></div>
                                     </label>
 

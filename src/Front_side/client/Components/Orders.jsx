@@ -15,8 +15,8 @@ const Orders = () => {
     const { sec_http } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
-
-
+    const [id, setId] = useState(1);
+    const userData = new FormData()
 
     useEffect(() => {
 
@@ -33,28 +33,29 @@ const Orders = () => {
                     cookie.remove('token');
                 }
             });
+        } else {
+            
+
+            userData.append('user_id', id);
+
+            getOrders();
+
         }
 
-        getOrders();
 
     }, [])
 
 
     const getOrders = async () => {
 
-        const userData = new FormData();
 
-        userData.append('token', cookie.get('token'));
-        userData.append('user_id', JSON.parse(cookie.get('user')).id)
-        console.log(userData);
-
-        await sec_http.post('/orders', userData)
+        await sec_http.post(`/orders` , userData)
             .then(res => {
                 setOrders(res.data.orders);
             }).catch(err => {
                 Swal.fire({
                     title: 'Error',
-                    text: err,
+                    text: err.message,
                     icon: 'error'
                 })
             });

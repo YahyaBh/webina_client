@@ -20,6 +20,7 @@ import Profile from "./Front_side/client/Components/Profile";
 import Logout from "./Front_side/client/Components/Logout";
 import Websites from "./Front_side/client/Components/Websites";
 import Website from "./Front_side/client/Components/Website";
+import Payment from "./Front_side/client/Components/Payment";
 
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
+        <Route exact path="/payment" element={<Payment />} />
+
 
 
         <Route exact path='*' element={<Error />} />

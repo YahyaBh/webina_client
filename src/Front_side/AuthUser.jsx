@@ -44,7 +44,7 @@ export default function AuthUser() {
             "Authorization": `Bearer ${token}`,
             "user_token": getToken()
         }
-    }) : console.log('Not authorized');
+    }) : console.error('Not authorized');
 
 
 

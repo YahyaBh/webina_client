@@ -8,6 +8,7 @@ import cookie from 'js-cookie';
 import AuthUser from '../../AuthUser';
 import { useLayoutEffect } from 'react';
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import Logo from '../../../Assets/Images/webinai.png';
 
 
 const SignIn = () => {
@@ -107,7 +108,7 @@ const SignIn = () => {
             :
             <div className='app__signin'>
                 <a href='/' style={{ width: '50px', height: '50px' }}>
-                    <img src='./Images/webinai.png' alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
+                    <img src={Logo} alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
                 </a>
 
                 <div className='app__signin__form'>
