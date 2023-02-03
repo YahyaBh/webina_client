@@ -15,6 +15,7 @@ const Orders = () => {
     const { sec_http } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
+    const [websites, setwebsites] = useState(null);
     const [id, setId] = useState(1);
     const userData = new FormData()
 
@@ -34,7 +35,7 @@ const Orders = () => {
                 }
             });
         } else {
-            
+
 
             userData.append('user_id', id);
 
@@ -49,9 +50,10 @@ const Orders = () => {
     const getOrders = async () => {
 
 
-        await sec_http.post(`/orders` , userData)
+        await sec_http.post(`/orders`, userData)
             .then(res => {
                 setOrders(res.data.orders);
+                setwebsites(res.data.websites);
             }).catch(err => {
                 Swal.fire({
                     title: 'Error',
@@ -77,16 +79,24 @@ const Orders = () => {
                     <Navbar userData={JSON.parse(cookie.get('user'))} />
                 </div>
 
+                <div className='orders-container'>
+                    {orders && orders.length > 0 ?
+                        orders.map((order, index) => (
+                            <div className='order-item' key={index}>
 
-                {orders && orders.length > 0 ?
+                                {/* <img src={order.image} alt='order-image' /> */}
+                                <div className='order-item-header'>
+                                    <p>Order : {order.token}</p>
+                                    <p>Website name : {order?.website?.website_name}</p>
+                                    <p>{order?.website?.price ? order.website.price + '$' : ''}</p>
+                                </div>
+                            </div>
 
-                    orders.map((order, index) => {
-                        <div>{order.number}</div>
-                    })
+                        ))
 
-                    : <div className='no-orders-container'>
-                        You have no orders Yet</div>}
-
+                        : <div className='no-orders-container'>
+                            You have no orders Yet</div>}
+                </div>
             </Fragment>
     )
 }

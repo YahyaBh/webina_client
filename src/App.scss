@@ -1966,3 +1966,22 @@ body {
     }
 
 }
+
+
+.orders-container {
+
+    padding: 30px;
+
+    .order-item {
+        background-color: #f9f9f9;
+        padding: 10px;
+        width: 350px;
+        height: 80px;
+        box-shadow: 0 0 10px -2px grey;
+        border-radius: 10px;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
