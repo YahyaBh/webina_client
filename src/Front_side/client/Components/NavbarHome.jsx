@@ -53,7 +53,7 @@ const NavbarHome = () => {
 
                 <nav className='m-navbar'>
                     <a href='/'>
-                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='60px' />
                     </a>
 
                     <ul>

@@ -4,11 +4,8 @@
 }
 
 body {
-    background-image: url(../public/Images/s-bg.png);
-    background-repeat: repeat;
-    background-attachment: scroll;
-    background-size: contain;
-    background-origin: border-box;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
 
@@ -18,6 +15,7 @@ body {
     height: 100vh;
     background-size: cover;
     background-position: center;
+    box-shadow: 0 0 18px 6px grey;
 
     .app__header__content {
         width: 100%;
@@ -36,7 +34,8 @@ body {
     }
 
     .app__video {
-        height: 100vh
+        height: 100vh;
+        box-shadow: 0 0 20px -10px grey;
     }
 
 
@@ -61,10 +60,15 @@ body {
         .app__header__title__sign {
             position: relative;
             padding: 15px 20px;
+            width: 237px;
+            height: 50px;
             transition: all .2s ease;
-
-
-
+            background-color: rgb(var(--heavy-color));
+            border: rgb(var(--mid-color)) 2px solid;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             &:before {
                 content: "";
@@ -73,9 +77,9 @@ body {
                 left: 0;
                 display: block;
                 border-radius: 28px;
-                background: rgba(var(--mid-color), .5);
+                background: rgba(var(--heavy-color), .5);
                 width: 0px;
-                height: 56px;
+                height: 46px;
                 transition: all .2s ease
             }
 
@@ -105,9 +109,15 @@ body {
             }
 
             &:hover {
+                color: #000;
 
                 a {
                     color: rgba(var(--mid-color), 1);
+                }
+
+                svg {
+                    stroke: #000;
+
                 }
 
                 .app__header__title__sign__get {
@@ -117,7 +127,8 @@ body {
 
                 &:before {
                     width: 100%;
-                    background: rgba(var(--heavy-color), 1);
+                    background: rgba(var(--mid-color), 1);
+                    border: rgb(var(--heavy-color)) 2px solid;
 
                     svg {
                         transform: translateX(0);
@@ -204,36 +215,81 @@ body {
     height: 400px;
     width: 100%;
     align-items: center;
-    padding: 40px 80px;
+    padding: 30px 45px;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 60px;
+    margin: 180px 0;
 
-
-    h2 {
-        font-family: Louis-Bold;
-        font-size: 50px;
+    hr {
+        opacity: 0.2;
+        width: 100%;
     }
 
-    p {
-        font-size: 20px;
-    }
+    .app__about__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
+        h2 {
+            font-family: Louis-Bold;
+            font-size: 45px;
+            color: #000;
+            text-align: center;
+            background-color: rgb(var(--mid-color));
+            height: 100px;
+            width: 600px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            text-transform: uppercase;
+            border-radius: 50px;
+        }
+
+
+        .app__about__para_image {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 70%;
+
+            p {
+                width: 50%;
+                font-size: 30px;
+            }
+
+            img {
+                width: 50%;
+            }
+        }
+
+    }
 
     .app__about__list {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-evenly;
 
-        svg {
-            font-size: 60px;
-            color: rgb(var(--heavy-color));
-            padding: 10px;
-            border-radius: 50%;
-            background-color: rgb(var(--mid-color));
-            box-shadow: 0 0 20px -5px grey;
-            margin: 6px;
+        h4 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 0px 60px;
+            font: 20px "Louis-Bold";
+
+            svg {
+                font-size: 7rem;
+                color: rgb(var(--heavy-color));
+                padding: 10px;
+                border-radius: 50%;
+                background-color: rgba(204, 204, 204, 0.705);
+                box-shadow: 0 0 20px 2px grey;
+                margin: 20px;
+
+            }
         }
+
     }
 }
 
@@ -241,13 +297,25 @@ body {
 .app__more__about {
     display: flex;
     justify-content: center;
+    background-color: #1E1E1E;
 
     .app__more__about__content {
+        background-color: #D0D0D0;
+        margin: 150px;
+        padding: 50px;
 
         h2 {
             font-family: Louis-Bold;
             font-size: 50px;
             margin: 10px;
+            text-align: center;
+            border-radius: 20px;
+            background-color: rgb(var(--heavy-color));
+            width: 500px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         p {
@@ -1929,6 +1997,7 @@ body {
         display: flex;
         justify-content: space-around;
         align-items: center;
+
         .app__single__website__spec {
             box-shadow: 0 0 10px -2px grey;
             border-radius: 20px;
@@ -1956,13 +2025,14 @@ body {
             ul {
                 list-style: none;
                 margin: 20px;
+
                 li {
                     font-size: 50px;
                 }
             }
         }
 
-        
+
     }
 
 }

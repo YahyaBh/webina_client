@@ -12,15 +12,14 @@ import Moujahid from './Assets/Images/FRAZZIX.png';
 import { Link } from 'react-router-dom';
 
 
-import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer, AiOutlineFieldTime } from 'react-icons/ai';
+import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
 import { TbBrandJavascript } from 'react-icons/tb';
 import { FaLaravel } from 'react-icons/fa';
 import { DiMysql, DiNodejsSmall, DiReact, DiCss3, DiSass, DiPhp, DiPhotoshop, DiIllustrator, DiVisualstudio } from 'react-icons/di';
 import { SiTypescript, SiAdobepremierepro, SiAdobeaftereffects } from 'react-icons/si';
 import { MdDone, MdError, MdOutlineDesignServices, MdOutlineMiscellaneousServices } from 'react-icons/md';
-import { RiCustomerServiceLine, RiLockPasswordFill, RiCustomerService2Line } from 'react-icons/ri';
-import { BiDollarCircle } from 'react-icons/bi';
-
+import { RiCustomerServiceLine, RiCustomerService2Line } from 'react-icons/ri';
+import { BiDollarCircle, BiTimeFive } from 'react-icons/bi';
 
 import './App.scss'
 
@@ -45,7 +44,7 @@ import AuthUser from './Front_side/AuthUser';
 import cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import Footer from './Front_side/client/Components/Footer';
-
+import Loading from './Assets/Images/WEBINA2.png'
 
 
 
@@ -68,16 +67,14 @@ const Home = () => {
         if (user !== undefined && user !== null && user !== '') {
             setuserData(JSON.parse(cookie.get('user')))
         }
-        const onPageLoad = () => {
-            setLoading(false);
-        };
+        window.addEventListener('load', function () {
 
-        if (document.readyState === 'complete') {
-            onPageLoad();
-        } else {
-            window.addEventListener('load', onPageLoad);
-            return () => window.removeEventListener('load', onPageLoad);
-        }
+            setLoading(false);
+
+            return () => window.removeEventListener('load');
+
+        });
+
 
 
 
@@ -158,7 +155,9 @@ const Home = () => {
 
     return (
         loading ?
-            <div>Loading...</div>
+            <div className='loading-container'>
+                <img src={Loading} alt="loading-web" />
+            </div>
             :
             <div>
                 <header className="app__header" id="home">
@@ -226,48 +225,46 @@ const Home = () => {
                 <section className="app__about" id="about">
                     <div className="app__about__content">
                         <h2>What Is WebIna ?</h2>
-                        <p>WebIna is a website that helps you make your dreams
-                            easier and build you a full appliaction for your business , you can easly choose any website
-                            from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
+                        <div className='app__about__para_image'>
+                            <p>WebIna is a website that helps you make your dreams
+                                easier and build you a full appliaction for your business , you can easly choose any website
+                                from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
+
+                            <img src={ImageAbout} alt="about_us" width='500px' />
+                        </div>
+                        <hr />
                         <div className="app__about__list">
                             <h4><BiDollarCircle /> Best Prices In The Market</h4>
-                            <h4><AiOutlineFieldTime /> Fast Website Developing Time</h4>
+                            <h4><BiTimeFive /> Fast Website Developing Time</h4>
                             <h4><RiCustomerService2Line /> 24/7 Customer Services Assistance</h4>
                         </div>
-                    </div>
-
-
-                    <div className="app__about__image">
-                        <img src={ImageAbout} alt="about_us" width='500px' />
                     </div>
                 </section>
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fillOpacity="3" d="M0,32L0,224L240,224L240,288L480,288L480,288L720,288L720,192L960,192L960,160L1200,160L1200,192L1440,192L1440,320L1200,320L1200,320L960,320L960,320L720,320L720,320L480,320L480,320L240,320L240,320L0,320L0,320Z"></path></svg>            <section className="app__more__about">
-                    <div className="app__more__about__image"></div>
+                <section className="app__more__about">
                     <div className="app__more__about__content">
                         <h2>More About WebIna</h2>
                         <p>WebIna is a website that helps you make your dreams
                             easier and build you a full appliaction for your business , you can easly choose any website
                             from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
                         <div className="app__more__about__card" data-aos="fade-right">
-                            <CgWebsite /> <h2>Website Development</h2>
+                            <CgWebsite /> <h3>Website Development</h3>
                         </div>
 
                         <div className="app__more__about__card" data-aos="fade-right">
-                            <VscDebugAll /> <h2>Websites Debugging</h2>
+                            <VscDebugAll /> <h3>Websites Debugging</h3>
                         </div>
 
                         <div className="app__more__about__card" data-aos="fade-right">
-                            <AiOutlineDeploymentUnit /> <h2>Website Deployment</h2>
+                            <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
                         </div>
                     </div>
                 </section>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2c2827" fillOpacity="3" d="M0,0L0,160L288,160L288,64L576,64L576,96L864,96L864,64L1152,64L1152,32L1440,32L1440,0L1152,0L1152,0L864,0L864,0L576,0L576,0L288,0L288,0L0,0L0,0Z"></path></svg>
 
 
 
-
+                
 
 
                 <section className="app__categories mt-5" id='categories'>
@@ -433,7 +430,7 @@ const Home = () => {
                 </section>
 
 
-                <Footer/>
+                <Footer />
             </div>
     )
 }
