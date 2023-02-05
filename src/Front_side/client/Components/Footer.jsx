@@ -1,14 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Visa from '../../../Assets/Images/Visa_Logo.png'
 import MasterCard from '../../../Assets/Images/mastercard.png'
 import AmericanExpress from '../../../Assets/Images/american-express.png'
 import TrustPayment from '../../../Assets/Images/trust_payment_logo.png'
 import formations from '../../../Assets/Images/1st-logo-2022-light.png'
+import PayPal from '../../../Assets/Images/paypal.png'
 import { AiFillFacebook, AiFillInstagram, AiOutlineTwitter } from 'react-icons/ai'
 import { SiMinutemailer } from 'react-icons/si'
+import AuthUser from '../../AuthUser'
+import Swal from 'sweetalert2'
+
+
+
 
 
 const Footer = () => {
+
+    const { http } = AuthUser();
+
+    const [email, setEmail] = useState('');
+    const [subscribed , setSubscribed] = useState(false);
+
+
+    const subscribe = async (e) => {
+        e.preventDefault();
+        const subscirbe_email = new FormData();
+
+        subscirbe_email.append('email', email)
+
+
+        await http.post('/subscribe', subscirbe_email)
+            .then(res => {
+                Swal.fire({
+                    title : 'Thank you for subscribing!',
+                    text : res.data.message,
+                    icon : 'success'
+                })
+                setSubscribed(true);
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Oops...',
+                    text: 'Something went wrong' + err.message,
+                    icon: 'error'
+                })
+            })
+
+    }
     return (
         <>
             <footer className="app__footer">
@@ -34,11 +72,17 @@ const Footer = () => {
                             <li><a href="/e-commerce/websites">E-commerce</a></li>
                             <li><a href="/blog/websites">Blog</a></li>
                             <li><a href="/landing-page/websites">Landing Page</a></li>
+                            <br />
+                            <h3>Subscribe</h3>
                             <li>
-                                <form>
-                                    <input style={{ padding: '5px', outline: 'none', borderRadius: '5px' }} placeholder='subscribe' />
-                                    <button style={{ padding: '5px', outline: 'none', borderRadius: '5px' }} > Subscribe < SiMinutemailer /></button>
+                                {!subscribed ?
+                                <form onSubmit={subscribe}>
+                                    <input style={{ padding: '5px', outline: 'none', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px' }} placeholder='subscribe' onChange={(e) => setEmail(e.target.value)} />
+                                    <button style={{ padding: '5px', outline: 'none', borderTopRightRadius: '5px', borderBottomRightRadius: '5px', color: 'rgb(var(--heavy-color))', backgroundColor: 'rgb(var(--mid-color))' }} > Subscribe < SiMinutemailer /></button>
                                 </form>
+                                :
+                                <h3>Thank You For Subscribing</h3>
+                                }
                             </li>
                         </ul>
                     </div>
@@ -51,6 +95,7 @@ const Footer = () => {
                                 <img src={Visa} alt='visa' />
                                 <img src={MasterCard} alt='mastercard' />
                                 <img src={AmericanExpress} alt='americanexpress' />
+                                <img src={PayPal} alt='paypal' />
                             </div>
 
                             <h3>Our Providers :</h3>

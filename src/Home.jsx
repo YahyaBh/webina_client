@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import Navbar from "./Front_side/client/Components/NavbarHome";
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';
 import ImageContact from './Assets/Images/vector_contact.png';
@@ -22,13 +21,6 @@ import { RiCustomerServiceLine, RiCustomerService2Line } from 'react-icons/ri';
 import { BiDollarCircle, BiTimeFive } from 'react-icons/bi';
 
 import './App.scss'
-
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 
 
@@ -67,6 +59,7 @@ const Home = () => {
         if (user !== undefined && user !== null && user !== '') {
             setuserData(JSON.parse(cookie.get('user')))
         }
+
         window.addEventListener('load', function () {
 
             setLoading(false);
@@ -75,18 +68,14 @@ const Home = () => {
 
         });
 
-
-
-
-
-
     }, [])
 
 
 
     const submitForm = function (e) {
 
-        if (1 === 1) {
+        if (name === '' || emailInput === '' || message === '') {
+
             e.preventDefault();
 
             const formData = new FormData()
@@ -342,14 +331,14 @@ const Home = () => {
                             <div className="app__skills__card__img">
 
 
-                                <div class="flip-box">
-                                    <div class="flip-box-inner">
-                                        <div class="flip-box-front">
+                                <div className="flip-box">
+                                    <div className="flip-box-inner">
+                                        <div className="flip-box-front">
                                             <div className='app__skills__card__image__container'>
                                                 <img src={YahyaBouhsine} alt="founder_yahya" />
                                             </div>
                                         </div>
-                                        <div class="flip-box-back">
+                                        <div className="flip-box-back">
                                             <AiFillHtml5 /><TbBrandJavascript /><FaLaravel /><DiMysql /><DiNodejsSmall /><DiReact />
                                             <DiCss3 /><DiSass /><DiPhp /><SiTypescript />
                                         </div>
@@ -368,14 +357,14 @@ const Home = () => {
                         <div className="app__skills__card">
                             <div className="app__skills__card__img">
 
-                                <div class="flip-box">
-                                    <div class="flip-box-inner">
-                                        <div class="flip-box-front">
+                                <div className="flip-box">
+                                    <div className="flip-box-inner">
+                                        <div className="flip-box-front">
                                             <div className='app__skills__card__image__container'>
                                                 <img src={Moujahid} alt="founder_moujahid" />
                                             </div>
                                         </div>
-                                        <div class="flip-box-back">
+                                        <div className="flip-box-back">
                                             <div className='app__skills__svgs'>
                                                 <AiOutlineCamera /><DiPhotoshop /><DiIllustrator /><SiAdobepremierepro /><SiAdobeaftereffects /><DiReact />
                                                 <MdOutlineDesignServices />
@@ -396,14 +385,14 @@ const Home = () => {
                         <div className="app__skills__card">
                             <div className="app__skills__card__img">
 
-                                <div class="flip-box">
-                                    <div class="flip-box-inner">
-                                        <div class="flip-box-front">
+                                <div className="flip-box">
+                                    <div className="flip-box-inner">
+                                        <div className="flip-box-front">
                                             <div className='app__skills__card__image__container'>
                                                 <img src={Youness} alt="founder_youness" />
                                             </div>
                                         </div>
-                                        <div class="flip-box-back">
+                                        <div className="flip-box-back">
                                             <div className='app__skills__svgs'>
                                                 <AiOutlineDatabase /><AiOutlineCloudServer /><DiVisualstudio /><MdOutlineMiscellaneousServices /><RiCustomerServiceLine /></div>
                                         </div>
