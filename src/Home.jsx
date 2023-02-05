@@ -248,28 +248,30 @@ const Home = () => {
                         <p>WebIna is a website that helps you make your dreams
                             easier and build you a full appliaction for your business , you can easly choose any website
                             from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
-                        <div className="app__more__about__card" data-aos="fade-right">
-                            <CgWebsite /> <h3>Website Development</h3>
-                        </div>
+                        <div className='app__more__about__cards__container'>
+                            <div className="app__more__about__card" data-aos="fade-right">
+                                <CgWebsite /> <h3>Website Development</h3>
+                            </div>
 
-                        <div className="app__more__about__card" data-aos="fade-right">
-                            <VscDebugAll /> <h3>Websites Debugging</h3>
-                        </div>
+                            <div className="app__more__about__card" data-aos="fade-right">
+                                <VscDebugAll /> <h3>Websites Debugging</h3>
+                            </div>
 
-                        <div className="app__more__about__card" data-aos="fade-right">
-                            <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
+                            <div className="app__more__about__card" data-aos="fade-right">
+                                <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
+                            </div>
                         </div>
                     </div>
                 </section>
 
 
 
-                
 
 
-                <section className="app__categories mt-5" id='categories'>
+
+                <section className="app__categories" id='categories'>
                     <div className="app__categories__content">
-                        <div className="app__categories__title"><h2>WebIna_Categories</h2></div>
+                        <div className="app__categories__title"><h2>WebIna Categories</h2></div>
                     </div>
 
 
@@ -329,74 +331,105 @@ const Home = () => {
 
                 </section>
 
-                <section className="app__skills mt-5" id='founders'>
+                <section className="app__skills" id='founders'>
 
                     <div className="app__skills__content">
-                        <div className="app__skills__title"><h2>WebIna_Founders</h2></div>
+                        <div className="app__skills__title"><h2>WebIna Founders</h2></div>
                     </div>
 
                     <div className="app__skills__cards">
                         <div className="app__skills__card">
                             <div className="app__skills__card__img">
-                                <h2 className="app__skills__card__name">YAHYA BOUHSINE</h2>
-                                <p className="app__skills__card__content__role">Developer And Programmer of WebIna Company</p>
-                                <img src={YahyaBouhsine} alt="founders" />
+
+
+                                <div class="flip-box">
+                                    <div class="flip-box-inner">
+                                        <div class="flip-box-front">
+                                            <div className='app__skills__card__image__container'>
+                                                <img src={YahyaBouhsine} alt="founder_yahya" />
+                                            </div>
+                                        </div>
+                                        <div class="flip-box-back">
+                                            <AiFillHtml5 /><TbBrandJavascript /><FaLaravel /><DiMysql /><DiNodejsSmall /><DiReact />
+                                            <DiCss3 /><DiSass /><DiPhp /><SiTypescript />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div className="app__skills__card__content">
                                 <h3 className="app__skills__card__content__title">Yahya Bouhsine</h3>
                                 <p className="app__skills__card__content__description">Developer And Programmer of WebIna Company</p>
-                                <AiFillHtml5 /><TbBrandJavascript /><FaLaravel /><DiMysql /><DiNodejsSmall /><DiReact />
-                                <DiCss3 /><DiSass /><DiPhp /><SiTypescript />
-                                <hr />
                             </div>
                         </div>
 
-                        <hr />
 
                         <div className="app__skills__card">
                             <div className="app__skills__card__img">
-                                <h2 className="app__skills__card__name">MOUJAHID NEJJAR</h2>
-                                <p className="app__skills__card__content__role">Designer & UX/UI Designer of WebIna Company</p>
-                                <img className="moujahid" src={Moujahid} alt="founders" />
+
+                                <div class="flip-box">
+                                    <div class="flip-box-inner">
+                                        <div class="flip-box-front">
+                                            <div className='app__skills__card__image__container'>
+                                                <img src={Moujahid} alt="founder_moujahid" />
+                                            </div>
+                                        </div>
+                                        <div class="flip-box-back">
+                                            <div className='app__skills__svgs'>
+                                                <AiOutlineCamera /><DiPhotoshop /><DiIllustrator /><SiAdobepremierepro /><SiAdobeaftereffects /><DiReact />
+                                                <MdOutlineDesignServices />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div className="app__skills__card__content">
                                 <h3 className="app__skills__card__content__title">Moujahid Nejjar</h3>
                                 <p className="app__skills__card__content__description">Designer & UX/UI Designer of WebIna Company</p>
-                                <AiOutlineCamera /><DiPhotoshop /><DiIllustrator /><SiAdobepremierepro /><SiAdobeaftereffects /><DiReact />
-                                <MdOutlineDesignServices />
-                                <hr />
                             </div>
                         </div>
 
-                        <hr />
 
                         <div className="app__skills__card">
                             <div className="app__skills__card__img">
-                                <h2 className="app__skills__card__name">YOUNESS MEKKI</h2>
-                                <p className="app__skills__card__content__role">Security & Database Managment</p>
-                                <img src={Youness} alt="founders" />
+
+                                <div class="flip-box">
+                                    <div class="flip-box-inner">
+                                        <div class="flip-box-front">
+                                            <div className='app__skills__card__image__container'>
+                                                <img src={Youness} alt="founder_youness" />
+                                            </div>
+                                        </div>
+                                        <div class="flip-box-back">
+                                            <div className='app__skills__svgs'>
+                                                <AiOutlineDatabase /><AiOutlineCloudServer /><DiVisualstudio /><MdOutlineMiscellaneousServices /><RiCustomerServiceLine /></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+
 
                             <div className="app__skills__card__content">
                                 <h3 className="app__skills__card__content__title">Youness Mekki</h3>
                                 <p className="app__skills__card__content__description">Security & Database Managment</p>
-                                <AiOutlineDatabase /><AiOutlineCloudServer /><DiVisualstudio /><MdOutlineMiscellaneousServices /><RiCustomerServiceLine />
-                                <hr />
                             </div>
                         </div>
 
-                        <hr />
-                    </div>
+
+
+                    </div >
 
 
                 </section >
 
 
-                <section className="app__contact mt-5" id='contact'>
+                <section className="app__contact" id='contact'>
                     <div className="app__contact__content">
-                        <div className="app__contact__title"><h2>Conatct_WebIna</h2></div>
+                        <div className="app__contact__title"><h2>Conatct WebIna</h2></div>
                     </div>
 
                     <div className="app__contact__content__form__image">
@@ -427,11 +460,17 @@ const Home = () => {
                             </div>
                         }
                     </div>
+
+
+
+
+
+                    <Footer />
+
                 </section>
 
 
-                <Footer />
-            </div>
+            </div >
     )
 }
 
