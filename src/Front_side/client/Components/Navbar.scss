@@ -2,9 +2,12 @@
 
     display: flex;
     justify-content:space-around;
-    padding: 15px 50px;
+    align-items: center;
+    padding: 15px 20px;
 
-
+    .navbar-logo {
+        width: 50px;
+    }
 
     ul {
         list-style-type: none;

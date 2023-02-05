@@ -16,16 +16,21 @@ body {
 * {
   margin: 0;
   padding: 0;
-  border: none ;
+  border: none;
   text-decoration: none;
 }
 
 *,
 *:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /*#ffe662*/

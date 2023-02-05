@@ -50,7 +50,7 @@ const Navbar = () => {
 
                 <nav className='m-navbar'>
                     <a href='/'>
-                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='60px' />
+                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='40px' />
                     </a>
 
                     <ul>

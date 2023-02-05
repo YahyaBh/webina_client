@@ -221,7 +221,6 @@ const Home = () => {
 
                             <img src={ImageAbout} alt="about_us" width='500px' />
                         </div>
-                        <hr />
                         <div className="app__about__list">
                             <h4><BiDollarCircle /> Best Prices In The Market</h4>
                             <h4><BiTimeFive /> Fast Website Developing Time</h4>
@@ -315,7 +314,7 @@ const Home = () => {
                     </div>
 
                     <div className="show__container">
-                        <a href='/websites' className="app__categories__show__button">Show All</a>
+                        <a href='/websites' className="app__categories__show__button">Show All Websites</a>
                     </div>
 
                 </section>

@@ -1,7 +1,7 @@
 {
   "name": "vortex-client",
   "version": "0.1.0",
-  "proxy": "http://localhost:8000",
+  "proxy": "https://4867-160-179-4-92.eu.ngrok.io",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "react-scroll-to-element": "^0.2.0",
     "sass": "^1.57.1",
+    "source-map-explorer": "^2.5.3",
     "sweetalert2": "^11.6.16",
     "swiper": "^8.4.5",
     "uuid": "^9.0.0",
@@ -27,6 +28,7 @@
     "youcan-payment-nodejs-sdk": "^1.2.8"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
