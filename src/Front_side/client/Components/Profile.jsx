@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import swal from '@sweetalert/with-react'
 
 const Profile = () => {
 
@@ -24,7 +25,7 @@ const Profile = () => {
 
     const token = cookie.get('token');
     const navigate = useNavigate();
-    const { http , sec_http } = AuthUser();
+    const { http, sec_http } = AuthUser();
 
     useEffect(() => {
         if (token) {
@@ -88,7 +89,7 @@ const Profile = () => {
         formData.append('password', password);
         formData.append('new_password', newPass);
         formData.append('remember_token', cookie.get('token'));
-        
+
         try {
             sec_http.post('/user/update', formData)
                 .then(res => {
@@ -131,47 +132,21 @@ const Profile = () => {
 
 
     const updateImage = (e) => {
+        e.preventDefault();
+
+        swal(<ImageUpdating />)
 
 
-        Swal.fire({
-            title: "An input!",
-            text: "Select an image!",
-            input: 'file',
-            showCancelButton: true,
-            onChange: (e) => formData.append("image", e.target.files[0]),
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    icon: 'success',
-                    text : result.value,
-                })
-            }
-        });
+        // Swal.fir({
+        //     title: 'Upload Image',
+        //     html: `<input type="file" name="image" id="image" onChange={setImage((e) => e.target.files[0])} />`,
+        //     icon: 'success',
+        // })
+            
+
 
         // try {
-        //     http.post('/user/update', formData)
-        //         .then(res => {
-        //             if (res.status === 200) {
-        //                 setImage(res.data.user.avatar);
-        //                 setLoader(false);
-        //             }
-
-        //             if (res.status === 401) {
-        //                 setTimeout(() => {
-        //                     navigate('/');
-        //                 }, 2000);
-        //                 Swal.fire({
-        //                     title: 'Error!',
-        //                     text: res.data.message,
-        //                     icon: <MdErrorOutline />,
-        //                     showConfirmButton: false,
-        //                     confirmButtonText: 'Sign up!',
-        //                     showCancelButton: true,
-
-        //                 })
-        //             }
-
-        //         })
+        //     
         // } catch (error) {
         //     Swal.fire({
         //         title: 'Error!',
@@ -291,6 +266,11 @@ const Profile = () => {
                 </div>
             </Fragment>
     )
+}
+
+
+const ImageUpdating = () => {
+    <p>Welcome to Sweet Alert and React</p>
 }
 
 export default Profile
