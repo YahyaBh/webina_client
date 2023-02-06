@@ -17,7 +17,7 @@ const NavbarHome = () => {
     const { getToken } = AuthUser();
     const { token } = AuthUser();
 
-    const [ userData , setUserData ] = useState({});
+    const [userData, setUserData] = useState({});
 
 
 
@@ -67,15 +67,8 @@ const NavbarHome = () => {
                                 <button>Categories</button>
                             </Scroll>
                         </li>
-                        {/* <li>
-                            <Scroll type="id" element="founders" offset={-100} timeout={100}>
-                                <button>Founders</button>
-                            </Scroll>
-                        </li> */}
                         <li>
-                            <Scroll type="id" element="contact" offset={-100} timeout={100}>
-                                <button>Contact</button>
-                            </Scroll>
+                            <a href='/blogs'>Blogs</a>
                         </li>
 
                         <li>
@@ -107,8 +100,22 @@ const NavbarHome = () => {
                                 <button>Categories</button>
                             </Scroll>
                         </li>
+
                         <li>
                             <a href='/websites'>Websites</a>
+                        </li>
+
+                        <li>
+                            <a href='/websites'>Blogs</a>
+                        </li>
+                        <li>
+                            <a href='/announcements'>Announcements</a>
+                        </li>
+                        <li>
+                            <a href='/frequent-asked-questions'>FAQ</a>
+                        </li>
+                        <li>
+                            <a href='/hiring'>Hire Me</a>
                         </li>
                         <li>
                             <Scroll type="id" element="contact" offset={-100} timeout={100}>

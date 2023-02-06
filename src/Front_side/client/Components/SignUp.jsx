@@ -30,7 +30,7 @@ const SignUp = () => {
         if (token) {
             navigate('/');
         }
-        fetch('http://localhost:8000/api/auth/google', {
+        fetch('http://localhost:8000/api/auth', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

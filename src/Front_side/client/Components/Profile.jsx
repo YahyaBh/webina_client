@@ -77,17 +77,18 @@ const Profile = () => {
         }
     }, [])
 
+    const formData = new FormData()
 
     const updateUser = (e) => {
         e.preventDefault();
 
-        const formData = new FormData()
 
         formData.append('email', email);
         formData.append('name', name);
         formData.append('password', password);
         formData.append('new_password', newPass);
         formData.append('remember_token', cookie.get('token'));
+        
         try {
             sec_http.post('/user/update', formData)
                 .then(res => {
@@ -131,11 +132,13 @@ const Profile = () => {
 
     const updateImage = (e) => {
 
+
         Swal.fire({
             title: "An input!",
             text: "Select an image!",
             input: 'file',
-            showCancelButton: true
+            showCancelButton: true,
+            onChange: (e) => formData.append("image", e.target.files[0]),
         }).then((result) => {
             if (result.value) {
                 Swal.fire({

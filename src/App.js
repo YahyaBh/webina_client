@@ -21,6 +21,7 @@ import Logout from "./Front_side/client/Components/Logout";
 import Websites from "./Front_side/client/Components/Websites";
 import Website from "./Front_side/client/Components/Website";
 import Payment from "./Front_side/client/Components/Payment";
+import Blogs from "./Front_side/client/Components/Blogs";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route exact path='/websites' element={<Websites/>} />
         <Route exact path='/website/:token' element={<Website/>} />
 
+        <Route exact path='/blogs' element={<Blogs/>} />
 
 
 

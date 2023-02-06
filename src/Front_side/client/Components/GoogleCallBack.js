@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthUser from '../../AuthUser';
-
+import Loading from '../../../Assets/Images/WEBINA2.png'
 function GoogleCallback() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -34,7 +34,10 @@ function GoogleCallback() {
 }
 
 function DisplayLoading() {
-    return <div>Loading....</div>;
+    return <div className='loading-container'>
+    <img src={Loading} alt="loading-web" />
+</div>
+    ;
 }
 
 

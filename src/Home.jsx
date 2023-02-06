@@ -8,7 +8,7 @@ import YahyaBouhsine from './Assets/Images/profile.b5697fde8b8a45586598.png';
 import Youness from './Assets/Images/youness.png';
 import Moujahid from './Assets/Images/FRAZZIX.png';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
@@ -21,7 +21,10 @@ import { RiCustomerServiceLine, RiCustomerService2Line } from 'react-icons/ri';
 import { BiDollarCircle, BiTimeFive } from 'react-icons/bi';
 
 import './App.scss'
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Pagination } from "swiper";
 
 
 
@@ -41,9 +44,10 @@ import Loading from './Assets/Images/WEBINA2.png'
 
 
 
+
 const Home = () => {
 
-
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [emailInput, setEmailInput] = useState('');
     const [message, setMessage] = useState('');
@@ -52,15 +56,36 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const { getToken, http } = AuthUser();
     const [userData, setuserData] = useState({})
-
+    const [testimonials, setTestiomonials] = useState([]);
+    const [categories, setCategories] = useState([]);
     useEffect(() => {
-        setLoading(false);
 
         const user = cookie.get('user');
 
         if (user !== undefined && user !== null && user !== '') {
             setuserData(JSON.parse(cookie.get('user')))
         }
+
+        http.get('/')
+            .then((res) => {
+                if (res.status === 200) {
+                    setLoading(false);
+                    setTestiomonials(res.data.testimonials);
+                    setCategories(res.data.categories);
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                navigate('/');
+                            }
+                        })
+                }
+            })
 
 
     }, [])
@@ -408,6 +433,50 @@ const Home = () => {
 
 
                 </section >
+
+
+                <section className="app__testimonials" id='testimonials'>
+                    <div className='app__testimonials__container'>
+                        {testimonials > 0 ?
+                            <Swiper loop={true} navigation={true} modules={[Navigation, Pagination]} className="testimonials">
+                                {testimonials.map((testimonial, index) => (
+                                    <SwiperSlide key={index + testimonial.name}>
+                                        <div className='testimonail__card'>
+                                            <div className='testimonial__card__header'>
+                                                {testimonial.image ?
+                                                    <div className='image__holder'>
+                                                        <img src={testimonial.image} alt={testimonial.name} />
+                                                    </div> :
+                                                    ''
+                                                }
+                                                <div className='testimonial__card__header__name'>
+                                                    <h3>{testimonial.name}</h3>
+                                                    <p>{testimonial.date}</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div className='testimonial__card__body'>
+                                                <h4>{testimonial.feedback}</h4>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+
+                            </Swiper>
+
+                            :
+                            <div style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <h2>Leave Us A FeedBack</h2>
+                                <form>
+                                    <input type="text" name='name' placeholder='name' />
+                                    <input type="text" name='feedback' placeholder='name' />
+
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </section>
 
 
                 <section className="app__contact" id='contact'>
