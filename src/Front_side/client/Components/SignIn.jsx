@@ -27,20 +27,22 @@ const SignIn = () => {
             navigate('/');
         }
 
-        fetch('http://localhost:8000/api/auth/google', {
+        http('/auth', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         })
             .then((response) => {
-                if (response.ok) {
+                if (response.data.status === 'success') {
                     setLoading(false);
-                    return response.json();
+                    console.log(response.data);
+                    setLoginUrl(response.data.url);
+                    
+                }else {
+                    new Error('Something went wrong!')
                 }
-                throw new Error('Something went wrong!');
             })
-            .then((data) => setLoginUrl(data.url))
             .catch((error) => console.error(error));
     }, []);
 
@@ -121,7 +123,7 @@ const SignIn = () => {
                         <input type="password" name="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} />
 
 
-                        <a type="submit" className='app__google__signup' href={loginUrl}><AiOutlineGoogle /></a>
+                        <a className='app__google__signup' target='_top' href={loginUrl}><AiOutlineGoogle /></a>
 
                         <button type='submit'>Sign In</button>
 

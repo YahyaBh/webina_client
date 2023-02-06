@@ -54,19 +54,14 @@ const Home = () => {
     const [userData, setuserData] = useState({})
 
     useEffect(() => {
+        setLoading(false);
 
         const user = cookie.get('user');
+
         if (user !== undefined && user !== null && user !== '') {
             setuserData(JSON.parse(cookie.get('user')))
         }
 
-        window.addEventListener('load', function () {
-
-            setLoading(false);
-
-            return () => window.removeEventListener('load');
-
-        });
 
     }, [])
 
@@ -74,7 +69,7 @@ const Home = () => {
 
     const submitForm = function (e) {
 
-        if (name === '' || emailInput === '' || message === '') {
+        if (name !== '' || emailInput !== '' || message !== '') {
 
             e.preventDefault();
 
@@ -98,7 +93,7 @@ const Home = () => {
                                 text: res.data.message,
                                 icon: <MdDone />,
                                 showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
+                                cancelButtonText: 'Thanks!',
                                 showCancelButton: true,
 
                             })

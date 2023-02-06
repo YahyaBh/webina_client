@@ -9,6 +9,7 @@ import { AiFillFacebook, AiFillInstagram, AiOutlineTwitter } from 'react-icons/a
 import { SiMinutemailer } from 'react-icons/si'
 import AuthUser from '../../AuthUser'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -20,6 +21,7 @@ const Footer = () => {
 
     const [email, setEmail] = useState('');
     const [subscribed , setSubscribed] = useState(false);
+    const navigate = useNavigate();
 
 
     const subscribe = async (e) => {
@@ -34,7 +36,15 @@ const Footer = () => {
                 Swal.fire({
                     title : 'Thank you for subscribing!',
                     text : res.data.message,
-                    icon : 'success'
+                    icon : 'success',
+                    confirmButtonText : 'Register ?',
+                    confirmButtonColor : '#f3d341',
+                    showCancelButton : true,
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/signup')
+                    }
                 })
                 setSubscribed(true);
             })
@@ -81,7 +91,7 @@ const Footer = () => {
                                     <button style={{ padding: '5px', outline: 'none', borderTopRightRadius: '5px', borderBottomRightRadius: '5px', color: 'rgb(var(--heavy-color))', backgroundColor: 'rgb(var(--mid-color))' }} > Subscribe < SiMinutemailer /></button>
                                 </form>
                                 :
-                                <h3>Thank You For Subscribing</h3>
+                                <h3>Thank You For <span style={{ color : '#f3d341'}}>Subscribing</span></h3>
                                 }
                             </li>
                         </ul>

@@ -1,26 +1,29 @@
+import cookie from 'js-cookie';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AuthUser from '../../AuthUser';
 
 function GoogleCallback() {
-
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState({});
     const [user, setUser] = useState(null);
     const location = useLocation();
-
+    const { http } = AuthUser();
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/auth/callback${location.search}`, {
+        http(`/auth/callback${location.search}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         })
             .then((response) => {
-                return response.json();
+                return response;
             })
             .then((data) => {
+                cookie.set('token', JSON.stringify(data.data.access_token));
+                cookie.set('user', JSON.stringify(data.data.user));
                 setLoading(false);
-                setData(data);
+                navigate('/');
             });
 
     }, []);
