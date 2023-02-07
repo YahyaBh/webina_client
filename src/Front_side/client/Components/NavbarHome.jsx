@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import cookie from 'js-cookie';
 import { useState } from 'react';
 import { MdOutlineSegment } from 'react-icons/md';
-import { AiOutlineClose} from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 
 
 const NavbarHome = () => {
@@ -118,65 +118,122 @@ const NavbarHome = () => {
 
                 :
 
+                <>
+                    <nav className='m-navbar'>
+                        <a href='/'>
+                            <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                        </a>
+                        <ul>
+                            <li>
+                                <Scroll type="id" element="about" offset={-100} timeout={100}>
+                                    <button>About</button>
+                                </Scroll>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="categories" offset={-100} timeout={100}>
+                                    <button>Categories</button>
+                                </Scroll>
+                            </li>
 
-                <nav className='m-navbar'>
-                    <a href='/'>
-                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
-                    </a>
-                    <ul>
-                        <li>
-                            <Scroll type="id" element="about" offset={-100} timeout={100}>
-                                <button>About</button>
-                            </Scroll>
-                        </li>
-                        <li>
-                            <Scroll type="id" element="categories" offset={-100} timeout={100}>
-                                <button>Categories</button>
-                            </Scroll>
-                        </li>
+                            <li>
+                                <a href='/websites'>Websites</a>
+                            </li>
 
-                        <li>
-                            <a href='/websites'>Websites</a>
-                        </li>
+                            <li>
+                                <a href='/blogs'>Blogs</a>
+                            </li>
+                            <li>
+                                <a href='/announcements'>Announcements</a>
+                            </li>
+                            <li>
+                                <a href='/frequent-asked-questions'>FAQ</a>
+                            </li>
+                            <li>
+                                <a href='/hiring'>Hire Me</a>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="contact" offset={-100} timeout={100}>
+                                    <button>Contact</button>
+                                </Scroll>
+                            </li>
 
-                        <li>
-                            <a href='/websites'>Blogs</a>
-                        </li>
-                        <li>
-                            <a href='/announcements'>Announcements</a>
-                        </li>
-                        <li>
-                            <a href='/frequent-asked-questions'>FAQ</a>
-                        </li>
-                        <li>
-                            <a href='/hiring'>Hire Me</a>
-                        </li>
-                        <li>
-                            <Scroll type="id" element="contact" offset={-100} timeout={100}>
-                                <button>Contact</button>
-                            </Scroll>
-                        </li>
-
-                        <div className="dropdown">
-                            <span><img src={userData.avatar} alt={userData.name} /></span>
-                            <div className="dropdown-content">
-                                <li>
-                                    <a href="/profile">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="/orders">Orders</a>
-                                </li>
-                                <li>
-                                    <a href="/" onClick={logoutUser}>Log Out</a>
-                                </li>
+                            <div className="dropdown">
+                                <span><img src={userData.avatar} alt={userData.name} /></span>
+                                <div className="dropdown-content">
+                                    <li>
+                                        <a href="/profile">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="/orders">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" onClick={logoutUser}>Log Out</a>
+                                    </li>
+                                </div>
                             </div>
-                        </div>
 
-                    </ul>
+                        </ul>
 
-                    <MdOutlineSegment className='segmant-show' />
+                        <MdOutlineSegment onClick={openCloseSide} />
+                    </nav>
 
-                </nav>
+                    <div id="mySidebar" className="sidebar-nav">
+                        <AiOutlineClose onClick={openCloseSide} />
+                        <a href='/'>
+                            <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                        </a>
+                        <ul>
+                            <li>
+                                <Scroll type="id" element="about" offset={-100} timeout={100}>
+                                    <button>About</button>
+                                </Scroll>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="categories" offset={-100} timeout={100}>
+                                    <button>Categories</button>
+                                </Scroll>
+                            </li>
+
+                            <li>
+                                <a href='/websites'>Websites</a>
+                            </li>
+
+                            <li>
+                                <a href='/blogs'>Blogs</a>
+                            </li>
+                            <li>
+                                <a href='/announcements'>Announcements</a>
+                            </li>
+                            <li>
+                                <a href='/frequent-asked-questions'>FAQ</a>
+                            </li>
+                            <li>
+                                <a href='/hiring'>Hire Me</a>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="contact" offset={-100} timeout={100}>
+                                    <button>Contact</button>
+                                </Scroll>
+                            </li>
+
+                            <div className="dropdown">
+                                <span><img src={userData.avatar} alt={userData.name} /></span>
+                                <div className="dropdown-content">
+                                    <li>
+                                        <a href="/profile">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="/orders">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" onClick={logoutUser}>Log Out</a>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </div>
+                </>
             }
         </div>
     )

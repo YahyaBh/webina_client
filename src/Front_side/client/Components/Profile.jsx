@@ -84,7 +84,7 @@ const Profile = () => {
 
 
         formData.append('email', email);
-        formData.append('name', name);
+        formData.append('full_name', name);
         formData.append('password', password);
         formData.append('new_password', newPass);
         formData.append('remember_token', cookie.get('token'));
@@ -94,7 +94,7 @@ const Profile = () => {
                 .then(res => {
                     if (res.status === 200) {
                         setUserData(res.data.user);
-                        setName(res.data.user.name);
+                        setName(res.data.user.full_name);
                         setEmail(res.data.user.email);
                         setImage(res.data.user.avatar);
                         navigate('/')
@@ -235,7 +235,7 @@ const Profile = () => {
                             <img onClick={updateImage} className='app__profile__container__left__img' src={userData ? userData.avatar : ''} alt='profile' />
                             <AiFillCamera title='Change picture' />
                         </div>
-                        <h3>{userData ? userData.name : ''}</h3>
+                        <h3>{userData ? userData.full_name : ''}</h3>
                         <h5>Created {userData ? moment(userData.created_at.split('T')[0] + ' ' + userData.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5>
                     </div>
                     <div className='app__profile__container__right'>

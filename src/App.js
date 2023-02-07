@@ -22,6 +22,8 @@ import Websites from "./Front_side/client/Components/Websites";
 import Website from "./Front_side/client/Components/Website";
 import Payment from "./Front_side/client/Components/Payment";
 import Blogs from "./Front_side/client/Components/Blogs";
+import EmailVerify from "./Front_side/client/Components/EmailVerify";
+import VerifyEmail from "./Front_side/client/Components/VerifyEmail";
 
 
 function App() {
@@ -53,18 +55,13 @@ function App() {
 
         <Route exact path='/blogs' element={<Blogs/>} />
 
-
-
-        {/* <Route exact path='/websites' element={<Show />} /> */}
-        {/* <Route exact path='/website/:id' element={<Show />} /> */}
-        {/* <Route exact path='/chats' element={<Chat />} /> */}
-        {/* <Route exact path='/chat/:id' element={<Chat />} /> */}
-
-
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
+        <Route path="/email/check-verify/:email/:token" element={<EmailVerify />} />
+        <Route path="/email/verify/:email/:token" element={<VerifyEmail />} />
         <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
+
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
         <Route exact path="/payment" element={<Payment />} />

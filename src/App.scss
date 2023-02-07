@@ -236,13 +236,8 @@ body {
             border-radius: 8px;
 
             h1 {
-                display: none;
-            }
-
-            h2 {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                display: block;
+                font-size: 35px;
             }
 
 
@@ -1162,6 +1157,24 @@ body {
                     }
                 }
 
+                a {
+                    
+                    height: 50px;
+                    padding: 5px;
+                    background-color: rgb(var(--mid-color));
+                    color: rgb(var(--heavy-color));
+                    transition: all .3s ease;
+                    font: bold 20px 'Louis-Bold';
+                    border-radius: 25px;
+                    text-align: center;
+                    text-decoration: none;
+                    &:hover {
+                        background-color: rgb(var(--heavy-color));
+                        color: rgb(var(--white-color));
+                        transform: scale(.95);
+                    }
+                }
+
                 textarea {
                     padding: 5px;
                     height: 200px;
@@ -1177,11 +1190,15 @@ body {
 
                 input,
                 textarea,
-                button {
+                button,
+                a {
                     display: block;
                     outline: none;
                     margin-bottom: 20px;
                     width: 500px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 input[type=checkbox] {
@@ -1648,204 +1665,359 @@ body {
             background-color: rgb(var(--white-color));
         }
     }
-}
 
+    img {
+        max-width: 500px;
+    }
 
-.app__signup {
-
-    display: flex;
-
-    .app__signup__form {
-        height: 100vh;
-        width: 30%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: auto;
-            width: 70%;
-            background-color: rgba(var(--white-color));
-            padding: 20px;
-            border-radius: 10px;
-            border: none;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 20px 4px grey;
-
-            h2 {
-                font-family: Louis-Bold;
-            }
-
-
-            input {
-                width: 100%;
-                height: 40px;
-                margin-bottom: 20px;
-                padding: 10px;
-                border-bottom: 2px solid rgb(var(--heavy-color));
-                outline: none;
-            }
-
-            button {
-                height: 40px;
-                width: 100%;
-                background-color: rgb(var(--mid-color));
-                color: rgb(var(--black-color));
-                border-radius: 20px;
-                font-family: Louis-Bold;
-                margin-bottom: 20px;
-                transition: all .3s ease;
-
-                &:hover {
-                    background-color: rgb(var(--heavy-color));
-                    color: rgb(var(--white-color));
-                    box-shadow: 0 0 20px 0px grey;
-                }
-            }
-
-            .app__google__signup {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 20px;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                background-color: #db4537e0;
-                box-shadow: 0 0 20px 4px grey;
-                transition: all .3s ease;
-                margin-bottom: 10px;
-
-                svg {
-                    color: rgba(var(--white-color));
-                }
-
-                &:hover {
-                    height: 40px;
-                    width: 100%;
-                    border-radius: 20px;
-                    box-shadow: 0 0 20px 0px grey;
-
-                }
-            }
+    @media screen and (max-width:900px) {
+        h2 {
+            text-align: center;
+            font-size: 50px;
         }
-    }
 
-
-    .app__signup__form__bg {
-        height: 100vh;
-        width: 70%;
-        background: url(./Assets/Images/signup.jpg);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: brightness(40%);
     }
 }
-
 
 
 
 .app__signin {
-
     display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 15px 50px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../public/Images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: border-box;
+    background-attachment: scroll;
+    height: 100vh;
+
+    nav {
+        padding: 15px 50px;
+        top: 0;
+        left: 0;
+
+        img {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 60px;
+            margin: 20px;
+        }
+    }
+
+
+    .app__signin__title {
+        font-family: Louis-Bold;
+        color: #fff;
+        margin-top: 0;
+
+        h2 {
+            font-size: 50px !important;
+        }
+    }
 
     .app__signin__form {
+        width: 100%;
         height: 100vh;
-        width: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
 
         form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: auto;
-            width: 70%;
-            background-color: rgba(var(--white-color));
-            padding: 20px;
-            border-radius: 10px;
-            border: none;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 20px 4px grey;
+            top: 0;
+            margin-top: 0;
+            height: 50vh;
+            width: 500px;
 
-            h2 {
-                font-family: Louis-Bold;
-            }
+            .app__signin__form__name {
 
-
-            input {
-                width: 100%;
-                height: 40px;
-                margin-bottom: 20px;
-                padding: 10px;
-                border-bottom: 2px solid rgb(var(--heavy-color));
-                outline: none;
-            }
-
-            button {
-                height: 40px;
-                width: 100%;
-                background-color: rgb(var(--mid-color));
-                color: rgb(var(--black-color));
-                border-radius: 20px;
-                font-family: Louis-Bold;
-                margin-bottom: 20px;
-                transition: all .3s ease;
-
-                &:hover {
-                    background-color: rgb(var(--heavy-color));
-                    color: rgb(var(--white-color));
-                    box-shadow: 0 0 20px 0px grey;
-                }
-            }
-
-            .app__google__signup {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
-                justify-content: center;
-                font-size: 20px;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                background-color: #db4537e0;
-                box-shadow: 0 0 20px 4px grey;
-                transition: all .3s ease;
+                flex-direction: row;
+                width: 100%;
                 margin-bottom: 10px;
 
-                svg {
-                    color: rgba(var(--white-color));
+                input {
+                    font-family: Louis-Bold;
+                    width: 100%;
+                    margin: 5px;
+                    height: 50px;
+                    background-color: transparent;
+                    padding: 10px;
+                    background-color: rgb(var(--white-color));
+                    border-radius: 10px;
+                    border-bottom: 3px solid rgb(var(--heavy-color));
+                    transition: all .1s ease;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            input {
+                font-family: Louis-Bold;
+                width: 100%;
+                height: 50px;
+                background-color: transparent;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: rgb(var(--white-color));
+                border-radius: 10px;
+                border-bottom: 3px solid rgb(var(--heavy-color));
+                transition: all .1s ease;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    border-bottom: none;
+                }
+            }
+
+
+            .app__signin__form__buttons {
+                display: flex;
+                flex-direction: column;
+
+                .app__google__signup {
+                    width: 100%;
+                    height: 50px;
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 40px;
+                    margin-bottom: 10px;
+                    border-bottom: rgb(var(--mid-color)) 3px solid;
+                    transition: all .1s ease;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
                 }
 
-                &:hover {
-                    height: 40px;
-                    width: 100%;
-                    border-radius: 20px;
-                    box-shadow: 0 0 20px 0px grey;
 
+                button {
+                    width: 100%;
+                    height: 50px;
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                    border-bottom: rgb(var(--mid-color)) 3px solid;
+                    font-family: Louis-Bold;
+                    text-transform: uppercase;
+                    transition: all .1s ease;
+
+                    svg {
+                        margin-left: 10px;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            p {
+                text-align: center;
+                color: rgb(var(--white-color));
+
+                a {
+                    color: rgb(var(--white-color));
                 }
             }
         }
     }
 
-
-    .app__signin__form__bg {
-        height: 100vh;
-        width: 70%;
-        background: url(./Assets/Images/signin.jpg);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: brightness(40%);
-    }
 }
 
+.app__signup {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 15px 50px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../public/Images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: border-box;
+    background-attachment: scroll;
+    height: 100vh;
+
+    nav {
+        padding: 15px 50px;
+        top: 0;
+        left: 0;
+
+        img {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 60px;
+            margin: 20px;
+        }
+    }
+
+
+    .app__signup__title {
+        font-family: Louis-Bold;
+        color: #fff;
+        margin-top: 0;
+
+        h2 {
+            font-size: 50px !important;
+        }
+    }
+
+    .app__signup__form {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        form {
+            top: 0;
+            margin-top: 0;
+            height: 50vh;
+            width: 500px;
+
+            .app__signup__form__name {
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                width: 100%;
+                margin-bottom: 10px;
+
+                input {
+                    font-family: Louis-Bold;
+                    width: 100%;
+                    margin: 5px;
+                    height: 50px;
+                    background-color: transparent;
+                    padding: 10px;
+                    background-color: rgb(var(--white-color));
+                    border-radius: 10px;
+                    border-bottom: 3px solid rgb(var(--heavy-color));
+                    transition: all .1s ease;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            input {
+                font-family: Louis-Bold;
+                width: 100%;
+                height: 50px;
+                background-color: transparent;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: rgb(var(--white-color));
+                border-radius: 10px;
+                border-bottom: 3px solid rgb(var(--heavy-color));
+                transition: all .1s ease;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    border-bottom: none;
+                }
+            }
+
+
+            .app__signup__form__buttons {
+                display: flex;
+                flex-direction: column;
+
+                .app__google__signup {
+                    width: 80%;
+                    margin: auto;
+                    height: 60px;
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    border-radius: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 40px;
+                    margin-bottom: 10px;
+                    border-bottom: rgb(var(--mid-color)) 3px solid;
+                    transition: all .1s ease;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
+                }
+
+
+                button {
+                    margin: auto;
+                    width: 80%;
+                    height: 60px;
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--white-color));
+                    border-radius: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                    border-bottom: rgb(var(--mid-color)) 3px solid;
+                    font-family: Louis-Bold;
+                    text-transform: uppercase;
+                    transition: all .1s ease;
+
+                    svg {
+                        margin-left: 10px;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            p {
+                text-align: center;
+                color: rgb(var(--white-color));
+
+                a {
+                    color: rgb(var(--white-color));
+                }
+            }
+        }
+    }
+
+}
 
 
 .app__profile__container {
@@ -2016,7 +2188,7 @@ body {
 
 .dropdown-content {
     display: block;
-    position: fixed;
+    position: absolute;
     background-color: #f9f9f9;
     height: auto;
     width: auto;

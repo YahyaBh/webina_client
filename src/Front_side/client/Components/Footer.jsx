@@ -11,6 +11,7 @@ import AuthUser from '../../AuthUser'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import Logo from '../../../Assets/Images/webinai.png'
+import cookie from 'js-cookie'
 
 
 
@@ -41,6 +42,8 @@ const Footer = () => {
                     confirmButtonText: 'Register ?',
                     confirmButtonColor: '#f3d341',
                     showCancelButton: true,
+                    showConfirmButton : cookie.get('token')? false : true
+
                 })
                     .then((result) => {
                         if (result.isConfirmed) {

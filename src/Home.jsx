@@ -42,6 +42,7 @@ import Footer from './Front_side/client/Components/Footer';
 import Loading from './Assets/Images/WEBINA2.png'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
+import { useLayoutEffect } from 'react';
 
 
 
@@ -58,16 +59,19 @@ const Home = () => {
     const [userData, setuserData] = useState({})
     const [testimonials, setTestiomonials] = useState([]);
     const [categories, setCategories] = useState([]);
+
+
+
     useEffect(() => {
 
-        const user = cookie.get('user');
-
-        if (user !== undefined && user !== null && user !== '') {
-            setuserData(JSON.parse(cookie.get('user')))
-        }
+        getTestimonials_Categories();
+        console.log(userData.full_name)
+    }, [])
 
 
-        http.get('/')
+    const getTestimonials_Categories = async () => {
+
+        await http.get('/')
             .then((res) => {
                 if (res.status === 200) {
                     setLoading(false);
@@ -87,10 +91,16 @@ const Home = () => {
                         })
                 }
             })
+    }
 
+    useLayoutEffect(() => {
 
+        const user = cookie.get('user');
+
+        if (user !== undefined && user !== null && user !== '') {
+            setuserData(JSON.parse(user));
+        }
     }, [])
-
 
 
     const submitForm = function (e) {
@@ -194,8 +204,8 @@ const Home = () => {
                                     <div className="wrapper">
                                         <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
 
-                                            {userData !== {} ? userData.name.length > 7 ?
-                                                `${userData.name.substring(0, 7)}...` : userData.name
+                                            {userData && userData.full_name !== null  ? userData.full_name.length > 7 ?
+                                                `${userData.full_name.substring(0, 7)}...` : userData.full_name
                                                 : ''}
 
                                         </span></h1>
@@ -264,16 +274,16 @@ const Home = () => {
                                 <div id="website-development" className="app__more__about__card" data-aos="fade-right">
                                     <CgWebsite /> <h3>Website Development</h3>
                                 </div>
-                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width : '200px' , flexWrap : 'wrap' }} place='top' anchorId="website-development" multiline={true} disableInteractive>
-                                    Developing Perfect Full stack /<br/> Front End / Back End / UI-UX Website .
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-development" multiline={true} disableInteractive>
+                                    Developing Perfect Full stack /<br /> Front End / Back End / UI-UX Website .
                                 </ReactTooltip>
 
 
                                 <div id='website-debugging' className="app__more__about__card" data-aos="fade-right">
                                     <VscDebugAll /> <h3>Websites Debugging</h3>
                                 </div>
-                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000' , width : '200px' , flexWrap : 'wrap'}} place='top' anchorId="website-debugging" multiline={true} disableInteractive>
-                                    Having Issues With Debugging ?<br/> WebIna Always Here .
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-debugging" multiline={true} disableInteractive>
+                                    Having Issues With Debugging ?<br /> WebIna Always Here .
 
                                 </ReactTooltip>
 
@@ -281,8 +291,8 @@ const Home = () => {
                                 <div id='website-deployment' className="app__more__about__card" data-aos="fade-right">
                                     <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
                                 </div>
-                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000' , width : '200px', flexWrap : 'wrap' }} place='top' anchorId="website-deployment" multiline={true} disableInteractive>
-                                    Your Website Is Ready To Use .<br/> Let Us Handle The Rest Of It .
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-deployment" multiline={true} disableInteractive>
+                                    Your Website Is Ready To Use .<br /> Let Us Handle The Rest Of It .
                                 </ReactTooltip>
                             </div>
                         </div>
@@ -518,6 +528,7 @@ const Home = () => {
                                         </label>
 
                                         <button type="submit">SEND MESSAGE</button>
+                                        <a href='/chat'>LIVE CHAT</a>
                                     </form>
                                 </div> :
                                 <div style={{ textAlign: 'center' }}>

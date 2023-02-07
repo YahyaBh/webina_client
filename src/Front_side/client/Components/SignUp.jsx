@@ -9,15 +9,17 @@ import { MdDone, MdErrorOutline } from 'react-icons/md';
 import AuthUser from '../../AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
+import { FaSignInAlt } from 'react-icons/fa';
 
 
 const SignUp = () => {
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [verify_passwordInput, setVerPasswordInput] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const { http, getToken } = AuthUser();
     const [registerUrl, setRegisterUrl] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -66,7 +68,9 @@ const SignUp = () => {
             formData.append('email', emailInput)
             formData.append('password', passwordInput)
             formData.append('password_confirmation', verify_passwordInput)
-            formData.append('name', name)
+            formData.append('first_name', firstName)
+            formData.append('last_name', lastName)
+
 
             const checkEmailData = new FormData()
 
@@ -85,8 +89,6 @@ const SignUp = () => {
                                     if (res_ver.status === 200) {
                                         setId(res.data.id);
                                         setTokenChecker(res.data.access_token);
-
-
                                     } else {
                                         Swal.fire({
                                             title: 'Error!',
@@ -110,17 +112,6 @@ const SignUp = () => {
                                 checkVerification
                             );
 
-
-                        } else if (res.status === 400) {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: res.data.message,
-                                icon: <MdErrorOutline />,
-                                showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
-                                showCancelButton: true,
-
-                            })
 
                         } else {
                             Swal.fire({
@@ -153,7 +144,13 @@ const SignUp = () => {
 
 
     const checkVerification = () => {
-        http.post(`/email/verify/${emailInput}`)
+
+        const checkEmail = new FormData();
+
+        checkEmail.append('email', emailInput)
+        
+
+        http.post(`/email/verify/` , checkEmail)
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({
@@ -166,7 +163,8 @@ const SignUp = () => {
                     cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
                     cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
                     navigate(`/`);
-                    setName('');
+                    setFirstName('');
+                    setLastName('');
                     setEmailInput('');
                     setPasswordInput('');
                     setVerPasswordInput('');
@@ -195,17 +193,25 @@ const SignUp = () => {
             </div>
             :
             <div className='app__signup'>
-                <a href='/' style={{ width: '50px', height: '50px' }}>
-                    <img src={Logo} alt='logo' style={{ filter: 'invert(100%)', margin: '10px', position: 'absolute', width: '50px', height: '50px' }} />
-                </a>
+
+                <nav>
+                    <img src={Logo} alt="logo" />
+                </nav>
 
                 <div className='app__signup__form'>
+
+                    <div className='app__signup__title'>
+                        <h2>Log In To Your Account</h2>
+                    </div>
+
                     <form onSubmit={submitForm}>
-                        <h2>SIGN UP</h2>
+
+                        <div className='app__signup__form__name'>
+                            <input type="text" name="first_name" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
+                            <input type="text" name="last_name" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
 
 
-                        <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-
+                        </div>
 
                         <input type="email" name="email" placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
 
@@ -213,21 +219,21 @@ const SignUp = () => {
 
                         <input type="password" name="verify_pass" placeholder="Verify Password" value={verify_passwordInput} onChange={(e) => setVerPasswordInput(e.target.value)} />
 
-                        <a type="submit" className='app__google__signup' href={registerUrl}><AiOutlineGoogle /></a>
 
-                        <button type='submit'>Sign Up</button>
+                        <div className='app__signup__form__buttons'>
 
+                            <a className='app__google__signup' target='_top' href={registerUrl}><AiOutlineGoogle /></a>
+
+                            <button type='submit'>Sign Up <FaSignInAlt /></button>
+                        </div>
                         <p>Already Have An Account ? <a href='/signin'>Sign In</a></p>
 
                     </form>
 
                 </div>
-                <p style={{ position: 'absolute', bottom: 0, margin: '5px' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
+                <p style={{ position: 'absolute', bottom: 0, margin: '5px', color: 'rgb(var(--white-color))' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
 
 
-                <div className='app__signup__form__bg'>
-
-                </div>
             </div>
     )
 }
