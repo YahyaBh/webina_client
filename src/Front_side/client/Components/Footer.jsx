@@ -10,6 +10,7 @@ import { SiMinutemailer } from 'react-icons/si'
 import AuthUser from '../../AuthUser'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../../../Assets/Images/webinai.png'
 
 
 
@@ -20,7 +21,7 @@ const Footer = () => {
     const { http } = AuthUser();
 
     const [email, setEmail] = useState('');
-    const [subscribed , setSubscribed] = useState(false);
+    const [subscribed, setSubscribed] = useState(false);
     const navigate = useNavigate();
 
 
@@ -34,18 +35,18 @@ const Footer = () => {
         await http.post('/subscribe', subscirbe_email)
             .then(res => {
                 Swal.fire({
-                    title : 'Thank you for subscribing!',
-                    text : res.data.message,
-                    icon : 'success',
-                    confirmButtonText : 'Register ?',
-                    confirmButtonColor : '#f3d341',
-                    showCancelButton : true,
+                    title: 'Thank you for subscribing!',
+                    text: res.data.message,
+                    icon: 'success',
+                    confirmButtonText: 'Register ?',
+                    confirmButtonColor: '#f3d341',
+                    showCancelButton: true,
                 })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/signup')
-                    }
-                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            navigate('/signup')
+                        }
+                    })
                 setSubscribed(true);
             })
             .catch(err => {
@@ -61,6 +62,8 @@ const Footer = () => {
         <>
             <footer className="app__footer">
                 <div className='app__footer__container'>
+                    <img src={Logo} alt="logo" style={{ marginRight : '40px' , marginTop : '30px'}} width='70px' height='auto' />
+
                     <div className="app__footer__content">
                         <ul>
                             <h3>Page You Should Visit</h3>
@@ -86,12 +89,12 @@ const Footer = () => {
                             <h3>Subscribe</h3>
                             <li>
                                 {!subscribed ?
-                                <form onSubmit={subscribe}>
-                                    <input style={{ padding: '5px', outline: 'none', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px' }} placeholder='subscribe' onChange={(e) => setEmail(e.target.value)} />
-                                    <button style={{ padding: '5px', outline: 'none', borderTopRightRadius: '5px', borderBottomRightRadius: '5px', color: 'rgb(var(--heavy-color))', backgroundColor: 'rgb(var(--mid-color))' }} > Subscribe < SiMinutemailer /></button>
-                                </form>
-                                :
-                                <h3>Thank You For <span style={{ color : '#f3d341'}}>Subscribing</span></h3>
+                                    <form onSubmit={subscribe}>
+                                        <input style={{ padding: '5px', outline: 'none', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px' }} placeholder='subscribe' onChange={(e) => setEmail(e.target.value)} />
+                                        <button style={{ padding: '5px', outline: 'none', borderTopRightRadius: '5px', borderBottomRightRadius: '5px', color: 'rgb(var(--heavy-color))', backgroundColor: 'rgb(var(--mid-color))' }} > Subscribe < SiMinutemailer /></button>
+                                    </form>
+                                    :
+                                    <h3>Thank You For <span style={{ color: '#f3d341' }}>Subscribing</span></h3>
                                 }
                             </li>
                         </ul>

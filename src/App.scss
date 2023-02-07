@@ -149,6 +149,7 @@ body {
         font-size: 20px;
         display: flex;
         text-align: center;
+        margin-bottom: 55px;
     }
 
 
@@ -215,15 +216,16 @@ body {
     height: auto;
     width: 100%;
     align-items: center;
-    padding: 30px 45px;
+    padding: 0px 41px;
     display: flex;
     justify-content: space-around;
-    margin: 100px 0;
+    margin: 50px 0px 50px 0px ;
     cursor: help;
 
     hr {
         opacity: 0.2;
         width: 100%;
+
     }
 
     .app__about__content {
@@ -245,6 +247,7 @@ body {
             display: flex;
             text-transform: uppercase;
             border-radius: 50px;
+            margin-bottom: 80px;
         }
 
 
@@ -316,7 +319,7 @@ body {
         h2 {
             font-family: Louis-Bold;
             font-size: 80px;
-            margin: 20px;
+            margin: 40px;
             padding: 10px 20px;
             border-radius: 20px;
             background-color: rgb(var(--heavy-color));
@@ -324,15 +327,17 @@ body {
             height: auto;
             display: flex;
             align-items: center;
-            color: #fff;
+            color: rgba(var(--white-color));
             justify-content: center;
             box-shadow: 0 10px 10px -2px gray;
+            text-transform: uppercase;
+
         }
 
         p {
             font-size: 25px;
             margin: 30px;
-            background-color: #fff;
+            background-color: rgba(var(--white-color));
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -483,7 +488,7 @@ body {
                         z-index: 5;
                         font-size: 14px;
                         font-weight: bold;
-                        color: #fff;
+                        color: rgba(var(--white-color));
                         opacity: 0;
                         transition: all 0.3s ease;
                         margin-left: 10px;
@@ -496,7 +501,7 @@ body {
                         z-index: 5;
                         font-size: 20px;
                         font-weight: bold;
-                        color: #fff;
+                        color: rgba(var(--white-color));
                         left: 10px;
                         bottom: 40px;
                         opacity: 0;
@@ -550,9 +555,9 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 100px 140px;
-    }
+        margin: 50px;
 
+    }
 
     .app__skills__title {
         font-size: 1.5rem;
@@ -603,7 +608,7 @@ body {
         }
 
         .flip-box-back {
-            background-color: #fff;
+            background-color: rgba(var(--white-color));
             transform: rotateY(180deg);
             display: flex;
             justify-content: center;
@@ -628,7 +633,7 @@ body {
 
 
     .app__skills__cards {
-        // margin: 100px 400px;
+        margin-bottom: 100px;
         margin-top: 50px;
         transition: all .3s ease;
         display: flex;
@@ -739,7 +744,7 @@ body {
                 input {
                     height: 50px;
                     padding: 5px;
-                    background-color: #fff;
+                    background-color: rgba(var(--white-color));
                     border-bottom: 2px solid rgb(var(--mid-color));
                     transition: all .3s ease;
                 }
@@ -778,7 +783,7 @@ body {
                     resize: none;
                     border-bottom: 2px solid rgb(var(--mid-color));
                     transition: all .3s ease;
-                    background-color: #fff;
+                    background-color: rgba(var(--white-color));
 
                     &:hover {
                         border-bottom: 2px solid rgb(var(--heavy-color));
@@ -1002,20 +1007,23 @@ body {
 
 .app__testimonials {
     padding: 15px 250px;
+    height: 100%;
+    background-color: #1E1E1E;
 
     h2 {
         text-align: center;
         text-transform: uppercase;
         font-family: Louis-Bold;
         font-size: 70px;
-        color: #000;
+        color: rgba(var(--white-color));
+        margin-top: 40px;
     }
 
     .swiper-button-prev {
         box-sizing: border-box;
         display: block;
         transform: scale(var(--ggs, 1.3));
-        color: rgb(var(--heavy-color));
+        color: rgb(var(--white-color));
         width: 50px;
         height: 50px;
         transition: all .3s ease;
@@ -1056,7 +1064,7 @@ body {
         box-sizing: border-box;
         display: block;
         transform: scale(var(--ggs, 1.3));
-        color: rgb(var(--heavy-color));
+        color: rgb(var(--white-color));
         width: 30px;
         height: 30px;
         right: 20px;
@@ -1095,21 +1103,16 @@ body {
     .app__testimonials__container {
 
 
-
-
-
-
         .swiper {
             width: 100%;
-            height: 40vh;
+            height: 50vh;
+            color: #1E1E1E;
         }
 
         .swiper-slide {
             text-align: center;
             font-size: 18px;
-            background: #fff;
-
-            /* Center slide text vertically */
+            background-color: #1E1E1E;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1127,8 +1130,9 @@ body {
             height: auto;
             width: 80%;
             padding: 20px;
-            box-shadow: 0 0 10px -2px grey;
+            box-shadow: 0 0 10px -2px rgba(var(--white-color), .3);
             border-radius: 10px;
+            background-color: rgba(var(--white-color));
 
 
             .testimonial__card__header {
@@ -1193,11 +1197,13 @@ body {
     justify-content: space-around;
     flex-direction: row;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 100px;
 
     .app__footer__container {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
         padding: 15px 50px;
 
 
@@ -1243,7 +1249,7 @@ body {
                     width: 80px;
                     height: 45px;
                     border-radius: 5px;
-                    background: #fff;
+                    background: rgba(var(--white-color));
                     padding: 10px;
                     object-fit: scale-down;
                     margin: 10px;
@@ -1386,7 +1392,7 @@ body {
                 margin-bottom: 10px;
 
                 svg {
-                    color: #FFF;
+                    color: rgba(var(--white-color));
                 }
 
                 &:hover {
@@ -1485,7 +1491,7 @@ body {
                 margin-bottom: 10px;
 
                 svg {
-                    color: #FFF;
+                    color: rgba(var(--white-color));
                 }
 
                 &:hover {
@@ -1551,7 +1557,7 @@ body {
                 position: absolute;
                 opacity: 0;
                 transition: all .3s ease;
-                color: #FFF;
+                color: rgba(var(--white-color));
             }
 
             &:hover {
@@ -1607,7 +1613,7 @@ body {
                     transition: all .3s ease;
 
                     &:hover {
-                        color: #fff;
+                        color: rgba(var(--white-color));
                         background-color: rgb(var(--heavy-color));
                         box-shadow: 0 0 20px 4px grey;
                         transform: scale(1.1);
@@ -1666,7 +1672,7 @@ body {
             height: 45px;
             width: 45px;
             object-fit: cover;
-            background-color: #fff;
+            background-color: rgba(var(--white-color));
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid rgb(var(--mid-color));
@@ -1799,7 +1805,7 @@ body {
     .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        background: rgba(var(--white-color));
         display: -webkit-box;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -1992,7 +1998,7 @@ body {
             justify-content: center;
             align-items: center;
             border-radius: 20px;
-            color: #FFF;
+            color: rgba(var(--white-color));
             transition: all .3s ease;
         }
     }
@@ -2008,7 +2014,7 @@ body {
     .app__card__website {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        background: rgba(var(--white-color));
         display: -webkit-box;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -2198,7 +2204,7 @@ body {
             justify-content: center;
             align-items: center;
             border-radius: 20px;
-            color: #FFF;
+            color: rgba(var(--white-color));
             transition: all .3s ease;
         }
     }
@@ -2258,7 +2264,7 @@ body {
                 opacity: 0;
                 position: absolute;
                 z-index: 3;
-                color: #fff;
+                color: rgba(var(--white-color));
                 font-size: 40px;
                 transition: all .3s ease;
                 top: 50%;
@@ -2269,7 +2275,7 @@ body {
                 opacity: 0;
                 position: absolute;
                 z-index: 3;
-                color: #fff;
+                color: rgba(var(--white-color));
                 font-size: 40px;
                 transition: all .3s ease;
                 top: 55%;
@@ -2393,6 +2399,7 @@ body {
         padding: 20px;
         border-radius: 10px;
         margin: 5px;
+
         img {
             width: 450px;
             height: 400px;

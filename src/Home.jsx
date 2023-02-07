@@ -440,7 +440,9 @@ const Home = () => {
                     <h2>People Feedbacks</h2>
                     <div className='app__testimonials__container'>
                         {testimonials.length > 0 ?
-                            <Swiper loop={true} navigation={true} modules={[Navigation, Pagination]} className="testimonials">
+                            <Swiper
+                                // loop={true}
+                                navigation={true} modules={[Navigation, Pagination]} className="testimonials">
                                 {testimonials.map((testimonial, index) => (
                                     <SwiperSlide key={index + testimonial.name}>
                                         <div className='testimonail__card'>
@@ -468,7 +470,7 @@ const Home = () => {
                             </Swiper>
 
                             :
-                            <div style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexDirection : 'column'}}>
+                            <div style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                                 <h3>Leave Us A FeedBack</h3>
                             </div>
                         }
