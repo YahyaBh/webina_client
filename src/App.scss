@@ -403,7 +403,7 @@ body {
     justify-content: center;
     background-color: #1E1E1E;
     height: auto;
-    padding: 30px 100px;
+    padding: 60px 100px;
 
     .app__more__about__content {
         background-color: #D0D0D0;
@@ -415,11 +415,13 @@ body {
         align-items: center;
         flex-direction: column;
         border: 4px solid rgb(var(--mid-color));
+        box-shadow: 0 0 40px -20px rgb(var(--mid-color));
+
 
         h2 {
             font-family: Louis-Bold;
-            font-size: 80px;
-            margin: 40px;
+            font-size: 70px;
+            margin: 20px;
             padding: 10px 20px;
             border-radius: 20px;
             background-color: rgb(var(--heavy-color));
@@ -458,21 +460,21 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 40px;
+            margin-top: 10px;
 
 
             .app__more__about__card {
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 display: flex;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 flex-direction: column;
+                margin: 10px;
 
                 h3 {
                     font-family: Louis-Bold;
                     text-transform: uppercase;
                     letter-spacing: .2rem;
-                    margin-left: 50px;
                     font-size: 20px;
                     margin-top: 10px;
                     text-align: center;
@@ -544,6 +546,7 @@ body {
             text-transform: uppercase;
             font-family: Louis-Bold;
             font-size: 80px;
+            margin: 20px;
         }
     }
 
@@ -555,7 +558,7 @@ body {
     }
 
     .app__categories__cards {
-        margin: 0px 90px;
+        margin: 0px 20px;
         margin-top: 250px;
         top: -180px;
         position: relative;
@@ -566,7 +569,7 @@ body {
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
-            padding: 0px 50px;
+            padding: 0px 20px;
 
             .app__categories__card {
                 margin-bottom: 20px;
@@ -668,6 +671,9 @@ body {
 
     @media screen and (max-width:900px) {
 
+        .app__categories__cards {
+            margin: 0px 0px;
+        }
 
         .app__categories__title {
             h2 {
@@ -689,6 +695,12 @@ body {
         .app__categories__cards__sep {
             padding: 0px 0px !important;
         }
+
+
+        .app__categories__card {
+            margin: 0px
+        }
+
 
     }
 }
@@ -1572,6 +1584,7 @@ body {
 
             .app__footer__content {
                 text-align: center;
+
                 ul {
                     margin-top: 20px;
                     margin: 10px;

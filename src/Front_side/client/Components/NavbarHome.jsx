@@ -102,7 +102,7 @@ const NavbarHome = () => {
                         <MdOutlineSegment onClick={openCloseSide} />
                     </nav>
 
-                    <div id="mySidebar" class="sidebar-nav">
+                    <div id="mySidebar" className="sidebar-nav">
                         <AiOutlineClose onClick={openCloseSide} />
                         <a href="/">About</a>
                         <a href="/">Services</a>

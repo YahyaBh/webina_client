@@ -40,8 +40,8 @@ import cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import Footer from './Front_side/client/Components/Footer';
 import Loading from './Assets/Images/WEBINA2.png'
-
-
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
 
 
@@ -259,17 +259,31 @@ const Home = () => {
                                 easier and build you a full appliaction for your business , you can easly choose any website
                                 from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
                             <div className='app__more__about__cards__container'>
-                                <div className="app__more__about__card" data-aos="fade-right">
+
+
+                                <div id="website-development" className="app__more__about__card" data-aos="fade-right">
                                     <CgWebsite /> <h3>Website Development</h3>
                                 </div>
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width : '200px' , flexWrap : 'wrap' }} place='top' anchorId="website-development" multiline={true} disableInteractive>
+                                    Developing Perfect Full stack /<br/> Front End / Back End / UI-UX Website .
+                                </ReactTooltip>
 
-                                <div className="app__more__about__card" data-aos="fade-right">
+
+                                <div id='website-debugging' className="app__more__about__card" data-aos="fade-right">
                                     <VscDebugAll /> <h3>Websites Debugging</h3>
                                 </div>
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000' , width : '200px' , flexWrap : 'wrap'}} place='top' anchorId="website-debugging" multiline={true} disableInteractive>
+                                    Having Issues With Debugging ?<br/> WebIna Always Here .
 
-                                <div className="app__more__about__card" data-aos="fade-right">
+                                </ReactTooltip>
+
+
+                                <div id='website-deployment' className="app__more__about__card" data-aos="fade-right">
                                     <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
                                 </div>
+                                <ReactTooltip style={{ backgroundColor: '#fff', color: '#000' , width : '200px', flexWrap : 'wrap' }} place='top' anchorId="website-deployment" multiline={true} disableInteractive>
+                                    Your Website Is Ready To Use .<br/> Let Us Handle The Rest Of It .
+                                </ReactTooltip>
                             </div>
                         </div>
                     </section>

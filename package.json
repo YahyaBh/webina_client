@@ -20,6 +20,7 @@
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "react-scroll-to-element": "^0.2.0",
+    "react-tooltip": "^5.7.4",
     "sass": "^1.57.1",
     "source-map-explorer": "^2.5.3",
     "sweetalert2": "^11.6.16",
