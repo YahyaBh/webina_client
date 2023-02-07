@@ -66,6 +66,7 @@ const Home = () => {
             setuserData(JSON.parse(cookie.get('user')))
         }
 
+
         http.get('/')
             .then((res) => {
                 if (res.status === 200) {
@@ -235,7 +236,7 @@ const Home = () => {
                     <div className="app__about__content">
                         <h2>What Is WebIna ?</h2>
                         <div className='app__about__para_image'>
-                            <p>WebIna is a website that helps you make your dreams
+                            <p>WebIna is a comapny that helps you make your dreams
                                 easier and build you a full appliaction for your business , you can easly choose any website
                                 from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
 
@@ -253,7 +254,7 @@ const Home = () => {
                 <section className="app__more__about">
                     <div className="app__more__about__content">
                         <h2>More About WebIna</h2>
-                        <p>WebIna is a website that helps you make your dreams
+                        <p>WebIna is a company that helps you make your dreams
                             easier and build you a full appliaction for your business , you can easly choose any website
                             from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
                         <div className='app__more__about__cards__container'>
@@ -436,8 +437,9 @@ const Home = () => {
 
 
                 <section className="app__testimonials" id='testimonials'>
+                    <h2>People Feedbacks</h2>
                     <div className='app__testimonials__container'>
-                        {testimonials > 0 ?
+                        {testimonials.length > 0 ?
                             <Swiper loop={true} navigation={true} modules={[Navigation, Pagination]} className="testimonials">
                                 {testimonials.map((testimonial, index) => (
                                     <SwiperSlide key={index + testimonial.name}>
@@ -466,13 +468,8 @@ const Home = () => {
                             </Swiper>
 
                             :
-                            <div style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <h2>Leave Us A FeedBack</h2>
-                                <form>
-                                    <input type="text" name='name' placeholder='name' />
-                                    <input type="text" name='feedback' placeholder='name' />
-
-                                </form>
+                            <div style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexDirection : 'column'}}>
+                                <h3>Leave Us A FeedBack</h3>
                             </div>
                         }
                     </div>

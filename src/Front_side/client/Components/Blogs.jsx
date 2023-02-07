@@ -20,7 +20,8 @@ const Blogs = () => {
             .then(res => {
                 if (res.status === 200) {
                     setBlogs(res.data.blogs);
-                    setLoading(false)
+                    console.log(res.data.blogs);
+                    setLoading(false);
                 } else {
                     Swal.fire({
                         title: 'Oops...',
@@ -51,16 +52,21 @@ const Blogs = () => {
                     <Navbar />
                 </div>
 
-                {blogs > 0 ?
-                    blogs.map((blog, index) => (
-                        <div key={index}>
-                            <h3>{blog.title}</h3>
+
+
+                <div>
+                    {blogs.length > 0 ?
+                        blogs.map((blog, index) => (
+                            <div className='app__blog__card' key={index}>
+                                <h3>{blog.title}</h3>
+                            </div>
+                        )) :
+                        <div>
+                            <h1>No Blogs Available Now</h1>
                         </div>
-                    )) :
-                    <div>
-                        <h1>No Blogs Available Now</h1>
-                    </div>
-                }
+
+                    }
+                </div>
             </Fragment>
     )
 }

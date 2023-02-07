@@ -1003,6 +1003,14 @@ body {
 .app__testimonials {
     padding: 15px 250px;
 
+    h2 {
+        text-align: center;
+        text-transform: uppercase;
+        font-family: Louis-Bold;
+        font-size: 70px;
+        color: #000;
+    }
+
     .swiper-button-prev {
         box-sizing: border-box;
         display: block;
@@ -2368,4 +2376,9 @@ body {
         display: flex;
         flex-wrap: wrap;
     }
+}
+
+
+.app__blog__card {
+    
 }

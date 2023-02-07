@@ -9,7 +9,6 @@ import Swal from 'sweetalert2'
 import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import Loading from '../../../Assets/Images/WEBINA2.png';
-import swal from '@sweetalert/with-react'
 
 const Profile = () => {
 
@@ -133,8 +132,6 @@ const Profile = () => {
 
     const updateImage = (e) => {
         e.preventDefault();
-
-        swal(<ImageUpdating />)
 
 
         // Swal.fir({
