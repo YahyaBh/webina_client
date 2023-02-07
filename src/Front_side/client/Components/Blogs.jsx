@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser'
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import Navbar from './Navbar';
-
+import moment from 'moment';
 
 
 
@@ -54,11 +54,14 @@ const Blogs = () => {
 
 
 
-                <div>
+                <div className='app__blog__cards__container'>
                     {blogs.length > 0 ?
                         blogs.map((blog, index) => (
                             <div className='app__blog__card' key={index}>
                                 <h3>{blog.title}</h3>
+                                <img src={blog.image} alt={blog.title} />
+                                <p>{blog.body}</p>
+                                <p style={{ color : 'grey'}}>{blog.created_at ? moment(blog.created_at.split('T')[0] + ' ' + blog.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
                             </div>
                         )) :
                         <div>

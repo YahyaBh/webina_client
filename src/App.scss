@@ -2379,6 +2379,26 @@ body {
 }
 
 
-.app__blog__card {
-    
+.app__blog__cards__container {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 70px;
+
+    .app__blog__card {
+        width: 600px;
+        min-height: 700px;
+        box-shadow: 0 0 10px -2px grey;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 5px;
+        img {
+            width: 450px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    }
 }
