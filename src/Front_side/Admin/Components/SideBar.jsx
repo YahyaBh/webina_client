@@ -1,5 +1,4 @@
 import React from 'react'
-import './SideBar.scss'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import { BsMailbox } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'

@@ -1,7 +1,67 @@
+.sidebar-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+
+    a {
+        padding: 20px;
+        text-decoration: none;
+        font-size: 25px;
+        color: rgb(var(--mid-color));
+        display: block;
+        transition: 0.3s;
+        text-align: right;
+
+        &:hover {
+            color: #f1f1f1;
+        }
+    }
+
+    svg {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: rgb(var(--mid-color));
+        cursor: pointer;
+    }
+
+    @media screen and (max-height: 450px) {
+        padding-top: 15px;
+
+        .sidebar a {
+            font-size: 18px;
+        }
+    }
+}
+
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+
 .m-navbar {
 
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
     padding: 15px 20px;
 
@@ -42,6 +102,64 @@
             }
 
 
+        }
+    }
+
+    svg {
+        display: none;
+    }
+
+
+
+
+    @media screen and (max-width:900px) {
+
+        padding: 20px 20px !important;
+        justify-content: space-between;
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            display: none;
+
+            li {
+                margin: 10px;
+
+                a,
+                button {
+                    display: block;
+                    color: rgb(var(--white-color));
+                    background-color: transparent;
+                    border: transparent;
+                    outline: none;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+
+                    transition: all .1s ease;
+
+                    &:hover {
+                        transform: scale(.95);
+                        color: rgb(var(--mid-color));
+                    }
+                }
+
+
+            }
+        }
+
+        svg {
+            display: block;
+            color: rgb(var(--white-color));
+            cursor: pointer;
+            font-size: 30px;
         }
     }
 }

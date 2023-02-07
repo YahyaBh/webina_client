@@ -8,6 +8,8 @@ import WebInaLogo from '../../../Assets/Images/webinai.png';
 import { useEffect } from 'react';
 import cookie from 'js-cookie';
 import { useState } from 'react';
+import { MdOutlineSegment } from 'react-icons/md';
+import { AiOutlineClose} from 'react-icons/ai';
 
 
 const NavbarHome = () => {
@@ -18,6 +20,7 @@ const NavbarHome = () => {
     const { token } = AuthUser();
 
     const [userData, setUserData] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
 
 
 
@@ -47,40 +50,71 @@ const NavbarHome = () => {
             })
         }
     }
+
+
+    const openCloseSide = (e) => {
+        e.preventDefault();
+
+
+        if (isOpen) {
+            setIsOpen(false);
+            document.getElementById("mySidebar").style.width = "0";
+        } else {
+            setIsOpen(true);
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+    }
+
     return (
         <div>
             {!getToken() ?
 
-                <nav className='m-navbar'>
-                    <a href='/'>
-                        <img className='navbar-logo' src={WebInaLogo} alt="logo" width='40px' />
-                    </a>
+                <>
 
-                    <ul>
-                        <li>
-                            <Scroll type="id" element="about" offset={-100} timeout={100}>
-                                <button>About</button>
-                            </Scroll>
-                        </li>
-                        <li>
-                            <Scroll type="id" element="categories" offset={-100} timeout={100}>
-                                <button>Categories</button>
-                            </Scroll>
-                        </li>
-                        <li>
-                            <a href='/blogs'>Blogs</a>
-                        </li>
+                    <nav className='m-navbar'>
+                        <a href='/'>
+                            <img className='navbar-logo' src={WebInaLogo} alt="logo" width='40px' />
+                        </a>
 
-                        <li>
-                            <a href="/signin">Sign In</a>
-                        </li>
-                        <li>
-                            <a href="/signup">Sign Up</a>
-                        </li>
+                        <ul>
+                            <li>
+                                <Scroll type="id" element="about" offset={-100} timeout={100}>
+                                    <button>About</button>
+                                </Scroll>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="categories" offset={-100} timeout={100}>
+                                    <button>Categories</button>
+                                </Scroll>
+                            </li>
+                            <li>
+                                <a href='/blogs'>Blogs</a>
+                            </li>
 
-                    </ul>
+                            <li>
+                                <a href="/signin">Sign In</a>
+                            </li>
+                            <li>
+                                <a href="/signup">Sign Up</a>
+                            </li>
 
-                </nav>
+                        </ul>
+                        <MdOutlineSegment onClick={openCloseSide} />
+                    </nav>
+
+                    <div id="mySidebar" class="sidebar-nav">
+                        <AiOutlineClose onClick={openCloseSide} />
+                        <a href="/">About</a>
+                        <a href="/">Services</a>
+                        <a href="/">Clients</a>
+                        <a href="/">Contact</a>
+                    </div>
+
+                </>
+
+
+
+
 
                 :
 
@@ -139,6 +173,9 @@ const NavbarHome = () => {
                         </div>
 
                     </ul>
+
+                    <MdOutlineSegment className='segmant-show' />
+
                 </nav>
             }
         </div>
