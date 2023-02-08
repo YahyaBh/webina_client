@@ -44,7 +44,7 @@ export default function AuthUser() {
             "Authorization": `Bearer ${token}`,
             "user_token": getToken()
         }
-    }) : axios.delete;
+    }) : null;
 
 
 

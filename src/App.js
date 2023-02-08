@@ -64,7 +64,7 @@ function App() {
 
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
-        <Route exact path="/payment" element={<Payment />} />
+        <Route exact path="/buy/website/:token" element={<Payment />} />
 
 
 

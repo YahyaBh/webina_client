@@ -27,7 +27,11 @@ const Website = () => {
 
 
     useEffect(() => {
+        if(sec_http){
         getWebsite()
+        } else {
+            navigate('/')
+        }
     }, [])
 
 
@@ -75,14 +79,8 @@ const Website = () => {
     }
 
     const buyWebsite = async () => {
-        setLoading(true)
-        await sec_http.post(`/website/${params.token}`)
-            .then(res => {
-                setWebsiteData(res.data.website);
-            })
-
-        setUserData(JSON.parse(cookie.get('user')));
-        setLoading(false)
+        setLoading(true);
+        navigate(`/buy/website/${websiteData.token}`);
     }
 
     const findSimiliar = async () => {
