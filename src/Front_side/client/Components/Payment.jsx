@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png'
+import CreditCardForm from './CreditCard/CreditCardForm'
+
 const Payment = () => {
 
     // Get ID from URL
@@ -16,6 +18,17 @@ const Payment = () => {
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
+
+
+    // const [number, setCardNumber] = useState('');
+    // const [card_cvc, setCardCvc] = useState('');
+    // const [card_exp, setCardExp] = useState('');
+    // const [focused, setFocused] = useState('');
+    // const [name, setName] = useState('');
+    // const [formData, setFormData] = useState(null);
+    // const [issuer, setIssuer] = useState('');
+
+
     const navigate = useNavigate();
 
 
@@ -48,26 +61,28 @@ const Payment = () => {
         setLoading(false);
 
     }
+
     return (
         loading ?
             <div className='loading-container'>
                 <img src={Loading} alt="loading-web" />
             </div>
             :
-            <Fragment>
+            <div className='payment'>
 
                 <div style={{ backgroundColor: '#000' }}>
                     <Navbar />
                 </div>
 
-                {websiteData?.website_name}
 
 
-                <div className=''>
-
-                </div>
-            </Fragment>
+                <CreditCardForm/>
+            </div>
     )
 }
+
+
+
+
 
 export default Payment

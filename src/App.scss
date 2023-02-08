@@ -2917,3 +2917,32 @@ body {
         }
     }
 }
+
+
+.payment {
+    input {
+        margin-top: 1%;
+        margin-left: 1%;
+        font-family: Montserrat, sans-serif;
+        padding: 0.5%;
+    }
+
+    button {
+        font-family: Montserrat, sans-serif;
+        transition-duration: 0.7s;
+        margin-top: 2%;
+        height: 3em;
+        width: 7em;
+        color: white;
+        background-color: #7589eb;
+        border-radius: 7em;
+        border: 0;
+    }
+
+    button:hover {
+        background-color: #ccd5fc;
+        color: black;
+        border-radius: 7em;
+    }
+
+}
