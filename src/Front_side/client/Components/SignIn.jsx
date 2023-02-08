@@ -9,7 +9,7 @@ import AuthUser from '../../AuthUser';
 import { useLayoutEffect } from 'react';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
-import { FaSignInAlt} from 'react-icons/fa';
+import { FaSignInAlt } from 'react-icons/fa';
 
 const SignIn = () => {
 
@@ -19,7 +19,7 @@ const SignIn = () => {
     const { http, setToken } = AuthUser();
     const [loginUrl, setLoginUrl] = useState(null);
     const [loading, setLoading] = useState(true);
-    
+
 
 
 
@@ -74,8 +74,8 @@ const SignIn = () => {
         http.post('/signin', formData)
             .then(res => {
                 if (res.status === 200) {
-                    cookie.set('user' , JSON.stringify(res.data.user) , { secure: true, sameSite: 'none' });
-                    cookie.set('token', res.data.token , { secure: true, sameSite: 'none' });
+                    cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
+                    cookie.set('token', res.data.token, { secure: true, sameSite: 'none' });
                     navigate("/")
                     setEmailInput('');
                     setPasswordInput('');
@@ -136,16 +136,17 @@ const SignIn = () => {
 
                         <div className='app__signin__form__buttons'>
 
+                            <button type='submit'>Sign In <FaSignInAlt /></button>
+
                             <a className='app__google__signup' target='_top' href={loginUrl}><AiOutlineGoogle /></a>
 
-                            <button type='submit'>Sign In <FaSignInAlt/></button>
                         </div>
                         <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>
 
                     </form>
 
                 </div>
-                <p style={{ position: 'absolute', bottom: 0, margin: '5px' , color : 'rgb(var(--white-color))' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
+                <p style={{ position: 'absolute', bottom: 0, margin: '5px', color: 'rgb(var(--white-color))' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
 
             </div>
 

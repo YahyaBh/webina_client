@@ -49,11 +49,10 @@ const SignUp = () => {
             .catch((error) => console.error(error));
     }, [])
 
-    const submitForm = function (e) {
+    const submitForm = async function (e) {
         e.preventDefault();
 
         if (passwordInput === verify_passwordInput) {
-
             Swal.fire({
                 title: 'Just a second...',
                 html: '<img src="http://localhost:3000/Images/Infinity-1s-200px.gif">',
@@ -75,82 +74,109 @@ const SignUp = () => {
             const checkEmailData = new FormData()
 
 
+            await http.post('/signup', formData)
+                .then(res => {
+                    if (res.status === 200) {
+                        checkEmailData.append('email', emailInput)
+                        checkEmailData.append('token', res.data.access_token)
 
+                        http.post('/email/verification', checkEmailData)
+                            .then(res_ver => {
+                                if (res_ver.status === 200) {
+                                    setId(res.data.id);
+                                    setTokenChecker(res.data.access_token);
 
-            try {
-                http.post('/signup', formData)
-                    .then(res => {
-                        if (res.status === 200) {
-                            checkEmailData.append('email', emailInput)
-                            checkEmailData.append('token', res.data.access_token)
+                                    Swal.fire({
+                                        title: 'Registred!',
+                                        text: 'Please check your email to verify your account.',
+                                        icon: "warning",
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#000',
+                                        confirmButtonText: "I checked it!",
+                                    }).then((res) => {
+                                        if (res.isConfirmed) {
+                                            checkVerification()
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: res.data.message,
+                                        icon: <MdErrorOutline />,
+                                        showConfirmButton: false,
+                                        confirmButtonText: 'Sign up!',
+                                        showCancelButton: true,
 
-                            http.post('/email/verification', checkEmailData)
-                                .then(res_ver => {
-                                    if (res_ver.status === 200) {
-                                        setId(res.data.id);
-                                        setTokenChecker(res.data.access_token);
-                                    } else {
-                                        Swal.fire({
-                                            title: 'Error!',
-                                            text: res.data.message,
-                                            icon: <MdErrorOutline />,
-                                            showConfirmButton: false,
-                                            confirmButtonText: 'Sign up!',
-                                            showCancelButton: true,
-
-                                        })
-                                    }
-                                })
-                            Swal.fire({
-                                title: 'Registred!',
-                                text: 'Please check your email to verify your account.',
-                                icon: "warning",
-                                showConfirmButton: true,
-                                confirmButtonColor: '#000',
-                                confirmButtonText: "I checked it!",
-                            }).then(
-                                checkVerification
-                            );
-
-
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: res.data.message,
-                                icon: <MdErrorOutline />,
-                                showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
-                                showCancelButton: true,
-
+                                    })
+                                }
                             })
-                        }
-                    })
-            } catch (error) {
-                console.error(error);
-            }
+
+
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: res.data.message,
+                            icon: <MdErrorOutline />,
+                            showConfirmButton: false,
+                            confirmButtonText: 'Sign up!',
+                            showCancelButton: true,
+
+                        })
+                    }
+                })
+                .catch((err) => {
+                    if (err.response.status === 400) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: err.response.data.message,
+                            confirmButtonText: 'Change Email',
+                            confirmButtonColor: '#000',
+                            showCancelButton: true
+                        })
+                            .then(res => {
+                                if (res.isConfirmed) {
+                                    setEmailInput('');
+                                }
+                            })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: err.response.data.message,
+                            confirmButtonColor: '#000',
+                            style : 'background-color: #f44336;',
+                        })
+                            .then(res => {
+                                if (res.isConfirmed) {
+                                    setPasswordInput('');
+                                    setVerPasswordInput('');
+                                }
+                            })
+                    }
+                })
 
         } else {
             Swal.fire({
                 title: 'Error!',
                 text: 'Passwords does not match',
-                icon: <RiLockPasswordFill />,
+                icon: 'error',
                 showConfirmButton: false,
                 confirmButtonText: 'Sign up!',
                 showCancelButton: false,
-
             })
         }
     }
 
 
-    const checkVerification = () => {
+    const checkVerification = async () => {
 
         const checkEmail = new FormData();
 
         checkEmail.append('email', emailInput)
-        
 
-        http.post(`/email/verify/` , checkEmail)
+
+        await http.post(`/email/verify`, checkEmail)
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({
@@ -168,20 +194,20 @@ const SignUp = () => {
                     setEmailInput('');
                     setPasswordInput('');
                     setVerPasswordInput('');
-                } else {
-                    checkVerification();
+                } else if (res.status === 401) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email not verified',
+                        text: 'Please try to verify your email before signing up',
+                        confirmButtonText: 'I Verified it!',
+                        confirmButtonColor: '#000',
+                    })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                checkVerification();
+                            }
+                        })
                 }
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error.data.message,
-                    icon: <MdErrorOutline />,
-                    showConfirmButton: false,
-                    confirmButtonText: 'Sign up!',
-                    showCancelButton: true,
-
-                })
             })
     }
 
@@ -222,9 +248,10 @@ const SignUp = () => {
 
                         <div className='app__signup__form__buttons'>
 
+                            <button type='submit'>Sign Up <FaSignInAlt /></button>
+
                             <a className='app__google__signup' target='_top' href={registerUrl}><AiOutlineGoogle /></a>
 
-                            <button type='submit'>Sign Up <FaSignInAlt /></button>
                         </div>
                         <p>Already Have An Account ? <a href='/signin'>Sign In</a></p>
 

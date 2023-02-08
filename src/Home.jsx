@@ -65,7 +65,6 @@ const Home = () => {
     useEffect(() => {
 
         getTestimonials_Categories();
-        console.log(userData.full_name)
     }, [])
 
 

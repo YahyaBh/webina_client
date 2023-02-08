@@ -6,7 +6,13 @@
 body {
     scroll-behavior: smooth;
     box-sizing: border-box;
+
+    input:autofill {
+        background: #fff;
+    }
 }
+
+
 
 
 
@@ -1158,7 +1164,7 @@ body {
                 }
 
                 a {
-                    
+
                     height: 50px;
                     padding: 5px;
                     background-color: rgb(var(--mid-color));
@@ -1168,6 +1174,7 @@ body {
                     border-radius: 25px;
                     text-align: center;
                     text-decoration: none;
+
                     &:hover {
                         background-color: rgb(var(--heavy-color));
                         color: rgb(var(--white-color));
