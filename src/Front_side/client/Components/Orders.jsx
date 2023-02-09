@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser'
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png'
+import Cookies from 'js-cookie';
 const Orders = () => {
 
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ const Orders = () => {
     const [orders, setOrders] = useState(null);
     const [websites, setwebsites] = useState(null);
     const [id, setId] = useState(1);
-    const userData = new FormData()
 
     useEffect(() => {
 
@@ -35,12 +35,7 @@ const Orders = () => {
                 }
             });
         } else {
-
-
-            userData.append('user_id', id);
-
             getOrders();
-
         }
 
 
@@ -49,6 +44,9 @@ const Orders = () => {
 
     const getOrders = async () => {
 
+        const userData = new FormData();
+
+        userData.append('user_token', Cookies.get('token'));
 
         await sec_http.post(`/orders`, userData)
             .then(res => {
@@ -86,9 +84,9 @@ const Orders = () => {
 
                                 {/* <img src={order.image} alt='order-image' /> */}
                                 <div className='order-item-header'>
-                                    <p>Order : {order.token}</p>
-                                    <p>Website name : {order?.website?.website_name}</p>
-                                    <p>{order?.website?.price ? order.website.price + '$' : ''}</p>
+                                    <p>Order : {order.order_number}</p>
+                                    <p>Website name : {order?.notes}</p>
+                                    <p>{order?.grand_total ? order.grand_total + '$' : ''}</p>
                                 </div>
                             </div>
 

@@ -60,6 +60,7 @@ const SignUp = () => {
                     icon: 'no-border'
                 },
                 showConfirmButton: false,
+                background: '#f1f2f3'
             })
 
             const formData = new FormData()
@@ -110,33 +111,20 @@ const SignUp = () => {
                                     })
                                 }
                             })
-
-
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: res.data.message,
-                            icon: <MdErrorOutline />,
-                            showConfirmButton: false,
-                            confirmButtonText: 'Sign up!',
-                            showCancelButton: true,
-
-                        })
                     }
                 })
                 .catch((err) => {
                     if (err.response.status === 400) {
                         Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: err.response.data.message,
-                            confirmButtonText: 'Change Email',
-                            confirmButtonColor: '#000',
-                            showCancelButton: true
+                            icon: 'info',
+                            title: 'Email already exists!',
+                            text: 'Looks like this email is already in use.',
+                            confirmButtonText: 'Sign in!',
+                            confirmButtonColor: '#2c2827'
                         })
-                            .then(res => {
+                            .then((res) => {
                                 if (res.isConfirmed) {
-                                    setEmailInput('');
+                                    navigate('/signin')
                                 }
                             })
                     } else {
@@ -145,7 +133,7 @@ const SignUp = () => {
                             title: 'Oops...',
                             text: err.response.data.message,
                             confirmButtonColor: '#000',
-                            style : 'background-color: #f44336;',
+                            style: 'background-color: #f44336;',
                         })
                             .then(res => {
                                 if (res.isConfirmed) {
@@ -248,7 +236,7 @@ const SignUp = () => {
 
                         <div className='app__signup__form__buttons'>
 
-                            <button type='submit'>Sign Up <FaSignInAlt /></button>
+                            <button type='submit' disabled={firstName === '' || lastName === '' || emailInput === '' || passwordInput === '' || verify_passwordInput === '' ? true : false} >Sign Up <FaSignInAlt /></button>
 
                             <a className='app__google__signup' target='_top' href={registerUrl}><AiOutlineGoogle /></a>
 

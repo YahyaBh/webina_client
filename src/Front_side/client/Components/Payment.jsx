@@ -5,12 +5,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import CreditCardForm from './CreditCard/CreditCardForm'
+import { BsArrowLeftShort } from 'react-icons/bs';
+
+
 
 const Payment = () => {
 
-    // Get ID from URL
+
     const params = useParams();
 
     const { http, sec_http } = AuthUser();
@@ -19,14 +23,6 @@ const Payment = () => {
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
 
-
-    // const [number, setCardNumber] = useState('');
-    // const [card_cvc, setCardCvc] = useState('');
-    // const [card_exp, setCardExp] = useState('');
-    // const [focused, setFocused] = useState('');
-    // const [name, setName] = useState('');
-    // const [formData, setFormData] = useState(null);
-    // const [issuer, setIssuer] = useState('');
 
 
     const navigate = useNavigate();
@@ -43,6 +39,7 @@ const Payment = () => {
             await sec_http.get(`/website/${params.token}`)
                 .then(res => {
                     setWebsiteData(res.data.website);
+                    console.log(res.data.website);
                 })
                 .catch(err => {
                     Swal.fire({
@@ -57,7 +54,7 @@ const Payment = () => {
             :
             navigate('/')
 
-        setUserData(JSON.parse(Cookies.get('user')));
+        setUserData(JSON.parse(Cookies.get('user'), { SameSite: true }));
         setLoading(false);
 
     }
@@ -74,13 +71,52 @@ const Payment = () => {
                     <Navbar />
                 </div>
 
+                <div className='arrow-back'>
+                    <a href={`http://localhost:3000/website/${params.token}`}>
+                        <BsArrowLeftShort />
+                    </a>
+                </div>
 
                 <div className='payment-container'>
-                    <CreditCardForm />
+                    <CreditCardForm websiteData={websiteData} />
 
+                    <div className='order-info-payment'>
 
-                    <div className='order-info-payment'></div>
+                        <div className="section-name-head">Order Informations</div>
+                        <div className='website-informations'>
+                            <h5>{websiteData.website_name}</h5>
+
+                            <img className='website-image' src={websiteData.image} alt={websiteData.website_name} />
+                            <div className='website-price-container'>
+
+                                <div className='info-holder-bet'>
+                                    <h4>Website Price :</h4>
+                                    <h4>{websiteData.price}$</h4>
+                                </div>
+                                <hr />
+                                <div className='info-holder-bet'>
+                                    <h4>Discount :</h4>
+                                    <h4>0% (0.00$)</h4>
+                                </div>
+
+                                <hr />
+                                <div className='info-holder-bet'>
+                                    <h4>Fees :</h4>
+                                    <h4>0% (0.00$)</h4>
+                                </div>
+
+                                <hr />
+                                <div className='info-holder-bet total-price'>
+                                    <h4>Total Price :</h4>
+                                    <h4>{websiteData.price}$</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+                <Footer />
             </div>
     )
 }

@@ -3,20 +3,25 @@ import React from "react";
 import 'react-credit-cards/es/styles-compiled.css';
 import Cards from 'react-credit-cards';
 import { useState } from "react";
-import Navbar from "../Navbar";
 import CreditCards from '../../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
-
-const CreditCardForm = () => {
+import StripePNG from '../../../../Assets/Images/stripep.png'
+import Swal from "sweetalert2";
+import AuthUser from "../../../AuthUser";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+const CreditCardForm = ({ websiteData }) => {
 
     const [number, setNumber] = useState('');
-
     const [name, setName] = useState('');
-
     const [expiry, setExpiry] = useState('');
-
     const [cvc, setCvc] = useState('');
-
     const [focus, setFocus] = useState('');
+
+    const [loadoingchckout, setLoadoingchckout] = useState(false);
+
+    const { sec_http } = AuthUser();
+    const navigate = useNavigate();
+
 
 
     const formatString = (e) => {
@@ -47,9 +52,81 @@ const CreditCardForm = () => {
     }
 
 
-    return (
-        <div>
+    const checkOutWebsite = async (e) => {
+        e.preventDefault();
+        setLoadoingchckout(true);
 
+        if (loadoingchckout) {
+            Swal.fire({
+                title: 'Just a second...',
+                html: '<img src="http://localhost:3000/Images/Infinity-1s-200px.gif">',
+                customClass: {
+                    icon: 'no-border'
+                },
+                showConfirmButton: false,
+                background : '#f1f2f3'
+            })
+        }
+
+
+
+
+        const paymentForm = new FormData();
+
+        paymentForm.append('number', number);
+        paymentForm.append('cvc', cvc);
+        paymentForm.append('price', websiteData.price);
+        paymentForm.append('exp_month', expiry.substr(0, 2));
+        paymentForm.append('exp_year', expiry.substr(3, 5));
+        paymentForm.append('description', websiteData.website_name);
+        paymentForm.append('user_token', Cookies.get('token'));
+        paymentForm.append('user_email', JSON.parse(Cookies.get('user')).email);
+        paymentForm.append('user_name', JSON.parse(Cookies.get('user')).full_name);
+        paymentForm.append('user_id', JSON.parse(Cookies.get('user')).id);
+
+
+
+
+
+        if (name === '' || number === '' || expiry === '' || cvc === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'All fields are required',
+            })
+        } else {
+
+            await sec_http.post('/checkout', paymentForm)
+                .then(res => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thank you for your purchase',
+                        text: res.data.message,
+                    })
+                    Cookies.set('checkout', 'true' , { SameSite: true });
+                    setLoadoingchckout(false);
+                    window.location.replace(res.data.url)
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: err.response.data.message,
+                    })
+                    Cookies.set('checkout', 'false' , { SameSite: true });
+                    setLoadoingchckout(false);
+                    navigate(err.response.data.url);
+                })
+
+
+        }
+    }
+
+    return (
+        <div className="credit-card-form">
+
+
+            <div className="section-name-head">Payment Informations</div>
             <div className="container-cards-payment-form">
 
                 <Cards
@@ -60,7 +137,7 @@ const CreditCardForm = () => {
                     number={number}
                 />
 
-                <form className="form-credit-card-payment">
+                <form className="form-credit-card-payment" onSubmit={checkOutWebsite}>
 
                     <input
                         type="tel"
@@ -111,10 +188,14 @@ const CreditCardForm = () => {
                             max='3'
                         />
                     </div>
+
+                    <button className="btn-credit-card-payment" type="submit">Check Out</button>
                 </form>
 
-
-                <img src={CreditCards}/>
+                <div className="pay-images-s-c">
+                    <img src={StripePNG} alt="payment-strie" />
+                    <img src={CreditCards} alt="payment-cards" />
+                </div>
             </div>
         </div>
     );

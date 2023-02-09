@@ -1737,7 +1737,7 @@ body {
         form {
             top: 0;
             margin-top: 0;
-            height: 50vh;
+            height: 40vh;
             width: 500px;
 
             .app__signin__form__name {
@@ -1753,7 +1753,7 @@ body {
                     font-family: Louis-Bold;
                     width: 100%;
                     margin: 5px;
-                    height: 50px;
+                    height: 60px;
                     background-color: transparent;
                     padding: 10px;
                     background-color: rgb(var(--white-color));
@@ -1794,11 +1794,12 @@ body {
                 flex-direction: column;
 
                 .app__google__signup {
-                    width: 100%;
-                    height: 50px;
+                    width: 80%;
+                    margin: auto;
+                    height: 60px;
                     background-color: rgb(var(--heavy-color));
                     color: rgb(var(--white-color));
-                    border-radius: 10px;
+                    border-radius: 30px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -1816,11 +1817,12 @@ body {
 
 
                 button {
-                    width: 100%;
-                    height: 50px;
+                    width: 80%;
+                    margin: auto;
+                    height: 60px;
                     background-color: rgb(var(--heavy-color));
                     color: rgb(var(--white-color));
-                    border-radius: 10px;
+                    border-radius: 30px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -2000,6 +2002,10 @@ body {
                     font-family: Louis-Bold;
                     text-transform: uppercase;
                     transition: all .1s ease;
+
+                    &:disabled {
+                        opacity: .8;
+                    }
 
                     svg {
                         margin-left: 10px;
@@ -2195,7 +2201,7 @@ body {
 
 .dropdown-content {
     display: block;
-    position: absolute;
+    position: fixed;
     background-color: #f9f9f9;
     height: auto;
     width: auto;
@@ -2753,7 +2759,7 @@ body {
         }
 
         img {
-            width: 80%;
+            width: auto;
             border-radius: 20px;
             display: flex;
             justify-content: center;
@@ -2920,6 +2926,17 @@ body {
 
 
 .payment {
+
+    .arrow-back {
+        a svg {
+            color : rgb(var(--heavy-color));
+            font-size: 50px;
+            position: absolute;
+            top: 120px;
+            left : 40px;
+        }
+    }
+
     input {
         margin-top: 1%;
         margin-left: 1%;
@@ -2950,9 +2967,13 @@ body {
         justify-content: center;
         align-items: flex-start;
         flex-direction: column;
+        width: 400px;
+        margin: auto;
+
+
 
         input {
-            width: 100%;
+            width: 400px;
             border-radius: 10px;
             height: 50px;
             margin-top: 20px;
@@ -2964,26 +2985,108 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 400px;
+
+            input {
+                width: 50%;
+            }
         }
     }
 
     .payment-container {
         display: flex;
         justify-content: space-around;
-        margin-top: 20vh;
+        margin-top: 8vh;
+        padding: 15px 50px;
+
+        .credit-card-form {
+            width: 50%;
+        }
 
     }
 
     .container-cards-payment-form {
         display: flex;
         flex-direction: column;
+        padding: 17px;
+        height: 65vh;
 
 
-        img {
-            float: right;
-            width: 200px;
-            margin-top: 30px;
-            margin-left: auto;
+
+        .pay-images-s-c {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+            padding: 20px;
+
+            img {
+                width: 150px;
+            }
+
+            img:nth-child(2) {
+                width: 140px;
+            }
         }
+    }
+
+    .section-name-head {
+        height: 40px;
+        width: 180px;
+        margin: auto;
+        background-color: rgb(var(--mid-color));
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        font-family: Louis-Bold;
+
+    }
+
+
+    .order-info-payment {
+        // width: 60%;
+
+        .info-holder-bet {
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+
+            h4 {
+                font-size: 20px;
+            }
+        }
+
+        hr {
+            width: 90%;
+            margin: auto;
+            padding: 10px;
+        }
+
+
+        .website-image {
+            width: 300px;
+            margin: 30px;
+            object-fit: cover;
+        }
+
+        .website-price-container {
+            width: 400px;
+        }
+
+        .website-informations {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .total-price {
+            font-family: Louis-Bold;
+        }
+
+
     }
 }
