@@ -189,7 +189,7 @@ const CreditCardForm = ({ websiteData }) => {
                         />
                     </div>
 
-                    <button className="btn-credit-card-payment" type="submit">Check Out</button>
+                    <button className="button-checkout" type="submit">Check Out</button>
                 </form>
 
                 <div className="pay-images-s-c">

@@ -114,7 +114,7 @@ const SignUp = () => {
                     }
                 })
                 .catch((err) => {
-                    if (err.response.status === 400) {
+                    if (err.status === 400) {
                         Swal.fire({
                             icon: 'info',
                             title: 'Email already exists!',
@@ -131,7 +131,7 @@ const SignUp = () => {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: err.response.data.message,
+                            text: err.message,
                             confirmButtonColor: '#000',
                             style: 'background-color: #f44336;',
                         })
@@ -174,6 +174,7 @@ const SignUp = () => {
                         confirmButtonColor: '#ffe662',
                         confirmButtonText: "OK!",
                     })
+                    console.log(res)
                     cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
                     cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
                     navigate(`/`);

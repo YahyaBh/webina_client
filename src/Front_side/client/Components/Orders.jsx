@@ -3,7 +3,7 @@ import React from 'react'
 import { Fragment } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser'
 import Navbar from './Navbar';
@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
 const Orders = () => {
 
     const navigate = useNavigate();
+    // const params = useParams();
 
     const { sec_http } = AuthUser();
     const [loading, setLoading] = useState(true);
@@ -80,15 +81,18 @@ const Orders = () => {
                 <div className='orders-container'>
                     {orders && orders.length > 0 ?
                         orders.map((order, index) => (
-                            <div className='order-item' key={index}>
+                            <a href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`} className='order-item' key={index}>
 
                                 {/* <img src={order.image} alt='order-image' /> */}
                                 <div className='order-item-header'>
                                     <p>Order : {order.order_number}</p>
-                                    <p>Website name : {order?.notes}</p>
-                                    <p>{order?.grand_total ? order.grand_total + '$' : ''}</p>
+
+                                    <div className='sec-order-item-details'>
+                                        <p>Website name : {order?.notes}</p>
+                                        <p>{order?.grand_total ? order.grand_total + '$' : ''}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
 
                         ))
 

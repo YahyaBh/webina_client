@@ -23,7 +23,7 @@ const EmailVerify = () => {
     const getFetching = async () => {
         await http.get(`/email/check-verify/${params.email}/${params.token}`)
             .then(res => {
-                cookie.set('token', res.data.token , { secure: true, sameSite: 'none' });
+                cookie.set('token', params.token , { secure: true, sameSite: 'none' });
                 cookie.set('user', JSON.stringify(res.data.user) , { secure: true, sameSite: 'none' });
                 navigate('/');
                 Swal.fire({

@@ -25,6 +25,7 @@ import Blogs from "./Front_side/client/Components/Blogs";
 import EmailVerify from "./Front_side/client/Components/EmailVerify";
 import VerifyEmail from "./Front_side/client/Components/VerifyEmail";
 import PaymentSuccess from "./Front_side/client/Components/CreditCard/PaymentSuccess";
+import Order from "./Front_side/client/Components/Order";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
 
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
+        <Route exact path="/order/:order_token/:user_token/:user_id" element={<Order />} />
         <Route exact path="/buy/website/:token" element={<Payment />} />
         <Route exact path="/payment/:result" element={<PaymentSuccess />} />
 
