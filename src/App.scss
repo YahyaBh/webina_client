@@ -2945,4 +2945,45 @@ body {
         border-radius: 7em;
     }
 
+    .form-credit-card-payment {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+
+        input {
+            width: 100%;
+            border-radius: 10px;
+            height: 50px;
+            margin-top: 20px;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+
+        .ex-cvc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .payment-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20vh;
+
+    }
+
+    .container-cards-payment-form {
+        display: flex;
+        flex-direction: column;
+
+
+        img {
+            float: right;
+            width: 200px;
+            margin-top: 30px;
+            margin-left: auto;
+        }
+    }
 }

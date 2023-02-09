@@ -75,8 +75,12 @@ const Payment = () => {
                 </div>
 
 
+                <div className='payment-container'>
+                    <CreditCardForm />
 
-                <CreditCardForm/>
+
+                    <div className='order-info-payment'></div>
+                </div>
             </div>
     )
 }

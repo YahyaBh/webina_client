@@ -4,7 +4,7 @@ import 'react-credit-cards/es/styles-compiled.css';
 import Cards from 'react-credit-cards';
 import { useState } from "react";
 import Navbar from "../Navbar";
-
+import CreditCards from '../../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
 
 const CreditCardForm = () => {
 
@@ -50,7 +50,7 @@ const CreditCardForm = () => {
     return (
         <div>
 
-            <div>
+            <div className="container-cards-payment-form">
 
                 <Cards
                     cvc={cvc}
@@ -60,19 +60,7 @@ const CreditCardForm = () => {
                     number={number}
                 />
 
-                <form>
-
-                    <input
-                        maxLength='16'
-                        max='16'
-                        type="tel"
-                        name="number"
-                        val={number}
-                        placeholder={"Enter Number"}
-                        onChange={e => setNumber(e.target.value)}
-                        onFocus={e => setFocus(e.target.name)}
-
-                    />
+                <form className="form-credit-card-payment">
 
                     <input
                         type="tel"
@@ -86,29 +74,47 @@ const CreditCardForm = () => {
                     />
 
                     <input
+                        maxLength='16'
+                        max='16'
                         type="tel"
-                        name="expiry"
-                        val={expiry}
-                        placeholder={"Enter Expiry date"}
-                        onKeyUp={e => formatString(e)}
+                        name="number"
+                        val={number}
+                        placeholder={"Enter Number"}
+                        onChange={e => setNumber(e.target.value)}
                         onFocus={e => setFocus(e.target.name)}
-                        maxLength='5'
-                        max='5'
+
                     />
 
-                    <input
-                        type="tel"
-                        name="cvc"
-                        val={cvc}
-                        placeholder={"Enter Cvc"}
-                        onChange={e => setCvc(e.target.value)}
-                        onFocus={e => setFocus(e.target.name)}
-                        maxLength='3'
-                        max='3'
-                    />
 
+
+                    <div className="ex-cvc">
+
+                        <input
+                            type="tel"
+                            name="expiry"
+                            val={expiry}
+                            placeholder={"Enter Expiry date"}
+                            onKeyUp={e => formatString(e)}
+                            onFocus={e => setFocus(e.target.name)}
+                            maxLength='5'
+                            max='5'
+                        />
+
+                        <input
+                            type="tel"
+                            name="cvc"
+                            val={cvc}
+                            placeholder={"CVC"}
+                            onChange={e => setCvc(e.target.value)}
+                            onFocus={e => setFocus(e.target.name)}
+                            maxLength='3'
+                            max='3'
+                        />
+                    </div>
                 </form>
 
+
+                <img src={CreditCards}/>
             </div>
         </div>
     );
