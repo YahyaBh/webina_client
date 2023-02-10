@@ -1,5 +1,6 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
+import moment from 'moment';
 import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -21,7 +22,6 @@ const VerifyEmail = () => {
 
 
     const postFetching = async () => {
-
 
         await http.get(`/email/verify/${params.email}/${params.token}`)
             .then(res => {
