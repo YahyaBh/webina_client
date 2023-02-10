@@ -205,7 +205,7 @@ const NavbarHome = () => {
                                 <a href='/announcements'>Announcements</a>
                             </li>
                             <li>
-                                <a href='/frequent-asked-questions'>FAQ</a>
+                                <a href='/frequent-asked-questions'>FAQs</a>
                             </li>
                             <li>
                                 <a href='/hiring'>Hire Me</a>

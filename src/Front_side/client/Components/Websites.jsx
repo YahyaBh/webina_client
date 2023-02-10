@@ -161,7 +161,7 @@ const Websites = () => {
 
                                         <div className='app__website__buttons'>
                                             <a className='app__website__buttons__show' href={`/website/${website.token}`} >SHOW</a>
-                                            <a className='app__website__buttons__buy' href={`/website/purchace/${website.token}`} >PURCHASE</a>
+                                            <a className='app__website__buttons__buy' href={`/buy/website/${website.token}`} >PURCHASE</a>
                                         </div>
                                     </div>
                                 </SwiperSlide>

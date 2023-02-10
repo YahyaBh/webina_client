@@ -9,6 +9,8 @@ import AuthUser from '../../AuthUser'
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import Cookies from 'js-cookie';
+import { BsArrowLeftShort } from 'react-icons/bs';
+import moment from 'moment';
 const Orders = () => {
 
     const navigate = useNavigate();
@@ -53,6 +55,8 @@ const Orders = () => {
             .then(res => {
                 setOrders(res.data.orders);
                 setwebsites(res.data.websites);
+                console.log(orders);
+
             }).catch(err => {
                 Swal.fire({
                     title: 'Error',
@@ -66,11 +70,23 @@ const Orders = () => {
 
     }
 
+    const orderStatus = (status) => {
+        if (status === 'completed') {
+            return 'col col-4 completed';
+        } else if (status === 'pending') {
+            return 'col col-4 pending';
+        } else if (status === 'processing') {
+            return 'col col-4 processing';
+        } else if (status === 'decline') {
+            return 'col col-4 decline';
+        }
+    }
+
 
     return (
         loading ?
             <div className='loading-container'>
-                < img src={Loading} alt="loading-web" />
+                <img src={Loading} alt="loading-web" />
             </div >
             :
             <Fragment>
@@ -78,28 +94,52 @@ const Orders = () => {
                     <Navbar userData={JSON.parse(cookie.get('user'))} />
                 </div>
 
-                <div className='orders-container'>
-                    {orders && orders.length > 0 ?
-                        orders.map((order, index) => (
-                            <a href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`} className='order-item' key={index}>
-
-                                {/* <img src={order.image} alt='order-image' /> */}
-                                <div className='order-item-header'>
-                                    <p>Order : {order.order_number}</p>
-
-                                    <div className='sec-order-item-details'>
-                                        <p>Website name : {order?.notes}</p>
-                                        <p>{order?.grand_total ? order.grand_total + '$' : ''}</p>
-                                    </div>
-                                </div>
-                            </a>
-
-                        ))
-
-                        : <div className='no-orders-container'>
-                            You have no orders Yet</div>}
+                <div className='arrow-back'>
+                    <a href={`/`}>
+                        <BsArrowLeftShort />
+                    </a>
                 </div>
-            </Fragment>
+
+
+                <div className="orders-container">
+
+                    <div class="container">
+                        <h2>Orders History</h2>
+                        <ul class="responsive-table">
+                            <li class="table-header">
+                                <div class="col col-1">Order Number</div>
+                                <div class="col col-2">Website Name</div>
+                                <div class="col col-3">Total Price</div>
+                                <div class="col col-4">Order Status</div>
+                                <div class="col col-4">Order Date</div>
+                            </li>
+                            {orders && orders.length > 0 ?
+                                orders.map((order, index) => (
+                                    <a href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`}>
+
+                                        <li class="table-row" >
+                                            <div class="col col-1" data-label="Order Number">{order.order_number}</div>
+                                            <div class="col col-2" data-label="Website Name">{order?.notes}</div>
+                                            <div class="col col-3" data-label="Total Price">{order?.grand_total ? order.grand_total + '$' : ''}</div>
+                                            <div className={orderStatus(order.status)} data-label="Order Status">{order.status}</div>
+                                            <div class="col col-5" data-label="Order Date">{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</div>
+                                        </li>
+                                    </a>
+
+                                ))
+                                :
+                                <div className='no-orders-container'>
+                                    You have no orders Yet
+                                </div>}
+
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </Fragment >
     )
 }
 

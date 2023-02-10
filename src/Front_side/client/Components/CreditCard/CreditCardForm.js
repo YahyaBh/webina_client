@@ -105,7 +105,7 @@ const CreditCardForm = ({ websiteData }) => {
                     })
                     Cookies.set('checkout', 'true' , { SameSite: true });
                     setLoadoingchckout(false);
-                    window.location.replace(res.data.url)
+                    window.location.replace(res.data.url);
                 })
                 .catch(err => {
                     Swal.fire({
@@ -115,7 +115,7 @@ const CreditCardForm = ({ websiteData }) => {
                     })
                     Cookies.set('checkout', 'false' , { SameSite: true });
                     setLoadoingchckout(false);
-                    navigate(err.response.data.url);
+                    window.location.replace(err.data.url);
                 })
 
 
@@ -174,7 +174,7 @@ const CreditCardForm = ({ websiteData }) => {
                             onKeyUp={e => formatString(e)}
                             onFocus={e => setFocus(e.target.name)}
                             maxLength='5'
-                            max='5'
+                            max='1228'
                         />
 
                         <input
