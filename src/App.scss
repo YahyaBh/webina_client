@@ -2033,11 +2033,31 @@ body {
 }
 
 
+.modal-body-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        margin: 20px;
+        object-fit: cover;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+    }
+}
+
+
 .app__profile__container {
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
     padding: 80px;
+
+
+
+
 
     .app__profile__container__left {
         display: flex;
@@ -2958,9 +2978,12 @@ body {
             color: rgb(var(--heavy-color));
             font-family: Louis-Bold;
 
+
             &:hover {
                 transform: scale(1);
             }
+
+
         }
 
         .completed {

@@ -46,6 +46,15 @@ export default function AuthUser() {
         }
     }) : null;
 
+    const image_upload = cookie.get('token') ? axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: {
+            'content-type': 'multipart/form-data',
+            "Authorization": `Bearer ${token}`,
+            "user_token": getToken()
+        }
+    }) : null;
+
 
 
     return {
@@ -54,6 +63,7 @@ export default function AuthUser() {
         user,
         getToken,
         http,
-        sec_http
+        sec_http,
+        image_upload
     }
 }

@@ -75,7 +75,7 @@ const SignIn = () => {
             .then(res => {
                 if (res.status === 200) {
                     cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
-                    cookie.set('token', res.data.token, { secure: true, sameSite: 'none' });
+                    cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
                     navigate("/")
                     setEmailInput('');
                     setPasswordInput('');

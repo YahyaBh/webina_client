@@ -9,6 +9,8 @@ import Swal from 'sweetalert2'
 import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import withReactContent from 'sweetalert2-react-content'
+import Cookies from 'js-cookie'
 
 const Profile = () => {
 
@@ -19,12 +21,14 @@ const Profile = () => {
     const [password, setPassword] = useState('');
     const [newPass, setNewPass] = useState('');
     const [image, setImage] = useState(null);
+    const [imageValue, setImageValue] = useState(null);
+
 
 
 
     const token = cookie.get('token');
     const navigate = useNavigate();
-    const { http, sec_http } = AuthUser();
+    const { sec_http , image_upload} = AuthUser();
 
     useEffect(() => {
         if (token) {
@@ -129,32 +133,37 @@ const Profile = () => {
         }
     }
 
+    const imageSwal = withReactContent(Swal);
 
-    const updateImage = (e) => {
+    const handleChangeImage = (e) => {
+        e.preventDefault();
+        setImage(URL.createObjectURL(e.target.files[0]));
+        setImageValue(e.target.files[0].name);
+    }
+
+    const handleUpdateImage = async (e) => {
         e.preventDefault();
 
+        const imageData = new FormData();
 
-        // Swal.fir({
-        //     title: 'Upload Image',
-        //     html: `<input type="file" name="image" id="image" onChange={setImage((e) => e.target.files[0])} />`,
-        //     icon: 'success',
-        // })
-            
+        imageData.append('avatar', image);
+        imageData.append('user_id', userData.id);
+        imageData.append('user_token', Cookies.get('token'));
+        console.log(image);
+        
 
-
-        // try {
-        //     
-        // } catch (error) {
-        //     Swal.fire({
-        //         title: 'Error!',
-        //         text: error.response.data.message,
-        //         icon: <MdErrorOutline />,
-        //         showConfirmButton: false,
-        //         confirmButtonText: 'Sign up!',
-        //         showCancelButton: true,
-
-        //     })
-        // }
+        try {
+            await image_upload.post('/user/update/avatar', imageData)
+                .then((res) => {
+                    setImage(res.data.avatar);
+                })
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: error.message,
+            })
+        }
     }
 
     const deletUser = (e) => {
@@ -227,12 +236,31 @@ const Profile = () => {
                     <Navbar />
                 </div>
 
-
+                <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body modal-body-profile">
+                                <img style={{ margin: 'auto' }} src={image} alt={userData.full_name} />
+                                <input type="file" name='image' onChange={handleChangeImage} />
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onClick={handleUpdateImage} className="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className='app__profile__container'>
                     <div className='app__profile__container__left'>
-                        <div className='app__profile__container__left__img__container'>
-                            <img onClick={updateImage} className='app__profile__container__left__img' src={userData ? userData.avatar : ''} alt='profile' />
+                        <div data-toggle="modal" data-target="#exampleModalCenter" className='app__profile__container__left__img__container'>
+                            <img className='app__profile__container__left__img' src={userData ? userData.avatar : ''} alt='profile' />
                             <AiFillCamera title='Change picture' />
                         </div>
                         <h3>{userData ? userData.full_name : ''}</h3>

@@ -103,26 +103,26 @@ const Orders = () => {
 
                 <div className="orders-container">
 
-                    <div class="container">
+                    <div className="container">
                         <h2>Orders History</h2>
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                                <div class="col col-1">Order Number</div>
-                                <div class="col col-2">Website Name</div>
-                                <div class="col col-3">Total Price</div>
-                                <div class="col col-4">Order Status</div>
-                                <div class="col col-4">Order Date</div>
+                        <ul className="responsive-table">
+                            <li className="table-header">
+                                <div className="col col-1">Order Number</div>
+                                <div className="col col-2">Website Name</div>
+                                <div className="col col-3">Total Price</div>
+                                <div className="col col-4">Order Status</div>
+                                <div className="col col-4">Order Date</div>
                             </li>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
                                     <a href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`}>
 
-                                        <li class="table-row" >
-                                            <div class="col col-1" data-label="Order Number">{order.order_number}</div>
-                                            <div class="col col-2" data-label="Website Name">{order?.notes}</div>
-                                            <div class="col col-3" data-label="Total Price">{order?.grand_total ? order.grand_total + '$' : ''}</div>
+                                        <li className="table-row" >
+                                            <div className="col col-1" data-label="Order Number">{order.order_number}</div>
+                                            <div className="col col-2" data-label="Website Name">{order?.notes}</div>
+                                            <div className="col col-3" data-label="Total Price">{order?.grand_total ? order.grand_total + '$' : ''}</div>
                                             <div className={orderStatus(order.status)} data-label="Order Status">{order.status}</div>
-                                            <div class="col col-5" data-label="Order Date">{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</div>
+                                            <div className="col col-5" data-label="Order Date">{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</div>
                                         </li>
                                     </a>
 
