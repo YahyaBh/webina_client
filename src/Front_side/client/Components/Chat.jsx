@@ -144,35 +144,35 @@ class Chatpanel extends React.Component {
         //         }
         //     }
         // });
-        var new_msg = [];
-        var channel = pusher.subscribe('private-chat-' + user.id);
-        channel.bind('App\\Events\\MessageEvent', (d) => {
+        // var new_msg = [];
+        // var channel = pusher.subscribe('private-chat-' + user.id);
+        // channel.bind('App\\Events\\MessageEvent', (d) => {
 
-            //checking sent message from sender side
-            if (d.sender_id == user.id) {
-                if (this.state.active_user[0].id == d.rec_id) {
-                    //alert('you have sent message to this user.');
-                    this.setState({ msg_list: this.state.msg_list.concat(d) });
-                }
-            }
+        //     //checking sent message from sender side
+        //     if (d.sender_id == user.id) {
+        //         if (this.state.active_user[0].id == d.rec_id) {
+        //             //alert('you have sent message to this user.');
+        //             this.setState({ msg_list: this.state.msg_list.concat(d) });
+        //         }
+        //     }
 
-            //checking message has been received or not
-            if (d.sender_id != user.id) {
-                if (this.state.active_user.length != 0) {
-                    if (this.state.active_user[0].id == d.sender_id) {
-                        //alert('you have sent message to this user.');
-                        this.setState({ msg_list: this.state.msg_list.concat(d) });
-                    }
-                    else {
-                        var id_to_notify = document.getElementById('user_' + d.sender_id);
-                    }
-                }
-                else {
-                    alert('no active user, you got a new message : ' + d.message);
-                }
-            }
+        //     //checking message has been received or not
+        //     if (d.sender_id != user.id) {
+        //         if (this.state.active_user.length != 0) {
+        //             if (this.state.active_user[0].id == d.sender_id) {
+        //                 //alert('you have sent message to this user.');
+        //                 this.setState({ msg_list: this.state.msg_list.concat(d) });
+        //             }
+        //             else {
+        //                 var id_to_notify = document.getElementById('user_' + d.sender_id);
+        //             }
+        //         }
+        //         else {
+        //             alert('no active user, you got a new message : ' + d.message);
+        //         }
+        //     }
 
-        });
+        // });
     }
 
 
@@ -207,13 +207,13 @@ class Chatpanel extends React.Component {
                             <div className="card-header">{isAnyUserActive ? this.state.active_user[0].name : 'no active'}</div>
                             <div className="card-body">
                                 <ul id="chat_list" className="chat_list">
-                                    {this.state.msg_list.map((msgs) =>
+                                    {/* {this.state.msg_list.map((msgs) =>
                                         (msgs.sender_id == user.id) ?
                                             <div className="sent" id={msgs.id} key={msgs.id}>{msgs.message}</div>
                                             :
                                             <div className="replies" id={msgs.id} key={msgs.id}>{msgs.message}</div>
 
-                                    )}
+                                    )} */}
                                 </ul>
                             </div>
                             <div className="card-footer">

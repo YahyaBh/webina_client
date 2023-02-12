@@ -1,6 +1,4 @@
-import axios from 'axios';
 import cookie from 'js-cookie';
-import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';

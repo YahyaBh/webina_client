@@ -1,11 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { AiOutlineClockCircle, AiOutlineGoogle } from 'react-icons/ai';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { AiOutlineGoogle } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
-import { RiLockPasswordFill } from 'react-icons/ri';
-import { MdDone, MdErrorOutline } from 'react-icons/md';
+import { MdErrorOutline } from 'react-icons/md';
 import AuthUser from '../../AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';

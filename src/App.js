@@ -1,13 +1,11 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Admin from "./Front_side/Admin/Components/Admin";
-import Show from "./Front_side/Admin/Components/Show";
 import Services from "./Front_side/Admin/Components/Services";
 import Orders from "./Front_side/client/Components/Orders";
 import CreateWebsite from "./Front_side/Admin/Components/CreateWebsite";
-import Chat from "./Front_side/Admin/Components/Chat";
 import Users from "./Front_side/Admin/Components/Users";
 import SignIn from "./Front_side/client/Components/SignIn";
 import SignUp from "./Front_side/client/Components/SignUp";

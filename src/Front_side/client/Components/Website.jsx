@@ -1,8 +1,7 @@
 import cookie from 'js-cookie';
-import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthUser from '../../AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png';

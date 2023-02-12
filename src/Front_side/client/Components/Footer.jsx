@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import Visa from '../../../Assets/Images/Visa_Logo.png'
 import MasterCard from '../../../Assets/Images/mastercard.png'
 import AmericanExpress from '../../../Assets/Images/american-express.png'

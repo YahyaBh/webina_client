@@ -1,12 +1,10 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import { MdDone, MdErrorOutline } from 'react-icons/md';
+import { MdErrorOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
 import AuthUser from '../../AuthUser';
-import { useLayoutEffect } from 'react';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
 import { FaSignInAlt } from 'react-icons/fa';

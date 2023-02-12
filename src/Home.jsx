@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';

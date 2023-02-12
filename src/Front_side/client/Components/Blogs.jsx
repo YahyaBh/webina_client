@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser'
 import Loading from '../../../Assets/Images/WEBINA2.png'

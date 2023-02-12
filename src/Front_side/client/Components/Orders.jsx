@@ -1,16 +1,12 @@
-import cookie from 'js-cookie';
-import React from 'react'
-import { Fragment } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import AuthUser from '../../AuthUser'
-import Navbar from './Navbar';
-import Loading from '../../../Assets/Images/WEBINA2.png'
-import Cookies from 'js-cookie';
-import { BsArrowLeftShort } from 'react-icons/bs';
+import { default as cookie, default as Cookies } from 'js-cookie';
 import moment from 'moment';
+import { Fragment, useEffect, useState } from 'react';
+import { BsArrowLeftShort } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import Loading from '../../../Assets/Images/WEBINA2.png';
+import AuthUser from '../../AuthUser';
+import Navbar from './Navbar';
 const Orders = () => {
 
     const navigate = useNavigate();
@@ -72,13 +68,13 @@ const Orders = () => {
 
     const orderStatus = (status) => {
         if (status === 'completed') {
-            return 'col col-4 completed';
+            return ' col-lg-2 completed';
         } else if (status === 'pending') {
-            return 'col col-4 pending';
+            return ' col-lg-2 pending';
         } else if (status === 'processing') {
-            return 'col col-4 processing';
+            return ' col-lg-2 processing';
         } else if (status === 'decline') {
-            return 'col col-4 decline';
+            return ' col-lg-2 decline';
         }
     }
 
@@ -105,25 +101,23 @@ const Orders = () => {
 
                     <div className="container">
                         <h2>Orders History</h2>
-                        <ul className="responsive-table">
-                            <li className="table-header">
-                                <div className="col col-1">Order Number</div>
-                                <div className="col col-2">Website Name</div>
-                                <div className="col col-3">Total Price</div>
-                                <div className="col col-4">Order Status</div>
-                                <div className="col col-4">Order Date</div>
-                            </li>
+                        <div>
+
+                            <div className='header-orders row'>
+                                <h4 className='col-lg-4 col-md-12'>Order Number</h4>
+                                <h4 className='col-lg-2 col-md-12'>Website Name</h4>
+                                <h4 className='col-lg-2 col-md-12'>Total Price</h4>
+                                <h4 className='col-lg-2 col-md-12'>Order Status</h4>
+                                <h4 className='col-lg-2 col-md-12'>Order Date</h4>
+                            </div>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
-                                    <a href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`}>
-
-                                        <li className="table-row" >
-                                            <div className="col col-1" data-label="Order Number">{order.order_number}</div>
-                                            <div className="col col-2" data-label="Website Name">{order?.notes}</div>
-                                            <div className="col col-3" data-label="Total Price">{order?.grand_total ? order.grand_total + '$' : ''}</div>
-                                            <div className={orderStatus(order.status)} data-label="Order Status">{order.status}</div>
-                                            <div className="col col-5" data-label="Order Date">{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</div>
-                                        </li>
+                                    <a className="order-data-each row" href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`}>
+                                        <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
+                                        <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
+                                        <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>
+                                        <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status}</h4>
+                                        <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
                                     </a>
 
                                 ))
@@ -133,10 +127,9 @@ const Orders = () => {
                                 </div>}
 
 
-                        </ul>
+                        </div>
                     </div>
                 </div>
-
 
 
             </Fragment >

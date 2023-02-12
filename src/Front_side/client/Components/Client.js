@@ -1,14 +1,8 @@
-import React, { Fragment } from "react";
-
-import { Routes, Route, Link } from "react-router-dom";
-import { AuthContext } from "../../UserContext";
+import { Fragment } from "react";
 
 
 
 import Navbar from "./Navbar";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import Chat from "../../Admin/Components/Chat";
 
 
 

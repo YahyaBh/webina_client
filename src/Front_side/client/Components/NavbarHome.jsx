@@ -1,4 +1,3 @@
-import React from 'react'
 import './Navbar.scss'
 import Scroll from 'react-scroll-to-element';
 import AuthUser from '../../AuthUser';

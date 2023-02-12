@@ -1,6 +1,6 @@
 
 import Cookies from 'js-cookie';
-import React, { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthUser from '../../AuthUser';

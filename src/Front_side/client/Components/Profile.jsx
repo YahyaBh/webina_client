@@ -1,7 +1,6 @@
 import cookie from 'js-cookie'
-import React from 'react'
 import { useState, useEffect, Fragment } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment'
 import Navbar from './Navbar'
 import AuthUser from '../../AuthUser'

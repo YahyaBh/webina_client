@@ -1,4 +1,3 @@
-import React from 'react'
 import './Navbar.scss'
 import AuthUser from '../../AuthUser';
 import Swal from 'sweetalert2';

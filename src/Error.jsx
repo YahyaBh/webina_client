@@ -1,4 +1,3 @@
-import React from 'react'
 import Error404 from './Assets/Images/404 Error Page not Found with people connecting a plug-amico(1).svg'
 
 const Error = () => {
