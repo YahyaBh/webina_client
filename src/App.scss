@@ -2048,23 +2048,41 @@ body {
     }
 
 
-    .uploadImageButton {
+    .imageUploadContainer {
         margin-top: 10px;
-        width: 150px;
+        width: 100px;
+        height: 50px;
         max-width: 100%;
         background: rgb(var(--mid-color));
         color: rgb(var(--heavy-color));
-        border: 1px solid #555;
+        box-shadow: 0 0 10px -2px rgba(var(--heavy-color), .4);
         padding: 5px;
         border-radius: 10px;
         font-family: Louis-Bold;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer !important;
+        transition: all .2s ease;
 
-        input[type=file] {
-            color: transparent;
-            opacity: 0;
+        &:hover {
+            opacity: .7;
+            transform: scale(.98);
+            cursor: pointer;
+        }
+
+        input[type=file]::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        svg {
+            color: rgb(var(--heavy-color));
+            font-size: 80px;
+            margin-left: 13px;
+            cursor: pointer;
         }
     }
 }
@@ -2252,7 +2270,7 @@ body {
     margin-top: 208px;
     margin-right: 0;
     border-radius: 12px;
-    transition: all 1s ease;
+    transition: all .3s ease;
     opacity: 0;
 
     li {

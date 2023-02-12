@@ -128,6 +128,7 @@ const Profile = () => {
             await image_upload.post('/user/update/avatar', imageData)
                 .then((res) => {
                     setUserData({ avatar: res.data.avatar });
+                    Cookies.set('user', JSON.stringify(res.data.user), { sameSite: true });
                     window.location.reload(true)
                 })
         } catch (error) {
@@ -223,10 +224,9 @@ const Profile = () => {
                             <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
                                 <div className="modal-body modal-body-profile">
                                     <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
-
-                                    <button className='uploadImageButton'>
-                                        <input type="file" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload/>Choose Image
-                                    </button>
+                                    <div className='imageUploadContainer' >
+                                        <input type="file" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
+                                    </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>

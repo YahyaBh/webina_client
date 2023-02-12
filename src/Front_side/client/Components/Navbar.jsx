@@ -99,7 +99,7 @@ const Navbar = () => {
                         </li>
 
                         <div className="dropdown">
-                            <span><img src={userData.avatar} alt={userData.name} /></span>
+                            <span><img src={userData.avatar ? `http://localhost:8000/uploads/users/${userData.avatar}` : userData.avatar} alt={userData.name} /></span>
                             <div className="dropdown-content">
                                 <li>
                                     <a href="/profile">Profile</a>

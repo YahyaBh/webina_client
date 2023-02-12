@@ -22,8 +22,9 @@ export default function AuthUser() {
     const [user, setUser] = useState(getUser());
 
     const saveToken = (user, token) => {
-        cookie.set('token', token, { secure: true, sameSite: 'none' });
-        cookie.set('user', user, { secure: true, sameSite: 'none' });
+        cookie.set('token', token, { secure: true, sameSite: 'none', expires: 4 });
+
+        cookie.set('user', user, { secure: true, sameSite: 'none', expires: 4 });
 
         navigate('/');
     }
