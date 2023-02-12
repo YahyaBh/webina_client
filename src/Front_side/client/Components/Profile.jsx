@@ -7,6 +7,7 @@ import AuthUser from '../../AuthUser'
 import Swal from 'sweetalert2'
 import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
+import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import withReactContent from 'sweetalert2-react-content'
 import Cookies from 'js-cookie'
@@ -21,13 +22,13 @@ const Profile = () => {
     const [newPass, setNewPass] = useState('');
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState(null);
-
+    const [selected, setSelected] = useState(false);
 
 
 
     const token = cookie.get('token');
     const navigate = useNavigate();
-    const { sec_http , image_upload} = AuthUser();
+    const { sec_http, image_upload } = AuthUser();
 
     useEffect(() => {
         if (token) {
@@ -38,7 +39,6 @@ const Profile = () => {
             try {
                 sec_http.post('/user', formData)
                     .then(res => {
-
                         if (res.status === 200) {
                             setUserData(res.data.user);
                             setName(res.data.user.name);
@@ -47,26 +47,14 @@ const Profile = () => {
                             setLoader(false);
                         }
 
-                        if (res.status === 401) {
-                            setTimeout(() => {
-                                navigate('/');
-                            }, 2000);
-                            Swal.fire({
-                                title: 'Error!',
-                                text: res.data.message,
-                                icon: <MdErrorOutline />,
-                                showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
-                                showCancelButton: true,
-
-                            })
-                        }
-
                     })
             } catch (error) {
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
                 Swal.fire({
                     title: 'Error!',
-                    text: error.response.data.message,
+                    text: error.message,
                     icon: <MdErrorOutline />,
                     showConfirmButton: false,
                     confirmButtonText: 'Sign up!',
@@ -74,8 +62,7 @@ const Profile = () => {
 
                 })
             }
-        }
-        else {
+        } else {
             navigate('/')
         }
     }, [])
@@ -102,27 +89,14 @@ const Profile = () => {
                         setImage(res.data.user.avatar);
                         navigate('/')
                     }
-
-                    if (res.status === 401) {
-                        setTimeout(() => {
-                            navigate('/profile');
-                        }, 2000);
-                        Swal.fire({
-                            title: 'Error!',
-                            text: res.data.message,
-                            icon: <MdErrorOutline />,
-                            showConfirmButton: false,
-                            confirmButtonText: 'Sign up!',
-                            showCancelButton: true,
-
-                        })
-                    }
-
                 })
         } catch (error) {
+            setTimeout(() => {
+                navigate('/profile');
+            }, 2000);
             Swal.fire({
                 title: 'Error!',
-                text: error.response.data.message,
+                text: error.message,
                 icon: <MdErrorOutline />,
                 showConfirmButton: false,
                 confirmButtonText: 'Sign up!',
@@ -136,8 +110,9 @@ const Profile = () => {
 
     const handleChangeImage = (e) => {
         e.preventDefault();
-        setImage(URL.createObjectURL(e.target.files[0]));
-        setImageValue(e.target.files[0].name);
+        setImageValue(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0]);
+        setSelected(true);
     }
 
     const handleUpdateImage = async (e) => {
@@ -148,13 +123,12 @@ const Profile = () => {
         imageData.append('avatar', image);
         imageData.append('user_id', userData.id);
         imageData.append('user_token', Cookies.get('token'));
-        console.log(image);
-        
 
         try {
             await image_upload.post('/user/update/avatar', imageData)
                 .then((res) => {
-                    setImage(res.data.avatar);
+                    setUserData({ avatar: res.data.avatar });
+                    window.location.reload(true)
                 })
         } catch (error) {
             Swal.fire({
@@ -235,7 +209,9 @@ const Profile = () => {
                     <Navbar />
                 </div>
 
-                <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <img src={image} alt="" />
+
+                <div className="modal fade" id="changeImageProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -244,26 +220,32 @@ const Profile = () => {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div className="modal-body modal-body-profile">
-                                <img style={{ margin: 'auto' }} src={image} alt={userData.full_name} />
-                                <input type="file" name='image' onChange={handleChangeImage} />
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" onClick={handleUpdateImage} className="btn btn-primary">Save changes</button>
-                            </div>
+                            <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
+                                <div className="modal-body modal-body-profile">
+                                    <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
+
+                                    <button className='uploadImageButton'>
+                                        <input type="file" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload/>Choose Image
+                                    </button>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
 
                 <div className='app__profile__container'>
                     <div className='app__profile__container__left'>
-                        <div data-toggle="modal" data-target="#exampleModalCenter" className='app__profile__container__left__img__container'>
-                            <img className='app__profile__container__left__img' src={userData ? userData.avatar : ''} alt='profile' />
+                        <div data-toggle="modal" data-target="#changeImageProfile" className='app__profile__container__left__img__container'>
+                            <img className='app__profile__container__left__img' src={userData ? `http://localhost:8000/uploads/users/${userData?.avatar}` : ''} alt='profile' />
                             <AiFillCamera title='Change picture' />
                         </div>
                         <h3>{userData ? userData.full_name : ''}</h3>
-                        <h5>Created {userData ? moment(userData.created_at.split('T')[0] + ' ' + userData.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5>
+                        <h5>Created {userData ? moment(userData?.created_at?.split('T')[0] + ' ' + userData?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5>
                     </div>
                     <div className='app__profile__container__right'>
                         <div className='app__profile__container__right__form__container'>

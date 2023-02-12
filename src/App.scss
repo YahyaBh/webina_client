@@ -2046,6 +2046,27 @@ body {
         width: 200px;
         border-radius: 50%;
     }
+
+
+    .uploadImageButton {
+        margin-top: 10px;
+        width: 150px;
+        max-width: 100%;
+        background: rgb(var(--mid-color));
+        color: rgb(var(--heavy-color));
+        border: 1px solid #555;
+        padding: 5px;
+        border-radius: 10px;
+        font-family: Louis-Bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input[type=file] {
+            color: transparent;
+            opacity: 0;
+        }
+    }
 }
 
 
@@ -3294,5 +3315,35 @@ body {
             }
         }
 
+    }
+}
+
+
+
+.single-order {}
+
+.sk_bg {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: sk_bg_animation;
+    animation-timing-function: linear;
+    background: #787879;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 800px 104px;
+    position: relative;
+    width: 400px;
+    height: 300px;
+    margin: 50px;
+}
+
+
+@keyframes sk_bg_animation {
+    0% {
+        background-position: -468px 0
+    }
+
+    100% {
+        background-position: 468px 0
     }
 }

@@ -83,7 +83,7 @@ const CreditCardForm = ({ websiteData }) => {
         paymentForm.append('user_email', JSON.parse(Cookies.get('user')).email);
         paymentForm.append('user_name', JSON.parse(Cookies.get('user')).full_name);
         paymentForm.append('user_id', JSON.parse(Cookies.get('user')).id);
-
+        paymentForm.append('website_token', websiteData.token);
 
 
 
