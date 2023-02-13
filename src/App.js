@@ -24,6 +24,7 @@ import EmailVerify from "./Front_side/client/Components/EmailVerify";
 import VerifyEmail from "./Front_side/client/Components/VerifyEmail";
 import PaymentSuccess from "./Front_side/client/Components/CreditCard/PaymentSuccess";
 import Order from "./Front_side/client/Components/Order";
+import Chat from "./Front_side/client/Components/Chat";
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
         <Route exact path="/payment/:result" element={<PaymentSuccess />} />
 
 
+        <Route exact path='/chat' element={<Chat/>}/>
 
 
         <Route exact path='*' element={<Error />} />
