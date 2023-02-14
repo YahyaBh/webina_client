@@ -20,8 +20,8 @@ function GoogleCallback() {
                 return response;
             })
             .then((data) => {
-                cookie.set('token', JSON.stringify(data.data.access_token) , { secure: true, sameSite: 'none' });
-                cookie.set('user', JSON.stringify(data.data.user) , { secure: true, sameSite: 'none' });
+                cookie.set('token', JSON.stringify(data.data.access_token), { secure: true, sameSite: 'none' });
+                cookie.set('user', JSON.stringify(data.data.user), { secure: true, sameSite: 'none' });
                 setLoading(false);
                 navigate('/');
             });
@@ -35,9 +35,9 @@ function GoogleCallback() {
 
 function DisplayLoading() {
     return <div className='loading-container'>
-    <img src={Loading} alt="loading-web" />
-</div>
-    ;
+        <img src={Loading} alt="loading-web" />
+    </div>
+        ;
 }
 
 
