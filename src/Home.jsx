@@ -33,8 +33,10 @@ import { VscDebugAll } from 'react-icons/vsc'
 import { AiOutlineDeploymentUnit } from 'react-icons/ai'
 import NavbarHome from './Front_side/client/Components/NavbarHome';
 
-
 import AOS from "aos";
+import "aos/dist/aos.css";
+
+
 import AuthUser from './Front_side/AuthUser';
 import cookie from 'js-cookie';
 import Swal from 'sweetalert2';
@@ -65,6 +67,9 @@ const Home = () => {
     useEffect(() => {
 
         getTestimonials_Categories();
+        AOS.init();
+        AOS.refresh();
+
     }, [])
 
 
@@ -104,7 +109,7 @@ const Home = () => {
 
     const submitForm = function (e) {
 
-        if (name !== '' || emailInput !== '' || message !== '') {
+        if (name !== '' || emailInput !== '' || message !== '' || acceptEmail.checked !== false) {
 
             e.preventDefault();
 
@@ -169,9 +174,6 @@ const Home = () => {
     }
 
 
-    AOS.init();
-
-
     return (
         loading ?
             <div className='loading-container'>
@@ -190,8 +192,8 @@ const Home = () => {
                                 {!getToken() ?
 
                                     <div className="wrapper">
-                                        <h2>WE WEILL HELP YOU</h2>
-                                        <h1>Make Your Sales </h1>
+                                        <h2 data-aos="fade-right">WE WEILL HELP YOU</h2>
+                                        <h1 data-aos="fade-right">Make Your Sales </h1>
                                         <div className="words">
                                             <span>Easier</span>
                                             <span>Better</span>
@@ -200,10 +202,10 @@ const Home = () => {
                                         </div>
                                     </div>
                                     :
-                                    <div className="wrapper">
+                                    <div className="wrapper" data-aos="fade-right">
                                         <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
 
-                                            {userData && userData.full_name !== null  ? userData.full_name.length > 7 ?
+                                            {userData && userData.full_name !== null ? userData.full_name.length > 7 ?
                                                 `${userData.full_name.substring(0, 7)}...` : userData.full_name
                                                 : ''}
 
@@ -253,9 +255,9 @@ const Home = () => {
                                 <img src={ImageAbout} alt="about_us" width='500px' />
                             </div>
                             <div className="app__about__list">
-                                <h4><BiDollarCircle /> Best Prices In The Market</h4>
-                                <h4><BiTimeFive /> Fast Website Developing Time</h4>
-                                <h4><RiCustomerService2Line /> 24/7 Customer Services Assistance</h4>
+                                <h4 data-aos="fade-right" ><BiDollarCircle /> Best Prices In The Market</h4>
+                                <h4 data-aos="fade-right" data-aos-duration="500"><BiTimeFive /> Fast Website Developing Time</h4>
+                                <h4 data-aos="fade-right" data-aos-duration="1000"><RiCustomerService2Line /> 24/7 Customer Services Assistance</h4>
                             </div>
                         </div>
                     </section>
@@ -263,14 +265,14 @@ const Home = () => {
 
                     <section className="app__more__about">
                         <div className="app__more__about__content">
-                            <h2>More About WebIna</h2>
-                            <p>WebIna is a company that helps you make your dreams
+                            <h2 data-aos="fade-down">More About WebIna</h2>
+                            <p data-aos="fade-right">WebIna is a company that helps you make your dreams
                                 easier and build you a full appliaction for your business , you can easly choose any website
                                 from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
                             <div className='app__more__about__cards__container'>
 
 
-                                <div id="website-development" className="app__more__about__card" data-aos="fade-right">
+                                <div data-aos="fade-right" id="website-development" className="app__more__about__card">
                                     <CgWebsite /> <h3>Website Development</h3>
                                 </div>
                                 <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-development" multiline={true} disableInteractive>
@@ -278,7 +280,7 @@ const Home = () => {
                                 </ReactTooltip>
 
 
-                                <div id='website-debugging' className="app__more__about__card" data-aos="fade-right">
+                                <div data-aos="fade-right" data-aos-duration="500" id='website-debugging' className="app__more__about__card" >
                                     <VscDebugAll /> <h3>Websites Debugging</h3>
                                 </div>
                                 <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-debugging" multiline={true} disableInteractive>
@@ -287,7 +289,7 @@ const Home = () => {
                                 </ReactTooltip>
 
 
-                                <div id='website-deployment' className="app__more__about__card" data-aos="fade-right">
+                                <div data-aos="fade-right" data-aos-duration="750" id='website-deployment' className="app__more__about__card" >
                                     <AiOutlineDeploymentUnit /> <h3>Website Deployment</h3>
                                 </div>
                                 <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-deployment" multiline={true} disableInteractive>
@@ -310,7 +312,7 @@ const Home = () => {
 
                         <div className="app__categories__cards">
                             <div className="app__categories__cards__sep">
-                                <div className="app__categories__card">
+                                <div data-aos="fade-right" className="app__categories__card">
                                     <div className="app__categories__card__content">
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/e-commerce.jpg" alt="e-commerce" />
@@ -320,7 +322,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="app__categories__card">
+                                <div data-aos="fade-right" className="app__categories__card">
                                     <div className="app__categories__card__content">
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/landing.jpg" alt="landing-page" />
@@ -330,7 +332,7 @@ const Home = () => {
                                     </div>
                                 </div>
 
-                                <div className="app__categories__card">
+                                <div data-aos="fade-right" className="app__categories__card">
                                     <div className="app__categories__card__content">
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/blog.jpg" alt="blog" />
@@ -340,7 +342,7 @@ const Home = () => {
                                     </div>
                                 </div>
 
-                                <div className="app__categories__card">
+                                <div data-aos="fade-right" className="app__categories__card">
                                     <div className="app__categories__card__content">
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/portfolio.jpg" alt="portfolio" />
@@ -351,8 +353,6 @@ const Home = () => {
                                 </div>
 
 
-
-                                {/* <SwiperCategories /> */}
                             </div>
 
 
@@ -371,7 +371,7 @@ const Home = () => {
                         </div>
 
                         <div className="app__skills__cards">
-                            <div className="app__skills__card">
+                            <div data-aos="fade-down"  className="app__skills__card">
                                 <div className="app__skills__card__img">
 
 
@@ -398,7 +398,7 @@ const Home = () => {
                             </div>
 
 
-                            <div className="app__skills__card">
+                            <div data-aos="fade-down" data-aos-duration="300" className="app__skills__card">
                                 <div className="app__skills__card__img">
 
                                     <div className="flip-box">
@@ -426,7 +426,7 @@ const Home = () => {
                             </div>
 
 
-                            <div className="app__skills__card">
+                            <div data-aos="fade-down" data-aos-duration="600" className="app__skills__card">
                                 <div className="app__skills__card__img">
 
                                     <div className="flip-box">
@@ -462,7 +462,7 @@ const Home = () => {
 
                     <section className="app__testimonials" id='testimonials'>
                         <h2>People Feedbacks</h2>
-                        <div className='app__testimonials__container'>
+                        <div data-aos="zoom-in" className='app__testimonials__container'>
                             {testimonials.length > 0 ?
                                 <Swiper
                                     // loop={true}
@@ -504,11 +504,11 @@ const Home = () => {
 
                     <section className="app__contact" id='contact'>
                         <div className="app__contact__content">
-                            <div className="app__contact__title"><h2>Conatct WebIna</h2></div>
+                            <div className="app__contact__title" data-aos="fade-down"><h2>Conatct WebIna</h2></div>
                         </div>
 
                         <div className="app__contact__content__form__image">
-                            <div className="app__contact__image">
+                            <div data-aos="fade-right" className="app__contact__image">
                                 <img src={ImageContact} alt="contact" style={{ width: '700px' }} />
                             </div>
 
@@ -516,11 +516,11 @@ const Home = () => {
                             {!emailSent ?
                                 <div className="app__contact__form">
                                     <form onSubmit={submitForm}>
-                                        <input type="text" name="name" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-                                        <input type="email" name="email" placeholder="Email" onChange={(e) => setEmailInput(e.target.value)} />
-                                        <textarea placeholder="Message" name="message" onChange={(e) => setMessage(e.target.value)} ></textarea>
+                                        <input data-aos="fade-left" type="text" name="name" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+                                        <input data-aos="fade-left" data-aos-duration="200" type="email" name="email" placeholder="Email" onChange={(e) => setEmailInput(e.target.value)} />
+                                        <textarea data-aos="fade-left" data-aos-duration="300" placeholder="Message" name="message" onChange={(e) => setMessage(e.target.value)} ></textarea>
 
-                                        <label className="b-contain">
+                                        <label data-aos="fade-left" data-aos-duration="500" className="b-contain">
                                             <span>I Accept Receiving Marketing Emails</span>
                                             <input type="checkbox" name='accept_mails' onChange={(e) => setAcceptEmail(e.checked)} />
                                             <div className="b-input"></div>
