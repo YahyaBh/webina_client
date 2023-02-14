@@ -3365,3 +3365,93 @@ body {
         background-position: 468px 0
     }
 }
+
+
+.chat-container {
+
+    padding: 150px 50px;
+    width: 100%;
+    height: 90vh;
+    max-height: 90vh;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+
+    .chat-container-messages {
+        width: 100%;
+        overflow-y: scroll;
+        background-color: #1e1e1ed2;
+        flex: 1 auto;
+        height: 100%;
+        padding: 40px 40px;
+        border-radius: 10px;
+
+        .sender_message {
+
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            float: right;
+
+            p {
+                color: rgb(var(--mid-color));
+                font-family: Louis-Bold;
+                margin-bottom: 0 !important;
+                background-color: #868686;
+                padding: 10px 10px;
+                min-width: 50px;
+                text-align: right;
+                border-radius: 15px;
+            }
+        }
+
+        .reciever_message {
+            background-color: #868686;
+            max-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            padding: 10px 10px;
+            p {
+                color: #fff;
+                font-family: Louis-Bold;
+                margin-bottom: 0 !important;
+        }
+    }
+}
+
+
+    form {
+        margin-top: 5px;
+        padding: 0px 50px;
+        width: 100%;
+        background-color: #1E1E1E;
+        border-radius: 10px;
+        height: 50px;
+
+        input {
+            height: 100%;
+            width: 90%;
+            background-color: #1E1E1E;
+            color: rgb(var(--white-color));
+            outline: none;
+            border: none;
+        }
+
+        button {
+            width: 10%;
+            height: 80%;
+            background-color: #1E1E1E;
+            color: rgb(var(--mid-color));
+            font-size: 25px;
+        }
+    }
+
+}
