@@ -14,7 +14,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http, setToken } = AuthUser();
+    const { http } = AuthUser();
     const [loginUrl, setLoginUrl] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -72,15 +72,27 @@ const SignIn = () => {
         http.post('/signin', formData)
             .then(res => {
                 if (res.status === 200) {
-                    cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
-                    cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
-                    navigate("/")
-                    setEmailInput('');
-                    setPasswordInput('');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Signed in successfully'
-                    })
+                    if (res.data.admin) {
+                        cookie.set('admin', JSON.stringify(res.data.admin), { secure: true, sameSite: 'none' });
+                        cookie.set('admin_token', res.data.access_token, { secure: true, sameSite: 'none' });
+                        navigate("/admin/dashboard");
+                        setEmailInput('');
+                        setPasswordInput('');
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Welcome Back Admin!'
+                        })
+                    } else {
+                        cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
+                        cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
+                        navigate("/")
+                        setEmailInput('');
+                        setPasswordInput('');
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Signed in successfully'
+                        })
+                    }
                 }
 
             })

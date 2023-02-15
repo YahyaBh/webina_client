@@ -6,10 +6,15 @@ import Swal from 'sweetalert2';
 import { MdErrorOutline } from 'react-icons/md';
 
 export default function AuthUser() {
+
     const navigate = useNavigate();
 
     const getToken = () => {
-        return cookie.get('token');
+        if (cookie.get('token')) {
+            return cookie.get('token');
+        } else {
+            return cookie.get('admin_token');
+        }
     }
 
     const getUser = () => {
@@ -17,17 +22,15 @@ export default function AuthUser() {
     }
 
 
+    const AdminChecker = axios.post("http://localhost:8000/api/admin/check", { admin_token : getToken() , email : 'yahyabouhsine@protonmail.com' });
+
+
 
     const [token, setToken] = useState(getToken());
     const [user, setUser] = useState(getUser());
+    const [admin, setAdmin] = useState(false);
 
-    const saveToken = (user, token) => {
-        cookie.set('token', token, { secure: true, sameSite: 'none', expires: 4 });
 
-        cookie.set('user', user, { secure: true, sameSite: 'none', expires: 4 });
-
-        navigate('/');
-    }
 
     const http = axios.create({
         baseURL: "http://localhost:8000/api",
@@ -47,6 +50,15 @@ export default function AuthUser() {
         }
     }) : null;
 
+    const admin_http = cookie.get('admin_token') ? axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "admin_token": getToken()
+        }
+    }) : null;
+
     const image_upload = cookie.get('token') ? axios.create({
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -59,12 +71,14 @@ export default function AuthUser() {
 
 
     return {
-        setToken: saveToken,
         token,
         user,
         getToken,
+        AdminChecker,
+        admin,
         http,
         sec_http,
-        image_upload
+        image_upload,
+        admin_http
     }
 }

@@ -2,7 +2,6 @@ import { Fragment } from "react";
 
 import { Routes, Route } from "react-router-dom";
 
-import Admin from "./Front_side/Admin/Components/Admin";
 import Services from "./Front_side/Admin/Components/Services";
 import Orders from "./Front_side/client/Components/Orders";
 import CreateWebsite from "./Front_side/Admin/Components/CreateWebsite";
@@ -25,6 +24,7 @@ import VerifyEmail from "./Front_side/client/Components/VerifyEmail";
 import PaymentSuccess from "./Front_side/client/Components/CreditCard/PaymentSuccess";
 import Order from "./Front_side/client/Components/Order";
 import Chat from "./Front_side/client/Components/Chat";
+import Dashboard from "./Front_side/Admin/Components/Dashboard";
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
 
       <Routes>
 
-        <Route exact path='/admin' element={<Admin />} />
+        <Route exact path='/admin/dashboard' element={<Dashboard />} />
         <Route exact path='/admin/services' element={<Services />} />
         <Route exact path='/admin/orders' element={<Orders />} />
         <Route exact path='/admin/order/:id' element={<Orders />} />

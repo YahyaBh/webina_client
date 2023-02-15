@@ -3509,3 +3509,39 @@ body {
     background-color: #555;
     /* Color of the handle on hover */
 }
+
+
+.app__dashboard {
+
+    .sidebar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 30px;
+        width: 20%;
+        position: fixed;
+
+        .side-header {
+            margin-bottom: 50px;
+
+            img {
+                width: 20%;
+            }
+        }
+
+        ul {
+            list-style: none;
+
+            li {
+                width: 40px;
+            }
+
+            svg {
+                font-size: 30px;
+                margin-bottom: 30px;
+                color: rgb(var(--heavy-color));
+            }
+        }
+    }
+}

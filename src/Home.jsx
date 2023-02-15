@@ -205,8 +205,8 @@ const Home = () => {
                                     <div className="wrapper" data-aos="fade-right">
                                         <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
 
-                                            {userData && userData.full_name !== null ? userData.full_name.length > 7 ?
-                                                `${userData.full_name.substring(0, 7)}...` : userData.full_name
+                                            {userData && userData?.full_name !== null ? userData?.full_name.length > 7 ?
+                                                `${userData?.full_name.substring(0, 7)}...` : userData?.full_name
                                                 : ''}
 
                                         </span></h1>

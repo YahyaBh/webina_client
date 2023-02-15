@@ -4,14 +4,14 @@ import { BsMailbox } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'
 import { MdMiscellaneousServices } from 'react-icons/md'
 import { AiOutlineMessage } from 'react-icons/ai'
-
 import { Link } from 'react-router-dom'
+import Logo from '../../../Assets/Images/WEBINA2.png'
 
 const SideBar = () => {
     return (
         <aside className='sidebar'>
             <div className='side-header'>
-                <img src='./Images/logo.png' alt='logo' className='side-logo' />
+                <img src={Logo} alt='logo' className='side-logo' />
             </div>
 
             <div>
