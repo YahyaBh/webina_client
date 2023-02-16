@@ -68,14 +68,14 @@ const Home = () => {
 
         getTestimonials_Categories();
         AOS.init();
-        AOS.refresh();
+        AOS.refresh();        
 
     }, [])
 
 
     const getTestimonials_Categories = async () => {
 
-        await http.get('/')
+        await http.get('/homepagetesti')
             .then((res) => {
                 if (res.status === 200) {
                     setLoading(false);

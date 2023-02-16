@@ -2275,6 +2275,9 @@ body {
     align-items: center;
 
     span {
+        outline: none;
+        border: none;
+
         img {
             height: 45px;
             width: 45px;
@@ -2284,6 +2287,7 @@ body {
             cursor: pointer;
             border: 2px solid rgb(var(--mid-color));
             transition: all .2s ease;
+            outline: none;
 
             &:hover {
                 transform: scale(.9);
