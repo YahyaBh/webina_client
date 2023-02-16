@@ -22,7 +22,9 @@ export default function AuthUser() {
     }
 
 
-    const AdminChecker = axios.post("http://localhost:8000/api/admin/check", { admin_token : getToken() , email : 'yahyabouhsine@protonmail.com' });
+    const AdminChecker = () => {
+        axios.post("http://localhost:8000/api/admin/check", { admin_token: getToken(), email: 'yahyabouhsine@protonmail.com' })
+    };
 
 
 

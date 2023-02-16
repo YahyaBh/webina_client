@@ -13,8 +13,9 @@ import {
     Title,
     Tooltip,
     Legend,
+    ArcElement
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Doughnut } from 'react-chartjs-2';
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -29,43 +30,69 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    ArcElement
 );
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-        },
-    },
-};
+export
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Orders',
-            data: labels.map(() => Math.floor(Math.random() * 100)),
-            borderColor: '#ffe662',
-            backgroundColor: '#ffe662',
-        },
-        {
-            label: 'Users',
-            data: labels.map(() => Math.floor(Math.random() * 100)),
-            borderColor: '#2c2827',
-            backgroundColor: '#2c2827',
-        },
-    ],
-};
 
-function Dashboard() {
+
+    function Dashboard() {
+
+
+    const [dataDashboard, setDataDashboard] = useState([]);
+
+
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Orders',
+                data: labels.map(() => Math.floor(Math.random() * 100)),
+                borderColor: '#ffe662',
+                backgroundColor: '#ffe662',
+            },
+            {
+                label: 'Users',
+                data: labels.map(() => Math.floor(Math.random() * 100)),
+                borderColor: '#2c2827',
+                backgroundColor: '#2c2827',
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart',
+            },
+        },
+    };
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    const doughnutData = {
+        labels: ['Users with orders', 'Users without orders'],
+        datasets: [{
+            label: 'Quantity',
+            data: [dataDashboard ? 5 : dataDashboard.user_orders, dataDashboard ? 5 : dataDashboard.user_no_orders],
+            backgroundColor: ['#2c2827', '#ffe662'],
+            borderColor: ['#2c2827', '#ffe662'],
+        }]
+    }
+
+    const doughnutOptions = {
+
+    }
 
     const navigate = useNavigate();
 
@@ -76,13 +103,11 @@ function Dashboard() {
 
     useEffect(() => {
         if (Cookies.get('admin_token')) {
-            
-            AdminChecker
-            .then(res => {
-                if(res.status === 200) {
-                    setLoading(false);
-                }
-            })
+
+            AdminChecker()
+
+            setLoading(false);
+
 
         } else {
             navigate('/signin');
@@ -99,9 +124,14 @@ function Dashboard() {
 
                 <SideBar />
 
-                <div className="mt-5" style={{ width : '80%' , float: 'right' }}>
-                    <Line options={options} data={data} />;
+                <div className="dashboard-main-container">
+                    <div>
+                        <Line options={options} data={data} />;
+                    </div>
 
+                    <div>
+                        <Doughnut data={doughnutData} options={doughnutOptions}></Doughnut>
+                    </div>
                 </div>
             </div >);
 }
