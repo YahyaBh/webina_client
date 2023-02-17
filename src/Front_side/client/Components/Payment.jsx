@@ -17,7 +17,7 @@ const Payment = () => {
 
     const params = useParams();
 
-    const { http, sec_http } = AuthUser();
+    const { http, sec_http , getUser } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
@@ -36,7 +36,7 @@ const Payment = () => {
 
     const getWebsite = async () => {
         sec_http ?
-            await sec_http.get(`/website/${params.token}`)
+            await sec_http.get(`/api/website/${params.token}`)
                 .then(res => {
                     setWebsiteData(res.data.website);
                     console.log(res.data.website);
@@ -54,7 +54,7 @@ const Payment = () => {
             :
             navigate('/')
 
-        setUserData(JSON.parse(Cookies.get('user'), { SameSite: true }));
+        setUserData(getUser, { SameSite: true });
         setLoading(false);
 
     }

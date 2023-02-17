@@ -23,8 +23,7 @@ const Websites = () => {
     const navigate = useNavigate();
     const [websites, setWebsites] = useState([]);
     const [recentWebsites, setRecentWebsites] = useState([]);
-
-    const { http } = AuthUser();
+    const { http , getUser } = AuthUser();
     const [loading, setLoading] = useState(true);
 
 
@@ -32,7 +31,6 @@ const Websites = () => {
 
 
     useEffect(() => {
-
         getWebsites();
 
 
@@ -41,7 +39,7 @@ const Websites = () => {
 
     const getWebsites = async () => {
         try {
-            await http.get('/websites')
+            await http.get('/api/websites')
                 .then(res => {
                     if (res.status === 200) {
                         setWebsites(res.data.websites);
@@ -53,18 +51,18 @@ const Websites = () => {
                         })
                     }
                 })
-            await http.post('/recent/websites')
+            await http.post('/api/recent/websites')
                 .then(res => {
                     setRecentWebsites(res.data.websites);
                 })
 
-            if (cookie.get('user')) {
-                setUserData(JSON.parse(cookie.get('user')));
+            if (getUser) {
+                setUserData(getUser);
             }
             setLoading(false);
 
 
-            if (!cookie.get('token')) {
+            if (!getUser) {
                 Swal.fire({
                     title: 'Your are not logged in',
                     text: 'Please login in order continue',

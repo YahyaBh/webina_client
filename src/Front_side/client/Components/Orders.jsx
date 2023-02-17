@@ -12,15 +12,14 @@ const Orders = () => {
     const navigate = useNavigate();
     // const params = useParams();
 
-    const { sec_http } = AuthUser();
+    const { sec_http , getUser } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
     const [websites, setwebsites] = useState(null);
-    const [id, setId] = useState(1);
 
     useEffect(() => {
 
-        if (!cookie.get('token')) {
+        if (!getUser) {
             Swal.fire({
                 title: 'Your are not logged in',
                 text: 'Please login in order continue',
@@ -30,7 +29,6 @@ const Orders = () => {
             }).then(function (isConfirm) {
                 if (isConfirm) {
                     navigate('/signin');
-                    cookie.remove('token');
                 }
             });
         } else {
@@ -45,9 +43,9 @@ const Orders = () => {
 
         const userData = new FormData();
 
-        userData.append('user_token', Cookies.get('token'));
+        userData.append('user_id', getUser.id);
 
-        await sec_http.post(`/orders`, userData)
+        await sec_http.post(`/api/orders`, userData)
             .then(res => {
                 setOrders(res.data.orders);
                 setwebsites(res.data.websites);
@@ -87,7 +85,7 @@ const Orders = () => {
             :
             <Fragment>
                 <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
-                    <Navbar userData={JSON.parse(cookie.get('user'))} />
+                    <Navbar userData={getUser} />
                 </div>
 
                 <div className='arrow-back'>
@@ -112,7 +110,7 @@ const Orders = () => {
                             </div>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
-                                    <a className="order-data-each row" href={`/order/${order.order_number}/${cookie.get('token')}/${JSON.parse(cookie.get('user')).id}`}>
+                                    <a className="order-data-each row" href={`/order/${order.order_number}/${cookie.get('token')}/${getUser.id}`}>
                                         <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>

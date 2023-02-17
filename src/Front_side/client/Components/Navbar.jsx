@@ -10,22 +10,20 @@ import WebInaLogo from '../../../Assets/Images/webinai.png'
 const Navbar = () => {
 
     const navigate = useNavigate();
-    const { getToken } = AuthUser();
-    const { token } = AuthUser();
-
+    const { getUser } = AuthUser();
     const [userData, setUserData] = useState({});
 
 
     useEffect(() => {
-        if (cookie.get('token')) {
-            setUserData(JSON.parse(cookie.get('user')));
+        if (getUser) {
+            setUserData(getUser);
         }
     }, [])
 
 
     const logoutUser = (e) => {
         e.preventDefault();
-        if (token !== undefined) {
+        if (getUser !== undefined) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You will logout from this account!",
@@ -45,7 +43,7 @@ const Navbar = () => {
 
     return (
         <div>
-            {!getToken() ?
+            {!getUser ?
 
                 <nav className='m-navbar'>
                     <a href='/'>
@@ -99,7 +97,7 @@ const Navbar = () => {
                         </li>
 
                         <div className="dropdown">
-                            <span><img src={userData.avatar ? `http://localhost:8000/uploads/users/${userData.avatar}` : userData.avatar} alt={userData.name} /></span>
+                            <span><img src={getUser ? `http://localhost:8000/uploads/users/${userData.avatar}` : userData.avatar} alt={userData.name} /></span>
                             <div className="dropdown-content">
                                 <li>
                                     <a href="/profile">Profile</a>

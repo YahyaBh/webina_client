@@ -16,7 +16,7 @@ const Website = () => {
     // Get ID from URL
     const params = useParams();
 
-    const { http, sec_http } = AuthUser();
+    const { sec_http , getUser } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
@@ -26,8 +26,9 @@ const Website = () => {
 
 
     useEffect(() => {
-        if(sec_http){
-        getWebsite()
+
+        if (getUser) {
+            getWebsite()
         } else {
             navigate('/')
         }
@@ -44,7 +45,7 @@ const Website = () => {
                 Swal.fire({
                     title: 'Oops...',
                     text: 'Something went wrong!',
-                    icon : 'error'
+                    icon: 'error'
                 })
                 setTimeout(() => {
                     navigate('/websites')
@@ -99,62 +100,62 @@ const Website = () => {
                 < img src={Loading} alt="loading-web" />
             </div >
             : websiteData ?
-            <Fragment>
-                <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
-                    <Navbar userData={userData} />
-                </div>
-
-
-
-                <header className="app__signle__website__header">
-                    <div onClick={showFullImage} className="app__signle__website__image__container">
-                        <div className='image__data'>
-                            <BsImage />
-                            <h5>Show Full Image</h5>
-                        </div>
-                        <img src={websiteData.image} alt={websiteData.website_name} />
-                    </div>
-                </header>
-
-                <section className='app__single__website__details'>
-                    <h2>{websiteData.website_name}</h2>
-
-                    <h4>{websiteData.description}</h4>
-
-                    <h5>Only : {websiteData.price}$ {websiteData.old_price ? <sub><del>{websiteData.old_price}</del></sub> : ''}</h5>
-
-                    <div className='app__single__website__buttons'>
-                        <button onClick={buyWebsite}>Buy Website</button>
-                        <button onClick={findSimiliar}>Find Similiar</button>
+                <Fragment>
+                    <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
+                        <Navbar userData={userData} />
                     </div>
 
 
-                    <div className='app__single__website__spec__container'>
-                        <div className='app__single__website__spec'>
-                            <ul>
-                                {websiteData.specifications ? websiteData.specifications.split(',').map((item, index) => { return (<li key={index}>{item}</li>) }) : ''}
 
-                            </ul>
+                    <header className="app__signle__website__header">
+                        <div onClick={showFullImage} className="app__signle__website__image__container">
+                            <div className='image__data'>
+                                <BsImage />
+                                <h5>Show Full Image</h5>
+                            </div>
+                            <img src={websiteData.image} alt={websiteData.website_name} />
+                        </div>
+                    </header>
+
+                    <section className='app__single__website__details'>
+                        <h2>{websiteData.website_name}</h2>
+
+                        <h4>{websiteData.description}</h4>
+
+                        <h5>Only : {websiteData.price}$ {websiteData.old_price ? <sub><del>{websiteData.old_price}</del></sub> : ''}</h5>
+
+                        <div className='app__single__website__buttons'>
+                            <button onClick={buyWebsite}>Buy Website</button>
+                            <button onClick={findSimiliar}>Find Similiar</button>
                         </div>
 
-                        <div className="app__single__website__spec__sec">
-                            <ul>
-                                <li><Ri24HoursFill /> 24/7 Online Assistance</li>
 
-                                <li><BsBoxSeam /> Fast Delivery</li>
+                        <div className='app__single__website__spec__container'>
+                            <div className='app__single__website__spec'>
+                                <ul>
+                                    {websiteData.specifications ? websiteData.specifications.split(',').map((item, index) => { return (<li key={index}>{item}</li>) }) : ''}
 
-                                <li><BsCashStack /> Competitive Price</li>
-                            </ul>
+                                </ul>
+                            </div>
+
+                            <div className="app__single__website__spec__sec">
+                                <ul>
+                                    <li><Ri24HoursFill /> 24/7 Online Assistance</li>
+
+                                    <li><BsBoxSeam /> Fast Delivery</li>
+
+                                    <li><BsCashStack /> Competitive Price</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
 
-                <Footer />
-            </Fragment>
+                    <Footer />
+                </Fragment>
 
-            :
-            navigate('/websites')
+                :
+                navigate('/websites')
 
     )
 }

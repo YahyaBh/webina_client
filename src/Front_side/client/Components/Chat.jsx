@@ -12,15 +12,15 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
 
-    const { http } = AuthUser();
+    const { http , getUser , getToken } = AuthUser();
 
     useEffect(() => {
         document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
 
         const userData = new FormData();
 
-        userData.append('user_id', JSON.parse(Cookies.get('user')).id);
-        userData.append('user_token' , Cookies.get('token'));
+        userData.append('user_id', getUser.id);
+        userData.append('user_token' , getToken);
         userData.append('reciever_id' , '1');
 
         

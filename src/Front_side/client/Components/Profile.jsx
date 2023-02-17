@@ -30,9 +30,9 @@ const Profile = () => {
         if (getUser) {
             const formData = new FormData()
 
-            formData.append('email', JSON.parse(cookie.get('user')).email);
+            formData.append('email', getUser.email);
 
-
+            
             try {
                 sec_http.post('/user', formData)
                     .then(res => {
