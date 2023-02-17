@@ -1,7 +1,7 @@
 import cookie from 'js-cookie';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 function GoogleCallback() {
     const navigate = useNavigate();

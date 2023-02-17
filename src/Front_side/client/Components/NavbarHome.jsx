@@ -1,6 +1,6 @@
 import './Navbar.scss'
 import Scroll from 'react-scroll-to-element';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import WebInaLogo from '../../../Assets/Images/webinai.png';

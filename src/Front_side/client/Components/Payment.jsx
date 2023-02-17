@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Loading from '../../../Assets/Images/WEBINA2.png'

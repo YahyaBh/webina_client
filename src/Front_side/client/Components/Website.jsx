@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import { Fragment } from 'react';

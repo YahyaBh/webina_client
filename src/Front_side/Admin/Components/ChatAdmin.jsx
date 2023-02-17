@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import AuthUser from '../../AuthUser'
+import AuthUser from '../../context/AuthUser'
 import SideBar from './SideBar';
 
 const ChatAdmin = () => {

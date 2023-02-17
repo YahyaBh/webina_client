@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import { MdErrorOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import cookie from 'js-cookie';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
 import { FaSignInAlt } from 'react-icons/fa';
@@ -14,7 +12,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http } = AuthUser();
+    const { http, csrf , googleLink , getUser} = AuthUser();
     const [loginUrl, setLoginUrl] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -22,33 +20,16 @@ const SignIn = () => {
 
 
     useEffect(() => {
-        const token = cookie.get('token')
-        if (token) {
-            navigate('/');
-        }
 
-        http('/auth', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-            .then((response) => {
-                if (response.data.status === 'success') {
-                    setLoading(false);
-                    setLoginUrl(response.data.url);
 
-                } else {
-                    new Error('Something went wrong!')
-                }
-            })
-            .catch((error) => console.error(error));
+        
     }, []);
 
 
 
     const submitForm = async (e) => {
         e.preventDefault();
+
 
         const formData = new FormData()
 
@@ -67,51 +48,43 @@ const SignIn = () => {
             }
         })
 
+        await csrf();
 
-
-        http.post('/signin', formData)
+        await http.post('/login', formData)
             .then(res => {
-                if (res.status === 200) {
-                    if (res.data.admin) {
-                        cookie.set('admin', JSON.stringify(res.data.admin), { secure: true, sameSite: 'none' });
-                        cookie.set('admin_token', res.data.access_token, { secure: true, sameSite: 'none' });
-                        navigate("/admin/dashboard");
-                        setEmailInput('');
-                        setPasswordInput('');
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Welcome Back Admin!'
-                        })
-                    } else {
-                        cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
-                        cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
-                        navigate("/")
-                        setEmailInput('');
-                        setPasswordInput('');
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Signed in successfully'
-                        })
-                    }
+                if (res.data.admin) {
+                    navigate("/admin/dashboard");
+                    getUser();
+                    setEmailInput('');
+                    setPasswordInput('');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Welcome Back Admin!'
+                    })
+                } else {
+                    navigate("/");
+                    getUser();
+                    setEmailInput('');
+                    setPasswordInput('');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Signed in successfully'
+                    })
                 }
-
+                console.log(res.data)
             })
             .catch(err => {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Password or email is incorrect',
-                    icon: <MdErrorOutline />,
+                    text: err.message,
+                    icon: 'error',
                     showConfirmButton: false,
                     confirmButtonText: 'Sign up!',
                     showCancelButton: true,
                 })
-                setPasswordInput('');
+                // setPasswordInput('');
             })
-
-
-
     }
-
 
 
     return (
@@ -148,7 +121,7 @@ const SignIn = () => {
 
                             <button type='submit'>Sign In <FaSignInAlt /></button>
 
-                            <a className='app__google__signup' target='_top' href={loginUrl}><AiOutlineGoogle /></a>
+                            <a className='app__google__signup' target='_top' href={googleLink}><AiOutlineGoogle /></a>
 
                         </div>
                         <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>

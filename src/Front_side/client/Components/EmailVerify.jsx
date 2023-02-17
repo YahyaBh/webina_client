@@ -2,7 +2,7 @@ import cookie from 'js-cookie';
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import AuthUser from '../../AuthUser'
+import AuthUser from '../../context/AuthUser'
 
 const EmailVerify = () => {
 

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import cookie from 'js-cookie';
 import { MdErrorOutline } from 'react-icons/md';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
 import { FaSignInAlt } from 'react-icons/fa';

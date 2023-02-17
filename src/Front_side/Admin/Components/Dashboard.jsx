@@ -19,7 +19,7 @@ import { Line, Doughnut } from 'react-chartjs-2';
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import AuthUser from "../../AuthUser";
+import AuthUser from "../../context/AuthUser";
 
 
 

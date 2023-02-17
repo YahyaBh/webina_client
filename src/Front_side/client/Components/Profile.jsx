@@ -3,7 +3,7 @@ import { useState, useEffect, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment'
 import Navbar from './Navbar'
-import AuthUser from '../../AuthUser'
+import AuthUser from '../../context/AuthUser'
 import Swal from 'sweetalert2'
 import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'

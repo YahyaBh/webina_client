@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 
 

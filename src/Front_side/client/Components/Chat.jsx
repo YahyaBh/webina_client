@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import Pusher from 'pusher-js';
 import React, { Fragment, useEffect, useState } from 'react';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Navbar from '../../client/Components/Navbar'
 import { BiSend } from 'react-icons/bi';
 

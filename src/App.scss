@@ -47,8 +47,78 @@ body {
     background-color: #555;
 }
 
+.chat-with-us {
+
+    position: fixed;
+    left: 40px;
+    bottom: 50px;
+    z-index: 90;
+
+    animation: fade-right .3s linear;
+
+    @keyframes fade-right {
+        0% {
+            left: -35px;
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+            left: 40px
+        }
+    }
+
+    .chat-section {
+        background-color: rgb(var(--white-color));
+        height: 300px;
+        width: 200px;
+        margin-bottom: 25px;
+        padding: 20px;
+        border-radius: 15px;
+        transition: all .3s ease;
+    }
+
+    .chat-section-hidden {
+        height: 0px;
+        width: 200px;
+        margin-bottom: 25px;
+        padding: 20px;
+        border-radius: 15px;
+        transition: all .3s ease;
+        opacity: 0;
+    }
+
+    .float-button-chat {
+        position: absolute;
+        left: -20px;
+        bottom: 0px;
+        background-color: rgb(var(--mid-color));
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transition: all .3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px -2px grey;
+        cursor: pointer;
 
 
+        svg {
+            font-size: 30px;
+        }
+
+        &:hover {
+            bottom: 15px;
+            transform: scale(1.2);
+            background-color: rgb(var(--heavy-color));
+
+            svg {
+                color: rgb(var(--mid-color));
+            }
+        }
+    }
+}
 
 .app__header {
     width: 100%;
@@ -71,6 +141,29 @@ body {
         object-fit: cover;
         z-index: -1;
         filter: brightness(60%);
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: rgb(48, 48, 48);
+        background: linear-gradient(90deg, rgba(48, 48, 48, 1) 0%, rgba(44, 40, 39, 1) 100%);
+
+        @keyframes placeHolderShimmer {
+            0% {
+                background-position: -30vw 0
+            }
+
+            50% {
+                background-position: 20vw 0
+            }
+
+            100% {
+                background-position: 70vw 0
+            }
+        }
+
+
     }
 
     .app__video {
@@ -78,6 +171,23 @@ body {
         box-shadow: 0 0 20px -10px grey;
     }
 
+
+    .only-res {
+        display: none;
+
+        @media screen and (max-width:900px) {
+            display: block;
+        }
+    }
+
+    .only-res-title {
+        display: inline !important;
+
+
+        @media screen and (max-width:900px) {
+            display: none !important;
+        }
+    }
 
     .app__header__title {
         font-family: Louis-Bold;
@@ -96,6 +206,8 @@ body {
             color: rgb(var(--white-color));
             text-decoration: none;
         }
+
+
 
         .app__header__title__sign {
             position: relative;
@@ -555,7 +667,70 @@ body {
     }
 }
 
+.app__custom__edit {
 
+    padding: 15px 50px;
+    margin: 40px 0px;
+
+    .free-to-edit {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #freepik--background-complete--inject-10,
+    #freepik--Windows--inject-10,
+    #freepik--Plant--inject-10 {
+        transition: all 1s ease;
+    }
+
+    .move-from-top {
+        animation: movefromTop 1s ease;
+    }
+
+    .move-from-top-2 {
+        animation: movefromTop 1.5s ease;
+    }
+
+    .move-from-bottom {
+        animation: movefromBottom 1s ease;
+    }
+
+    .move-from-left {
+        animation: movefromLeft .3s ease;
+    }
+
+    @keyframes movefromTop {
+        0% {
+            transform: translateY(-40%);
+        }
+
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    @keyframes movefromLeft {
+        0% {
+            transform: translateX(-60%);
+        }
+
+        100% {
+            transform: translateX(0%);
+        }
+    }
+
+
+    @keyframes movefromBottom {
+        0% {
+            transform: translateY(150%);
+        }
+
+        100% {
+            transform: translateY(0%);
+        }
+    }
+}
 
 .app__categories {
     background: url(../public/Images/background.jpg);
@@ -1841,6 +2016,7 @@ body {
                     margin-bottom: 10px;
                     border-bottom: rgb(var(--mid-color)) 3px solid;
                     transition: all .1s ease;
+                    margin-top: 15px;
 
                     &:hover,
                     &:focus,
@@ -1866,6 +2042,7 @@ body {
                     font-family: Louis-Bold;
                     text-transform: uppercase;
                     transition: all .1s ease;
+                    margin-top: 15px;
 
                     svg {
                         margin-left: 10px;
@@ -2011,6 +2188,7 @@ body {
                     margin-bottom: 10px;
                     border-bottom: rgb(var(--mid-color)) 3px solid;
                     transition: all .1s ease;
+                    margin-top: 15px;
 
                     &:hover,
                     &:focus,
@@ -2036,6 +2214,7 @@ body {
                     font-family: Louis-Bold;
                     text-transform: uppercase;
                     transition: all .1s ease;
+                    margin-top: 15px;
 
                     &:disabled {
                         opacity: .8;

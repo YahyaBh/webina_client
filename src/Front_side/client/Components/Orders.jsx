@@ -5,7 +5,7 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loading from '../../../Assets/Images/WEBINA2.png';
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 const Orders = () => {
 

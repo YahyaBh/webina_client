@@ -1,5 +1,5 @@
 import './Navbar.scss'
-import AuthUser from '../../AuthUser';
+import AuthUser from '../../context/AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';

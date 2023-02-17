@@ -8,7 +8,7 @@ import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import AuthUser from '../../AuthUser'
+import AuthUser from '../../context/AuthUser'
 
 import Navbar from './Navbar'
 import Loading from '../../../Assets/Images/WEBINA2.png';
@@ -83,7 +83,6 @@ const Websites = () => {
             console.log(error);
         }
     }
-
     return (
         loading ?
             <div className='loading-container'>
@@ -106,8 +105,6 @@ const Websites = () => {
                             </div>
 
                             <div className='app__header__websites_container__left'>
-                                <div className='app__websites__header__right'></div>
-                                <div className='app__websites__header__right__bottom'></div>
                             </div>
                         </div>
                     </div>

@@ -28,6 +28,7 @@ import PaymentSuccess from "./Front_side/client/Components/CreditCard/PaymentSuc
 import Order from "./Front_side/client/Components/Order";
 import Chat from "./Front_side/client/Components/Chat";
 import ChatAdminUser from "./Front_side/Admin/Components/ChatAdminUser";
+import Hire from "./Front_side/client/Components/Hire";
 
 
 function App() {
@@ -56,10 +57,10 @@ function App() {
 
 
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/websites' element={<Websites/>} />
-        <Route exact path='/website/:token' element={<Website/>} />
-
-        <Route exact path='/blogs' element={<Blogs/>} />
+        <Route exact path='/websites' element={<Websites />} />
+        <Route exact path='/website/:token' element={<Website />} />
+        <Route exact path='/blogs' element={<Blogs />} />
+        <Route exact path='/hiring' element={<Hire />} />
 
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
@@ -67,15 +68,14 @@ function App() {
         <Route path="/email/verify/:email/:token" element={<VerifyEmail />} />
         <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
-
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
         <Route exact path="/order/:order_token/:user_token/:user_id" element={<Order />} />
         <Route exact path="/buy/website/:token" element={<Payment />} />
         <Route exact path="/payment/:result" element={<PaymentSuccess />} />
+        <Route exact path='/chat' element={<Chat />} />
 
 
-        <Route exact path='/chat' element={<Chat/>}/>
 
 
         <Route exact path='*' element={<Error />} />

@@ -6,7 +6,7 @@ import { useState } from "react";
 import CreditCards from '../../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
 import StripePNG from '../../../../Assets/Images/stripep.png'
 import Swal from "sweetalert2";
-import AuthUser from "../../../AuthUser";
+import AuthUser from "../../../context/AuthUser";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 const CreditCardForm = ({ websiteData }) => {
