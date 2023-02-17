@@ -51,7 +51,7 @@ const Home = () => {
     const [emailSent, setSent] = useState(false);
     const [acceptEmail, setAcceptEmail] = useState(false);
     const [loading, setLoading] = useState(true);
-    const { getToken, http } = AuthUser();
+    const { http , getUser} = AuthUser();
     const [userData, setuserData] = useState({})
     const [testimonials, setTestiomonials] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -65,6 +65,7 @@ const Home = () => {
         AOS.init();
 
         setLoading(false);
+        console.log(getUser);
 
     }, [])
 
@@ -208,7 +209,7 @@ const Home = () => {
                         <div className="app__header__content">
 
                             <div className="app__header__title">
-                                {!getToken() ?
+                                {!getUser ?
 
                                     <div className="wrapper">
 
@@ -240,7 +241,7 @@ const Home = () => {
 
 
                                 <p>We will help you make your dreams come true by <br /> making you the most professional website among the market</p>
-                                {!getToken() ?
+                                {!cookie.get('user') ?
                                     <Link to='/signup' className="app__header__title__sign">
                                         <span className="app__header__title__sign__get">GET STARTED</span>
                                         <svg width="13px" height="10px" viewBox="0 0 13 10">

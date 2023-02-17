@@ -23,19 +23,16 @@ const Profile = () => {
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState(null);
     const [selected, setSelected] = useState(false);
-
-
-
-    const token = cookie.get('token');
     const navigate = useNavigate();
-    const { sec_http, image_upload } = AuthUser();
+    const { sec_http, image_upload , getUser} = AuthUser();
 
     useEffect(() => {
-        if (token) {
+        if (getUser) {
             const formData = new FormData()
 
             formData.append('email', JSON.parse(cookie.get('user')).email);
-            formData.append('remember_token', cookie.get('token'));
+
+
             try {
                 sec_http.post('/user', formData)
                     .then(res => {
@@ -122,7 +119,6 @@ const Profile = () => {
 
         imageData.append('avatar', image);
         imageData.append('user_id', userData.id);
-        imageData.append('user_token', Cookies.get('token'));
 
         try {
             await image_upload.post('/user/update/avatar', imageData)

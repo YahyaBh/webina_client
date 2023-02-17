@@ -15,24 +15,23 @@ const NavbarHome = () => {
 
 
     const navigate = useNavigate();
-    const { getToken } = AuthUser();
-    const { token } = AuthUser();
 
     const [userData, setUserData] = useState({});
     const [isOpen, setIsOpen] = useState(false);
 
-
+    const { getUser } = AuthUser();
 
     useEffect(() => {
-        if (cookie.get('token')) {
-            setUserData(JSON.parse(cookie.get('user')));
+        if (getUser) {
+            setUserData(getUser);
+
         }
     }, [])
 
 
     const logoutUser = (e) => {
         e.preventDefault();
-        if (token !== undefined) {
+        if (getUser !== undefined) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You will logout from this account!",
@@ -66,7 +65,7 @@ const NavbarHome = () => {
 
     return (
         <div>
-            {!getToken() ?
+            {!getUser ?
 
                 <>
 

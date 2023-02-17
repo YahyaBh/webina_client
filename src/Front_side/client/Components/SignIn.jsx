@@ -12,17 +12,26 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http, csrf , googleLink , getUser} = AuthUser();
-    const [loginUrl, setLoginUrl] = useState(null);
+    const { http, csrf, googleLogin, getUser , setUser } = AuthUser();
     const [loading, setLoading] = useState(true);
-
+    const [googleURL , setGoogleURL] = useState('');
 
 
 
     useEffect(() => {
 
-
-        
+        if (getUser) {
+            navigate('/');
+        } else {
+            try {
+                googleLogin().then(res => setGoogleURL(res));
+                setLoading(false);
+            } catch (error) {
+                Swal.fire({
+                    text: error.message,
+                });
+            }
+        }
     }, []);
 
 
@@ -52,37 +61,27 @@ const SignIn = () => {
 
         await http.post('/login', formData)
             .then(res => {
-                if (res.data.admin) {
-                    navigate("/admin/dashboard");
-                    getUser();
-                    setEmailInput('');
-                    setPasswordInput('');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Welcome Back Admin!'
-                    })
-                } else {
-                    navigate("/");
-                    getUser();
-                    setEmailInput('');
-                    setPasswordInput('');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Signed in successfully'
-                    })
-                }
-                console.log(res.data)
+                console.log(res.data);
+                navigate("/");
+                setUser(res.data.user)
+                console.log(res.data);
+                setEmailInput('');
+                setPasswordInput('');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
             })
             .catch(err => {
                 Swal.fire({
                     title: 'Error!',
-                    text: err.message,
+                    text: err.response.data.message,
                     icon: 'error',
                     showConfirmButton: false,
                     confirmButtonText: 'Sign up!',
                     showCancelButton: true,
                 })
-                // setPasswordInput('');
+                setPasswordInput('');
             })
     }
 
@@ -121,7 +120,7 @@ const SignIn = () => {
 
                             <button type='submit'>Sign In <FaSignInAlt /></button>
 
-                            <a className='app__google__signup' target='_top' href={googleLink}><AiOutlineGoogle /></a>
+                            <a className='app__google__signup' target='_top' href={googleURL}><AiOutlineGoogle /></a>
 
                         </div>
                         <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>
