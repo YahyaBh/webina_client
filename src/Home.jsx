@@ -63,9 +63,7 @@ const Home = () => {
 
         getTestimonials_Categories();
         AOS.init();
-
         setLoading(false);
-        console.log(getUser);
 
     }, [])
 

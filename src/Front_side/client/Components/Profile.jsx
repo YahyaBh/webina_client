@@ -24,26 +24,38 @@ const Profile = () => {
     const [imageValue, setImageValue] = useState(null);
     const [selected, setSelected] = useState(false);
     const navigate = useNavigate();
-    const { sec_http, image_upload , getUser} = AuthUser();
+
+    const { http, sec_http, image_upload, getUser, setUser, csrf } = AuthUser();
+
 
     useEffect(() => {
         if (getUser) {
             const formData = new FormData()
 
-            formData.append('email', getUser.email);
+            formData.append('email', JSON.parse(getUser).email);
 
-            
             try {
-                sec_http.post('/user', formData)
+                csrf();
+                sec_http.post('/api/profile', formData, {
+                    withCredentials: true,
+                })
                     .then(res => {
                         if (res.status === 200) {
                             setUserData(res.data.user);
                             setName(res.data.user.name);
                             setEmail(res.data.user.email);
                             setImage(res.data.user.avatar);
+                            setUser(res.data.user);
                             setLoader(false);
                         }
 
+                    })
+                    .catch(err => {
+                        Swal.fire({
+                            icon: 'error',
+                            text: err.response.data.message,
+                            title: 'Oops...',
+                        })
                     })
             } catch (error) {
                 setTimeout(() => {
@@ -51,8 +63,8 @@ const Profile = () => {
                 }, 2000);
                 Swal.fire({
                     title: 'Error!',
-                    text: error.message,
-                    icon: <MdErrorOutline />,
+                    text: 'Something went wrong!',
+                    icon: 'error',
                     showConfirmButton: false,
                     confirmButtonText: 'Sign up!',
                     showCancelButton: true,
@@ -124,7 +136,8 @@ const Profile = () => {
             await image_upload.post('/user/update/avatar', imageData)
                 .then((res) => {
                     setUserData({ avatar: res.data.avatar });
-                    Cookies.set('user', JSON.stringify(res.data.user), { sameSite: true });
+                    // setUser(res.data.user)
+                    console.log(res.data.user)
                     window.location.reload(true)
                 })
         } catch (error) {

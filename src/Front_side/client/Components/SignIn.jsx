@@ -6,15 +6,16 @@ import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
 import { FaSignInAlt } from 'react-icons/fa';
+import axios from 'axios';
 
 const SignIn = () => {
 
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http, csrf, googleLogin, getUser , setUser } = AuthUser();
+    const { http, csrf, setAccessToken, getUser, setUser } = AuthUser();
     const [loading, setLoading] = useState(true);
-    const [googleURL , setGoogleURL] = useState('');
+    const [googleURL, setGoogleURL] = useState('');
 
 
 
@@ -24,7 +25,7 @@ const SignIn = () => {
             navigate('/');
         } else {
             try {
-                googleLogin().then(res => setGoogleURL(res));
+
                 setLoading(false);
             } catch (error) {
                 Swal.fire({
@@ -59,14 +60,13 @@ const SignIn = () => {
 
         await csrf();
 
-        await http.post('/login', formData)
+        await http.post('/api/signin', formData)
             .then(res => {
-                console.log(res.data);
                 navigate("/");
                 setUser(res.data.user)
-                console.log(res.data);
                 setEmailInput('');
                 setPasswordInput('');
+                setAccessToken(res.data.access_token)
                 Toast.fire({
                     icon: 'success',
                     title: 'Signed in successfully'
@@ -75,7 +75,7 @@ const SignIn = () => {
             .catch(err => {
                 Swal.fire({
                     title: 'Error!',
-                    text: err.response.data.message,
+                    text: err.message,
                     icon: 'error',
                     showConfirmButton: false,
                     confirmButtonText: 'Sign up!',
@@ -124,6 +124,7 @@ const SignIn = () => {
 
                         </div>
                         <p>Don't Have An Account Yet ? <a href='/signup'>Sign Up</a></p>
+                        <p>You Forgot Your Account Password ? <a href='/password-reset'>Reset Password</a></p>
 
                     </form>
 

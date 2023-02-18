@@ -1,50 +1,55 @@
 import axios from 'axios';
-import { useState } from 'react';
 import cookie from 'js-cookie';
 
-export default function AuthUser() {
-    const http = axios.create({
-        baseURL: 'http://localhost:8000',
-        withCredentials: true,
-    })
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common["Access-Control-Allow-Credentials"] = "true";
+axios.defaults.headers.common["Access-Control-Max-Age"] = "1800";
+axios.defaults.headers.common["Access-Control-Allow-Headers"] = "content-type";
+axios.defaults.headers.common["Access-Control-Allow-Methods"] = "PUT, POST, GET, DELETE, PATCH, OPTIONS";
+// axios.defaults.headers.common["Content-Type", "application/json;charset=utf-8"]; // Opening this comment will cause problems
 
-    const getUser = cookie.get('user') ? JSON.parse(cookie.get('user')) : null;
-    const setUser = (data) => { cookie.set('user', JSON.stringify(data)) }
+export default function AuthUser() {
+
+
+
+    const getUser = cookie.get('user') ? cookie.get('user') : null;
+    const setUser = (data) => { cookie.set('user', JSON.stringify(data), { sameSite: true, secure: true }) }
 
     const getToken = cookie.get('token') ? cookie.get('token') : null;
-    const setToken = (getUser) => { cookie.set('token', getUser.remember_token) }
+    const setToken = (data) => { cookie.set('token', data, { sameSite: true, secure: true }) }
 
-    const csrf = () => http.get('/sanctum/csrf-cookie');
+    const accessToken = cookie.get('access_token') ? cookie.get('access_token') : null;
+    const setAccessToken = (data) => { cookie.set('access_token', data, { sameSite: true, secure: true }) };
 
-    const sec_http = getUser && getToken ? axios.create({
-        baseURL: "http://localhost:8000/api",
-        withCredentials: true,
+
+    const http = axios.create({
+        baseURL: 'http://localhost:8000',
+    })
+
+    const csrf = async () => await http.get('/sanctum/csrf-cookie');
+
+
+    const sec_http = getUser ? axios.create({
+        baseURL: "http://localhost:8000/",
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
     }) : null;
 
-    const image_upload = getUser && getToken ? axios.create({
+    const image_upload = getUser ? axios.create({
         baseURL: "http://localhost:8000/api",
         headers: {
             'content-type': 'multipart/form-data',
-        },
-        withCredentials: true,
+        }
     }) : null;
 
-    const googleLogin = () => http('/api/auth', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    }).then((response) => {
-        if (response.data.status === 'success') {
-            return response.data.url
-        } else {
-            new Error('Something went wrong!')
-        }
-    })
-        .catch((error) => console.error(error));
+
 
     return {
-        googleLogin,
         http,
         csrf,
         sec_http,
@@ -52,6 +57,7 @@ export default function AuthUser() {
         getUser,
         setUser,
         getToken,
-        setToken
+        setToken,
+        setAccessToken
     }
 }

@@ -12,7 +12,7 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
 
-    const { http , getUser , getToken } = AuthUser();
+    const { sec_http , getUser } = AuthUser();
 
     useEffect(() => {
         document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
@@ -20,12 +20,11 @@ const Chat = () => {
         const userData = new FormData();
 
         userData.append('user_id', getUser.id);
-        userData.append('user_token' , getToken);
         userData.append('reciever_id' , '1');
 
         
 
-        http.post("/chat/messages"  , userData)
+        sec_http.post("/chat/messages"  , userData)
             .then(res => {
                 setMessages(res.data.messages);
                 document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
@@ -51,12 +50,11 @@ const Chat = () => {
         const messageData = new FormData();
 
         messageData.append("message", input);
-        messageData.append("user_id", JSON.parse(Cookies.get('user')).id);
-        messageData.append("user_token", Cookies.get('token'));
+        messageData.append("user_id", getUser.id);
         messageData.append("reciever_id", '1');
         
 
-        http.post("/chat/message", messageData)
+        sec_http.post("/api/chat/message", messageData)
             .then(res => {
                 document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
             })

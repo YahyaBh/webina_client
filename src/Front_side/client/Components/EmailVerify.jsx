@@ -6,7 +6,7 @@ import AuthUser from '../../context/AuthUser'
 
 const EmailVerify = () => {
 
-    const { http } = AuthUser();
+    const { http, setToken, setUser } = AuthUser();
     const params = useParams();
     const navigate = useNavigate();
 
@@ -19,15 +19,20 @@ const EmailVerify = () => {
 
 
     const getFetching = async () => {
-        await http.get(`/email/check-verify/${params.email}/${params.token}`)
+        await http.get(`/api/email/verify/${params.email}/${params.token}`, {
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
             .then(res => {
-                cookie.set('token', params.token , { secure: true, sameSite: 'none' });
-                cookie.set('user', JSON.stringify(res.data.user) , { secure: true, sameSite: 'none' });
+                setToken(res.data.token);
+                setUser(res.data.user);
                 navigate('/');
                 Swal.fire({
-                    icon : 'success',
-                    title : 'Email Verified',
-                    text : res.data.message
+                    icon: 'success',
+                    title: 'Email Verified',
+                    text: res.data.message
                 })
             })
             .catch(err => {

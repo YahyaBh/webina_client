@@ -5,6 +5,7 @@ import { MdErrorOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import AuthUser from '../../context/AuthUser'
 
 
 
@@ -14,30 +15,30 @@ const Logout = () => {
 
     const navigate = useNavigate();
 
+    const { csrf, sec_http } = AuthUser();
 
     useEffect(() => {
-        if (cookie.get('token')) {
-            axios.post('http://localhost:8000/api/logout')
-                .then((res) => {
-                    if (res.status === 200) {
 
-                        navigate('/');
-                        cookie.remove('token');
-                        cookie.remove('user');
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: res.data.message,
-                            icon: <MdErrorOutline />,
-                            showConfirmButton: false,
-                            confirmButtonText: 'Sign up!',
-                            showCancelButton: true,
+        csrf();
+        sec_http.post("/logout")
+            .then((res) => {
+                navigate('/');
+                cookie.remove('token');
+                cookie.remove('user');
+                cookie.remove('access_token');
+            })
+            .catch((err) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: err.data.message,
+                    icon: <MdErrorOutline />,
+                    showConfirmButton: false,
+                    confirmButtonText: 'Sign up!',
+                    showCancelButton: true,
 
-                        })
-                    }
                 })
+            })
 
-        }
     })
 
     return (

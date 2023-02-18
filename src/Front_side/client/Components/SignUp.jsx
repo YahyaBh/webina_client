@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -18,34 +18,39 @@ const SignUp = () => {
     const [verify_passwordInput, setVerPasswordInput] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const { http, getToken } = AuthUser();
+    const { http, csrf, getToken, setToken, setUser } = AuthUser();
     const [registerUrl, setRegisterUrl] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const [id, setId] = useState('');
     const [token_checker, setTokenChecker] = useState('');
 
-    useEffect(() => {
-        const token = cookie.get('token')
-        if (token) {
+    useLayoutEffect(() => {
+        if (getToken) {
             navigate('/');
         }
-        fetch('http://localhost:8000/api/auth', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
+    })
+
+
+    useEffect(() => {
+        if (registerUrl) {
+            return;
+        } else {
+            getGoogleUrl()
+        }
+    })
+
+    const getGoogleUrl = async function () {
+        await http.get('http://localhost:8000/api/auth')
             .then((response) => {
-                if (response.ok) {
+                if (response.status === 200) {
+                    setRegisterUrl(response.data.url);
                     setLoading(false);
-                    return response.json();
                 }
-                throw new Error('Something went wrong!');
             })
-            .then((data) => setRegisterUrl(data.url))
-            .catch((error) => console.error(error));
-    }, [])
+            .catch((error) => console.error(error.message));
+    }
+
 
     const submitForm = async function (e) {
         e.preventDefault();
@@ -73,17 +78,16 @@ const SignUp = () => {
             const checkEmailData = new FormData()
 
 
-            await http.post('/signup', formData)
+            await http.post('/api/signup', formData)
                 .then(res => {
                     if (res.status === 200) {
                         checkEmailData.append('email', emailInput)
-                        checkEmailData.append('token', res.data.access_token)
-
-                        http.post('/email/verification', checkEmailData)
+                        checkEmailData.append('token', res.data.token)
+                        csrf();
+                        http.post('/api/email/verifiction', checkEmailData)
                             .then(res_ver => {
                                 if (res_ver.status === 200) {
                                     setId(res.data.id);
-                                    setTokenChecker(res.data.access_token);
 
                                     Swal.fire({
                                         title: 'Registred!',
@@ -162,7 +166,7 @@ const SignUp = () => {
         checkEmail.append('email', emailInput)
 
 
-        await http.post(`/email/verify`, checkEmail)
+        await http.post(`/api/email/verifiction/check`, checkEmail)
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({
@@ -172,29 +176,29 @@ const SignUp = () => {
                         confirmButtonColor: '#ffe662',
                         confirmButtonText: "OK!",
                     })
-                    console.log(res)
-                    cookie.set('token', res.data.access_token, { secure: true, sameSite: 'none' });
-                    cookie.set('user', JSON.stringify(res.data.user), { secure: true, sameSite: 'none' });
+                    setToken(res.data.token)
+                    setUser(res.data.user)
                     navigate(`/`);
                     setFirstName('');
                     setLastName('');
                     setEmailInput('');
                     setPasswordInput('');
                     setVerPasswordInput('');
-                } else if (res.status === 401) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Email not verified',
-                        text: 'Please try to verify your email before signing up',
-                        confirmButtonText: 'I Verified it!',
-                        confirmButtonColor: '#000',
-                    })
-                        .then((result) => {
-                            if (result.isConfirmed) {
-                                checkVerification();
-                            }
-                        })
                 }
+            })
+            .catch((err) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email not verified',
+                    text: 'Please try to verify your email before signing up',
+                    confirmButtonText: 'I Verified it!',
+                    confirmButtonColor: '#000',
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            checkVerification();
+                        }
+                    })
             })
     }
 

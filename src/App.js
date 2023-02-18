@@ -23,7 +23,6 @@ import Website from "./Front_side/client/Components/Website";
 import Payment from "./Front_side/client/Components/Payment";
 import Blogs from "./Front_side/client/Components/Blogs";
 import EmailVerify from "./Front_side/client/Components/EmailVerify";
-import VerifyEmail from "./Front_side/client/Components/VerifyEmail";
 import PaymentSuccess from "./Front_side/client/Components/CreditCard/PaymentSuccess";
 import Order from "./Front_side/client/Components/Order";
 import Chat from "./Front_side/client/Components/Chat";
@@ -64,8 +63,7 @@ function App() {
 
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
-        <Route path="/email/check-verify/:email/:token" element={<EmailVerify />} />
-        <Route path="/email/verify/:email/:token" element={<VerifyEmail />} />
+        <Route path="/email/verify/:email/:token" element={<EmailVerify />} />
         <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
