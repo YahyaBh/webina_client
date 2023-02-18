@@ -19,19 +19,18 @@ const NavbarHome = () => {
     const [userData, setUserData] = useState({});
     const [isOpen, setIsOpen] = useState(false);
 
-    const { getUser } = AuthUser();
+    const { user } = AuthUser();
 
     useEffect(() => {
-        if (getUser) {
-            setUserData(getUser);
-
+        if (user) {
+            setUserData(user);
         }
     }, [])
 
 
     const logoutUser = (e) => {
         e.preventDefault();
-        if (getUser !== undefined) {
+        if (user !== undefined) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You will logout from this account!",
@@ -65,7 +64,7 @@ const NavbarHome = () => {
 
     return (
         <div>
-            {!getUser ?
+            {!user ?
 
                 <>
 
@@ -214,7 +213,7 @@ const NavbarHome = () => {
                                 </Scroll>
                             </li>
 
-                            <div className="dropdown">
+                            {/* <div className="dropdown">
                                 <span><img src={userData.avatar} alt={userData.name} /></span>
                                 <div className="dropdown-content">
                                     <li>
@@ -227,7 +226,7 @@ const NavbarHome = () => {
                                         <a href="/" onClick={logoutUser}>Log Out</a>
                                     </li>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </ul>
                     </div>

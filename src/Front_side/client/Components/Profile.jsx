@@ -10,7 +10,6 @@ import { AiFillCamera } from 'react-icons/ai'
 import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import withReactContent from 'sweetalert2-react-content'
-import Cookies from 'js-cookie'
 
 const Profile = () => {
 
@@ -36,13 +35,11 @@ const Profile = () => {
 
             try {
                 csrf();
-                sec_http.post('/api/profile', formData, {
-                    withCredentials: true,
-                })
+                sec_http.post('/api/profile', formData)
                     .then(res => {
                         if (res.status === 200) {
                             setUserData(res.data.user);
-                            setName(res.data.user.name);
+                            setName(res.data.user.full_name);
                             setEmail(res.data.user.email);
                             setImage(res.data.user.avatar);
                             setUser(res.data.user);
@@ -115,8 +112,6 @@ const Profile = () => {
         }
     }
 
-    const imageSwal = withReactContent(Swal);
-
     const handleChangeImage = (e) => {
         e.preventDefault();
         setImageValue(URL.createObjectURL(e.target.files[0]));
@@ -136,8 +131,7 @@ const Profile = () => {
             await image_upload.post('/user/update/avatar', imageData)
                 .then((res) => {
                     setUserData({ avatar: res.data.avatar });
-                    // setUser(res.data.user)
-                    console.log(res.data.user)
+                    setUser(res.data.user);
                     window.location.reload(true)
                 })
         } catch (error) {
@@ -219,8 +213,6 @@ const Profile = () => {
                     <Navbar />
                 </div>
 
-                <img src={image} alt="" />
-
                 <div className="modal fade" id="changeImageProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
@@ -283,9 +275,5 @@ const Profile = () => {
     )
 }
 
-
-const ImageUpdating = () => {
-    <p>Welcome to Sweet Alert and React</p>
-}
 
 export default Profile

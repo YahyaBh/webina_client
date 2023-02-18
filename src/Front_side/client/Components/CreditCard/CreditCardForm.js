@@ -103,7 +103,7 @@ const CreditCardForm = ({ websiteData }) => {
                         title: 'Thank you for your purchase',
                         text: res.data.message,
                     })
-                    Cookies.set('checkout', 'true' , { SameSite: true });
+                    Cookies.set('checkout', 'true' , { sameSite: 'Lax' });
                     setLoadoingchckout(false);
                     window.location.replace(res.data.url);
                 })
@@ -113,7 +113,7 @@ const CreditCardForm = ({ websiteData }) => {
                         title: 'Oops...',
                         text: err.response.data.message,
                     })
-                    Cookies.set('checkout', 'false' , { SameSite: true });
+                    Cookies.set('checkout', 'false' , { sameSite: 'Lax' });
                     setLoadoingchckout(false);
                     window.location.replace(err.data.url);
                 })

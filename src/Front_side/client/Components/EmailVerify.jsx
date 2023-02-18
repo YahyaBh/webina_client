@@ -1,8 +1,8 @@
-import cookie from 'js-cookie';
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthUser from '../../context/AuthUser'
+import Loading from '../../../Assets/Images/WEBINA2.png'
 
 const EmailVerify = () => {
 
@@ -41,7 +41,9 @@ const EmailVerify = () => {
     }
 
     return (
-        <div>Loading...</div>
+        <div className='loading-container'>
+            <img src={Loading} alt="loading-web" />
+        </div>
     )
 }
 

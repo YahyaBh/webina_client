@@ -22,7 +22,7 @@ import Swal from 'sweetalert2';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import { useInView } from 'react-intersection-observer';
-
+import Scroll from 'react-scroll-to-element';
 
 
 
@@ -51,7 +51,7 @@ const Home = () => {
     const [emailSent, setSent] = useState(false);
     const [acceptEmail, setAcceptEmail] = useState(false);
     const [loading, setLoading] = useState(true);
-    const { http , getUser} = AuthUser();
+    const { http, getUser } = AuthUser();
     const [userData, setuserData] = useState({})
     const [testimonials, setTestiomonials] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -187,9 +187,15 @@ const Home = () => {
             <div>
                 <section className='chat-with-us'>
                     <div className={chatShown ? 'chat-section' : 'chat-section-hidden'}>
-                        Hello There ,
-                        <br />
-                        How We Can Help You?
+                        <div className='text-chat-with-us'>
+                            How We Can Help You?
+                            Having A Problem ?
+                        </div>
+
+                        <div className='chat-withus-live'>
+                            <button onClick={showChatSection}>LIVE CHAT</button>
+                            <button onClick={showChatSection}><Scroll type="id" element="contact" offset={-100} timeout={100}>CONTACT US</Scroll></button>
+                        </div>
                     </div>
                     <div onClick={showChatSection} className='float-button-chat'>
 

@@ -54,7 +54,7 @@ const Payment = () => {
             :
             navigate('/')
 
-        setUserData(getUser, { SameSite: true });
+        setUserData(getUser, { sameSite: 'Lax' });
         setLoading(false);
 
     }

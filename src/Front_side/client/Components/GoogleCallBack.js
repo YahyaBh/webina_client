@@ -6,9 +6,8 @@ import Loading from '../../../Assets/Images/WEBINA2.png'
 function GoogleCallback() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
     const location = useLocation();
-    const { http } = AuthUser();
+    const { http, setUser, setToken } = AuthUser();
     useEffect(() => {
         http(`/auth/callback${location.search}`, {
             headers: {
@@ -20,13 +19,13 @@ function GoogleCallback() {
                 return response;
             })
             .then((data) => {
-                cookie.set('token', JSON.stringify(data.data.access_token), { secure: true, sameSite: 'none' });
-                cookie.set('user', JSON.stringify(data.data.user), { secure: true, sameSite: 'none' });
+                setToken(data.data.access_token);
+                setUser(data.data.user);
                 setLoading(false);
                 navigate('/');
             });
 
-    }, []);
+    });
 
     if (loading) {
         return <DisplayLoading />

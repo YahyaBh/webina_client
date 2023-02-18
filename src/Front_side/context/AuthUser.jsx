@@ -1,5 +1,6 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
+import { useState } from 'react';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -16,14 +17,17 @@ export default function AuthUser() {
 
 
 
-    const getUser = cookie.get('user') ? cookie.get('user') : null;
-    const setUser = (data) => { cookie.set('user', JSON.stringify(data), { sameSite: true, secure: true }) }
+    const getUser = cookie.get('user') ? (cookie.get('user')) : null;
+    const setUser = (data) => { cookie.set('user', JSON.stringify(data), { sameSite: 'Lax', secure: true }) }
+
+    const [user , setuser] = useState(getUser ? JSON.parse(getUser) : null);
+
 
     const getToken = cookie.get('token') ? cookie.get('token') : null;
-    const setToken = (data) => { cookie.set('token', data, { sameSite: true, secure: true }) }
+    const setToken = (data) => { cookie.set('token', data, { sameSite: 'Lax', secure: true }) }
 
     const accessToken = cookie.get('access_token') ? cookie.get('access_token') : null;
-    const setAccessToken = (data) => { cookie.set('access_token', data, { sameSite: true, secure: true }) };
+    const setAccessToken = (data) => { cookie.set('access_token', data, { sameSite: 'Lax', secure: true }) };
 
 
     const http = axios.create({
@@ -44,6 +48,7 @@ export default function AuthUser() {
         baseURL: "http://localhost:8000/api",
         headers: {
             'content-type': 'multipart/form-data',
+            'Authorization': `Bearer ${accessToken}`
         }
     }) : null;
 
@@ -54,6 +59,7 @@ export default function AuthUser() {
         csrf,
         sec_http,
         image_upload,
+        user,
         getUser,
         setUser,
         getToken,
