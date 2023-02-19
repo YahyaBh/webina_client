@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
 import { TbBrandJavascript } from 'react-icons/tb';
@@ -51,8 +51,7 @@ const Home = () => {
     const [emailSent, setSent] = useState(false);
     const [acceptEmail, setAcceptEmail] = useState(false);
     const [loading, setLoading] = useState(true);
-    const { http, getUser } = AuthUser();
-    const [userData, setuserData] = useState({})
+    const { http, getUser, user } = AuthUser();
     const [testimonials, setTestiomonials] = useState([]);
     const [categories, setCategories] = useState([]);
     const [chatShown, setChatShown] = useState(false);
@@ -63,44 +62,33 @@ const Home = () => {
 
         getTestimonials_Categories();
         AOS.init();
-        setLoading(false);
 
     }, [])
 
 
     const getTestimonials_Categories = async () => {
 
-        // await http.get('/homepagetesti')
-        //     .then((res) => {
-        //         if (res.status === 200) {
-        //             setLoading(false);
-        //             setTestiomonials(res.data.testimonials);
-        //             setCategories(res.data.categories);
-
-        //         } else {
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'Oops...',
-        //                 text: 'Something went wrong!',
-        //             })
-        //                 .then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         navigate('/');
-        //                     }
-        //                 })
-        //         }
-        //     })
+        await http.get('/api/homepagetesti')
+            .then((res) => {
+                if (res.status === 200) {
+                    setLoading(false);
+                    setTestiomonials(res.data.testimonials);
+                    setCategories(res.data.categories);
+                    setLoading(false);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                navigate('/');
+                            }
+                        })
+                }
+            })
     }
-
-    useLayoutEffect(() => {
-
-        const user = cookie.get('user');
-
-        if (user !== undefined && user !== null && user !== '') {
-            setuserData(JSON.parse(user));
-        }
-    }, [])
-
 
     const submitForm = function (e) {
 
@@ -180,7 +168,7 @@ const Home = () => {
 
     return (
         loading ?
-            <Loading/>
+            <Loading />
             :
             <div>
                 <section className='chat-with-us'>
@@ -191,7 +179,7 @@ const Home = () => {
                         </div>
 
                         <div className='chat-withus-live'>
-                            <button onClick={showChatSection}>LIVE CHAT</button>
+                            <button onClick={showChatSection}><a href='/chat'>LIVE CHAT</a></button>
                             <button onClick={showChatSection}><Scroll type="id" element="contact" offset={-100} timeout={100}>CONTACT US</Scroll></button>
                         </div>
                     </div>
@@ -205,7 +193,7 @@ const Home = () => {
                     <header className="app__header" id="home">
 
 
-                        <NavbarHome userData={userData} />
+                        <NavbarHome userData={user} />
 
 
                         <div className="app__header__content">
@@ -232,8 +220,8 @@ const Home = () => {
                                     <div className="wrapper" data-aos="fade-right">
                                         <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
 
-                                            {userData && userData?.full_name !== null ? userData?.full_name.length > 7 ?
-                                                `${userData?.full_name.substring(0, 7)}...` : userData?.full_name
+                                            {user && user?.full_name !== null ? user?.full_name.length > 7 ?
+                                                `${user?.full_name.substring(0, 7)}...` : user?.full_name
                                                 : ''}
 
                                         </span></h1>

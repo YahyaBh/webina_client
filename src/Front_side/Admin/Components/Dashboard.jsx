@@ -1,5 +1,3 @@
-import React, { Fragment } from "react";
-
 import { useNavigate } from "react-router-dom";
 import SideBar from "./SideBar";
 import LoadingIMG from './../../../Assets/Images/WEBINA2.png'
@@ -17,7 +15,6 @@ import {
 } from 'chart.js';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { useEffect } from "react";
-import Cookies from "js-cookie";
 import { useState } from "react";
 import AuthUser from "../../context/AuthUser";
 
@@ -108,7 +105,7 @@ export
 
 
     const getDashboardData = async () => {
-        admin_http.post('/admin/dashboard')
+        admin_http.post('/api/admin/dashboard')
             .then(res => {
                 setLoading(false);
                 setordersNum(res.data.orders);

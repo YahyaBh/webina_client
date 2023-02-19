@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import cookie from 'js-cookie';
 import { MdErrorOutline } from 'react-icons/md';
 import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
@@ -18,12 +17,11 @@ const SignUp = () => {
     const [verify_passwordInput, setVerPasswordInput] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const { http, csrf, getToken, setToken, setUser } = AuthUser();
+    const { http, csrf, getToken, setToken, setUser, setAccessToken, setAdmin } = AuthUser();
     const [registerUrl, setRegisterUrl] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const [id, setId] = useState('');
-    const [token_checker, setTokenChecker] = useState('');
 
     useLayoutEffect(() => {
         if (getToken) {
@@ -169,6 +167,17 @@ const SignUp = () => {
         await http.post(`/api/email/verifiction/check`, checkEmail)
             .then(res => {
                 if (res.status === 200) {
+                    if (res.data.user.role === 'admin') {
+                        setAccessToken(res.data.access_token);
+                        setAdmin(res.data.user);
+                        navigate(`/admin/dashboard`);
+
+                    } else {
+                        setAccessToken(res.data.token)
+                        setUser(res.data.user);
+                        navigate(`/`);
+                    }
+
                     Swal.fire({
                         title: 'Welcome To WebIna!',
                         icon: "success",
@@ -176,9 +185,6 @@ const SignUp = () => {
                         confirmButtonColor: '#ffe662',
                         confirmButtonText: "OK!",
                     })
-                    setToken(res.data.token)
-                    setUser(res.data.user)
-                    navigate(`/`);
                     setFirstName('');
                     setLastName('');
                     setEmailInput('');

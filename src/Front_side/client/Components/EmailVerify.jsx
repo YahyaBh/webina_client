@@ -6,7 +6,7 @@ import Loading from '../../../Assets/Images/WEBINA2.png'
 
 const EmailVerify = () => {
 
-    const { http, setToken, setUser } = AuthUser();
+    const { http, setToken, setAdmin, setAccessToken, setUser } = AuthUser();
     const params = useParams();
     const navigate = useNavigate();
 
@@ -26,9 +26,14 @@ const EmailVerify = () => {
             }
         })
             .then(res => {
+                if (res.data.user.role === 'admin') {
+                    navigate('/admin/dashboard', { replace: true });
+                    setAdmin(res.data.user);
+                } else {
+                    setUser(res.data.user);
+                }
                 setToken(res.data.token);
-                setUser(res.data.user);
-                navigate('/');
+                setAccessToken(res.data.token);
                 Swal.fire({
                     icon: 'success',
                     title: 'Email Verified',
@@ -36,7 +41,16 @@ const EmailVerify = () => {
                 })
             })
             .catch(err => {
-                console.log(err.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong',
+                    text: err.message
+                })
+                    .then(res => {
+                        if (res.isConfirmed) {
+                            navigate('/signin', { replace: true });
+                        }
+                    })
             })
     }
 

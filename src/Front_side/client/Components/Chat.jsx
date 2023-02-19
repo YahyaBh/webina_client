@@ -1,9 +1,11 @@
 import Cookies from 'js-cookie';
 import Pusher from 'pusher-js';
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import AuthUser from '../../context/AuthUser';
 import Navbar from '../../client/Components/Navbar'
 import { BiSend } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Chat = () => {
@@ -12,39 +14,48 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
 
-    const { sec_http , getUser } = AuthUser();
+    const { sec_http, getUser, user } = AuthUser();
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
 
-        const userData = new FormData();
+        if (getUser) {
 
-        userData.append('user_id', getUser.id);
-        userData.append('reciever_id' , '1');
+            document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
 
-        
+            const userData = new FormData();
 
-        sec_http.post("/chat/messages"  , userData)
-            .then(res => {
-                setMessages(res.data.messages);
-                document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
-            })
+            userData.append('user_id', user.id);
+            userData.append('reciever_id', '1');
 
-        const pusher = new Pusher("56c79e77998c0788fbe2", {
-            cluster: "eu",
-            encrypted: true
-        });
+            sec_http.post("/api/chat/messages", userData)
+                .then(res => {
+                    setMessages(res.data.messages);
+                    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+                })
 
-        const channel = pusher.subscribe("WebIna");
-        channel.bind('user-message', function (data) {
-            setMessages(data.message);
-        });
+            const pusher = new Pusher("56c79e77998c0788fbe2", {
+                cluster: "eu",
+                encrypted: true
+            });
+
+            const channel = pusher.subscribe("WebIna");
+            channel.bind('user-message', function (data) {
+                setMessages(data.message);
+            });
+
+        } else {
+            navigate('/signin', { replace: true });
+        }
     }, []);
 
 
     const handleSubmit = async e => {
+        if(input.length > 0) {
+        
         e.preventDefault();
-
 
 
         const messageData = new FormData();
@@ -52,16 +63,29 @@ const Chat = () => {
         messageData.append("message", input);
         messageData.append("user_id", getUser.id);
         messageData.append("reciever_id", '1');
-        
+
+        setInput("");
 
         sec_http.post("/api/chat/message", messageData)
             .then(res => {
                 document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
             })
-        setInput("");
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.response.data.message,
+                })
+            })
 
 
-
+        } else {
+            Swal.fire({
+                icon : 'info',
+                text : 'Please enter a message',
+                title : 'Oops...',
+            })
+        }
 
 
     };
@@ -86,7 +110,7 @@ const Chat = () => {
 
                 <form onSubmit={handleSubmit} >
                     <input type="text" value={input} placeholder='message' onChange={e => setInput(e.target.value)} />
-                    <button type="submit"><BiSend/></button>
+                    <button type="submit"><BiSend /></button>
                 </form>
             </div>
 

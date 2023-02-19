@@ -64,7 +64,6 @@ function App() {
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route path="/email/verify/:email/:token" element={<EmailVerify />} />
-        <Route exact path="/logout" element={<Logout />} />
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
@@ -72,6 +71,7 @@ function App() {
         <Route exact path="/buy/website/:token" element={<Payment />} />
         <Route exact path="/payment/:result" element={<PaymentSuccess />} />
         <Route exact path='/chat' element={<Chat />} />
+        <Route exact path="/logout" element={<Logout />} />
 
 
 

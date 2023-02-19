@@ -1,7 +1,5 @@
-import axios from 'axios'
 import cookie from 'js-cookie'
 import { useEffect } from 'react'
-import { MdErrorOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import Loading from '../../../Assets/Images/WEBINA2.png';
@@ -15,30 +13,59 @@ const Logout = () => {
 
     const navigate = useNavigate();
 
-    const { csrf, sec_http } = AuthUser();
+    const { csrf, sec_http, admin_http, user, admin } = AuthUser();
 
     useEffect(() => {
 
-        csrf();
-        sec_http.post("/logout")
-            .then((res) => {
-                navigate('/');
-                cookie.remove('token');
-                cookie.remove('user');
-                cookie.remove('access_token');
-            })
-            .catch((err) => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: err.data.message,
-                    icon: <MdErrorOutline />,
-                    showConfirmButton: false,
-                    confirmButtonText: 'Sign up!',
-                    showCancelButton: true,
 
+        if (user) {
+            csrf();
+            sec_http.post("/logout")
+                .then((res) => {
+                    cookie.remove('__ADMINISTRAOT_DATA');
+                    cookie.remove('__USER_DATA');
+                    cookie.remove('TOKEN_');
+                    cookie.remove('__ACCESS_TOKEN');
+                    navigate('/');
                 })
-            })
+                .catch((err) => {
+                    console.log(err);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: err.data.message,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        confirmButtonText: 'Sign up!',
+                        showCancelButton: true,
 
+                    })
+                })
+        } else if (admin) {
+            csrf();
+            admin_http.post("/logout")
+                .then((res) => {
+                    cookie.remove('__ADMINISTRAOT_DATA');
+                    cookie.remove('__USER_DATA');
+                    cookie.remove('TOKEN_');
+                    cookie.remove('__ACCESS_TOKEN');
+                    navigate('/');
+                })
+                .catch((err) => {
+                    console.log(err);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: err.data.message,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        confirmButtonText: 'Sign up!',
+                        showCancelButton: true,
+
+                    })
+                })
+        }
+        else {
+            navigate('/signin');
+        }
     })
 
     return (

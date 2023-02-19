@@ -11,27 +11,26 @@ axios.defaults.headers.common["Access-Control-Allow-Credentials"] = "true";
 axios.defaults.headers.common["Access-Control-Max-Age"] = "1800";
 axios.defaults.headers.common["Access-Control-Allow-Headers"] = "content-type";
 axios.defaults.headers.common["Access-Control-Allow-Methods"] = "PUT, POST, GET, DELETE, PATCH, OPTIONS";
-// axios.defaults.headers.common["Content-Type", "application/json;charset=utf-8"]; // Opening this comment will cause problems
 
 export default function AuthUser() {
 
-    const getAdmin = cookie.get('admin') ? cookie.get('admin') : null;
-    const setAdmin = (data) => { cookie.set('admin', JSON.stringify(data), { sameSite: 'Lax', secure: true }) }
+    const getAdmin = cookie.get('__ADMINISTRAOT_DATA') ? cookie.get('__ADMINISTRAOT_DATA') : null;
+    const setAdmin = (data) => { cookie.set('__ADMINISTRAOT_DATA', JSON.stringify(data), { sameSite: 'Lax', secure: true, expires: 3 }) }
 
 
-    const getUser = cookie.get('user') ? (cookie.get('user')) : null;
-    const setUser = (data) => { cookie.set('user', JSON.stringify(data), { sameSite: 'Lax', secure: true }) }
+    const getUser = cookie.get('__USER_DATA') ? (cookie.get('__USER_DATA')) : null;
+    const setUser = (data) => { cookie.set('__USER_DATA', JSON.stringify(data), { sameSite: 'Lax', secure: true, expires: 3 }) }
 
     const [user, setuser] = useState(getUser ? JSON.parse(getUser) : null);
     const [admin, setuseradmin] = useState(getAdmin ? JSON.parse(getAdmin) : null);
 
 
 
-    const getToken = cookie.get('token') ? cookie.get('token') : null;
-    const setToken = (data) => { cookie.set('token', data, { sameSite: 'Lax', secure: true }) }
+    const getToken = cookie.get('TOKEN_') ? cookie.get('TOKEN_') : null;
+    const setToken = (data) => { cookie.set('TOKEN_', data, { sameSite: 'Lax', secure: true, expires: 3 }) }
 
-    const accessToken = cookie.get('access_token') ? cookie.get('access_token') : null;
-    const setAccessToken = (data) => { cookie.set('access_token', data, { sameSite: 'Lax', secure: true }) };
+    const accessToken = cookie.get('__ACCESS_TOKEN') ? cookie.get('__ACCESS_TOKEN') : null;
+    const setAccessToken = (data) => { cookie.set('__ACCESS_TOKEN', data, { sameSite: 'Lax', secure: true, expires: 3 }) };
 
 
     const http = axios.create({
@@ -48,7 +47,7 @@ export default function AuthUser() {
         }
     }) : null;
 
-    const image_upload = getUser ? axios.create({
+    const image_upload = getUser || getAdmin ? axios.create({
         baseURL: "http://localhost:8000/api",
         headers: {
             'content-type': 'multipart/form-data',
@@ -57,7 +56,7 @@ export default function AuthUser() {
     }) : null;
 
     const admin_http = getAdmin ? axios.create({
-        baseURL: "http://localhost:8000/api",
+        baseURL: "http://localhost:8000/",
         headers: {
             'content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
