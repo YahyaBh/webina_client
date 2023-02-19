@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import 'react-credit-cards/es/styles-compiled.css';
 import Cards from 'react-credit-cards';
@@ -11,17 +11,23 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 const CreditCardForm = ({ websiteData }) => {
 
+    const { sec_http, user } = AuthUser();
+
+
     const [number, setNumber] = useState('');
-    const [name, setName] = useState('');
+    const [name, setName] = useState(user.full_name);
     const [expiry, setExpiry] = useState('');
     const [cvc, setCvc] = useState('');
     const [focus, setFocus] = useState('');
 
     const [loadoingchckout, setLoadoingchckout] = useState(false);
 
-    const { sec_http } = AuthUser();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log(user);
+
+    }, [])
 
 
     const formatString = (e) => {
@@ -64,7 +70,7 @@ const CreditCardForm = ({ websiteData }) => {
                     icon: 'no-border'
                 },
                 showConfirmButton: false,
-                background : '#f1f2f3'
+                background: '#f1f2f3'
             })
         }
 
@@ -96,14 +102,14 @@ const CreditCardForm = ({ websiteData }) => {
             })
         } else {
 
-            await sec_http.post('/checkout', paymentForm)
+            await sec_http.post('/api/checkout', paymentForm)
                 .then(res => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Thank you for your purchase',
                         text: res.data.message,
                     })
-                    Cookies.set('checkout', 'true' , { sameSite: 'Lax' });
+                    Cookies.set('checkout', 'true', { sameSite: 'Lax' });
                     setLoadoingchckout(false);
                     window.location.replace(res.data.url);
                 })
@@ -113,7 +119,7 @@ const CreditCardForm = ({ websiteData }) => {
                         title: 'Oops...',
                         text: err.response.data.message,
                     })
-                    Cookies.set('checkout', 'false' , { sameSite: 'Lax' });
+                    Cookies.set('checkout', 'false', { sameSite: 'Lax' });
                     setLoadoingchckout(false);
                     window.location.replace(err.data.url);
                 })
@@ -142,7 +148,7 @@ const CreditCardForm = ({ websiteData }) => {
                     <input
                         type="tel"
                         name="name"
-                        val={name}
+                        value={name}
                         placeholder={"Enter Name"}
                         onChange={e => setName(e.target.value)}
                         onFocus={e => setFocus(e.target.name)}
@@ -155,7 +161,7 @@ const CreditCardForm = ({ websiteData }) => {
                         max='16'
                         type="tel"
                         name="number"
-                        val={number}
+                        value={number}
                         placeholder={"Enter Number"}
                         onChange={e => setNumber(e.target.value)}
                         onFocus={e => setFocus(e.target.name)}
@@ -169,9 +175,9 @@ const CreditCardForm = ({ websiteData }) => {
                         <input
                             type="tel"
                             name="expiry"
-                            val={expiry}
+                            value={expiry}
                             placeholder={"Enter Expiry date"}
-                            onKeyUp={e => formatString(e)}
+                            onChange={e => formatString(e)}
                             onFocus={e => setFocus(e.target.name)}
                             maxLength='5'
                             max='1228'
@@ -180,7 +186,7 @@ const CreditCardForm = ({ websiteData }) => {
                         <input
                             type="tel"
                             name="cvc"
-                            val={cvc}
+                            value={cvc}
                             placeholder={"CVC"}
                             onChange={e => setCvc(e.target.value)}
                             onFocus={e => setFocus(e.target.name)}

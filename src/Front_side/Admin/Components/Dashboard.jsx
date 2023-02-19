@@ -42,7 +42,9 @@ export
     function Dashboard() {
 
 
-    const [dataDashboard, setDataDashboard] = useState([]);
+    const [orders_num, setordersNum] = useState(1);
+    const [users_num, setusersNum] = useState(1);
+
 
 
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -51,13 +53,13 @@ export
         datasets: [
             {
                 label: 'Orders',
-                data: labels.map(() => Math.floor(Math.random() * 100)),
+                data: [orders_num],
                 borderColor: '#ffe662',
                 backgroundColor: '#ffe662',
             },
             {
                 label: 'Users',
-                data: labels.map(() => Math.floor(Math.random() * 100)),
+                data: [users_num],
                 borderColor: '#2c2827',
                 backgroundColor: '#2c2827',
             },
@@ -84,35 +86,38 @@ export
         labels: ['Users with orders', 'Users without orders'],
         datasets: [{
             label: 'Quantity',
-            data: [dataDashboard ? 5 : dataDashboard.user_orders, dataDashboard ? 5 : dataDashboard.user_no_orders],
+            data: [orders_num, users_num],
             backgroundColor: ['#2c2827', '#ffe662'],
             borderColor: ['#2c2827', '#ffe662'],
         }]
-    }
-
-    const doughnutOptions = {
-
     }
 
     const navigate = useNavigate();
 
     const [Loading, setLoading] = useState(true);
 
-
-    const { AdminChecker } = AuthUser();
+    const { admin, admin_http } = AuthUser();
 
     useEffect(() => {
-        if (Cookies.get('admin_token')) {
-
-            AdminChecker()
-
-            setLoading(false);
-
-
+        if (admin) {
+            getDashboardData();
         } else {
             navigate('/signin');
         }
     }, [])
+
+
+    const getDashboardData = async () => {
+        admin_http.post('/admin/dashboard')
+            .then(res => {
+                setLoading(false);
+                setordersNum(res.data.orders);
+                setusersNum(res.data.users);
+            })
+            .catch(err => {
+                console.log(err.response.data.message)
+            })
+    }
 
     return (
         Loading ?
@@ -130,7 +135,7 @@ export
                     </div>
 
                     <div>
-                        <Doughnut data={doughnutData} options={doughnutOptions}></Doughnut>
+                        <Doughnut data={doughnutData}></Doughnut>
                     </div>
                 </div>
             </div >);

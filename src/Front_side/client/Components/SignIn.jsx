@@ -13,7 +13,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http, csrf, setAccessToken, getUser, setUser } = AuthUser();
+    const { http, csrf, setAccessToken, getUser, setUser , setAdmin } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [googleURL, setGoogleURL] = useState('');
 
@@ -62,11 +62,19 @@ const SignIn = () => {
 
         await http.post('/api/signin', formData)
             .then(res => {
-                navigate("/");
-                setUser(res.data.user)
+
+                if (res.data.user.role === 'admin') {
+                    navigate('/admin/dashboard');
+                    setAdmin(res.data.user);
+                    setAccessToken(res.data.access_token);
+                } else {
+                    navigate("/");
+                    setUser(res.data.user);
+                    setAccessToken(res.data.access_token);
+                }
+
                 setEmailInput('');
                 setPasswordInput('');
-                setAccessToken(res.data.access_token)
                 Toast.fire({
                     icon: 'success',
                     title: 'Signed in successfully'

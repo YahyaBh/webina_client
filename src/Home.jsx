@@ -38,7 +38,7 @@ import './App.scss'
 import NavbarHome from './Front_side/client/Components/NavbarHome';
 import AuthUser from './Front_side/context/AuthUser';
 import Footer from './Front_side/client/Components/Footer';
-import Loading from './Assets/Images/WEBINA2.png'
+import Loading from './Front_side/pages/Loading'
 
 
 const Home = () => {
@@ -180,9 +180,7 @@ const Home = () => {
 
     return (
         loading ?
-            <div className='loading-container'>
-                <img src={Loading} alt="loading-web" />
-            </div>
+            <Loading/>
             :
             <div>
                 <section className='chat-with-us'>

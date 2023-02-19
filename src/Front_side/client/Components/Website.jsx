@@ -27,7 +27,7 @@ const Website = () => {
 
     useEffect(() => {
 
-        if (getUser) {
+        if (getUser && params.token) {
             getWebsite()
         } else {
             navigate('/')
@@ -37,7 +37,7 @@ const Website = () => {
 
 
     const getWebsite = async () => {
-        await sec_http.get(`/website/${params.token}`)
+        await sec_http.get(`/api/website/${params.token}`)
             .then(res => {
                 setWebsiteData(res.data.website);
             })

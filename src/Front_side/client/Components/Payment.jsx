@@ -39,7 +39,6 @@ const Payment = () => {
             await sec_http.get(`/api/website/${params.token}`)
                 .then(res => {
                     setWebsiteData(res.data.website);
-                    console.log(res.data.website);
                 })
                 .catch(err => {
                     Swal.fire({

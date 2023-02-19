@@ -12,14 +12,14 @@ const Orders = () => {
     const navigate = useNavigate();
     // const params = useParams();
 
-    const { sec_http , getUser } = AuthUser();
+    const { sec_http , user , getToken } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
     const [websites, setwebsites] = useState(null);
 
     useEffect(() => {
 
-        if (!getUser) {
+        if (!user) {
             Swal.fire({
                 title: 'Your are not logged in',
                 text: 'Please login in order continue',
@@ -43,7 +43,7 @@ const Orders = () => {
 
         const userData = new FormData();
 
-        userData.append('user_id', getUser.id);
+        userData.append('user_id', user.id);
 
         await sec_http.post(`/api/orders`, userData)
             .then(res => {
@@ -85,7 +85,7 @@ const Orders = () => {
             :
             <Fragment>
                 <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
-                    <Navbar userData={getUser} />
+                    <Navbar userData={user} />
                 </div>
 
                 <div className='arrow-back'>
@@ -110,7 +110,7 @@ const Orders = () => {
                             </div>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
-                                    <a className="order-data-each row" href={`/order/${order.order_number}/${cookie.get('token')}/${getUser.id}`}>
+                                    <a className="order-data-each row" href={`/order/${order.order_number}`}>
                                         <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>

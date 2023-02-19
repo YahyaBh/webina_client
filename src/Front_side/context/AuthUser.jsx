@@ -15,12 +15,16 @@ axios.defaults.headers.common["Access-Control-Allow-Methods"] = "PUT, POST, GET,
 
 export default function AuthUser() {
 
+    const getAdmin = cookie.get('admin') ? cookie.get('admin') : null;
+    const setAdmin = (data) => { cookie.set('admin', JSON.stringify(data), { sameSite: 'Lax', secure: true }) }
 
 
     const getUser = cookie.get('user') ? (cookie.get('user')) : null;
     const setUser = (data) => { cookie.set('user', JSON.stringify(data), { sameSite: 'Lax', secure: true }) }
 
-    const [user , setuser] = useState(getUser ? JSON.parse(getUser) : null);
+    const [user, setuser] = useState(getUser ? JSON.parse(getUser) : null);
+    const [admin, setuseradmin] = useState(getAdmin ? JSON.parse(getAdmin) : null);
+
 
 
     const getToken = cookie.get('token') ? cookie.get('token') : null;
@@ -52,6 +56,14 @@ export default function AuthUser() {
         }
     }) : null;
 
+    const admin_http = getAdmin ? axios.create({
+        baseURL: "http://localhost:8000/api",
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    }) : null;
+
 
 
     return {
@@ -64,6 +76,10 @@ export default function AuthUser() {
         setUser,
         getToken,
         setToken,
-        setAccessToken
+        setAccessToken,
+        admin,
+        setAdmin,
+        admin_http
+
     }
 }

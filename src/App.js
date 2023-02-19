@@ -68,7 +68,7 @@ function App() {
         <Route path="/auth/google" element={<GoogleCallBack />}></Route>
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/orders" element={<Orders />} />
-        <Route exact path="/order/:order_token/:user_token/:user_id" element={<Order />} />
+        <Route exact path="/order/:order_token" element={<Order />} />
         <Route exact path="/buy/website/:token" element={<Payment />} />
         <Route exact path="/payment/:result" element={<PaymentSuccess />} />
         <Route exact path='/chat' element={<Chat />} />
