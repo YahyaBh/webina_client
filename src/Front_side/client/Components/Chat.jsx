@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import Pusher from 'pusher-js';
 import { Fragment, useEffect, useState } from 'react';
 import AuthUser from '../../context/AuthUser';
@@ -36,7 +35,7 @@ const Chat = () => {
                     document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
                 })
 
-            const pusher = new Pusher("56c79e77998c0788fbe2", {
+            const pusher = new Pusher("0b92bbc5466ff479ab62", {
                 cluster: "eu",
                 encrypted: true
             });
@@ -53,37 +52,36 @@ const Chat = () => {
 
 
     const handleSubmit = async e => {
-        if(input.length > 0) {
-        
-        e.preventDefault();
+        if (input.length > 0) {
+            e.preventDefault();
 
 
-        const messageData = new FormData();
+            const messageData = new FormData();
 
-        messageData.append("message", input);
-        messageData.append("user_id", getUser.id);
-        messageData.append("reciever_id", '1');
+            messageData.append("message", input);
+            messageData.append("user_id", user.id);
+            messageData.append("reciever_id", 1);
 
-        setInput("");
+            setInput("");
 
-        sec_http.post("/api/chat/message", messageData)
-            .then(res => {
-                document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
-            })
-            .catch(err => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: err.response.data.message,
+            sec_http.post("/api/chat/message", messageData)
+                .then(res => {
+                    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
                 })
-            })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: err.response.data.message,
+                    })
+                })
 
 
         } else {
             Swal.fire({
-                icon : 'info',
-                text : 'Please enter a message',
-                title : 'Oops...',
+                icon: 'info',
+                text: 'Please enter a message',
+                title: 'Oops...',
             })
         }
 
@@ -102,7 +100,7 @@ const Chat = () => {
 
                 <div className='chat-container-messages' id='messages-container'>
                     {messages?.map((message, index) => (
-                        <div className={message.sender_id === JSON.parse(Cookies.get('user')).id ? 'sender_message' : 'reciever_message'} key={index + message.id}>
+                        <div className={message.sender_id === user.id ? 'sender_message' : 'reciever_message'} key={index + message.id}>
                             <p>{message.message}</p>
                         </div>
                     ))}

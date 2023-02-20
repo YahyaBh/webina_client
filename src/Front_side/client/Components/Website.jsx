@@ -16,8 +16,7 @@ const Website = () => {
     // Get ID from URL
     const params = useParams();
 
-    const { sec_http , getUser } = AuthUser();
-    const [userData, setUserData] = useState({});
+    const { sec_http , getUser , user } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
@@ -52,7 +51,6 @@ const Website = () => {
                 }, 2000);
             })
 
-        setUserData(JSON.parse(cookie.get('user')));
         setLoading(false)
 
     }
@@ -90,7 +88,6 @@ const Website = () => {
                 setWebsiteData(res.data.website);
             })
 
-        setUserData(JSON.parse(cookie.get('user')));
         setLoading(false)
     }
 
@@ -102,7 +99,7 @@ const Website = () => {
             : websiteData ?
                 <Fragment>
                     <div style={{ backgroundColor: 'rgb(var(--heavy-color))' }}>
-                        <Navbar userData={userData} />
+                        <Navbar userData={user} />
                     </div>
 
 

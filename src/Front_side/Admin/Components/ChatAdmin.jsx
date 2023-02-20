@@ -1,62 +1,120 @@
-import Cookies from 'js-cookie';
+import Pusher from 'pusher-js';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import AuthUser from '../../context/AuthUser'
+import Loading from '../../pages/Loading';
 import SideBar from './SideBar';
+import { BiSend } from 'react-icons/bi';
 
 const ChatAdmin = () => {
 
     const [loading, setLoading] = useState(true);
     const [chatNames, setChatNames] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState('');
 
-    const { admin_http } = AuthUser();
+    const { admin_http, admin } = AuthUser();
     const navigate = useNavigate();
 
 
     useEffect(() => {
 
-        if (Cookies.get('admin_token') && Cookies.get('admin')) {
-            getAdminChat();
-            setLoading(false);
+        if (admin) {
+
+            // document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+
+            const userData = new FormData();
+
+            userData.append('user_id', admin.id);
+            userData.append('reciever_id', 2);
+
+            admin_http.post("/api/chat/messages", userData)
+                .then(res => {
+                    setMessages(res.data.messages);
+                    setLoading(false);
+                    // document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+                })
+
+            const pusher = new Pusher("0b92bbc5466ff479ab62", {
+                cluster: "eu",
+                encrypted: true
+            });
+
+            const channel = pusher.subscribe("WebIna");
+            channel.bind('user-message', function (data) {
+                setMessages(data.message);
+            });
+
         } else {
-            navigate('/signin')
+            navigate('/signin', { replace: true });
+        }
+    }, []);
+
+
+    const handleSubmit = async e => {
+        if (input.length > 0) {
+            e.preventDefault();
+
+
+            const messageData = new FormData();
+
+            messageData.append("message", input);
+            messageData.append("user_id", admin.id);
+            messageData.append("reciever_id", 2);
+
+            setInput("");
+
+            admin_http.post("/api/chat/message", messageData)
+                .then(res => {
+                    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: err.response.data.message,
+                    })
+                })
+
+
+        } else {
+            Swal.fire({
+                icon: 'info',
+                text: 'Please enter a message',
+                title: 'Oops...',
+            })
         }
 
-    }, [])
 
-    const getAdminChat = async () => {
-
-        const chatData = new FormData();
-
-        chatData.append('admin_id', JSON.parse(Cookies.get('admin')).id);
-        chatData.append('admin_token', Cookies.get('admin_token'));
-
-        await admin_http.post('/admin/chat', chatData)
-            .then(res => {
-                setChatNames(res.data.chatNames);
-                setLoading(false);
-            })
-    }
+    };
 
     return (
         loading ?
-            <div>
-                Loading....
-            </div>
+            <Loading />
             :
             <Fragment>
 
                 <SideBar />
 
-                <div className='chat-container-main'>
-                    <ul>
-                        {chatNames.map((chatName, index) => (
-                            <li key={index + chatName.id}><a href={`/admin/chat/${chatName.id}`}>{chatName.full_name}</a></li>
-                        ))}
-                    </ul>
+                <div className="app__chat__admin">
+
+                    <div className='chat-admin-container'>
+
+                        <div className='chat-container-messages' id='messages-container'>
+                            {messages?.map((message, index) => (
+                                <div className={message.sender_id === admin.id ? 'sender_message' : 'reciever_message'} key={index + message.id}>
+                                    <p>{message.message}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <form onSubmit={handleSubmit} >
+                            <input type="text" value={input} placeholder='message' onChange={e => setInput(e.target.value)} />
+                            <button type="submit"><BiSend /></button>
+                        </form>
+                    </div>
                 </div>
-
-
             </Fragment>
     )
 }

@@ -13,7 +13,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const { http, csrf, setAccessToken, getUser, setUser , setAdmin } = AuthUser();
+    const { http, csrf, setAccessToken, getUser, setUser, setAdmin } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [googleURL, setGoogleURL] = useState('');
 
@@ -81,14 +81,32 @@ const SignIn = () => {
                 })
             })
             .catch(err => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: err.message,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    confirmButtonText: 'Sign up!',
-                    showCancelButton: true,
-                })
+                if (err.response.status === 401) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Account not found , sign up ?',
+                        icon: 'error',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Sign up!',
+                        confirmButtonColor: 'rgb(var(--heavy-color))',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancel',
+                    })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                navigate('/signup')
+                            }
+                        })
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: err.response.data.message,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        confirmButtonText: 'Sign up!',
+                        showCancelButton: true,
+                    })
+                }
                 setPasswordInput('');
             })
     }
@@ -126,7 +144,7 @@ const SignIn = () => {
 
                         <div className='app__signin__form__buttons'>
 
-                            <button type='submit'>Sign In <FaSignInAlt /></button>
+                            <button type='submit' disabled={emailInput === '' || passwordInput === '' ? true : false}>Sign In <FaSignInAlt /></button>
 
                             <a className='app__google__signup' target='_top' href={googleURL}><AiOutlineGoogle /></a>
 
@@ -137,7 +155,7 @@ const SignIn = () => {
                     </form>
 
                 </div>
-                <p style={{ position: 'absolute', bottom: 0, margin: '5px', color: 'rgb(var(--white-color))' }}>All rights reserved <sup>&copy;</sup> WebIna</p>
+                <p className='app__copyright__bottom' >All rights reserved <sup>&copy;</sup> WebIna</p>
 
             </div>
 

@@ -1,7 +1,8 @@
 import { AiOutlineUserAdd } from 'react-icons/ai'
-import { BsMailbox } from 'react-icons/bs'
+import { BsMailbox, BsBoxSeam, BsNewspaper, BsReverseLayoutTextWindowReverse, BsChatLeftText, BsFillInboxFill } from 'react-icons/bs'
+import { BiDuplicate } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
-import { MdMiscellaneousServices } from 'react-icons/md'
+import { MdMiscellaneousServices, MdPayments, MdAnnouncement, MdManageAccounts } from 'react-icons/md'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Logo from '../../../Assets/Images/WEBINA2.png'
@@ -15,15 +16,21 @@ const SideBar = () => {
                 <a href='/logout'>LOGOUT</a>
             </div>
 
-            <div>
-                <ul>
-                    <li><Link to='/admin/websites'><CgWebsite /></Link></li>
-                    <li><Link to='/admin/services'><MdMiscellaneousServices /></Link></li>
-                    <li><Link to='/admin/users'><AiOutlineUserAdd /></Link></li>
-                    <li><Link to='/admin/orders'><BsMailbox /></Link></li>
-                    <li><Link to='/admin/chat'><AiOutlineMessage /></Link></li>
-
-                </ul>
+            <div className='sidebar-ul-container'>
+                <div>
+                    <Link to='/admin/orders'>Orders <BsBoxSeam /></Link>
+                    <Link to='/admin/websites'>Websites <CgWebsite /></Link>
+                    <Link to='/admin/users'>Users <AiOutlineUserAdd /></Link>
+                    <Link to='/admin/payments'>Payments <MdPayments /></Link>
+                    <Link to='/admin/categories'>Categories <BiDuplicate /></Link>
+                    <Link to='/admin/news-letters'>News <BsNewspaper /></Link>
+                    <Link to='/admin/blogs'>Blogs <BsReverseLayoutTextWindowReverse /></Link>
+                    <Link to='/admin/announcemetns'>Announce <MdAnnouncement /></Link>
+                    <Link to='/admin/founders'>Founders <MdManageAccounts /></Link>
+                    <Link to='/admin/chat'>Live Chat <BsChatLeftText /></Link>
+                    <Link to='/admin/services'>Services <MdMiscellaneousServices /></Link>
+                    <Link to='/admin/contact/messages'>Contact <BsFillInboxFill /></Link>
+                </div>
             </div>
 
         </aside>

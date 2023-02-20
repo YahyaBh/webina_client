@@ -25,7 +25,6 @@ const CreditCardForm = ({ websiteData }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(user);
 
     }, [])
 
@@ -86,9 +85,9 @@ const CreditCardForm = ({ websiteData }) => {
         paymentForm.append('exp_year', expiry.substr(3, 5));
         paymentForm.append('description', websiteData.website_name);
         paymentForm.append('user_token', Cookies.get('token'));
-        paymentForm.append('user_email', JSON.parse(Cookies.get('user')).email);
-        paymentForm.append('user_name', JSON.parse(Cookies.get('user')).full_name);
-        paymentForm.append('user_id', JSON.parse(Cookies.get('user')).id);
+        paymentForm.append('user_email', user.email);
+        paymentForm.append('user_name', user.full_name);
+        paymentForm.append('user_id', user.id);
         paymentForm.append('website_token', websiteData.token);
 
 

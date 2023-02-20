@@ -131,7 +131,7 @@ const SignUp = () => {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: err.message,
+                            text: err.response.data.message,
                             confirmButtonColor: '#000',
                             style: 'background-color: #f44336;',
                         })
@@ -173,7 +173,7 @@ const SignUp = () => {
                         navigate(`/admin/dashboard`);
 
                     } else {
-                        setAccessToken(res.data.token)
+                        setAccessToken(res.data.access_token)
                         setUser(res.data.user);
                         navigate(`/`);
                     }
