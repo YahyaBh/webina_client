@@ -27,7 +27,7 @@ const Chat = () => {
             const userData = new FormData();
 
             userData.append('user_id', user.id);
-            userData.append('reciever_id', '1');
+            userData.append('reciever_id', 1);
 
             sec_http.post("/api/chat/messages", userData)
                 .then(res => {
@@ -95,6 +95,11 @@ const Chat = () => {
                 <Navbar />
             </div>
 
+
+            <div className='chat-header'>
+                <h2>Live Chat</h2>
+                <p>Having a problem ? Don't worry we will respond in less than 24 hours</p>
+            </div>
 
             <div className='chat-container'>
 

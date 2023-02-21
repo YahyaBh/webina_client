@@ -148,7 +148,7 @@ export
                         <div className="orders-head-dashboard">
                             <div className="last-orders-container">
                                 <h3>{orders_num} Orders</h3>
-                                {latest_orders.map((order, index) => (
+                                {latest_orders?.map((order, index) => (
                                     <div className="last-orders-cards-container">
                                         <div className="last-order-card">
                                             <div className="last-order-card-content-title">

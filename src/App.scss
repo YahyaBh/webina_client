@@ -1012,6 +1012,8 @@ body {
             transition: all 0.3s ease;
             top: -100px;
             position: relative;
+            cursor: pointer;
+
 
             &:hover {
                 background-color: rgb(var(--white-color));
@@ -1571,6 +1573,7 @@ body {
                     transition: all .3s ease;
                     font: bold 20px 'Louis-Bold';
                     border-radius: 25px;
+                    cursor: pointer;
 
                     &:hover {
                         background-color: rgb(var(--mid-color));
@@ -1622,6 +1625,8 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    cursor: pointer;
+
                 }
 
                 input[type=checkbox] {
@@ -1687,6 +1692,8 @@ body {
                 button {
                     width: 200px !important;
                     margin: auto;
+                    cursor: pointer;
+
                 }
             }
         }
@@ -1718,6 +1725,7 @@ body {
         height: 50px;
         transition: all .3s ease;
         left: 30px;
+        cursor: pointer;
 
         &:hover {
             left: 20px !important;
@@ -1730,7 +1738,9 @@ body {
         display: block;
         box-sizing: border-box;
         position: absolute;
-        left: 3px
+        left: 3px;
+        cursor: pointer;
+
     }
 
     .swiper-button-prev::after {
@@ -1739,14 +1749,18 @@ body {
         border-bottom: 2px solid;
         border-left: 2px solid;
         transform: rotate(45deg);
-        bottom: 7px
+        bottom: 7px;
+        cursor: pointer;
+
     }
 
     .swiper-button-prev::before {
         width: 16px;
         height: 2px;
         bottom: 10px;
-        background: currentColor
+        background: currentColor;
+        cursor: pointer;
+
     }
 
 
@@ -1759,6 +1773,7 @@ body {
         height: 30px;
         right: 20px;
         transition: all .3s ease;
+        cursor: pointer;
 
         &:hover {
             right: 10px;
@@ -1771,7 +1786,9 @@ body {
         display: block;
         box-sizing: border-box;
         position: absolute;
-        right: 3px
+        right: 3px;
+        cursor: pointer;
+
     }
 
     .swiper-button-next::after {
@@ -1780,14 +1797,18 @@ body {
         border-top: 2px solid;
         border-right: 2px solid;
         transform: rotate(45deg);
-        bottom: 7px
+        bottom: 7px;
+        cursor: pointer;
+
     }
 
     .swiper-button-next::before {
         width: 16px;
         height: 2px;
         bottom: 10px;
-        background: currentColor
+        background: currentColor;
+        cursor: pointer;
+
     }
 
     .app__testimonials__container {
@@ -1887,6 +1908,8 @@ body {
         .swiper-button-next,
         .swiper-button-prev {
             display: none;
+            cursor: pointer;
+
         }
 
         .app__testimonials__container {
@@ -2099,6 +2122,8 @@ body {
         border: none;
         border-radius: 20px;
         transition: all .3s ease;
+        cursor: pointer;
+
 
         &:hover {
             box-shadow: 0 0 20px 4px grey;
@@ -2273,6 +2298,7 @@ body {
                     border-bottom: rgb(var(--mid-color)) 3px solid;
                     transition: all .1s ease;
                     margin-top: 15px;
+                    cursor: pointer;
 
 
                     &:hover,
@@ -2300,6 +2326,7 @@ body {
                     text-transform: uppercase;
                     transition: all .1s ease;
                     margin-top: 15px;
+                    cursor: pointer;
 
                     svg {
                         margin-left: 10px;
@@ -2450,6 +2477,7 @@ body {
                     border-bottom: rgb(var(--mid-color)) 3px solid;
                     transition: all .1s ease;
                     margin-top: 15px;
+                    cursor: pointer;
 
                     &:hover,
                     &:focus,
@@ -2476,6 +2504,7 @@ body {
                     text-transform: uppercase;
                     transition: all .1s ease;
                     margin-top: 15px;
+                    cursor: pointer;
 
                     &:disabled {
                         opacity: .8;
@@ -2661,6 +2690,8 @@ body {
                     background-color: rgb(var(--mid-color));
                     border-radius: 20px;
                     transition: all .3s ease;
+                    cursor: pointer;
+
 
                     &:hover {
                         color: rgba(var(--white-color));
@@ -2909,6 +2940,7 @@ body {
                 flex-direction: column;
                 margin-top: 30px;
                 width: 100%;
+                cursor: pointer;
 
 
             }
@@ -2916,10 +2948,13 @@ body {
             .app__website__buttons__show {
                 width: 100%;
                 margin: 10px;
+                cursor: pointer;
+
             }
 
             .app__website__buttons__buy {
                 width: 100%;
+                cursor: pointer;
 
             }
         }
@@ -3001,20 +3036,28 @@ body {
         width: 2rem;
         height: 2rem;
         color: rgb(var(--heavy-color));
+        cursor: pointer;
+
     }
 
     .image-swiper-button-prev {
         left: 30px;
+        cursor: pointer;
+
     }
 
     .image-swiper-button-next {
         right: 30px;
+        cursor: pointer;
+
     }
 
 
 
     .swiper-button-disabled {
         opacity: 0.5;
+        cursor: pointer;
+
     }
 
     .append-buttons {
@@ -3032,6 +3075,8 @@ body {
         border-radius: 4px;
         margin: 0 10px;
         font-size: 13px;
+        cursor: pointer;
+
     }
 
     .app__website__buttons {
@@ -3050,6 +3095,8 @@ body {
             border-radius: 20px;
             color: #000;
             transition: all .3s ease;
+            cursor: pointer;
+
         }
 
 
@@ -3063,6 +3110,8 @@ body {
             border-radius: 20px;
             color: rgba(var(--white-color));
             transition: all .3s ease;
+            cursor: pointer;
+
         }
     }
 
@@ -3103,17 +3152,22 @@ body {
                 flex-direction: column;
                 margin-top: 30px;
                 width: 100%;
+                cursor: pointer;
+
             }
 
             .app__website__buttons__show {
                 width: 100%;
                 margin: 10px;
+                cursor: pointer;
 
 
             }
 
             .app__website__buttons__buy {
                 width: 100%;
+                cursor: pointer;
+
             }
         }
     }
@@ -3194,6 +3248,8 @@ body {
         width: 2rem;
         height: 2rem;
         color: rgb(var(--heavy-color));
+        cursor: pointer;
+
     }
 
     .app__image-swiper-button-prev {
@@ -3248,6 +3304,8 @@ body {
             border-radius: 20px;
             color: #000;
             transition: all .3s ease;
+            cursor: pointer;
+
         }
 
 
@@ -3261,6 +3319,8 @@ body {
             border-radius: 20px;
             color: rgba(var(--white-color));
             transition: all .3s ease;
+            cursor: pointer;
+
         }
     }
 }
@@ -3364,6 +3424,8 @@ body {
             height: 40px;
             border-radius: 20px;
             transition: all .3s ease;
+            cursor: pointer;
+
         }
 
         button:nth-child(1) {
@@ -3616,6 +3678,8 @@ body {
         background-color: #7589eb;
         border-radius: 7em;
         border: 0;
+        cursor: pointer;
+
     }
 
     button:hover {
@@ -3758,6 +3822,7 @@ body {
         margin-top: 30px;
         background-color: rgb(var(--mid-color));
         color: rgb(var(--heavy-color));
+        cursor: pointer;
 
         &:hover {
             color: rgb(var(--mid-color));
@@ -3801,6 +3866,8 @@ body {
             align-items: center;
             border-radius: 20px;
             transition: all .3s ease;
+            cursor: pointer;
+
 
             &:hover {
                 transform: scale(.96);
@@ -3872,7 +3939,7 @@ body {
 
     padding: 30px 50px;
     width: 100%;
-    height: 90vh;
+    height: 70vh;
     max-height: 90vh;
     display: flex;
     flex-flow: column nowrap;
@@ -3880,9 +3947,10 @@ body {
     .chat-container-messages {
         width: 100%;
         overflow-y: scroll;
-        background-color: #1e1e1ed2;
+        background-color: rgb(var(--white-color));
+        box-shadow: 0 0 10px 0px grey;
         flex: 1 auto;
-        height: 100%;
+        height: 80%;
         padding: 40px 40px;
         border-radius: 10px;
 
@@ -3896,14 +3964,15 @@ body {
             border-radius: 15px;
             float: right;
 
+
             p {
-                color: rgb(var(--mid-color));
+                color: rgb(var(--heavy-color));
                 font-family: Louis-Bold;
                 margin-bottom: 0 !important;
-                background-color: #868686;
+                background-color: rgb(var(--mid-color));
                 padding: 10px 10px;
                 min-width: 50px;
-                text-align: right;
+                text-align: center;
                 border-radius: 15px;
             }
         }
@@ -3950,6 +4019,8 @@ body {
             background-color: #1E1E1E;
             color: rgb(var(--mid-color));
             font-size: 25px;
+            cursor: pointer;
+
         }
     }
 
@@ -4197,6 +4268,8 @@ body {
                         justify-content: center;
                         align-items: center;
                         flex-direction: row;
+                        cursor: pointer;
+
 
                         a {
                             margin-left: 10px;
@@ -4237,6 +4310,52 @@ body {
         max-height: 90vh;
         display: flex;
         flex-flow: column nowrap;
+
+
+        .chat-container-messages {
+            background-color: #1E1E1E;
+            border-radius: 10px;
+            height: 100%;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+
+        }
+
+        form {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: rgb(var(--heavy-color));
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+
+            input {
+                width: 90%;
+                background-color: rgb(var(--heavy-color));
+                color: rgb(var(--white-color));
+                outline: none;
+                border: none;
+            }
+
+            button {
+                width: 10%;
+                background-color: rgb(var(--heavy-color));
+                cursor: pointer;
+                outline: none;
+                border: none;
+
+                svg {
+                    color: rgb(var(--mid-color));
+                    background-color: rgb(var(--heavy-color));
+
+                }
+            }
+        }
     }
 }
 
@@ -4339,6 +4458,11 @@ body {
     }
 }
 
+
+.chat-header {
+    padding: 15px 50px;
+    margin: 20px;
+}
 
 .chat-container-main {
     margin-left: 10%;

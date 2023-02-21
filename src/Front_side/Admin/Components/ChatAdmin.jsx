@@ -22,7 +22,7 @@ const ChatAdmin = () => {
 
         if (admin) {
 
-            // document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+            document.getElementsByClassName('chat-container-messages').scrollTop = document.getElementsByClassName('chat-container-messages').scrollHeight;
 
             const userData = new FormData();
 
@@ -33,7 +33,7 @@ const ChatAdmin = () => {
                 .then(res => {
                     setMessages(res.data.messages);
                     setLoading(false);
-                    // document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+                    document.getElementsByClassName('chat-container-messages').scrollTop = document.getElementsByClassName('chat-container-messages').scrollHeight;
                 })
 
             const pusher = new Pusher("0b92bbc5466ff479ab62", {
@@ -67,7 +67,7 @@ const ChatAdmin = () => {
 
             admin_http.post("/api/chat/message", messageData)
                 .then(res => {
-                    document.getElementById('messages-container').scrollTop = document.getElementById('messages-container').scrollHeight;
+                    document.getElementsByClassName('chat-container-messages').scrollTop = document.getElementsByClassName('chat-container-messages').scrollHeight;
                 })
                 .catch(err => {
                     Swal.fire({
@@ -101,7 +101,7 @@ const ChatAdmin = () => {
 
                     <div className='chat-admin-container'>
 
-                        <div className='chat-container-messages' id='messages-container'>
+                        <div className='chat-container-messages'>
                             {messages?.map((message, index) => (
                                 <div className={message.sender_id === admin.id ? 'sender_message' : 'reciever_message'} key={index + message.id}>
                                     <p>{message.message}</p>
