@@ -179,6 +179,8 @@ body {
 .app__header {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
+    ;
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 18px 6px grey;
@@ -194,6 +196,8 @@ body {
         left: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
+        ;
         -o-object-fit: cover;
         object-fit: cover;
         z-index: -1;
@@ -245,6 +249,8 @@ body {
 
     .app__video {
         height: 100vh;
+        height: 100dvh;
+        ;
         box-shadow: 0 0 20px -10px grey;
     }
 
@@ -1817,6 +1823,8 @@ body {
         .swiper {
             width: 100%;
             height: 50vh;
+            height: 100dvh;
+            ;
             color: #1E1E1E;
         }
 
@@ -2107,6 +2115,8 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    height: 100dvh;
+    ;
 
     h2 {
         font-size: 60px;
@@ -2158,6 +2168,8 @@ body {
     background-clip: border-box;
     background-attachment: scroll;
     height: 100vh;
+    height: 100dvh;
+    ;
 
     @media screen and (max-width:900px) {
         padding: 0 20px !important;
@@ -2203,6 +2215,8 @@ body {
     .app__signin__form {
         width: 100%;
         height: 100vh;
+        height: 100dvh;
+        ;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -2228,6 +2242,8 @@ body {
             top: 0;
             margin-top: 0;
             height: 40vh;
+            height: 100dvh;
+            ;
             width: 500px;
 
             .app__signin__form__name {
@@ -2369,6 +2385,8 @@ body {
     background-clip: border-box;
     background-attachment: scroll;
     height: 100vh;
+    height: 100dvh;
+    ;
 
     nav {
         padding: 15px 50px;
@@ -2398,6 +2416,8 @@ body {
     .app__signup__form {
         width: 100%;
         height: 100vh;
+        height: 100dvh;
+        ;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -2407,6 +2427,8 @@ body {
             top: 0;
             margin-top: 0;
             height: 50vh;
+            height: 100dvh;
+            ;
             width: 500px;
 
             .app__signup__form__name {
@@ -2669,6 +2691,8 @@ body {
                 width: 100%;
                 box-shadow: 0 0 20px 4px grey;
                 height: 70vh;
+                height: 100dvh;
+                ;
                 padding: 20px;
                 border-radius: 12px;
                 display: flex;
@@ -2710,6 +2734,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    height: 100dvh;
+    ;
     width: 100%;
 
     img {
@@ -3723,6 +3749,8 @@ body {
         display: flex;
         justify-content: space-around;
         margin-top: 8vh;
+        height: 100dvh;
+        ;
         padding: 15px 50px;
 
         .credit-card-form {
@@ -3736,6 +3764,8 @@ body {
         flex-direction: column;
         padding: 17px;
         height: 65vh;
+        height: 100dvh;
+        ;
 
 
 
@@ -3844,6 +3874,8 @@ body {
     align-items: center;
     flex-direction: column;
     height: 70vh;
+    height: 100dvh;
+    ;
 
     img {
         width: 400px;
@@ -3940,7 +3972,11 @@ body {
     padding: 30px 50px;
     width: 100%;
     height: 70vh;
+    height: 100dvh;
+    ;
     max-height: 90vh;
+    height: 100dvh;
+    ;
     display: flex;
     flex-flow: column nowrap;
 
@@ -4307,7 +4343,11 @@ body {
         padding: 30px 50px;
         width: 100%;
         height: 90vh;
+        height: 100dvh;
+        ;
         max-height: 90vh;
+        height: 100dvh;
+        ;
         display: flex;
         flex-flow: column nowrap;
 
@@ -4368,6 +4408,7 @@ body {
     padding: 20px;
     width: 10%;
     height: 100vh;
+    height: 100dvh;
     position: fixed;
     background-color: rgb(var(--heavy-color));
 

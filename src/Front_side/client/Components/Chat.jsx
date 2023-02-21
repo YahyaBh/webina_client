@@ -27,7 +27,6 @@ const Chat = () => {
             const userData = new FormData();
 
             userData.append('user_id', user.id);
-            userData.append('reciever_id', 1);
 
             sec_http.post("/api/chat/messages", userData)
                 .then(res => {
@@ -60,7 +59,6 @@ const Chat = () => {
 
             messageData.append("message", input);
             messageData.append("user_id", user.id);
-            messageData.append("reciever_id", 1);
 
             setInput("");
 

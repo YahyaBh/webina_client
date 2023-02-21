@@ -26,11 +26,12 @@ const EmailVerify = () => {
             }
         })
             .then(res => {
-                if (res.data.user.role === 'admin') {
+                if (res.data.user.role === 'user') {
+                    setUser(res.data.user);
+                    navigate('/', { replace: true });
+                } else if (res.data.user.role === 'admin') {
                     navigate('/admin/dashboard', { replace: true });
                     setAdmin(res.data.user);
-                } else {
-                    setUser(res.data.user);
                 }
                 setToken(res.data.token);
                 setAccessToken(res.data.token);
