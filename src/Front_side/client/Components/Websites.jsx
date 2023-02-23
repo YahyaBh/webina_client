@@ -23,7 +23,11 @@ const Websites = () => {
     const navigate = useNavigate();
     const [websites, setWebsites] = useState([]);
     const [recentWebsites, setRecentWebsites] = useState([]);
-    const { http , getUser } = AuthUser();
+
+    const [categoriesWebsites, setCategoriesWebsites] = useState(['All']);
+    const [filterWebsites, setFilterWebsites] = useState([]);
+    const [activeFilter, setActiveFilter] = useState('All');
+    const { http, getUser } = AuthUser();
     const [loading, setLoading] = useState(true);
 
 
@@ -34,7 +38,22 @@ const Websites = () => {
         getWebsites();
 
 
-    }, [])
+    }, []);
+
+
+    const handleWorkFilter = (e) => {
+        setActiveFilter(e);
+
+        setTimeout(() => {
+            if (e === 'All') {
+                setFilterWebsites(websites);
+
+            } else {
+                setFilterWebsites(websites.filter((website) => website.category.includes(e)));
+            }
+        }, 500);
+    }
+
 
 
     const getWebsites = async () => {
@@ -43,6 +62,12 @@ const Websites = () => {
                 .then(res => {
                     if (res.status === 200) {
                         setWebsites(res.data.websites);
+
+                        for (let i = 0; i < res.data.websites.length; i++) {
+                            setCategoriesWebsites(categoriesWebsites => [...categoriesWebsites, res.data.websites[i].category]);
+                        }
+                        handleWorkFilter('All');
+
                     } else {
                         Swal.fire({
                             title: 'Oops...',
@@ -140,7 +165,7 @@ const Websites = () => {
                         {recentWebsites.map((website, index) => (
                             website.status === 'available' ?
                                 <SwiperSlide key={index + website.token + '1'}>
-                                    <div>
+                                    <div key={index + website.token + '1'}>
                                         <img src={website.image} alt={website.name} />
                                         <div className='app__swipper__website__details'>
                                             <div>
@@ -191,9 +216,22 @@ const Websites = () => {
                     <h2>WebIna Websites</h2>
 
 
+                    <div className="app__websites-filter">
+                        {categoriesWebsites.map((item, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleWorkFilter(item)}
+                                className={`app__websites-filter-item ${activeFilter === item ? 'item-active' : ''}`}
+                            >
+                                {item}
+                            </div>
+                        ))}
+                    </div>
 
 
-                    {websites.map((website, index) => (
+
+
+                    {filterWebsites?.map((website, index) => (
                         website.status === 'available' ?
                             <div className='app__card__website' key={index + website.token + '1'}>
                                 <img src={website.image} alt={website.name} />
