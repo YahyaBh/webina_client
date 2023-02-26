@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import WebInaLogo from '../../../Assets/Images/webinai.png';
 import { useEffect } from 'react';
-import cookie from 'js-cookie';
 import { useState } from 'react';
 import { MdOutlineSegment } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';

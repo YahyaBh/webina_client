@@ -1,4 +1,3 @@
-import cookie from 'js-cookie';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,10 +9,9 @@ import Swal from 'sweetalert2';
 import { BsImage, BsBoxSeam, BsCashStack } from 'react-icons/bs';
 import { Ri24HoursFill } from 'react-icons/ri';
 import Footer from './Footer';
+
 const Website = () => {
 
-
-    // Get ID from URL
     const params = useParams();
 
     const { sec_http , getUser , user } = AuthUser();

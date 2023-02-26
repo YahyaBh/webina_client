@@ -6,7 +6,6 @@ import AuthUser from '../../context/AuthUser';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import Logo from '../../../Assets/Images/webinai.png';
 import { FaSignInAlt } from 'react-icons/fa';
-import axios from 'axios';
 
 const SignIn = () => {
 

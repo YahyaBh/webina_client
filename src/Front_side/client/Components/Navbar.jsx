@@ -3,7 +3,6 @@ import AuthUser from '../../context/AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import cookie from 'js-cookie';
 import { useState } from 'react';
 import WebInaLogo from '../../../Assets/Images/webinai.png'
 
@@ -52,7 +51,7 @@ const Navbar = () => {
 
                     <ul>
                         <li>
-                            <a href='/'>About</a>
+                            <a href='/about'>About</a>
                         </li>
                         <li>
                             <a href='/'>Categories</a>
@@ -84,10 +83,10 @@ const Navbar = () => {
                     </a>
                     <ul>
                         <li>
-                            <a href='/'>About</a>
+                            <a href='/about'>About</a>
                         </li>
                         <li>
-                            <a href='/'>Categories</a>
+                            <a href='/websites/categories'>Categories</a>
                         </li>
                         <li>
                             <a href='/websites'>Websites</a>

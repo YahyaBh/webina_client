@@ -28,6 +28,7 @@ import Order from "./Front_side/client/Components/Order";
 import Chat from "./Front_side/client/Components/Chat";
 import ChatAdminUser from "./Front_side/Admin/Components/ChatAdminUser";
 import Hire from "./Front_side/client/Components/Hire";
+import AboutUs from "./Front_side/client/Components/AboutUs";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
         <Route exact path='/website/:token' element={<Website />} />
         <Route exact path='/blogs' element={<Blogs />} />
         <Route exact path='/hiring' element={<Hire />} />
+        <Route exact path='/about' element={<AboutUs />} />
 
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />

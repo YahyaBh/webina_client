@@ -9,7 +9,6 @@ import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
-import withReactContent from 'sweetalert2-react-content'
 
 const Profile = () => {
 

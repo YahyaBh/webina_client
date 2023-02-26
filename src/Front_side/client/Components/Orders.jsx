@@ -1,4 +1,3 @@
-import { default as cookie, default as Cookies } from 'js-cookie';
 import moment from 'moment';
 import { Fragment, useEffect, useState } from 'react';
 import { BsArrowLeftShort } from 'react-icons/bs';
@@ -7,10 +6,10 @@ import Swal from 'sweetalert2';
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
+
 const Orders = () => {
 
     const navigate = useNavigate();
-    // const params = useParams();
 
     const { sec_http , user , getToken } = AuthUser();
     const [loading, setLoading] = useState(true);

@@ -4536,3 +4536,58 @@ body {
 .chat-container-main {
     margin-left: 10%;
 }
+
+.app__about__us__page {
+    background-color: rgb(var(--heavy-color));
+
+    header {
+        padding: 15px 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40dvh;
+        background: url(./Assets/Images/background.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: scroll;
+
+        h2 {
+            font-size: 100px;
+            font-family: Louis-Bold;
+            font-weight: bold;
+        }
+    }
+
+    section {
+        padding: 15px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .app__par__container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: rgb(var(--white-color));
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            margin-top: 10px;
+
+            p {
+                padding: 0px 20px;
+                font-size: 20px;
+                font-family: Louis-Bold;
+            }
+
+            img {
+                width: 400px;
+            }
+        }
+    }
+}
