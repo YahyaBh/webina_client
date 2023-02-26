@@ -38,20 +38,19 @@ const Websites = () => {
         getWebsites();
 
 
+        handleWorkFilter('All');
     }, []);
 
 
-    const handleWorkFilter = (e) => {
+    const handleWorkFilter = async (e) => {
         setActiveFilter(e);
 
-        setTimeout(() => {
-            if (e === 'All') {
-                setFilterWebsites(websites);
+        if (e === 'All') {
+            setFilterWebsites(websites);
 
-            } else {
-                setFilterWebsites(websites.filter((website) => website.category.includes(e)));
-            }
-        }, 500);
+        } else {
+            setFilterWebsites(websites.filter((website) => website.category.includes(e)));
+        }
     }
 
 
@@ -66,7 +65,6 @@ const Websites = () => {
                         for (let i = 0; i < res.data.websites.length; i++) {
                             setCategoriesWebsites(categoriesWebsites => [...categoriesWebsites, res.data.websites[i].category]);
                         }
-                        handleWorkFilter('All');
 
                     } else {
                         Swal.fire({
