@@ -26,8 +26,6 @@ const Chat = () => {
 
             const userData = new FormData();
 
-            userData.append('user_id', user.id);
-
             sec_http.post("/api/chat/messages", userData)
                 .then(res => {
                     setMessages(res.data.messages);
@@ -51,14 +49,14 @@ const Chat = () => {
 
 
     const handleSubmit = async e => {
+        e.preventDefault();
+
         if (input.length > 0) {
-            e.preventDefault();
 
 
             const messageData = new FormData();
 
             messageData.append("message", input);
-            messageData.append("user_id", user.id);
 
             setInput("");
 
@@ -72,6 +70,7 @@ const Chat = () => {
                         title: 'Oops...',
                         text: err.response.data.message,
                     })
+                    console.log('Error', err.response.data.message);
                 })
 
 
