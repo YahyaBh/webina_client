@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SideBar from "./SideBar";
-import LoadingIMG from './../../../Assets/Images/WEBINA2.png'
+import Loading from "../../pages/Loading";
 
 import {
     Chart as ChartJS,
@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import AuthUser from "../../context/AuthUser";
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import moment from "moment";
 
 
 ChartJS.register(
@@ -99,7 +100,7 @@ export
 
     const navigate = useNavigate();
 
-    const [Loading, setLoading] = useState(true);
+    const [LoadingS, setLoading] = useState(true);
 
     const { admin, admin_http } = AuthUser();
 
@@ -121,20 +122,17 @@ export
                 setcanceledOrders(res.data.canceled_orders);
                 setpendingOrders(res.data.pending_orders);
                 setlatestOrders(res.data.recently_orders);
-                setlatestUsers(res.data.recently_users);
-                console.log(res.data);
-
+                setlatestUsers(res.data.recenetly_users);
             })
             .catch(err => {
                 console.log(err.response.data.message)
             })
     }
 
+
     return (
-        Loading ?
-            <div className='loading-container'>
-                <img src={LoadingIMG} alt="loading-web" />
-            </div>
+        LoadingS ?
+            <Loading />
             :
             <div className="app__dashboard" >
 
@@ -148,19 +146,26 @@ export
                         <div className="orders-head-dashboard">
                             <div className="last-orders-container">
                                 <h3>{orders_num} Orders</h3>
-                                {latest_orders?.map((order, index) => (
+                                {latest_orders ? latest_orders.map((order, index) => (
                                     <div className="last-orders-cards-container">
                                         <div className="last-order-card">
                                             <div className="last-order-card-content-title">
-                                                <h3>WIX WEBSITE</h3>
-                                                <p>2023-24-02 18:02:02</p>
+                                                <h3>{order.order_number}</h3>
+                                                <p>{order.created_at}</p>
                                             </div>
                                             <div className="last-order-card-content-price">
                                                 <h4>25$</h4>
                                             </div>
                                         </div>
                                     </div>
-                                ))}
+                                )) :
+                                    <div className="last-orders-cards-container">
+                                        <div className="last-order-card">
+                                            <div className="last-order-card-content-title">
+                                                <p>No orders yet</p>
+                                            </div>
+                                        </div>
+                                    </div>}
                             </div>
 
 
@@ -170,16 +175,17 @@ export
                             <div className="last-users-container">
                                 <h3>{users_num} Users</h3>
                                 <div className="last-users-cards-container">
-                                    <div className="last-user-card">
-                                        <img src="../Images/user_1.png" alt="" />
+                                    {latest_users?.map((user, index) => (
+                                        <div key={index} className="last-user-card">
+                                            <img src="../Images/user_1.png" alt="" />
+                                            <div className="last-order-card-content-title">
+                                                <h3>{user.full_name}</h3>
+                                                <p>{user.email}</p>
+                                            </div>
 
-                                        <div className="last-order-card-content-title">
-                                            <h3>YAHYA BOUHSINE</h3>
-                                            <p>gamesy865@gmail.com</p>
+                                            <p>{user ? moment(user?.created_at?.split('T')[0] + ' ' + user?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
                                         </div>
-
-                                        <p>4 hours ago</p>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>

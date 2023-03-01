@@ -29,6 +29,9 @@ import Chat from "./Front_side/client/Components/Chat";
 import ChatAdminUser from "./Front_side/Admin/Components/ChatAdminUser";
 import Hire from "./Front_side/client/Components/Hire";
 import AboutUs from "./Front_side/client/Components/AboutUs";
+import AdminOrders from "./Front_side/Admin/Components/AdminOrders";
+import AdminOrder from "./Front_side/Admin/Components/AdminOrder";
+import User from "./Front_side/Admin/Components/User";
 
 
 function App() {
@@ -45,10 +48,10 @@ function App() {
 
         <Route exact path='/admin/dashboard' element={<Dashboard />} />
         <Route exact path='/admin/services' element={<Services />} />
-        <Route exact path='/admin/orders' element={<Orders />} />
-        <Route exact path='/admin/order/:id' element={<Orders />} />
+        <Route exact path='/admin/orders' element={<AdminOrders />} />
+        <Route exact path='/admin/order/:id' element={<AdminOrder />} />
         <Route exact path='/admin/users' element={<Users />} />
-        <Route exact path='/admin/user/:id' element={<Users />} />
+        <Route exact path='/admin/user/:id' element={<User />} />
         <Route exact path='/admin/createWebsite' element={<CreateWebsite />} />
         <Route exact path='/admin/chat' element={<ChatAdmin />} />
         <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />

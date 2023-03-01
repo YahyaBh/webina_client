@@ -9,6 +9,9 @@ import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 const Profile = () => {
 
@@ -23,7 +26,7 @@ const Profile = () => {
     const [selected, setSelected] = useState(false);
     const navigate = useNavigate();
 
-    const { http, sec_http, image_upload, getUser, setUser, csrf } = AuthUser();
+    const { sec_http, image_upload, getUser, setUser, csrf } = AuthUser();
 
 
     useEffect(() => {
@@ -212,7 +215,7 @@ const Profile = () => {
                     <Navbar />
                 </div>
 
-                <div className="modal fade" id="changeImageProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -240,7 +243,7 @@ const Profile = () => {
 
                 <div className='app__profile__container'>
                     <div className='app__profile__container__left'>
-                        <div data-toggle="modal" data-target="#changeImageProfile" className='app__profile__container__left__img__container'>
+                        <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className='app__profile__container__left__img__container'>
                             <img className='app__profile__container__left__img' src={userData ? `http://localhost:8000/uploads/users/${userData?.avatar}` : ''} alt='profile' />
                             <AiFillCamera title='Change picture' />
                         </div>

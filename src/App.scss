@@ -95,7 +95,8 @@ body {
             align-items: center;
             justify-content: space-between;
 
-            button , a {
+            button,
+            a {
                 background-color: none;
                 margin: 2px;
                 outline: none;
@@ -112,8 +113,8 @@ body {
                 -moz-transition: all .3s ease;
                 -ms-transition: all .3s ease;
                 -o-transition: all .3s ease;
-                
-                
+
+
                 a:nth-child(1) {
                     background-color: rgb(var(--heavy-color));
                     color: rgb(var(--white-color));
@@ -134,9 +135,10 @@ body {
                     -moz-transform: scale(.96);
                     -ms-transform: scale(.96);
                     -o-transform: scale(.96);
-}
+                }
             }
         }
+
         background-color: rgb(var(--white-color));
         height: 300px;
         width: 280px;
@@ -152,7 +154,7 @@ body {
         -moz-transition: all .3s ease;
         -ms-transition: all .3s ease;
         -o-transition: all .3s ease;
-}
+    }
 
     .chat-section-hidden {
         height: 0px;
@@ -4602,6 +4604,63 @@ body {
 
             img {
                 width: 400px;
+            }
+        }
+    }
+}
+
+
+.container-admin-orders {
+    margin-left: 10%;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .head-admin-orders {
+        h2 {
+            font-size: 40px;
+        }
+    }
+
+    .admin-order-table {
+        width: 100%;
+        box-shadow: 0px 0px 10px 2px grey;
+        height: 80dvh;
+        margin-top: 10px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        padding: 10px;
+
+        .admin-order-table-header {
+            .head-row {
+                margin: 20px 0px;
+
+                h4 {
+                    font-family: Louis-Bold;
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .admin-order-table-body {
+            .admin-order-table-row {
+                margin: 10px 0px;
+                padding: 10px;
+                box-shadow: 0 0 10px -2px grey;
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
+
+                h5 {
+                    font-size: 18px;
+                }
             }
         }
     }
