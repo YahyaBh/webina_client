@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common["Access-Control-Allow-Credentials"] = "true";
@@ -57,8 +58,7 @@ export default function AuthUser() {
     const admin_http = getAdmin ? axios.create({
         baseURL: "http://localhost:8000/",
         headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Access-Control-Allow-Origin' : '*',
+            'Authorization': `Bearer ${accessToken}`
         }
     }) : null;
 

@@ -15,7 +15,7 @@ const AdminOrders = () => {
     const [loading, setLoading] = useState(true)
 
 
-    const { getAdmin, admin_http, accessToken } = AuthUser();
+    const { getAdmin, sec_http, accessToken } = AuthUser();
 
     const navigate = useNavigate();
 
@@ -30,18 +30,20 @@ const AdminOrders = () => {
 
     const getDataFromAPI = async () => {
 
-        admin_http.get('/api/admin/orders')
+        await sec_http.get('/api/admin/orders')
             .then(res => {
                 console.log(res.data);
                 setLoading(false);
             })
             .catch(err => {
+                console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: err.response.data.message,
+                    text: err.message,
                 })
             })
+
 
     }
 
