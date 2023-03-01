@@ -10,17 +10,19 @@ const AdminOrders = () => {
 
     const [positionOrders, setPositionOrders] = useState('All')
     const [orders, setOrders] = useState([])
+    const [websites, setWebsites] = useState([]);
+    const [users, setUsers] = useState([]);
     const [usersOrders, setUsersOrders] = useState([])
 
     const [loading, setLoading] = useState(true)
 
 
-    const { getAdmin, sec_http, accessToken } = AuthUser();
+    const { getAdmin, admin_http, accessToken } = AuthUser();
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!getAdmin  && accessToken) {
+        if (!getAdmin && accessToken) {
             getDataFromAPI();
         } else {
             navigate('/signin', { replace: true })
@@ -30,9 +32,11 @@ const AdminOrders = () => {
 
     const getDataFromAPI = async () => {
 
-        await sec_http.get('/api/admin/orders')
+        await admin_http.post('/api/admin/orders')
             .then(res => {
-                console.log(res.data);
+                setOrders(res.data.orders);
+                setWebsites(res.data.websites);
+                setUsers(res.data.users);
                 setLoading(false);
             })
             .catch(err => {
@@ -46,6 +50,8 @@ const AdminOrders = () => {
 
 
     }
+
+
 
     return (
         loading ?
@@ -62,13 +68,13 @@ const AdminOrders = () => {
                     <div className='admin-order-table'>
                         <div className='admin-order-table-header'>
                             <div className='head-row row'>
-                                <div className='col-lg-2'><h4>Order Number</h4></div>
+                                <div className='col-lg-4'><h4>Order Number</h4></div>
                                 <div className='col-lg-2'><h4>User Name</h4></div>
                                 <div className='col-lg-2'><h4>Product Name</h4></div>
                                 <div className='col-lg-1'><h4>Is Paid</h4></div>
                                 <div className='col-lg-1'><h4>Price</h4></div>
-                                <div className='col-lg-2'><h4>Payment Method</h4></div>
-                                <div className='col-lg-2'>
+                                <div className='col-lg-1'><h4>Payment Method</h4></div>
+                                <div className='col-lg-1'>
                                     <select value={positionOrders} onChange={e => setPositionOrders(e.target.value)}>
                                         <option value="All">All</option>
                                         <option value="Pending">Pending</option>
@@ -79,16 +85,20 @@ const AdminOrders = () => {
                             </div>
                         </div>
                         <div className='admin-order-table-body'>
-                            <div className='admin-order-table-row row'>
-
-                                <div className='col-lg-2'><h5>ch_83942jlke3yu2</h5></div>
-                                <div className='col-lg-2'><h5>Zik Bot</h5></div>
-                                <div className='col-lg-2'><h5>WIX</h5></div>
-                                <div className='col-lg-1'><h5>Yes</h5></div>
-                                <div className='col-lg-1'><h5>255$</h5></div>
-                                <div className='col-lg-2'><h5>MasterCard</h5></div>
-                                <div className='col-lg-2'><h5>Confirmed</h5></div>
-                            </div>
+                            {orders ? orders.map((order, index) => (
+                                <div className='admin-order-table-row row'>
+                                    <div className='col-lg-4'><h5>{order.order_number}</h5></div>
+                                    <div className='col-lg-1'><h5>{users.find((user) => user.id === order.user_id).full_name}</h5></div>
+                                    <div className='col-lg-2'><h5>WIX</h5></div>
+                                    <div className='col-lg-1'><h5>{order.is_paid === 1 ? 'Yes' : 'No'}</h5></div>
+                                    <div className='col-lg-1'><h5>{order.grand_total}$</h5></div>
+                                    <div className='col-lg-1'><h5>{order.payment_method}</h5></div>
+                                    <div className='col-lg-1'><h5>{order.status}</h5></div>
+                                </div>
+                            )) :
+                                <div className='admin-order-table-row row'>
+                                    <div className='col-lg-12'><h3>No orders Availabele Yet</h3></div>=
+                                </div>}
                         </div>
                     </div>
                 </div>
