@@ -32,7 +32,7 @@ const AdminOrders = () => {
 
     const getDataFromAPI = async () => {
 
-        await admin_http.post('/api/admin/orders')
+        await admin_http?.post('/api/admin/orders', { type: positionOrders })
             .then(res => {
                 setOrders(res.data.orders);
                 setWebsites(res.data.websites);
@@ -63,6 +63,26 @@ const AdminOrders = () => {
         }
     }
 
+    const changeTheValue = async (e) => {
+        if (e === positionOrders) {
+            return
+        } else {
+            setPositionOrders(e);
+            setLoading(true);
+            await admin_http?.post(`/api/admin/orders/`, { type: positionOrders })
+                .then(res => {
+                    setOrders(res.data.orders);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        text: err.message,
+                        title: 'Oops...',
+                    })
+                })
+        }
+    }
 
     return (
         loading ?
@@ -86,10 +106,11 @@ const AdminOrders = () => {
                                 <div className='col-lg-1'><h4>Price</h4></div>
                                 <div className='col-lg-2'><h4>Payment Method</h4></div>
                                 <div className='col-lg-1'>
-                                    <select className='select-input-orders' value={positionOrders} onChange={e => setPositionOrders(e.target.value)}>
+                                    <select className='select-input-orders' value={positionOrders} onChange={e => changeTheValue(e.target.value)}>
                                         <option value="All">All</option>
                                         <option value="Pending">Pending</option>
-                                        <option value="Canceled">Canceled</option>
+                                        <option value="Processing">Processing</option>
+                                        <option value="Decline">Declined</option>
                                         <option value="Confirmed">Confirmed</option>
                                     </select>
                                 </div>
@@ -99,17 +120,21 @@ const AdminOrders = () => {
                             {orders ? orders.map((order, index) => (
                                 <a href={`/admin/order/${order.order_number}`} className='admin-order-table-row row' key={index}>
                                     <div className='col-lg-4'><h5>{order.order_number}</h5></div>
-                                    <div className='col-lg-1'><h5>{users.find(user => user.id === order.user_id).first_name}</h5></div>
-                                    <div className='col-lg-1'><h5>{websites.find(website => website.token === order.website_token).website_name}</h5></div>
+                                    <div className='col-lg-1'><h5>{users?.find(user => user.id === order.user_id).first_name}</h5></div>
+                                    <div className='col-lg-1'><h5>{websites?.find(website => website.token === order.website_token).website_name}</h5></div>
                                     <div className='col-lg-1'><h5>{order.is_paid === 1 ? 'Yes' : 'No'}</h5></div>
                                     <div className='col-lg-1'><h5>{order.grand_total}$</h5></div>
                                     <div className='col-lg-2'><h5>{order.payment_method}</h5></div>
                                     <div className='col-lg-1'><h5 className={orderStatus(order.status)}>{order.status}</h5></div>
                                 </a>
                             )) :
-                                <div className='admin-order-table-row row'>
-                                    <div className='col-lg-12'><h3>No orders Availabele Yet</h3></div>=
-                                </div>}
+                                positionOrders === 'All' ?
+                                    <div className='admin-order-table-row row'>
+                                        <div className='col-lg-12'><h3>No orders Availabele Yet</h3></div>
+                                    </div> :
+                                    <div className='admin-order-table-row row'>
+                                        <div className='col-lg-12'><h3>No orders Matching This Type Found</h3></div>
+                                    </div>}
                         </div>
                     </div>
                 </div>
