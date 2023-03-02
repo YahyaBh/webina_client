@@ -2,7 +2,7 @@ import { AiOutlineUserAdd } from 'react-icons/ai'
 import { BsBoxSeam, BsNewspaper, BsReverseLayoutTextWindowReverse, BsChatLeftText, BsFillInboxFill } from 'react-icons/bs'
 import { BiDuplicate } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
-import { MdMiscellaneousServices, MdPayments, MdAnnouncement, MdManageAccounts } from 'react-icons/md'
+import { MdMiscellaneousServices, MdPayments, MdAnnouncement, MdManageAccounts , MdOutlineSpaceDashboard} from 'react-icons/md'
 import Logo from '../../../Assets/Images/WEBINA2.png'
 
 
@@ -16,6 +16,7 @@ const SideBar = () => {
 
             <div className='sidebar-ul-container'>
                 <div>
+                    <a href='/admin/dashboard'>Dash <MdOutlineSpaceDashboard /></a>
                     <a href='/admin/orders'>Orders <BsBoxSeam /></a>
                     <a href='/admin/websites'>Websites <CgWebsite /></a>
                     <a href='/admin/users'>Users <AiOutlineUserAdd /></a>
