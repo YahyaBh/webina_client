@@ -121,7 +121,8 @@ export
                 setusersNum(res.data.users);
                 setcanceledOrders(res.data.canceled_orders);
                 setpendingOrders(res.data.pending_orders);
-                setlatestOrders(res.data.recently_orders);
+                setlatestOrders(res.data.recenetly_orders);
+                console.log(res.data);
                 setlatestUsers(res.data.recenetly_users);
             })
             .catch(err => {
@@ -147,14 +148,14 @@ export
                             <div className="last-orders-container">
                                 <h3>{orders_num} Orders</h3>
                                 {latest_orders ? latest_orders.map((order, index) => (
-                                    <div className="last-orders-cards-container">
+                                    <div className="last-orders-cards-container" key={index}>
                                         <div className="last-order-card">
                                             <div className="last-order-card-content-title">
                                                 <h3>{order.order_number}</h3>
-                                                <p>{order.created_at}</p>
+                                                <p>{order ? moment(order?.created_at?.split('T')[0] + ' ' + order?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
                                             </div>
                                             <div className="last-order-card-content-price">
-                                                <h4>25$</h4>
+                                                <h4>{order.grand_total}$</h4>
                                             </div>
                                         </div>
                                     </div>

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 
 const AdminOrders = () => {
 
-    const [positionOrders, setPositionOrders] = useState('All')
+    const [positionOrders, setPositionOrders] = useState('all')
     const [orders, setOrders] = useState([])
     const [websites, setWebsites] = useState([]);
     const [users, setUsers] = useState([]);
@@ -22,7 +22,8 @@ const AdminOrders = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!getAdmin && accessToken) {
+        if (getAdmin && accessToken) {
+            console.log(getAdmin);
             getDataFromAPI();
         } else {
             navigate('/signin', { replace: true })
@@ -65,12 +66,12 @@ const AdminOrders = () => {
 
     const changeTheValue = async (e) => {
         if (e === positionOrders) {
-            return
+            return;
         } else {
-            setPositionOrders(e);
             setLoading(true);
-            await admin_http?.post(`/api/admin/orders/`, { type: positionOrders })
+            await admin_http?.post(`/api/admin/orders/`, { type: e })
                 .then(res => {
+                    setPositionOrders(e);
                     setOrders(res.data.orders);
                     setLoading(false);
                 })
@@ -93,7 +94,7 @@ const AdminOrders = () => {
 
                 <div className="container-admin-orders">
                     <div className='head-admin-orders'>
-                        <h2>{positionOrders} Orders</h2>
+                        <h2 style={{ textTransform : 'capitalize'}}>{positionOrders} orders</h2>
                     </div>
 
                     <div className='admin-order-table'>
@@ -107,11 +108,11 @@ const AdminOrders = () => {
                                 <div className='col-lg-2'><h4>Payment Method</h4></div>
                                 <div className='col-lg-1'>
                                     <select className='select-input-orders' value={positionOrders} onChange={e => changeTheValue(e.target.value)}>
-                                        <option value="All">All</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Processing">Processing</option>
-                                        <option value="Decline">Declined</option>
-                                        <option value="Confirmed">Confirmed</option>
+                                        <option value="all">All</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="processing">Processing</option>
+                                        <option value="decline">Declined</option>
+                                        <option value="confirmed">Confirmed</option>
                                     </select>
                                 </div>
                             </div>

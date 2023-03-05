@@ -77,6 +77,7 @@ export default function AuthUser() {
         setAccessToken,
         admin,
         setAdmin,
+        getAdmin,
         admin_http,
         accessToken
     }

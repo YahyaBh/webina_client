@@ -4626,6 +4626,7 @@ body {
             font-size: 40px;
         }
     }
+
     .admin-order-table {
         width: 100%;
         box-shadow: 0px 0px 10px 2px grey;
@@ -4696,5 +4697,94 @@ body {
         -moz-border-radius: 5px;
         -ms-border-radius: 5px;
         -o-border-radius: 5px;
+    }
+}
+
+
+.order-container {
+    margin-left: 10%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+
+    h2 {
+        font-size: 24px;
+        font-family: Louis-Bold;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .client-web-informations {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .order-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+
+        .confirmation-button {
+            background-color: #25ce00;
+            padding: 8px;
+            color: rgb(var(--heavy-color));
+            font-family: Louis-Bold;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+        }
+
+        .process-button {
+            background-color: #e69138;
+            padding: 8px;
+            color: rgb(var(--heavy-color));
+            font-family: Louis-Bold;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+        }
+
+        .cancel-button {
+            background-color: #c45656;
+            padding: 8px;
+            color: rgb(var(--heavy-color));
+            font-family: Louis-Bold;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+        }
+
+        button {
+            transition: all .3s ease;
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            -o-transition: all .3s ease;
+        }
+
+        button:disabled {
+            opacity: .7;
+            background-color: gray;
+        }
+
+        button:hover {
+            transform: scale(.98);
+            -webkit-transform: scale(.98);
+            -moz-transform: scale(.98);
+            -ms-transform: scale(.98);
+            -o-transform: scale(.98);
+            background-color: rgb(var(--mid-color));
+        }
     }
 }
