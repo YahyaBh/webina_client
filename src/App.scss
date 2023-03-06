@@ -4111,6 +4111,11 @@ body {
 
 .app__dashboard {
 
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
     .dashboard-main-container {
         margin-left: 10%;
         padding: 30px 20px;
@@ -4138,6 +4143,9 @@ body {
                 -moz-border-radius: 10px;
                 -ms-border-radius: 10px;
                 -o-border-radius: 10px;
+                max-height: 150px;
+                overflow: scroll;
+                overflow-x: hidden;
 
                 .last-orders-container {
                     display: flex;

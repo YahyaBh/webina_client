@@ -49,8 +49,12 @@ export
     const [canceled_orders, setcanceledOrders] = useState([]);
     const [pending_orders, setpendingOrders] = useState([]);
 
+    const [var_orders, setvarOrders] = useState([]);
+    const [var_users, setvarUsers] = useState([]);
 
 
+    console.log(var_orders, var_users);
+    console.log(var_users.January , var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December);
 
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const data = {
@@ -58,13 +62,13 @@ export
         datasets: [
             {
                 label: 'Orders',
-                data: [orders_num],
+                data: [var_orders.January , var_orders.February, var_orders.March, var_orders.April, var_orders.May, var_orders.June, var_orders.July, var_orders.August, var_orders.September, var_orders.October, var_orders.November, var_orders.December],
                 borderColor: '#ffe662',
                 backgroundColor: '#ffe662',
             },
             {
                 label: 'Users',
-                data: [users_num],
+                data: [var_users.January , var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December],
                 borderColor: '#2c2827',
                 backgroundColor: '#2c2827',
             },
@@ -79,7 +83,7 @@ export
             },
             title: {
                 display: true,
-                text: 'Users and orders with latest 12 months',
+                text: `Users and orders , ${var_orders.year && var_orders.year === var_users.year ? var_orders.year : '12 months'}`,
 
             },
         },
@@ -91,7 +95,7 @@ export
     const doughnutData = {
         labels: ['Users with orders', 'Users without orders'],
         datasets: [{
-            label: 'Quantity',
+            label: 'Number',
             data: [orders_num, users_num],
             backgroundColor: ['#2c2827', '#ffe662'],
             borderColor: ['#2c2827', '#ffe662'],
@@ -117,13 +121,14 @@ export
         admin_http.post('/api/admin/dashboard')
             .then(res => {
                 setLoading(false);
-                setordersNum(res.data.orders);
-                setusersNum(res.data.users);
+                setordersNum(res.data.total_orders);
+                setusersNum(res.data.total_users);
                 setcanceledOrders(res.data.canceled_orders);
                 setpendingOrders(res.data.pending_orders);
                 setlatestOrders(res.data.recenetly_orders);
-                console.log(res.data);
                 setlatestUsers(res.data.recenetly_users);
+                setvarOrders(res.data.var_orders[0]);
+                setvarUsers(res.data.var_users[0]);
             })
             .catch(err => {
                 console.log(err.response.data.message)
@@ -148,7 +153,7 @@ export
                             <div className="last-orders-container">
                                 <h3>{orders_num} Orders</h3>
                                 {latest_orders ? latest_orders.map((order, index) => (
-                                    <div className="last-orders-cards-container" key={index}>
+                                    <a href={`/admin/order/${order.order_number}`} className="last-orders-cards-container" key={index}>
                                         <div className="last-order-card">
                                             <div className="last-order-card-content-title">
                                                 <h3>{order.order_number}</h3>
@@ -158,7 +163,7 @@ export
                                                 <h4>{order.grand_total}$</h4>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 )) :
                                     <div className="last-orders-cards-container">
                                         <div className="last-order-card">
@@ -177,7 +182,7 @@ export
                                 <h3>{users_num} Users</h3>
                                 <div className="last-users-cards-container">
                                     {latest_users?.map((user, index) => (
-                                        <div key={index} className="last-user-card">
+                                        <a href={`/admin/user/${user.id}`} key={index} className="last-user-card">
                                             <img src="../Images/user_1.png" alt="" />
                                             <div className="last-order-card-content-title">
                                                 <h3>{user.full_name}</h3>
@@ -185,7 +190,7 @@ export
                                             </div>
 
                                             <p>{user ? moment(user?.created_at?.split('T')[0] + ' ' + user?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
-                                        </div>
+                                        </a>
                                     ))}
                                 </div>
                             </div>
@@ -208,16 +213,16 @@ export
                         <div className="goals-container">
                             <div className="goals-orders-dashboard">
                                 <div className="order-goal-title-prog">
-                                    <h4>Orders</h4> <ProgressBar variant="success" max={20000} now={orders_num + 10000} label={`${orders_num + 10000}`} />
+                                    <h4>Orders</h4> <ProgressBar backgroundColor="rgb(var(--heavy-color))" max={500} now={orders_num} label={`${orders_num}`} />
                                 </div>
-                                <p>20.000</p>
+                                <p>500</p>
                             </div>
 
                             <div className="goals-orders-dashboard">
                                 <div className="order-goal-title-prog">
-                                    <h4>Users</h4> <ProgressBar variant="info" max={5000} now={users_num + 4000} label={`${users_num + 4000}`} />
+                                    <h4>Users</h4> <ProgressBar backgroundColor="rgb(var(--mid-color))" max={500} now={users_num} label={`${users_num}`} />
                                 </div>
-                                <p>5.000</p>
+                                <p>500</p>
                             </div>
                         </div>
 

@@ -94,7 +94,7 @@ const AdminOrders = () => {
 
                 <div className="container-admin-orders">
                     <div className='head-admin-orders'>
-                        <h2 style={{ textTransform : 'capitalize'}}>{positionOrders} orders</h2>
+                        <h2 style={{ textTransform: 'capitalize' }}>{positionOrders} orders</h2>
                     </div>
 
                     <div className='admin-order-table'>
@@ -129,13 +129,9 @@ const AdminOrders = () => {
                                     <div className='col-lg-1'><h5 className={orderStatus(order.status)}>{order.status}</h5></div>
                                 </a>
                             )) :
-                                positionOrders === 'All' ?
-                                    <div className='admin-order-table-row row'>
-                                        <div className='col-lg-12'><h3>No orders Availabele Yet</h3></div>
-                                    </div> :
-                                    <div className='admin-order-table-row row'>
-                                        <div className='col-lg-12'><h3>No orders Matching This Type Found</h3></div>
-                                    </div>}
+                                <div className='admin-order-table-row row'>
+                                    <div className='col-lg-12'><h3>No orders Matching This Type Found</h3></div>
+                                </div>}
                         </div>
                     </div>
                 </div>
