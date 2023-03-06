@@ -8,21 +8,21 @@ import Footer from './Footer';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import CreditCardForm from './CreditCard/CreditCardForm'
 import { BsArrowLeftShort } from 'react-icons/bs';
-
-
+import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
+import WU from '../../../Assets/Images/pngwing.com (1).png'
 
 const Payment = () => {
 
 
     const params = useParams();
 
-    const { http, sec_http , getUser } = AuthUser();
+    const { http, sec_http, getUser } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
-
-
+    const [paymentMethods, setPaymentMethods] = useState('');
+    const [cashMethods, setCashMethods] = useState('');
 
     const navigate = useNavigate();
 
@@ -57,6 +57,25 @@ const Payment = () => {
 
     }
 
+    const setHandleShow = (e) => {
+        if (e === 'cash') {
+            setPaymentMethods('cash');
+            console.log(paymentMethods);
+        } else if (e === 'card') {
+            setPaymentMethods('card');
+            console.log(paymentMethods);
+        }
+    }
+
+    const setCashMethod = (e) => {
+        if(paymentMethods === 'cash') {
+            setCashMethods(e);
+            console.log(cashMethods);
+        } else {
+            setPaymentMethods('cash');
+        }
+    }
+
     return (
         loading ?
             <div className='loading-container'>
@@ -76,7 +95,29 @@ const Payment = () => {
                 </div>
 
                 <div className='payment-container'>
-                    <CreditCardForm websiteData={websiteData} />
+
+
+                    <div className='payment-methods-container'>
+                        <div className='pay-with-cash'>
+                            <button onClick={e => setHandleShow('cash')} className={paymentMethods === 'cash' ? 'select-div-pay' : 'selected-div-pay'}>
+                                WestrenUnion Or MoneyGram
+                            </button>
+
+                            <div className={paymentMethods === 'cash' ? 'show-method' : 'hide-method'}>
+                                <button className='west-money-sel' onClick={e => setCashMethod('westrenunion')}>WestrenUnion <img src={WU} alt="westrenunion" /></button>
+                                <button className='west-money-sel' onClick={e => setCashMethod('moneygram')}>MoneyGram <img src={MoneyGram} alt="moneygram"/></button>
+                            </div>
+                        </div>
+                        <div className='pay-with-card'>
+                            <button onClick={e => setHandleShow('card')} className={paymentMethods === 'card' ? 'select-div-pay' : 'selected-div-pay'}>
+                                Credit Or Debit Card
+                            </button>
+
+                            <div className={paymentMethods === 'card' ? 'show-method' : 'hide-method'}>
+                                <CreditCardForm websiteData={websiteData} />
+                            </div>
+                        </div>
+                    </div>
 
                     <div className='order-info-payment'>
 

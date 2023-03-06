@@ -32,6 +32,7 @@ import AboutUs from "./Front_side/client/Components/AboutUs";
 import AdminOrders from "./Front_side/Admin/Components/AdminOrders";
 import AdminOrder from "./Front_side/Admin/Components/AdminOrder";
 import User from "./Front_side/Admin/Components/User";
+import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route exact path='/admin/createWebsite' element={<CreateWebsite />} />
         <Route exact path='/admin/chat' element={<ChatAdmin />} />
         <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />
+        <Route exact path='/admin/websites' element={<AdminWebsites/>} />
 
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 

@@ -56,7 +56,6 @@ const CreditCardForm = ({ websiteData }) => {
         setExpiry(e.target.value);
     }
 
-
     const checkOutWebsite = async (e) => {
         e.preventDefault();
         setLoadoingchckout(true);
@@ -131,7 +130,6 @@ const CreditCardForm = ({ websiteData }) => {
         <div className="credit-card-form">
 
 
-            <div className="section-name-head">Payment Informations</div>
             <div className="container-cards-payment-form">
 
                 <Cards

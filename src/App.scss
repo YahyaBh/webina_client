@@ -3718,6 +3718,126 @@ body {
 
 
 .payment {
+    .section-name-head {
+        height: 50px;
+        width: 250px;
+        margin: auto;
+        background-color: rgb(var(--mid-color));
+        border-radius: 25px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 20px;
+        font-family: Louis-Bold;
+
+    }
+
+    .pay-with-cash {
+        .show-method {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .west-money-sel {
+                width: 180px;
+                height: 40px;
+                img {
+                    width: 60px;
+                }
+            }
+        }
+
+    }
+
+
+
+    .payment-methods-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .hide-method {
+            height: 0;
+            opacity: 0;
+        }
+
+        .show-method {
+            height: auto;
+            opacity: 1;
+        }
+
+        .select-div-pay {
+            width: 400px;
+            border: 2px solid rgb(var(--mid-color));
+            -webkit-border: 2px solid rgb(var(--mid-color));
+            -moz-border: 2px solid rgb(var(--mid-color));
+            -ms-border: 2px solid rgb(var(--mid-color));
+            -o-border: 2px solid rgb(var(--mid-color));
+            padding: 12px;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            font-family: Louis-Bold;
+            background-color: rgba(var(--mid-color), 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            color: rgb(var(--heavy-color));
+            transition: all .3s ease;
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            -o-transition: all .3s ease;
+
+            &:hover {
+                background-color: rgba(var(--heavy-color), .4);
+                color: rgb(var(--black-color));
+                border: 2px solid rgb(var(--heavy-color))
+            }
+        }
+
+
+        .selected-div-pay {
+            width: 400px;
+            opacity: .3;
+            background-color: rgba(var(--heavy-color), .4);
+            color: rgb(var(--black-color));
+            border: 2px solid rgb(var(--heavy-color));
+            padding: 12px;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            font-family: Louis-Bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            transition: all .3s ease;
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            -o-transition: all .3s ease;
+
+            &:hover {
+                opacity: 1;
+                border: 2px solid rgb(var(--mid-color));
+                -webkit-border: 2px solid rgb(var(--mid-color));
+                -moz-border: 2px solid rgb(var(--mid-color));
+                -ms-border: 2px solid rgb(var(--mid-color));
+                -o-border: 2px solid rgb(var(--mid-color));
+                background-color: rgba(var(--mid-color), 0.2);
+                color: rgb(var(--heavy-color));
+            }
+        }
+    }
 
     .arrow-back {
         a svg {
@@ -3801,7 +3921,7 @@ body {
         padding: 15px 50px;
 
         .credit-card-form {
-            width: 50%;
+            width: 100%;
         }
 
     }
@@ -3834,19 +3954,7 @@ body {
         }
     }
 
-    .section-name-head {
-        height: 50px;
-        width: 250px;
-        margin: auto;
-        background-color: rgb(var(--mid-color));
-        border-radius: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-        font-family: Louis-Bold;
 
-    }
 
 
     .order-info-payment {
