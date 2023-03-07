@@ -1,6 +1,6 @@
 import cookie from 'js-cookie'
 import { useState, useEffect, Fragment } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment/moment'
 import Navbar from './Navbar'
 import AuthUser from '../../context/AuthUser'
@@ -10,7 +10,9 @@ import { AiFillCamera } from 'react-icons/ai'
 import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import { BsArrowLeftShort } from 'react-icons/bs';
+import Footer from './Footer';
 
 
 const Profile = () => {
@@ -21,10 +23,13 @@ const Profile = () => {
     const [name, setName] = useState(null);
     const [password, setPassword] = useState('');
     const [newPass, setNewPass] = useState('');
+    const [phonenumber, setPhoneNumber] = useState('');
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState(null);
     const [selected, setSelected] = useState(false);
+
     const navigate = useNavigate();
+    const params = useParams();
 
     const { sec_http, image_upload, getUser, setUser, csrf } = AuthUser();
 
@@ -210,30 +215,33 @@ const Profile = () => {
                 <img src={Loading} alt="loading-web" />
             </div>
             :
-            <Fragment>
+            <div style={{ backgroundColor: 'rgba(var(--mid-color) , 0.2)' }}>
                 <div style={{ backgroundColor: 'black' }}>
                     <Navbar />
                 </div>
 
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className='arrow-back'>
+                    <a href={`http://localhost:3000/`}>
+                        <BsArrowLeftShort /> <span>Home</span>
+                    </a>
+                </div>
+
+                <div className="modal fade" id="modalImage" tabindex="-1" aria-labelledby="modalImageChange" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <h5 className="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
                             </div>
                             <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
                                 <div className="modal-body modal-body-profile">
                                     <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
                                     <div className='imageUploadContainer' >
-                                        <input type="file" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
+                                        <input type="file" accept="image/png, image/gif, image/jpeg" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
                                     </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modalImage">Close</button>
                                 </div>
                             </form>
 
@@ -241,29 +249,70 @@ const Profile = () => {
                     </div>
                 </div>
 
+                <div className="modal fade" id="modalImage" tabindex="-1" aria-labelledby="modalImageChange" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
+                            </div>
+                            <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
+                                <div className="modal-body modal-body-profile">
+                                    <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
+                                    <div className='imageUploadContainer' >
+                                        <input type="file" accept="image/png, image/gif, image/jpeg" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modalImage">Close</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div className='app__profile__container'>
                     <div className='app__profile__container__left'>
-                        <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className='app__profile__container__left__img__container'>
+                        <div className='app__profile__container__left__title' >
+                            <h2>Edit Profile</h2>
+                        </div>
+                        <div type="button" data-bs-toggle="modal" data-bs-target="#modalImage" className='app__profile__container__left__img__container'>
                             <img className='app__profile__container__left__img' src={userData ? `http://localhost:8000/uploads/users/${userData?.avatar}` : ''} alt='profile' />
                             <AiFillCamera title='Change picture' />
                         </div>
-                        <h3>{userData ? userData.full_name : ''}</h3>
-                        <h5>Created {userData ? moment(userData?.created_at?.split('T')[0] + ' ' + userData?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5>
                     </div>
                     <div className='app__profile__container__right'>
                         <div className='app__profile__container__right__form__container'>
                             <form onSubmit={updateUser}>
+                                <div className='app__profile__container__right__form__container__input__name'>
+                                    <div>
+                                        <label htmlFor="name" >First Name</label>
+                                        <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="name" >Last Name</label>
+                                        <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' />
+                                    </div>
+                                </div>
+                                <label htmlFor="password">Email Address</label>
+                                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} name='email' />
+                                <label htmlFor="phone">Phone Number</label>
+                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
 
-                                <label htmlFor="name" >Username</label>
-                                <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Name' name='name' />
-                                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' name='email' />
-                                <label htmlFor="password">Change Password</label>
-                                <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' name='password' />
-                                <input type='password' value={newPass} onChange={(e) => setNewPass(e.target.value)} placeholder='New Password' name='new_password' />
 
-                                <button type='submit' >UPDATE USER</button>
+                                <label htmlFor="phone">Phone Number</label>
+                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
 
-                                <button className='app__profile__delete__accout' onClick={deletUser}>DELETE ACCOUNT</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalImage">Change Password</button>
+
+
+                                <div>
+                                    <button type='submit' >Save</button>
+                                    <a href='/'>Cancel</a>
+                                </div>
+                                {/* <button className='app__profile__delete__accout' onClick={deletUser}>DELETE ACCOUNT</button> */}
 
                             </form>
 
@@ -273,7 +322,10 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+
+
+                <Footer />
+            </div>
     )
 }
 
