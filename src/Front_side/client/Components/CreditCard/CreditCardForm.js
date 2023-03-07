@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import 'react-credit-cards/es/styles-compiled.css';
 import Cards from 'react-credit-cards';
 import { useState } from "react";
-import CreditCards from '../../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
-import StripePNG from '../../../../Assets/Images/stripep.png'
 import Swal from "sweetalert2";
 import AuthUser from "../../../context/AuthUser";
 import Cookies from "js-cookie";
@@ -195,10 +193,6 @@ const CreditCardForm = ({ websiteData }) => {
                     <button className="button-checkout" type="submit">Check Out</button>
                 </form>
 
-                <div className="pay-images-s-c">
-                    <img src={StripePNG} alt="payment-strie" />
-                    <img src={CreditCards} alt="payment-cards" />
-                </div>
             </div>
         </div>
     );
