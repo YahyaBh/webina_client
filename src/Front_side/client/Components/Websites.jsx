@@ -3,21 +3,25 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Fragment } from 'react'
 import Swal from 'sweetalert2'
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper";
+
+
+
 import AuthUser from '../../context/AuthUser'
 
 import Navbar from './Navbar'
 import Loading from '../../../Assets/Images/WEBINA2.png';
 
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
-
 import Footer from './Footer'
-import cookie from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 const Websites = () => {
     const navigate = useNavigate();
@@ -95,7 +99,6 @@ const Websites = () => {
                 }).then(function (isConfirm) {
                     if (isConfirm) {
                         navigate('/signin');
-                        cookie.remove('token');
                     }
                 });
             }
@@ -120,9 +123,7 @@ const Websites = () => {
                     <div className='app__header__websites_container'>
                         <div className='app__header__websites_sec__container'>
                             <div className='app__header__websites_container__right'>
-                                <h2>Choose</h2>
-                                <h2>Your</h2>
-                                <h2>Website</h2>
+                                <h2>Choose Your Website</h2>
                             </div>
 
                             <div className='app__header__websites_container__left'>
@@ -135,53 +136,82 @@ const Websites = () => {
 
                 <section className='app__websites__container'>
 
-                    <h2>Recently Added</h2>
+                    <h2 className='title-for-section-app-websites'>Recently Added</h2>
 
-                    <div className="swiper-button image-swiper-button-next">
+
+                    {/* <div className="swiper-button image-swiper-button-next">
                         <BsFillArrowRightCircleFill />
                     </div>
                     <div className="swiper-button image-swiper-button-prev">
                         <BsFillArrowLeftCircleFill />
-                    </div>
+                    </div> */}
                     <Swiper
-                        slidesPerView={3}
-                        spaceBetween={30}
-                        slidesPerGroup={3}
-                        loop={true}
-                        loopFillGroupWithBlank={true}
+
                         pagination={{
                             clickable: true,
                         }}
+
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        className="swipper-category"
+                    >
+
+                    </Swiper>
+
+
+                    <Swiper
+                        slidesPerView={3}
+                        slidesPerGroup={1}
+                        spaceBetween={30}
+                        loop={true}
+                        loopFillGroupWithBlank={true}
                         navigation={{
                             nextEl: ".image-swiper-button-next",
                             prevEl: ".image-swiper-button-prev",
                             disabledClass: "swiper-button-disabled"
                         }}
-                        modules={[Pagination, Navigation]}
-                        className="swipper-category"
+                        centeredSlides={true}
+                        autoplay={{
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        }}
+                        // pagination={{
+                        //     null
+                        // }}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        className="mySwiper"
                     >
                         {recentWebsites.map((website, index) => (
                             website.status === 'available' ?
                                 <SwiperSlide key={index + website.token + '1'}>
-                                    <div key={index + website.token + '1'}>
+                                    <a href={`/website/${website.token}`} key={index + website.token + '1'}>
                                         <img src={website.image} alt={website.name} />
                                         <div className='app__swipper__website__details'>
                                             <div>
                                                 <div className='main__details'>
                                                     <h3 title='website name'>{website.website_name}</h3>
-                                                    <h4 title='price'>{website.price}$ {website.old_price ? <sub><del>{website.old_price}</del></sub> : ''}</h4>
+                                                    <h4 title='price'><span>{website.price}</span>{website.price}$ {website.old_price ? <sub><del>{website.old_price}</del></sub> : ''}</h4>
                                                 </div>
-                                                <p title='description'>{website.description}</p>
+                                                <p title='description'>
+                                                    {website && website?.description ? website.description.length >= 28 ?
+                                                        `${website.description.substring(0, 28)}...` : website.description
+                                                        : ''}
+                                                </p>
+                                                <h4 className='starts-feed'><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiOutlineStar /></h4>
                                                 <h4 className='app__website__category' title='category'>{website.category}</h4>
-                                                <h4 className='app__website__dev_time'>{website.developing_Time}</h4>
+
+                                                {/* <h4 className='app__website__dev_time'>{website.developing_Time}</h4> */}
                                             </div>
                                         </div>
 
-                                        <div className='app__website__buttons'>
+                                        {/* <div className='app__website__buttons'>
                                             <a className='app__website__buttons__show' href={`/website/${website.token}`} >SHOW</a>
                                             <a className='app__website__buttons__buy' href={`/buy/website/${website.token}`} >PURCHASE</a>
-                                        </div>
-                                    </div>
+                                        </div> */}
+                                    </a>
                                 </SwiperSlide>
                                 :
                                 <SwiperSlide key={index + website.token + '2'}>
@@ -211,8 +241,10 @@ const Websites = () => {
 
 
                 <section className='app__websites__all'>
-                    <h2>WebIna Websites</h2>
 
+                    <div className="title-container">
+                        <h2 className='title-for-section-app-websites'>WebIna Websites</h2>
+                    </div>
 
                     <div className="app__websites-filter">
                         {categoriesWebsites.map((item, index) => (

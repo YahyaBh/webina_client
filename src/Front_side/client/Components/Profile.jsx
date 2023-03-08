@@ -9,10 +9,11 @@ import { MdErrorOutline } from 'react-icons/md'
 import { AiFillCamera } from 'react-icons/ai'
 import { FiUpload } from 'react-icons/fi'
 import Loading from '../../../Assets/Images/WEBINA2.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import Footer from './Footer';
+import swal from 'sweetalert2';
 
 
 const Profile = () => {
@@ -20,9 +21,11 @@ const Profile = () => {
     const [userData, setUserData] = useState(null);
     const [loader, setLoader] = useState(true);
     const [email, setEmail] = useState(null);
-    const [name, setName] = useState(null);
+    const [firstname, setFirstName] = useState(null);
+    const [lastname, setLastName] = useState(null);
     const [password, setPassword] = useState('');
     const [newPass, setNewPass] = useState('');
+    const [confirmnewPass, setConfirmNewPass] = useState('');
     const [phonenumber, setPhoneNumber] = useState('');
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState(null);
@@ -46,7 +49,8 @@ const Profile = () => {
                     .then(res => {
                         if (res.status === 200) {
                             setUserData(res.data.user);
-                            setName(res.data.user.full_name);
+                            setFirstName(res.data.user.first_name);
+                            setLastName(res.data.user.last_name);
                             setEmail(res.data.user.email);
                             setImage(res.data.user.avatar);
                             setUser(res.data.user);
@@ -87,7 +91,8 @@ const Profile = () => {
 
 
         formData.append('email', email);
-        formData.append('full_name', name);
+        formData.append('first_name', firstname);
+        formData.append('last_name', lastname);
         formData.append('password', password);
         formData.append('new_password', newPass);
         formData.append('remember_token', cookie.get('token'));
@@ -97,7 +102,8 @@ const Profile = () => {
                 .then(res => {
                     if (res.status === 200) {
                         setUserData(res.data.user);
-                        setName(res.data.user.full_name);
+                        setFirstName(res.data.user.first_name);
+                        setLastName(res.data.user.last_name);
                         setEmail(res.data.user.email);
                         setImage(res.data.user.avatar);
                         navigate('/')
@@ -150,63 +156,90 @@ const Profile = () => {
         }
     }
 
-    const deletUser = (e) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            type: 'warning',
-            html: `<input type="text" id="password" className="swal2-input" placeholder="Password">`,
-            confirmButtonText: 'Delete Account',
-            confirmButtonColor: '#DD6B55',
-            showCancelButton: true,
-            focusConfirm: false,
-            preConfirm: () => {
-                const password = Swal.getPopup().querySelector('#password').value
-                if (!password) {
-                    Swal.showValidationMessage(`Please enter login and password`)
-                }
-                return { password: password }
-            }
-        }).then((result) => {
-            deleteAccount(result.value.password)
-        })
 
+    const changePassword = (e) => {
+        if (confirmnewPass === newPass && confirmnewPass !== '' && newPass !== '') {
 
-    }
+            setLoader(true);
 
-
-    const deleteAccount = (e) => {
-        const formData = new FormData()
-
-        formData.append('email', email);
-        formData.append('password_check', e);
-
-        try {
-            sec_http.post('/user/delete', formData)
+            sec_http.post('/user/update/password', { passowrd: password, new_password: newPass })
                 .then(res => {
-                    if (res.status === 200) {
-                        navigate('/logout');
-                    } else if (res.status === 401) {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: res.data.message,
-                            icon: <MdErrorOutline />,
-                            showConfirmButton: false,
-                            showCancelButton: true,
-
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Password changed successfully!',
+                        icon: 'success',
+                    })
+                        .then(res => {
+                            if (res.isConfirmed) {
+                                navigate('/');
+                            }
                         })
-                    }
-
                 })
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.response.data.message,
-                icon: <MdErrorOutline />,
-                showConfirmButton: false,
-                showCancelButton: true,
-            })
+                .catch(err => {
+                    swal.fire('error', err)
+                })
         }
     }
+
+
+
+    // const deletUser = (e) => {
+    //     Swal.fire({
+    //         title: 'Are you sure?',
+    //         type: 'warning',
+    //         html: `<input type="text" id="password" className="swal2-input" placeholder="Password">`,
+    //         confirmButtonText: 'Delete Account',
+    //         confirmButtonColor: '#DD6B55',
+    //         showCancelButton: true,
+    //         focusConfirm: false,
+    //         preConfirm: () => {
+    //             const password = Swal.getPopup().querySelector('#password').value
+    //             if (!password) {
+    //                 Swal.showValidationMessage(`Please enter login and password`)
+    //             }
+    //             return { password: password }
+    //         }
+    //     }).then((result) => {
+    //         deleteAccount(result.value.password)
+    //     })
+
+
+    // }
+
+
+    // const deleteAccount = (e) => {
+    //     const formData = new FormData()
+
+    //     formData.append('email', email);
+    //     formData.append('password_check', e);
+
+    //     try {
+    //         sec_http.post('/user/delete', formData)
+    //             .then(res => {
+    //                 if (res.status === 200) {
+    //                     navigate('/logout');
+    //                 } else if (res.status === 401) {
+    //                     Swal.fire({
+    //                         title: 'Error!',
+    //                         text: res.data.message,
+    //                         icon: <MdErrorOutline />,
+    //                         showConfirmButton: false,
+    //                         showCancelButton: true,
+
+    //                     })
+    //                 }
+
+    //             })
+    //     } catch (error) {
+    //         Swal.fire({
+    //             title: 'Error!',
+    //             text: error.response.data.message,
+    //             icon: <MdErrorOutline />,
+    //             showConfirmButton: false,
+    //             showCancelButton: true,
+    //         })
+    //     }
+    // }
 
 
     return (
@@ -215,7 +248,7 @@ const Profile = () => {
                 <img src={Loading} alt="loading-web" />
             </div>
             :
-            <div style={{ backgroundColor: 'rgba(var(--mid-color) , 0.2)' }}>
+            <div className='app__profile'>
                 <div style={{ backgroundColor: 'black' }}>
                     <Navbar />
                 </div>
@@ -226,11 +259,12 @@ const Profile = () => {
                     </a>
                 </div>
 
-                <div className="modal fade" id="modalImage" tabindex="-1" aria-labelledby="modalImageChange" aria-hidden="true">
+                <div className="modal fade" id="modalImage" tabIndex="-1" aria-labelledby="modalImageChange" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
+                                <h5 className="modal-title" id="modalImageItitle">Change Profile Image</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="#modalImage" aria-label="Close"></button>
                             </div>
                             <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
                                 <div className="modal-body modal-body-profile">
@@ -241,7 +275,6 @@ const Profile = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modalImage">Close</button>
                                 </div>
                             </form>
 
@@ -249,25 +282,25 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="modal fade" id="modalImage" tabindex="-1" aria-labelledby="modalImageChange" aria-hidden="true">
+                <div className="modal fade" id="modalPassword" tabIndex="-1" aria-labelledby="modalPasswordLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
+                                <h5 className="modal-title" id="exampleModalLongTitle">Change Account Password</h5>
                             </div>
-                            <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
-                                <div className="modal-body modal-body-profile">
-                                    <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
-                                    <div className='imageUploadContainer' >
-                                        <input type="file" accept="image/png, image/gif, image/jpeg" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
-                                    </div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="submit" disabled={selected ? false : true} className="btn btn-Secondary">Change Image</button>
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modalImage">Close</button>
-                                </div>
-                            </form>
+                            <form onSubmit={handleUpdateImage} className="new-pass-form">
+                                <label htmlFor="password">Password</label>
+                                <input type="text" name="password" value={password} onChange={e => setPassword(e.target.value)} />
 
+                                <label htmlFor="new-password">New Password</label>
+                                <input type="password" name='new-password' value={newPass} onChange={e => setNewPass(e.target.value)} />
+
+                                <label htmlFor="new-password">Confrim New Password</label>
+                                <input type="password" name='confirm-new-password' value={newPass} onChange={e => setNewPass(e.target.value)} />
+
+
+                                <button type="submit" className="btn btn-Secondary">Change Password</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -289,30 +322,31 @@ const Profile = () => {
                                 <div className='app__profile__container__right__form__container__input__name'>
                                     <div>
                                         <label htmlFor="name" >First Name</label>
-                                        <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' />
+                                        <input type='text' value={firstname} onChange={(e) => setFirstName(e.target.value)} name='name' />
                                     </div>
                                     <div>
                                         <label htmlFor="name" >Last Name</label>
-                                        <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' />
+                                        <input type='text' value={lastname} onChange={(e) => setLastName(e.target.value)} name='name' />
                                     </div>
                                 </div>
                                 <label htmlFor="password">Email Address</label>
                                 <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} name='email' />
-                                <label htmlFor="phone">Phone Number</label>
-                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
 
 
                                 <label htmlFor="phone">Phone Number</label>
-                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
-
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalImage">Change Password</button>
+                                <input type='tel' value={'+' + phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
 
 
-                                <div>
+                                {/* <label htmlFor="phone">Phone Number</label>
+                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' /> */}
+
+                                <button data-bs-toggle="modal" data-bs-target="#modalPassword" className='change-pass-but' type="button" >Change Password</button>
+
+
+                                <div className="buttons-save-canc-profile">
                                     <button type='submit' >Save</button>
                                     <a href='/'>Cancel</a>
                                 </div>
-                                {/* <button className='app__profile__delete__accout' onClick={deletUser}>DELETE ACCOUNT</button> */}
 
                             </form>
 

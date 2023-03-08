@@ -9,7 +9,8 @@ import Swal from 'sweetalert2'
 const AdminWebsites = () => {
 
     const [positionWebsites, setPositionWebsites] = useState('all')
-    const [websites, setWebsites] = useState([])
+    const [websites, setWebsites] = useState([]);
+    const [users , setUsers] = useState([]);
 
     const [loading, setLoading] = useState(true)
 
@@ -33,7 +34,11 @@ const AdminWebsites = () => {
         await admin_http?.post('/api/admin/websites', { type: positionWebsites })
             .then(res => {
                 setWebsites(res.data.websites);
+                setUsers(res.data.users);
+                
                 setLoading(false);
+
+                console.log(users);
             })
             .catch(err => {
                 console.log(err);
@@ -114,10 +119,10 @@ const AdminWebsites = () => {
                         </div>
                         <div className='admin-order-table-body'>
                             {websites ? websites.map((website, index) => (
-                                <a href={`/admin/order/${website.order_number}`} className='admin-order-table-row row' key={index}>
+                                <a href={`/admin/website/${website.order_number}`} className='admin-order-table-row row' key={index}>
                                     <div className='col-lg-4'><h5>{website.order_number}</h5></div>
-                                    <div className='col-lg-1'><h5>{website?.find(user => user.id === website.user_id).first_name}</h5></div>
-                                    <div className='col-lg-1'><h5>{websites?.find(website => website.token === website.website_token).website_name}</h5></div>
+                                    <div className='col-lg-1'><h5>{users?.find((user) => user.id === website.user_id).first_name}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.price}</h5></div>
                                     <div className='col-lg-1'><h5>{website.is_paid === 1 ? 'Yes' : 'No'}</h5></div>
                                     <div className='col-lg-1'><h5>{website.grand_total}$</h5></div>
                                     <div className='col-lg-2'><h5>{website.payment_method}</h5></div>

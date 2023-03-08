@@ -83,10 +83,28 @@ const NavbarHome = () => {
                                     <button>Categories</button>
                                 </Scroll>
                             </li>
+
+                            <li>
+                                <a href='/websites'>Websites</a>
+                            </li>
+
                             <li>
                                 <a href='/blogs'>Blogs</a>
                             </li>
-
+                            <li>
+                                <a href='/announcements'>Announcements</a>
+                            </li>
+                            <li>
+                                <a href='/frequent-asked-questions'>FAQ</a>
+                            </li>
+                            <li>
+                                <a href='/hiring'>Hire Me</a>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="contact" offset={-100} timeout={100}>
+                                    <button>Contact</button>
+                                </Scroll>
+                            </li>
                             <li>
                                 <a href="/signin">Sign In</a>
                             </li>
@@ -100,10 +118,44 @@ const NavbarHome = () => {
 
                     <div id="mySidebar" className="sidebar-nav">
                         <AiOutlineClose onClick={openCloseSide} />
-                        <a href="/">About</a>
-                        <a href="/">Services</a>
-                        <a href="/">Clients</a>
-                        <a href="/">Contact</a>
+                        <a href='/'>
+                            <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
+                        </a>
+                        <ul>
+                            <li>
+                                <Scroll type="id" element="about" offset={-100} timeout={100}>
+                                    <button>About</button>
+                                </Scroll>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="categories" offset={-100} timeout={100}>
+                                    <button>Categories</button>
+                                </Scroll>
+                            </li>
+
+                            <li>
+                                <a href='/websites'>Websites</a>
+                            </li>
+
+                            <li>
+                                <a href='/blogs'>Blogs</a>
+                            </li>
+                            <li>
+                                <a href='/announcements'>Announcements</a>
+                            </li>
+                            <li>
+                                <a href='/frequent-asked-questions'>FAQs</a>
+                            </li>
+                            <li>
+                                <a href='/hiring'>Hire Me</a>
+                            </li>
+                            <li>
+                                <Scroll type="id" element="contact" offset={-100} timeout={100}>
+                                    <button>Contact</button>
+                                </Scroll>
+                            </li>
+
+                        </ul>
                     </div>
 
                 </>
@@ -154,7 +206,7 @@ const NavbarHome = () => {
                             </li>
 
                             <div className="dropdown">
-                                <span><img src={userData.avatar ? `http://localhost:8000/uploads/users/${userData.avatar}` : userData.avatar} alt={userData.name} /></span>
+                                <span><img src={userData.avatar ? `http://localhost:8000/uploads/users/${userData.avatar}` : userData.avatar} alt={userData.full_name} /></span>
                                 <div className="dropdown-content">
                                     <li>
                                         <a href="/profile">Profile</a>

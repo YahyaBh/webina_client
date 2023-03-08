@@ -112,7 +112,7 @@ const AdminOrders = () => {
                                         <option value="pending">Pending</option>
                                         <option value="processing">Processing</option>
                                         <option value="decline">Declined</option>
-                                        <option value="confirmed">Confirmed</option>
+                                        <option value="completed">Completed</option>
                                     </select>
                                 </div>
                             </div>
