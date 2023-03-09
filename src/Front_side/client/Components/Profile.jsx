@@ -265,7 +265,6 @@ const Profile = () => {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="modalImageItitle">Change Profile Image</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="#modalImage" aria-label="Close"></button>
                             </div>
                             <form onSubmit={handleUpdateImage} encType='multipart/form-data'>
                                 <div className="modal-body modal-body-profile">
@@ -335,11 +334,8 @@ const Profile = () => {
 
 
                                 <label htmlFor="phone">Phone Number</label>
-                                <PhoneInput value={phonenumber} onChange={setPhoneNumber} name='phone' />
+                                <PhoneInput defaultCountry="MA" flagUrl='./Images/Flags/{XX}.svg' value={phonenumber} onChange={setPhoneNumber} name='phone' />
 
-
-                                {/* <label htmlFor="phone">Phone Number</label>
-                                <input type='tel' value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' /> */}
 
                                 <button data-bs-toggle="modal" data-bs-target="#modalPassword" className='change-pass-but' type="button" >Change Password</button>
 
