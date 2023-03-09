@@ -14,7 +14,8 @@ import 'bootstrap/dist/js/bootstrap.js';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import Footer from './Footer';
 import swal from 'sweetalert2';
-
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const Profile = () => {
 
@@ -334,7 +335,7 @@ const Profile = () => {
 
 
                                 <label htmlFor="phone">Phone Number</label>
-                                <input type='tel' value={'+' + phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} name='phone' />
+                                <PhoneInput value={phonenumber} onChange={setPhoneNumber} name='phone' />
 
 
                                 {/* <label htmlFor="phone">Phone Number</label>
