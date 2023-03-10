@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Pusher from 'pusher-js';
 import { Fragment, useEffect, useState } from 'react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +12,7 @@ const Orders = () => {
 
     const navigate = useNavigate();
 
-    const { sec_http , user , getToken } = AuthUser();
+    const { sec_http, user, getToken } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
     const [websites, setwebsites] = useState(null);
@@ -30,8 +31,28 @@ const Orders = () => {
                     navigate('/signin');
                 }
             });
+
+
+            
+
+
         } else {
             getOrders();
+
+            sec_http.post("/api/orders", { user_id: user.id })
+                .then(res => {
+                    setOrders(res.data.orders);
+                })
+
+            const pusher = new Pusher("0b92bbc5466ff479ab62", {
+                cluster: "eu",
+                encrypted: true
+            });
+
+            const channel = pusher.subscribe("WebIna");
+            channel.bind('orders-changed', function (data) {
+                setOrders(data.order);
+            });
         }
 
 
@@ -48,7 +69,6 @@ const Orders = () => {
             .then(res => {
                 setOrders(res.data.orders);
                 setwebsites(res.data.websites);
-                console.log(orders);
 
             }).catch(err => {
                 Swal.fire({
@@ -109,7 +129,7 @@ const Orders = () => {
                             </div>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
-                                    <a className="order-data-each row" href={`/order/${order.order_number}`}>
+                                    <a key={index} className="order-data-each row" href={`/order/${order.order_number}`}>
                                         <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>
@@ -119,7 +139,7 @@ const Orders = () => {
 
                                 ))
                                 :
-                                
+
                                 <div className='no-orders-container'>
                                     You have no orders Yet
                                 </div>}
