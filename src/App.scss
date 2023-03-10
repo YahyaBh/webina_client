@@ -2926,6 +2926,23 @@ input:-webkit-autofill:active {
 
                     }
 
+                    .phonenumber-input {
+
+                        margin-bottom: 30px;
+
+                        input {
+                            margin-bottom: 0 !important;
+                        }
+
+                        select option {
+                            font-family: Louis;
+                        }
+
+                        .PhoneInputCountryIcon {
+                            box-shadow: none !important;
+                        }
+                    }
+
                     button {
                         width: 40%;
                         height: 40px;

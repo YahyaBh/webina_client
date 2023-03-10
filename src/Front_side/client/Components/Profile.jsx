@@ -91,15 +91,34 @@ const Profile = () => {
         e.preventDefault();
 
 
-        formData.append('email', email);
-        formData.append('first_name', firstname);
-        formData.append('last_name', lastname);
-        formData.append('password', password);
-        formData.append('new_password', newPass);
-        formData.append('remember_token', cookie.get('token'));
+
+
+        if (email || phonenumber || firstname || lastname) {
+            formData.append('remember_token', cookie.get('__ACCESS_TOKEN'));
+
+            if (email) {
+                formData.append('email', email);
+            }
+            if (phonenumber) {
+                formData.append('phone_number', phonenumber);
+            }
+            if (firstname) {
+                formData.append('first_name', firstname);
+            }
+            if (lastname) {
+                formData.append('last_name', lastname);
+            }
+        } else {
+            Swal.fire({
+                icon: 'info',
+                text: 'Please provide different informations!',
+                title: 'Empty Fields!',
+            })
+        }
+
 
         try {
-            sec_http.post('/user/update', formData)
+            sec_http.post('api/user/update', formData)
                 .then(res => {
                     if (res.status === 200) {
                         setUserData(res.data.user);
@@ -160,7 +179,6 @@ const Profile = () => {
 
     const changePassword = (e) => {
         if (confirmnewPass === newPass && confirmnewPass !== '' && newPass !== '') {
-
             setLoader(true);
 
             sec_http.post('/user/update/password', { passowrd: password, new_password: newPass })
@@ -169,78 +187,22 @@ const Profile = () => {
                         title: 'Success!',
                         text: 'Password changed successfully!',
                         icon: 'success',
+                        showCancelButton: true
                     })
                         .then(res => {
                             if (res.isConfirmed) {
                                 navigate('/');
+                            } else {
+                                setLoader(false);
                             }
                         })
                 })
                 .catch(err => {
-                    swal.fire('error', err)
+                    swal.fire('error', err.message);
+                    navigate('/profile');
                 })
         }
     }
-
-
-
-    // const deletUser = (e) => {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         type: 'warning',
-    //         html: `<input type="text" id="password" className="swal2-input" placeholder="Password">`,
-    //         confirmButtonText: 'Delete Account',
-    //         confirmButtonColor: '#DD6B55',
-    //         showCancelButton: true,
-    //         focusConfirm: false,
-    //         preConfirm: () => {
-    //             const password = Swal.getPopup().querySelector('#password').value
-    //             if (!password) {
-    //                 Swal.showValidationMessage(`Please enter login and password`)
-    //             }
-    //             return { password: password }
-    //         }
-    //     }).then((result) => {
-    //         deleteAccount(result.value.password)
-    //     })
-
-
-    // }
-
-
-    // const deleteAccount = (e) => {
-    //     const formData = new FormData()
-
-    //     formData.append('email', email);
-    //     formData.append('password_check', e);
-
-    //     try {
-    //         sec_http.post('/user/delete', formData)
-    //             .then(res => {
-    //                 if (res.status === 200) {
-    //                     navigate('/logout');
-    //                 } else if (res.status === 401) {
-    //                     Swal.fire({
-    //                         title: 'Error!',
-    //                         text: res.data.message,
-    //                         icon: <MdErrorOutline />,
-    //                         showConfirmButton: false,
-    //                         showCancelButton: true,
-
-    //                     })
-    //                 }
-
-    //             })
-    //     } catch (error) {
-    //         Swal.fire({
-    //             title: 'Error!',
-    //             text: error.response.data.message,
-    //             icon: <MdErrorOutline />,
-    //             showConfirmButton: false,
-    //             showCancelButton: true,
-    //         })
-    //     }
-    // }
 
 
     return (
@@ -288,7 +250,7 @@ const Profile = () => {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLongTitle">Change Account Password</h5>
                             </div>
-                            <form onSubmit={handleUpdateImage} className="new-pass-form">
+                            <form onSubmit={changePassword} className="new-pass-form">
                                 <label htmlFor="password">Password</label>
                                 <input type="text" name="password" value={password} onChange={e => setPassword(e.target.value)} />
 
@@ -296,7 +258,7 @@ const Profile = () => {
                                 <input type="password" name='new-password' value={newPass} onChange={e => setNewPass(e.target.value)} />
 
                                 <label htmlFor="new-password">Confrim New Password</label>
-                                <input type="password" name='confirm-new-password' value={newPass} onChange={e => setNewPass(e.target.value)} />
+                                <input type="password" name='confirm-new-password' value={confirmnewPass} onChange={e => setConfirmNewPass(e.target.value)} />
 
 
                                 <button type="submit" className="btn btn-Secondary">Change Password</button>
@@ -332,16 +294,16 @@ const Profile = () => {
                                 <label htmlFor="password">Email Address</label>
                                 <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} name='email' />
 
-
-                                <label htmlFor="phone">Phone Number</label>
-                                <PhoneInput defaultCountry="MA" flagUrl='./Images/Flags/{XX}.svg' value={phonenumber} onChange={setPhoneNumber} name='phone' />
-
+                                <div className='phonenumber-input'>
+                                    <label htmlFor="phone">Phone Number</label>
+                                    <PhoneInput limitMaxLength={true} addInternationalOption={false} defaultCountry="MA" flagUrl='./Images/Flags/{XX}.svg' value={phonenumber} onChange={setPhoneNumber} name='phone' />
+                                </div>
 
                                 <button data-bs-toggle="modal" data-bs-target="#modalPassword" className='change-pass-but' type="button" >Change Password</button>
 
 
                                 <div className="buttons-save-canc-profile">
-                                    <button type='submit' >Save</button>
+                                    <button type='submit' onClick={e => updateUser} >Save</button>
                                     <a href='/'>Cancel</a>
                                 </div>
 
