@@ -33,16 +33,15 @@ const Profile = () => {
     const [selected, setSelected] = useState(false);
 
     const navigate = useNavigate();
-    const params = useParams();
 
-    const { sec_http, image_upload, getUser, setUser, csrf } = AuthUser();
+    const { sec_http, image_upload, getUser, setUser, csrf, user , setAccessToken } = AuthUser();
 
 
     useEffect(() => {
         if (getUser) {
             const formData = new FormData()
 
-            formData.append('email', JSON.parse(getUser).email);
+            formData.append('email', user.email);
 
             try {
                 csrf();
@@ -97,7 +96,8 @@ const Profile = () => {
             formData.append('remember_token', cookie.get('__ACCESS_TOKEN'));
 
             if (email) {
-                formData.append('email', email);
+                formData.append('email', user.email);
+                formData.append('new_email', email);
             }
             if (phonenumber) {
                 formData.append('phone_number', phonenumber);
@@ -126,6 +126,26 @@ const Profile = () => {
                         setLastName(res.data.user.last_name);
                         setEmail(res.data.user.email);
                         setImage(res.data.user.avatar);
+                        setUser(res.data.user);
+
+                        if (res.status === 400) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Email Verification!',
+                                text: 'Please check your email inbox , and verify your account!',
+                                showCancelButton: true,
+                                confirmButtonAriaLabel: 'I Verified!'
+                            })
+                                .then(res => {
+                                    if (res.isDenied) {
+                                        navigate('/logout');
+                                    } else if (res.isConfirmed) {
+                                        checkVerification();
+                                    }
+
+                                })
+                        }
+
                         navigate('/')
                     }
                 })
@@ -143,6 +163,37 @@ const Profile = () => {
 
             })
         }
+    }
+
+    const checkVerification = async () => {
+
+        const checkEmail = new FormData();
+
+        checkEmail.append('email', user.email)
+
+
+        await sec_http.post(`/api/email/verifiction/check`, checkEmail)
+            .then(res => {
+                if (res.status === 200) {
+                        setAccessToken(res.data.access_token)
+                        setUser(res.data.user);
+                        navigate(`/profile`);
+                }
+            })
+            .catch((err) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email not verified',
+                    text: 'Please try to verify your email before signing up',
+                    confirmButtonText: 'I Verified it!',
+                    confirmButtonColor: '#000',
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            checkVerification();
+                        }
+                    })
+            })
     }
 
     const handleChangeImage = (e) => {
