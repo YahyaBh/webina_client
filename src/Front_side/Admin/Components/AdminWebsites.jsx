@@ -100,12 +100,13 @@ const AdminWebsites = () => {
                     <div className='admin-order-table'>
                         <div className='admin-order-table-header'>
                             <div className='head-row row'>
-                                <div className='col-lg-4'><h4>Id</h4></div>
+                                <div className='col-lg-1'><h4>Id</h4></div>
+                                <div className='col-lg-2'><h4>Token</h4></div>
                                 <div className='col-lg-1'><h4>Name</h4></div>
                                 <div className='col-lg-1'><h4>Price</h4></div>
-                                <div className='col-lg-1'><h4>Is Available</h4></div>
-                                <div className='col-lg-1'><h4>Ordered</h4></div>
-                                <div className='col-lg-2'><h4>Created At</h4></div>
+                                <div className='col-lg-2'><h4>Is Available</h4></div>
+                                <div className='col-lg-1'><h4>Category</h4></div>
+                                <div className='col-lg-2'><h4>Developing Time</h4></div>
                                 <div className='col-lg-1'>
                                     <select className='select-input-orders' value={positionWebsites} onChange={e => changeTheValue(e.target.value)}>
                                         <option value="all">All</option>
@@ -119,13 +120,14 @@ const AdminWebsites = () => {
                         </div>
                         <div className='admin-order-table-body'>
                             {websites ? websites.map((website, index) => (
-                                <a href={`/admin/website/${website.order_number}`} className='admin-order-table-row row' key={index}>
-                                    <div className='col-lg-4'><h5>{website.order_number}</h5></div>
-                                    <div className='col-lg-1'><h5>{users?.find((user) => user.id === website.user_id).first_name}</h5></div>
+                                <a href={`/admin/website/${website.token}`} className='admin-order-table-row row' key={index}>
+                                    <div className='col-lg-1'><h5>{website.id}</h5></div>
+                                    <div className='col-lg-2'><h5>{website.token}</h5></div>
+                                    <div className='col-lg-1'><h5>{users?.find((user) => user?.id === website?.user_id)?.first_name}</h5></div>
                                     <div className='col-lg-1'><h5>{website.price}</h5></div>
-                                    <div className='col-lg-1'><h5>{website.is_paid === 1 ? 'Yes' : 'No'}</h5></div>
-                                    <div className='col-lg-1'><h5>{website.grand_total}$</h5></div>
-                                    <div className='col-lg-2'><h5>{website.payment_method}</h5></div>
+                                    <div className='col-lg-2'><h5>{website.status === 'available' ? 'Yes' : 'No'}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.category}$</h5></div>
+                                    <div className='col-lg-2'><h5>{website.developing_time}</h5></div>
                                     <div className='col-lg-1'><h5 className={orderStatus(website.status)}>{website.status}</h5></div>
                                 </a>
                             )) :

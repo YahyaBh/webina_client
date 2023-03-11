@@ -9,12 +9,13 @@ import Swal from 'sweetalert2';
 import { BsImage, BsBoxSeam, BsCashStack } from 'react-icons/bs';
 import { Ri24HoursFill } from 'react-icons/ri';
 import Footer from './Footer';
+import { AiFillStar } from 'react-icons/ai';
 
 const Website = () => {
 
     const params = useParams();
 
-    const { sec_http , getUser , user } = AuthUser();
+    const { sec_http, getUser, user } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
     const [websiteData, setWebsiteData] = useState({});
@@ -101,49 +102,45 @@ const Website = () => {
                     </div>
 
 
-
-                    <header className="app__signle__website__header">
-                        <div onClick={showFullImage} className="app__signle__website__image__container">
-                            <div className='image__data'>
-                                <BsImage />
-                                <h5>Show Full Image</h5>
-                            </div>
-                            <img src={websiteData.image} alt={websiteData.website_name} />
-                        </div>
-                    </header>
-
-                    <section className='app__single__website__details'>
-                        <h2>{websiteData.website_name}</h2>
-
-                        <h4>{websiteData.description}</h4>
-
-                        <h5>Only : {websiteData.price}$ {websiteData.old_price ? <sub><del>{websiteData.old_price}</del></sub> : ''}</h5>
-
-                        <div className='app__single__website__buttons'>
-                            <button onClick={buyWebsite}>Buy Website</button>
-                            <button onClick={findSimiliar}>Find Similiar</button>
-                        </div>
-
-
-                        <div className='app__single__website__spec__container'>
-                            <div className='app__single__website__spec'>
-                                <ul>
-                                    {websiteData.specifications ? websiteData.specifications.split(',').map((item, index) => { return (<li key={index}>{item}</li>) }) : ''}
-
-                                </ul>
-                            </div>
-
-                            <div className="app__single__website__spec__sec">
-                                <ul>
-                                    <li><Ri24HoursFill /> 24/7 Online Assistance</li>
-
-                                    <li><BsBoxSeam /> Fast Delivery</li>
-
-                                    <li><BsCashStack /> Competitive Price</li>
-                                </ul>
+                    <div className='app__single__website__container'>
+                        <div className='head__title'>
+                            <h2>TITLE HEADER</h2>
+                            <div className='head__feedback'>
+                                <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar />
+                                <a href='/'>customers reviews</a>
                             </div>
                         </div>
-                    </section>
+
+                        <div className="head__image__price__section">
+                            <div className="head__left__section">
+                                <div className='head__image'>
+                                    <img className={websiteData.image ? 'image_not_available' : ''} src={`http://localhost:8000/uploads/websites/${websiteData.image}`} alt={websiteData.website_name} />
+                                </div>
+                            </div>
+
+                            <div className="head__right__section">
+                                <div className='head__price'>
+                                    <div className="price">
+                                        <h3>PRICE</h3>
+                                        <h4>${websiteData.old_price ? <span>${websiteData.old_price}</span> : ''}{websiteData.price}</h4>
+                                    </div>
+                                    <hr />
+
+                                    <ul>
+                                        <li>Team Checked By TeamWagon</li>
+                                        <li>6 months technical support</li>
+                                        <li>Life time free update</li>
+                                        <li>100% money back guarante</li>
+                                    </ul>
+
+                                    <div className='buy__button'>
+                                        <button>Buy Now</button>
+                                        <h5>Regular Licenece</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <Footer />

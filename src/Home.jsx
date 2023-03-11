@@ -275,6 +275,8 @@ const Home = () => {
                                 <h4 data-aos="fade-right" data-aos-duration="500"><BiTimeFive /> Fast Website Developing Time</h4>
                                 <h4 data-aos="fade-right" data-aos-duration="1000"><RiCustomerService2Line /> 24/7 Customer Services Assistance</h4>
                             </div>
+
+
                         </div>
                     </section>
 
@@ -311,6 +313,10 @@ const Home = () => {
                                 <ReactTooltip style={{ backgroundColor: '#fff', color: '#000', width: '200px', flexWrap: 'wrap' }} place='top' anchorId="website-deployment" multiline={true} disableInteractive>
                                     Your Website Is Ready To Use .<br /> Let Us Handle The Rest Of It .
                                 </ReactTooltip>
+                            </div>
+
+                            <div className='app__about__more__button'>
+                                <a href="/about">Learn More About WebIna</a>
                             </div>
                         </div>
                     </section>
