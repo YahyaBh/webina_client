@@ -46,7 +46,6 @@ const Logout = () => {
                 .then((res) => {
                     cookie.remove('__ADMINISTRAOT_DATA');
                     cookie.remove('__USER_DATA');
-                    cookie.remove('TOKEN_');
                     cookie.remove('__ACCESS_TOKEN');
                     navigate('/');
                 })

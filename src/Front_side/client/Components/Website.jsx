@@ -188,7 +188,7 @@ const Website = () => {
                                         </div>
 
                                         <div className="website__technologies__used">
-                                            <h3>Website Specification</h3>
+                                            <h3>Website Specifications</h3>
 
                                             <ul>
                                                 <li>Html</li>
@@ -246,7 +246,7 @@ const Website = () => {
 
                                 <div className="website__description__right">
                                     <div className="website__description__right__title">
-                                        <h3>Added At :</h3>
+                                        <h3>Added :</h3>
                                         <h3>5 Hours Ago</h3>
                                     </div>
                                     <hr />

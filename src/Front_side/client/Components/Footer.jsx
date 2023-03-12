@@ -73,7 +73,7 @@ const Footer = () => {
                             <li><a href="/">Home</a></li>
                             <li><a href="/privacy&policy">Privacy & Policy</a></li>
 
-                            <h3 className='mt-3'>Stay Conntected</h3>
+                            <h3 className='mt-3'>Stay Connected</h3>
                             <div className='social-media'>
                                 <li><a href="/"><AiFillFacebook /></a></li>
                                 <li><a href="/"><AiFillInstagram /></a></li>

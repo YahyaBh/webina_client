@@ -265,7 +265,7 @@ const Home = () => {
                             <h2>What Is WebIna ?</h2>
                             <div className='app__about__para_image'>
                                 <p>WebIna is a comapny that helps you make your dreams
-                                    easier and build you a full appliaction for your business , you can easly choose any website
+                                    easier and build you a full application for your business , you can easily choose any website
                                     from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
 
                                 <img src={ImageAbout} alt="about_us" width='500px' />
@@ -284,9 +284,8 @@ const Home = () => {
                     <section className="app__more__about">
                         <div className="app__more__about__content">
                             <h2 data-aos="fade-down">More About WebIna</h2>
-                            <p data-aos="fade-right">WebIna is a company that helps you make your dreams
-                                easier and build you a full appliaction for your business , you can easly choose any website
-                                from our lists and we will finish it as soon as possible to make your work go easier on you.</p>
+                            <p data-aos="fade-right">WebIna is a company that helps you make the business of your dreams come true and our job is to make it so much easier for you.
+                                All you have to do is choose a website from our lists and we assure you that we will finish it as soon as possible so your work goes in the best way possible.</p>
                             <div className='app__more__about__cards__container'>
 
 
@@ -511,9 +510,9 @@ const Home = () => {
 
 
                             <div>
-                                <h1>DONE WITH OLD DESIGN ?</h1>
+                                <h1>DONE WITH OLD DESIGNS</h1>
 
-                                <p>We will make you a new design ,
+                                <p>We will make you a new designs ,
                                     with custom changments  ,colors , images ,
                                     that will fit your needs</p>
                             </div>
@@ -536,7 +535,7 @@ const Home = () => {
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/e-commerce.jpg" alt="e-commerce" />
                                             <div className="app__categories__card__content__title">E-Commerce Website</div>
-                                            <div className="app__categories__card__content__description">Make an e-ceommerce website for your produts to make it easier for customers</div>
+                                            <div className="app__categories__card__content__description">Make an e-ceommerce website for your products to make it easier for your customers</div>
 
                                         </div>
                                     </div>
@@ -546,7 +545,7 @@ const Home = () => {
                                         <div className="app__categories__card__content__image">
                                             <img className="app__categories__card__content" src="./Images/landing.jpg" alt="landing-page" />
                                             <div className="app__categories__card__content__title">Landing Page</div>
-                                            <div className="app__categories__card__content__description">Make single web page that appears marketing promotion, marketing email or an online advertisement.</div>
+                                            <div className="app__categories__card__content__description">Make a single web page that appears marketing promotions, marketing emails or an online advertisements.</div>
                                         </div>
                                     </div>
                                 </div>
