@@ -147,49 +147,49 @@ const Website = () => {
                                     <div className="website__description__left__title">
                                         <h2>&#x2022; Description</h2>
                                     </div>
+                                    <div className='light-back'>
+                                        <div className='website__description__paragraph'>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                when an unknown printer took a galley of type and scrambled it to make a type
+                                                specimen book. It has survived not only five centuries, but also the leap into
+                                                electronic typesetting, remaining essentially unchanged. It was popularised in
+                                                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                                                and more recently with desktop publishing software like Aldus PageMaker
+                                                including versions of Lorem Ipsum.</p>
+                                        </div>
 
-                                    <div className='website__description__paragraph'>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                            when an unknown printer took a galley of type and scrambled it to make a type
-                                            specimen book. It has survived not only five centuries, but also the leap into
-                                            electronic typesetting, remaining essentially unchanged. It was popularised in
-                                            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                            and more recently with desktop publishing software like Aldus PageMaker
-                                            including versions of Lorem Ipsum.</p>
+                                        <div className="website__design__section">
+                                            <h3>Design</h3>
+
+                                            <ul>
+                                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                    when an unknown pr</li>
+                                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                    when an unknown pr</li>
+                                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                    when an unknown pr</li>
+                                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                    when an unknown pr</li>
+                                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                    when an unknown pr</li>
+                                            </ul>
+                                        </div>
+
+                                        <div className="website__technologies__used">
+                                            <h3>Website Specification</h3>
+
+                                            <ul>
+                                                <li>Html</li>
+                                                <li>Css</li>
+                                                <li>JavaScript</li>
+                                                <li>JavaScript</li>
+                                                <li>JavaScript</li>
+                                                <li>JavaScript</li>
+                                                <li>JavaScript</li>
+                                            </ul>
+                                        </div>
                                     </div>
-
-                                    <div className="website__design__section">
-                                        <h3>Design</h3>
-
-                                        <ul>
-                                            <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown pr</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown pr</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown pr</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown pr</li>
-                                            <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown pr</li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="website__technologies__used">
-                                        <h3>Website Specification</h3>
-
-                                        <ul>
-                                            <li>Html</li>
-                                            <li>Css</li>
-                                            <li>JavaScript</li>
-                                            <li>JavaScript</li>
-                                            <li>JavaScript</li>
-                                            <li>JavaScript</li>
-                                            <li>JavaScript</li>
-                                        </ul>
-                                    </div>
-
 
                                     <div id='reviews' className="website__description__left__title">
                                         <h2>&#x2022; Reviews</h2>

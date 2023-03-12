@@ -3980,6 +3980,17 @@ body {
             .website__description__left {
                 width: 55%;
 
+                .light-back {
+                    margin: 38px 0px;
+                    background-color: #f7f7f7;
+                    padding: 2px 25px;
+                    border-radius: 25px;
+                    -webkit-border-radius: 25px;
+                    -moz-border-radius: 25px;
+                    -ms-border-radius: 25px;
+                    -o-border-radius: 25px;
+                }
+
                 .website__description__left__title {
                     margin-top: 20px;
 
@@ -4000,6 +4011,8 @@ body {
                 }
 
                 .website__description__paragraph {
+                    margin: 38px 0;
+
                     p {
                         font-family: Louis-Bold;
                         font-size: 22px;
@@ -4131,7 +4144,7 @@ body {
                     ul {
                         width: 50%;
                         display: flex;
-                        flex-direction:row;
+                        flex-direction: row;
                         flex-wrap: wrap;
                         align-items: center;
                         justify-content: center;
@@ -4144,6 +4157,7 @@ body {
                         align-items: center;
                         flex-direction: row;
                         opacity: .4;
+
                         img {
                             width: 10%;
                             margin-right: 20px;
