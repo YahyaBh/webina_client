@@ -11,7 +11,6 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
 import WU from '../../../Assets/Images/pngwing.com (1).png'
 import CreditCards from '../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
-// import StripePNG from '../../../../Assets/Images/stripep.png'
 
 const Payment = () => {
 
