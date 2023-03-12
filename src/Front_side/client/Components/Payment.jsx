@@ -106,7 +106,7 @@ const Payment = () => {
 
                 <div className='arrow-back'>
                     <a href={`http://localhost:3000/website/${params.token}`}>
-                        <BsArrowLeftShort />
+                        <BsArrowLeftShort />{websiteData.website_name}
                     </a>
                 </div>
 

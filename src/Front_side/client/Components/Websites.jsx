@@ -139,29 +139,6 @@ const Websites = () => {
                     <h2 className='title-for-section-app-websites'>Recently Added</h2>
 
 
-                    {/* <div className="swiper-button image-swiper-button-next">
-                        <BsFillArrowRightCircleFill />
-                    </div>
-                    <div className="swiper-button image-swiper-button-prev">
-                        <BsFillArrowLeftCircleFill />
-                    </div> */}
-                    <Swiper
-
-                        pagination={{
-                            clickable: true,
-                        }}
-
-                        autoplay={{
-                            delay: 2500,
-                            disableOnInteraction: false,
-                        }}
-                        modules={[Autoplay, Pagination, Navigation]}
-                        className="swipper-category"
-                    >
-
-                    </Swiper>
-
-
                     <Swiper
                         slidesPerView={3}
                         slidesPerGroup={1}

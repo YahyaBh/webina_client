@@ -5,9 +5,8 @@ import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../pages/Loading';
 import { Fragment } from 'react';
-import Swal from 'sweetalert2';
 import Footer from './Footer';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import PaymentMethods from '../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
 import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png';
 import WesternUnion from '../../../Assets/Images/pngwing.com (1).png'
@@ -15,13 +14,24 @@ import Paypal from '../../../Assets/Images/Paypal_2014_logo.png';
 import Logo from '../../../Assets/Images/WEBINA2.png';
 import { BiDownload } from 'react-icons/bi';
 
+import Swal from 'sweetalert2';
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper";
+
+
 const Website = () => {
 
     const params = useParams();
 
     const { sec_http, getUser, user } = AuthUser();
     const [loading, setLoading] = useState(true);
-    const [fullImage, setFullImage] = useState(false);
+    const [relatedWebsites, setRelatedWebsites] = useState([]);
     const [websiteData, setWebsiteData] = useState({});
     const navigate = useNavigate();
 
@@ -42,6 +52,7 @@ const Website = () => {
         await sec_http.get(`/api/website/${params.token}`)
             .then(res => {
                 setWebsiteData(res.data.website);
+                setRelatedWebsites(res.data.related_websites);
             })
             .catch(err => {
                 Swal.fire({
@@ -125,7 +136,7 @@ const Website = () => {
 
 
                                     <div className='buy__button'>
-                                        <button>Buy Now</button>
+                                        <button onClick={buyWebsite}>Buy Now</button>
                                         <h5>Regular Licenece</h5>
                                         <hr />
 
@@ -274,6 +285,83 @@ const Website = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+
+                        <div className="website__related__websites">
+                            <div className="website__related__websites__title">
+                                <h2>Related Websites</h2>
+                            </div>
+
+
+                            <Swiper
+                                slidesPerView={3}
+                                slidesPerGroup={1}
+                                spaceBetween={30}
+                                loop={true}
+                                loopFillGroupWithBlank={true}
+                                navigation={{
+                                    nextEl: ".image-swiper-button-next",
+                                    prevEl: ".image-swiper-button-prev",
+                                    disabledClass: "swiper-button-disabled"
+                                }}
+                                centeredSlides={true}
+                                autoplay={{
+                                    delay: 5000,
+                                    disableOnInteraction: false,
+                                }}
+                                // pagination={{
+                                //     null
+                                // }}
+                                modules={[Autoplay, Pagination, Navigation]}
+                                className="mySwiper"
+                            >
+                                {relatedWebsites.map((website, index) => (
+                                    website.status === 'available' ?
+                                        <SwiperSlide key={index + website.token + '1'}>
+                                            <a href={`/website/${website.token}`} key={index + website.token + '1'}>
+                                                <img src={website.image} alt={website.name} />
+                                                <div className='app__swipper__website__details'>
+                                                    <div>
+                                                        <div className='main__details'>
+                                                            <h3 title='website name'>{website.website_name}</h3>
+                                                            <h4 title='price'><span>{website.price}</span>{website.price}$ {website.old_price ? <sub><del>{website.old_price}</del></sub> : ''}</h4>
+                                                        </div>
+                                                        <p title='description'>
+                                                            {website && website?.description ? website.description.length >= 28 ?
+                                                                `${website.description.substring(0, 28)}...` : website.description
+                                                                : ''}
+                                                        </p>
+                                                        <h4 className='starts-feed'><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiOutlineStar /></h4>
+                                                        <h4 className='app__website__category' title='category'>{website.category}</h4>
+
+                                                    </div>
+                                                </div>
+
+                                            </a>
+                                        </SwiperSlide>
+                                        :
+                                        <SwiperSlide key={index + website.token + '2'}>
+
+                                            <div style={{ filter: 'brightness(60%)', opacity: '.5' }} title="Not Availale">
+                                                <img src={website.image} alt={website.name} />
+                                                <div className='app__swipper__website__details'>
+                                                    <div>
+                                                        <div className='main__details'>
+                                                            <h3 title='website name'>{website.website_name}</h3>
+                                                            <h4 title='price'>{website.price}$ {website.old_price ? <sub><del>{website.old_price}</del></sub> : ''}</h4>
+                                                        </div>
+                                                        <p title='description'>{website.description}</p>
+                                                        <h4 className='app__website__category' title='category'>{website.category}</h4>
+                                                        <h4 className='app__website__dev_time'>{website.developing_Time}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+
+
+                                ))}
+                            </Swiper>
                         </div>
                     </div>
 
