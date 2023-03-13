@@ -41,7 +41,7 @@ const Payment = () => {
 
     useEffect(() => {
 
-        if (getUser && accessToken && params.id) {
+        if (getUser && accessToken && params.token) {
             getWebsite();
         } else {
             navigate('/login', { replace: true });
@@ -87,6 +87,27 @@ const Payment = () => {
     const submitMonWest = async (e) => {
         e.preventDefault();
 
+    }
+
+    const paypalCheckout = async (e) => {
+
+        setHandleShow('paypal')
+
+        const websiteForm = new FormData();
+
+
+        websiteForm.append('website_name' , websiteData.website_name);
+        websiteForm.append('price' , websiteData.price);
+        websiteForm.append('description', websiteData.description);
+        websiteForm.append('website_token', websiteData.token);
+
+        sec_http ?
+            await sec_http.post(`/api/checkout/paypal`, websiteForm)
+                .then((res) => {
+                    console.log(res);
+                })
+            :
+            navigate('/', { replace: true });
     }
 
     return (
@@ -397,7 +418,7 @@ const Payment = () => {
                             </div>
                         </div>
                         <div className="pay-with-paypal">
-                            <button onClick={e => setHandleShow('paypal')} className={paymentMethods === 'paypal' ? 'select-div-pay' : 'selected-div-pay'}>
+                            <button onClick={paypalCheckout} className={paymentMethods === 'paypal' ? 'select-div-pay' : 'selected-div-pay'}>
                                 <h4>PayPal</h4> <img src={PayPal} alt="payapl-png" width='40px' />
                             </button>
                         </div>
