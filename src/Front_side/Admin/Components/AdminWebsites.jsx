@@ -10,7 +10,7 @@ const AdminWebsites = () => {
 
     const [positionWebsites, setPositionWebsites] = useState('all')
     const [websites, setWebsites] = useState([]);
-    const [users , setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const [loading, setLoading] = useState(true)
 
@@ -21,7 +21,6 @@ const AdminWebsites = () => {
 
     useEffect(() => {
         if (getAdmin && accessToken) {
-            console.log(getAdmin);
             getDataFromAPI();
         } else {
             navigate('/signin', { replace: true })
@@ -35,7 +34,7 @@ const AdminWebsites = () => {
             .then(res => {
                 setWebsites(res.data.websites);
                 setUsers(res.data.users);
-                
+
                 setLoading(false);
 
                 console.log(users);
@@ -98,13 +97,16 @@ const AdminWebsites = () => {
                     </div>
 
                     <div className='admin-order-table'>
+                        <a href='/admin/website/create'>
+                            Add New Website
+                        </a>
                         <div className='admin-order-table-header'>
                             <div className='head-row row'>
-                                <div className='col-lg-1'><h4>Id</h4></div>
-                                <div className='col-lg-2'><h4>Token</h4></div>
+                                <div className='col-lg-1'><h4>Image</h4></div>
+                                <div className='col-lg-3'><h4>Token</h4></div>
                                 <div className='col-lg-1'><h4>Name</h4></div>
                                 <div className='col-lg-1'><h4>Price</h4></div>
-                                <div className='col-lg-2'><h4>Is Available</h4></div>
+                                <div className='col-lg-1'><h4>Available</h4></div>
                                 <div className='col-lg-1'><h4>Category</h4></div>
                                 <div className='col-lg-2'><h4>Developing Time</h4></div>
                                 <div className='col-lg-1'>
@@ -121,13 +123,13 @@ const AdminWebsites = () => {
                         <div className='admin-order-table-body'>
                             {websites ? websites.map((website, index) => (
                                 <a href={`/admin/website/${website.token}`} className='admin-order-table-row row' key={index}>
-                                    <div className='col-lg-1'><h5>{website.id}</h5></div>
-                                    <div className='col-lg-2'><h5>{website.token}</h5></div>
-                                    <div className='col-lg-1'><h5>{users?.find((user) => user?.id === website?.user_id)?.first_name}</h5></div>
-                                    <div className='col-lg-1'><h5>{website.price}</h5></div>
-                                    <div className='col-lg-2'><h5>{website.status === 'available' ? 'Yes' : 'No'}</h5></div>
-                                    <div className='col-lg-1'><h5>{website.category}$</h5></div>
-                                    <div className='col-lg-2'><h5>{website.developing_time}</h5></div>
+                                    <div className='col-lg-1'><img src={website.image} alt={website.website_name} width={'60px'} /></div>
+                                    <div className='col-lg-3'><h5>{website.token}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.website_name}</h5></div>
+                                    <div className='col-lg-1'><h5>${website.price}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.status === 'available' ? 'Yes' : 'No'}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.category}</h5></div>
+                                    <div className='col-lg-2'><h5>{website.developing_Time}</h5></div>
                                     <div className='col-lg-1'><h5 className={orderStatus(website.status)}>{website.status}</h5></div>
                                 </a>
                             )) :

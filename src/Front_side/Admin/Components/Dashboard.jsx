@@ -53,22 +53,19 @@ export
     const [var_users, setvarUsers] = useState([]);
 
 
-    console.log(var_orders, var_users);
-    console.log(var_users.January , var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December);
-
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const data = {
         labels,
         datasets: [
             {
                 label: 'Orders',
-                data: [var_orders.January , var_orders.February, var_orders.March, var_orders.April, var_orders.May, var_orders.June, var_orders.July, var_orders.August, var_orders.September, var_orders.October, var_orders.November, var_orders.December],
+                data: [var_orders.January, var_orders.February, var_orders.March, var_orders.April, var_orders.May, var_orders.June, var_orders.July, var_orders.August, var_orders.September, var_orders.October, var_orders.November, var_orders.December],
                 borderColor: '#ffe662',
                 backgroundColor: '#ffe662',
             },
             {
                 label: 'Users',
-                data: [var_users.January , var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December],
+                data: [var_users.January, var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December],
                 borderColor: '#2c2827',
                 backgroundColor: '#2c2827',
             },
@@ -135,6 +132,17 @@ export
             })
     }
 
+    const orderStatus = (status) => {
+        if (status === 'completed') {
+            return 'completed';
+        } else if (status === 'pending') {
+            return 'pending';
+        } else if (status === 'processing') {
+            return 'processing';
+        } else if (status === 'decline') {
+            return 'decline';
+        }
+    }
 
     return (
         LoadingS ?
@@ -157,7 +165,7 @@ export
                                         <div className="last-order-card">
                                             <div className="last-order-card-content-title">
                                                 <h3>{order.order_number}</h3>
-                                                <p>{order ? moment(order?.created_at?.split('T')[0] + ' ' + order?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
+                                                <p>{order ? moment(order?.created_at?.split('T')[0] + ' ' + order?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''} <span className={orderStatus(order.status)}>{order.status}</span></p>
                                             </div>
                                             <div className="last-order-card-content-price">
                                                 <h4>{order.grand_total}$</h4>
@@ -233,7 +241,7 @@ export
                                     <h4>Pending Orders : </h4>
                                     <div className="orders-c-button-link">
                                         <h4 className="pending-or">{pending_orders}</h4>
-                                        <a href="/orders">Visit</a>
+                                        <a href="/admin/orders/pending">Visit</a>
                                     </div>
                                 </div>
 
@@ -241,7 +249,7 @@ export
                                     <h4>Canceled Orders : </h4>
                                     <div className="orders-c-button-link">
                                         <h4 className="canceled-or">{canceled_orders}</h4>
-                                        <a href="/orders">Visit</a>
+                                        <a href="/admin/orders/decline">Visit</a>
                                     </div>
                                 </div>
                             </div>

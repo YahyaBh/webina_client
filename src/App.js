@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 
 
-import CreateWebsite from "./Front_side/Admin/Components/CreateWebsite";
 import Users from "./Front_side/Admin/Components/Users";
 import Services from "./Front_side/Admin/Components/Services";
 import Dashboard from "./Front_side/Admin/Components/Dashboard";
@@ -33,6 +32,7 @@ import AdminOrders from "./Front_side/Admin/Components/AdminOrders";
 import AdminOrder from "./Front_side/Admin/Components/AdminOrder";
 import User from "./Front_side/Admin/Components/User";
 import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
+import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate";
 
 
 function App() {
@@ -50,13 +50,14 @@ function App() {
         <Route exact path='/admin/dashboard' element={<Dashboard />} />
         <Route exact path='/admin/services' element={<Services />} />
         <Route exact path='/admin/orders' element={<AdminOrders />} />
+        <Route exact path='/admin/orders/:type' element={<AdminOrders />} />
         <Route exact path='/admin/order/:id' element={<AdminOrder />} />
         <Route exact path='/admin/users' element={<Users />} />
         <Route exact path='/admin/user/:id' element={<User />} />
-        <Route exact path='/admin/createWebsite' element={<CreateWebsite />} />
         <Route exact path='/admin/chat' element={<ChatAdmin />} />
         <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />
         <Route exact path='/admin/websites' element={<AdminWebsites/>} />
+        <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
 
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 

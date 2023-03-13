@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import AuthUser from '../../context/AuthUser'
 import SideBar from './SideBar'
 import Loading from '../../pages/Loading'
@@ -14,6 +14,8 @@ const AdminOrders = () => {
     const [users, setUsers] = useState([]);
     const [usersOrders, setUsersOrders] = useState([])
 
+    const params = useParams();
+
     const [loading, setLoading] = useState(true)
 
 
@@ -23,17 +25,22 @@ const AdminOrders = () => {
 
     useEffect(() => {
         if (getAdmin && accessToken) {
-            console.log(getAdmin);
-            getDataFromAPI();
+
+            if (params) {
+                setPositionOrders(params.type)
+                getDataFromAPI(params);
+            } else {
+                getDataFromAPI();
+            }
+
         } else {
             navigate('/signin', { replace: true })
         }
     }, [])
 
 
-    const getDataFromAPI = async () => {
-
-        await admin_http?.post('/api/admin/orders', { type: positionOrders })
+    const getDataFromAPI = async (e) => {
+        await admin_http?.post('/api/admin/orders', e.type ? {type: e.type } : {type : positionOrders})
             .then(res => {
                 setOrders(res.data.orders);
                 setWebsites(res.data.websites);

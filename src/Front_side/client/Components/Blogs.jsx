@@ -16,7 +16,7 @@ const Blogs = () => {
 
 
     useEffect(() => {
-        http.get('/blogs')
+        http.get('/api/blogs')
             .then(res => {
                 if (res.status === 200) {
                     setBlogs(res.data.blogs);
@@ -61,13 +61,12 @@ const Blogs = () => {
                                 <h3>{blog.title}</h3>
                                 <img src={blog.image} alt={blog.title} />
                                 <p>{blog.body}</p>
-                                <p style={{ color : 'grey'}}>{blog.created_at ? moment(blog.created_at.split('T')[0] + ' ' + blog.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
+                                <p style={{ color: 'grey' }}>{blog.created_at ? moment(blog.created_at.split('T')[0] + ' ' + blog.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
                             </div>
                         )) :
                         <div>
-                            <h1>No Blogs Available Now</h1>
+                            <h1 style={{ fontFamily : 'Louis-Bold'}}>No Blogs Available Now</h1>
                         </div>
-
                     }
                 </div>
             </Fragment>
