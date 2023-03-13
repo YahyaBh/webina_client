@@ -7,17 +7,18 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import CreditCardForm from './CreditCard/CreditCardForm'
-import { BsArrowLeftShort } from 'react-icons/bs';
+import { BsArrowLeftShort, BsPaypal } from 'react-icons/bs';
 import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
 import WU from '../../../Assets/Images/pngwing.com (1).png'
 import CreditCards from '../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
+import PayPal from '../../../Assets/Images/Paypal_2014_logo.png'
 
 const Payment = () => {
 
 
     const params = useParams();
 
-    const { http, sec_http, getUser } = AuthUser();
+    const { http, sec_http, getUser, accessToken } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [fullImage, setFullImage] = useState(false);
@@ -40,7 +41,12 @@ const Payment = () => {
 
     useEffect(() => {
 
-        getWebsite();
+        if (getUser && accessToken && params.id) {
+            getWebsite();
+        } else {
+            navigate('/login', { replace: true });
+        }
+
     }, [])
 
 
@@ -51,21 +57,14 @@ const Payment = () => {
                     setWebsiteData(res.data.website);
                 })
                 .catch(err => {
-                    Swal.fire({
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        icon: 'error'
-                    })
                     setTimeout(() => {
                         navigate('/websites')
                     }, 2000);
                 })
             :
-            navigate('/')
-
+            navigate('/', { replace: true });
         setUserData(getUser, { sameSite: 'Lax' });
         setLoading(false);
-
     }
 
     const setHandleShow = (e) => {
@@ -74,14 +73,12 @@ const Payment = () => {
             console.log(paymentMethods);
         } else if (e === 'card') {
             setPaymentMethods('card');
-            console.log(paymentMethods);
         }
     }
 
     const setCashMethod = (e) => {
         if (paymentMethods === 'cash') {
             setCashMethods(e);
-            console.log(cashMethods);
         } else {
             setPaymentMethods('cash');
         }
@@ -398,6 +395,11 @@ const Payment = () => {
                             <div className={paymentMethods === 'card' ? 'show-method' : 'hide-method'}>
                                 <CreditCardForm websiteData={websiteData} />
                             </div>
+                        </div>
+                        <div className="pay-with-paypal">
+                            <button onClick={e => setHandleShow('paypal')} className={paymentMethods === 'paypal' ? 'select-div-pay' : 'selected-div-pay'}>
+                                <h4>PayPal</h4> <img src={PayPal} alt="payapl-png" width='40px' />
+                            </button>
                         </div>
                     </div>
 

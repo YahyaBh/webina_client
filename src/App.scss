@@ -4600,48 +4600,8 @@ body {
     }
 
 
-    .pay-with-cash {
 
 
-        .form-money-west {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-
-
-            input {
-                width: 100%;
-                padding: 10px;
-                height: 40px;
-                margin-top: 10px;
-            }
-
-            select {
-                width: 100%;
-                padding: 10px;
-                height: 40px;
-                margin-top: 10px;
-            }
-        }
-
-
-        .show-method {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-
-            .west-money-sel {
-                width: 180px;
-                height: 40px;
-
-                img {
-                    width: 60px;
-                }
-            }
-        }
-
-    }
 
 
 
@@ -4651,6 +4611,57 @@ body {
         justify-content: flex-start;
         align-items: flex-start;
         flex-direction: column;
+
+        .pay-with-cash {
+
+
+            .form-money-west {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    height: 40px;
+                    margin-top: 10px;
+                }
+
+                select {
+                    width: 100%;
+                    padding: 10px;
+                    height: 40px;
+                    margin-top: 10px;
+                }
+            }
+
+
+            .show-method {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                .west-money-sel {
+                    width: 180px;
+                    height: 40px;
+
+                    img {
+                        width: 60px;
+                    }
+                }
+            }
+
+        }
+
+        .pay-with-paypal {
+            .selected-div-pay {
+                img {
+                    width: 40px !important;
+                }
+            }
+        }
 
         .hide-method {
             height: 0;
@@ -5931,6 +5942,7 @@ body {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+
                 input[type='file'] {
                     border: none;
                 }
