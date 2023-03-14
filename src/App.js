@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 
@@ -34,61 +34,64 @@ import User from "./Front_side/Admin/Components/User";
 import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
 import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate";
 
+import AuthUser from "./Front_side/context/AuthUser";
+
+
+
 
 function App() {
 
 
 
 
+  
+
+
   return (
-    <Fragment>
+      <Fragment>
 
 
 
-      <Routes>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
 
-        <Route exact path='/admin/dashboard' element={<Dashboard />} />
-        <Route exact path='/admin/services' element={<Services />} />
-        <Route exact path='/admin/orders' element={<AdminOrders />} />
-        <Route exact path='/admin/orders/:type' element={<AdminOrders />} />
-        <Route exact path='/admin/order/:id' element={<AdminOrder />} />
-        <Route exact path='/admin/users' element={<Users />} />
-        <Route exact path='/admin/user/:id' element={<User />} />
-        <Route exact path='/admin/chat' element={<ChatAdmin />} />
-        <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />
-        <Route exact path='/admin/websites' element={<AdminWebsites/>} />
-        <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
+          <Route exact path='/admin/dashboard' element={<Dashboard />} />
+          <Route exact path='/admin/services' element={<Services />} />
+          <Route exact path='/admin/orders' element={<AdminOrders />} />
+          <Route exact path='/admin/orders/:type' element={<AdminOrders />} />
+          <Route exact path='/admin/order/:id' element={<AdminOrder />} />
+          <Route exact path='/admin/users' element={<Users />} />
+          <Route exact path='/admin/user/:id' element={<User />} />
+          <Route exact path='/admin/chat' element={<ChatAdmin />} />
+          <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />
+          <Route exact path='/admin/websites' element={<AdminWebsites />} />
+          <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
 
-        <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
-
-
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/websites' element={<Websites />} />
-        <Route exact path='/website/:token' element={<Website />} />
-        <Route exact path='/blogs' element={<Blogs />} />
-        <Route exact path='/hiring' element={<Hire />} />
-        <Route exact path='/about' element={<AboutUs />} />
-
-        <Route exact path="/signin" element={<SignIn />} />
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route path="/email/verify/:email/:token" element={<EmailVerify />} />
-        <Route path="/auth/google" element={<GoogleCallBack />}></Route>
-        <Route exact path="/profile" element={<Profile />} />
-        <Route exact path="/orders" element={<Orders />} />
-        <Route exact path="/order/:order_token" element={<Order />} />
-        <Route exact path="/buy/website/:token" element={<Payment />} />
-        <Route exact path="/payment/:result" element={<PaymentSuccess />} />
-        <Route exact path='/chat' element={<Chat />} />
-        <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 
 
+          <Route exact path='/websites' element={<Websites />} />
+          <Route exact path='/website/:token' element={<Website />} />
+          <Route exact path='/blogs' element={<Blogs />} />
+          <Route exact path='/hiring' element={<Hire />} />
+          <Route exact path='/about' element={<AboutUs />} />
+          <Route exact path="/signin" element={<SignIn />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route path="/email/verify/:email/:token" element={<EmailVerify />} />
+          <Route path="/auth/google" element={<GoogleCallBack />}></Route>
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/orders" element={<Orders />} />
+          <Route exact path="/order/:order_token" element={<Order />} />
+          <Route exact path="/buy/website/:token" element={<Payment />} />
+          <Route exact path="/payment/:result" element={<PaymentSuccess />} />
+          <Route exact path='/chat' element={<Chat />} />
+          <Route exact path="/logout" element={<Logout />} />
+          <Route exact path='*' element={<Error />} />
 
+        </Routes>
+      </Fragment >
 
-        <Route exact path='*' element={<Error />} />
-
-
-      </Routes>
-    </Fragment >
+      
   );
 }
 

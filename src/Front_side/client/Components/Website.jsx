@@ -92,9 +92,10 @@ const Website = () => {
 
                     <div className='app__single__website__container'>
                         <div className='head__title'>
-                            <h2>TITLE HEADER</h2>
+                            <h2>{websiteData.website_name}</h2>
                             <div className='head__feedback'>
-                                <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar />
+                                {websiteData.stars.map((object, i) => <AiFillStar />)}
+                                {/* <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /> */}
                                 <a href='/'>customers reviews</a>
                             </div>
                         </div>
