@@ -20,7 +20,6 @@ const Blogs = () => {
             .then(res => {
                 if (res.status === 200) {
                     setBlogs(res.data.blogs);
-                    console.log(res.data.blogs);
                     setLoading(false);
                 } else {
                     Swal.fire({

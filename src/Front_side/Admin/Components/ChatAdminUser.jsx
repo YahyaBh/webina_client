@@ -37,7 +37,7 @@ const ChatAdminUser = () => {
         admin_http.post(`/admin/chat/user`, senderDataForm)
             .then(res => {
                 res.data.messages.map(message => (
-                    console.log(message.message)
+                    console.log(message)
                 ))
             })
 

@@ -80,7 +80,7 @@ const SignIn = () => {
                 })
             })
             .catch(err => {
-                if (err.response.status === 401) {
+                if (err.status === 401) {
                     Swal.fire({
                         title: 'Error!',
                         text: 'Account not found , sign up ?',

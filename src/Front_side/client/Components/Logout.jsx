@@ -29,7 +29,6 @@ const Logout = () => {
                     navigate('/');
                 })
                 .catch((err) => {
-                    console.log(err);
                     Swal.fire({
                         title: 'Error!',
                         text: err.data.message,

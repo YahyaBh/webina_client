@@ -70,7 +70,6 @@ const Payment = () => {
     const setHandleShow = (e) => {
         if (e === 'cash') {
             setPaymentMethods('cash');
-            console.log(paymentMethods);
         } else if (e === 'card') {
             setPaymentMethods('card');
         }
@@ -104,7 +103,6 @@ const Payment = () => {
         sec_http ?
             await sec_http.post(`/api/checkout/paypal`, websiteForm)
                 .then((res) => {
-                    console.log(res);
                 })
             :
             navigate('/', { replace: true });

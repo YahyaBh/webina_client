@@ -37,10 +37,8 @@ const AdminWebsites = () => {
 
                 setLoading(false);
 
-                console.log(users);
             })
             .catch(err => {
-                console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',

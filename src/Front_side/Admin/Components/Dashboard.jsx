@@ -19,6 +19,7 @@ import { useState } from "react";
 import AuthUser from "../../context/AuthUser";
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import moment from "moment";
+import Swal from "sweetalert2";
 
 
 ChartJS.register(
@@ -128,7 +129,11 @@ export
                 setvarUsers(res.data.var_users[0]);
             })
             .catch(err => {
-                console.log(err.response.data.message)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.response.data.message,
+                })
             })
     }
 

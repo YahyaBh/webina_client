@@ -12,6 +12,8 @@ axios.defaults.headers.common["Access-Control-Max-Age"] = "1800";
 axios.defaults.headers.common["Access-Control-Allow-Headers"] = "content-type";
 axios.defaults.headers.common["Access-Control-Allow-Methods"] = "PUT, POST, GET, DELETE, PATCH, OPTIONS";
 
+const baseUrl = process.env.REACT_APP_API_URL;
+
 export default function AuthUser() {
 
     const getAdmin = cookie.get('__ADMINISTRAOT_DATA') ? cookie.get('__ADMINISTRAOT_DATA') : null;
@@ -34,21 +36,21 @@ export default function AuthUser() {
 
 
     const http = axios.create({
-        baseURL: 'http://localhost:8000',
+        baseURL: baseUrl,
     })
 
     const csrf = async () => await http.get('/sanctum/csrf-cookie');
 
 
     const sec_http = getUser ? axios.create({
-        baseURL: "http://localhost:8000/",
+        baseURL: baseUrl,
         headers: {
             'Authorization': `Bearer ${accessToken}`
         }
     }) : null;
 
     const image_upload = getUser || getAdmin ? axios.create({
-        baseURL: "http://localhost:8000/api",
+        baseURL: `${baseUrl}/api`,
         headers: {
             'content-type': 'multipart/form-data',
             'Authorization': `Bearer ${accessToken}`
@@ -56,7 +58,7 @@ export default function AuthUser() {
     }) : null;
 
     const admin_http = getAdmin ? axios.create({
-        baseURL: "http://localhost:8000/",
+        baseURL: baseUrl,
         headers: {
             'Authorization': `Bearer ${accessToken}`
         }

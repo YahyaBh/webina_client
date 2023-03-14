@@ -104,7 +104,6 @@ const Websites = () => {
             }
 
         } catch (error) {
-            console.log(error);
         }
     }
     return (

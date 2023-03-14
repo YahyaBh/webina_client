@@ -19,7 +19,6 @@ const Users = () => {
 
     useEffect(() => {
         if (getAdmin && accessToken) {
-            console.log(getAdmin);
             getDataFromAPI();
         } else {
             navigate('/signin', { replace: true })
@@ -35,7 +34,6 @@ const Users = () => {
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',

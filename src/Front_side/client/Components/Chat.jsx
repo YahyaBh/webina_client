@@ -70,7 +70,6 @@ const Chat = () => {
                         title: 'Oops...',
                         text: err.response.data.message,
                     })
-                    console.log('Error', err.response.data.message);
                 })
 
 
