@@ -4592,7 +4592,7 @@ body {
         background-color: rgb(var(--mid-color));
         border-radius: 25px;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         margin-bottom: 20px;
         font-family: Louis-Bold;
@@ -4652,11 +4652,19 @@ body {
                     -moz-border-radius: 4px;
                     -ms-border-radius: 4px;
                     -o-border-radius: 4px;
-
                     background-color: #f1f1f1;
                     color: rgb(var(--heavy-color));
                     font-family: Louis-Bold;
                     border: 2px solid rgb(var(--heavy-color));
+                    transition: all .3s ease;
+                    -webkit-transition: all .3s ease;
+                    -moz-transition: all .3s ease;
+                    -ms-transition: all .3s ease;
+                    -o-transition: all .3s ease;
+
+                    &:hover {
+                        opacity: .3;
+                    }
 
                     img {
                         width: 60px;
@@ -4898,12 +4906,12 @@ body {
         display: flex;
         justify-content: space-around;
         margin-top: 8vh;
-        height: 100dvh;
-        ;
+        height: auto;
         padding: 15px 50px;
 
         .credit-card-form {
             width: 100%;
+            height: auto;
         }
 
     }
@@ -4912,9 +4920,7 @@ body {
         display: flex;
         flex-direction: column;
         padding: 17px;
-        height: 65vh;
-        height: 100dvh;
-        ;
+        height: auto;
 
 
 
