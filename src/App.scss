@@ -4647,6 +4647,16 @@ body {
                 .west-money-sel {
                     width: 48%;
                     height: 40px;
+                    border-radius: 4px;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -ms-border-radius: 4px;
+                    -o-border-radius: 4px;
+
+                    background-color: #f1f1f1;
+                    color: rgb(var(--heavy-color));
+                    font-family: Louis-Bold;
+                    border: 2px solid rgb(var(--heavy-color));
 
                     img {
                         width: 60px;
