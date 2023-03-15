@@ -95,8 +95,8 @@ const Payment = () => {
         const websiteForm = new FormData();
 
 
-        websiteForm.append('website_name' , websiteData.website_name);
-        websiteForm.append('price' , websiteData.price);
+        websiteForm.append('website_name', websiteData.website_name);
+        websiteForm.append('price', websiteData.price);
         websiteForm.append('description', websiteData.description);
         websiteForm.append('website_token', websiteData.token);
 
@@ -136,9 +136,12 @@ const Payment = () => {
                             </button>
 
                             <div className={paymentMethods === 'cash' ? 'show-method' : 'hide-method'}>
-                                <button className='west-money-sel' onClick={e => setCashMethod('westrenunion')}>WestrenUnion <img src={WU} alt="westrenunion" /></button>
-                                <button className='west-money-sel' onClick={e => setCashMethod('moneygram')}>MoneyGram <img src={MoneyGram} alt="moneygram" /></button>
+                                <div className='cash-method'>
+                                    <button className='west-money-sel' onClick={e => setCashMethod('westrenunion')}>WestrenUnion <img src={WU} alt="westrenunion" /></button>
+                                    <button className='west-money-sel' onClick={e => setCashMethod('moneygram')}>MoneyGram <img src={MoneyGram} alt="moneygram" /></button>
+                                </div>
 
+                                
                                 <form className='form-money-west' onSubmit={submitMonWest} >
                                     <input type="text" name='full_name' onChange={(e) => setFullName(e.target.value)} value={full_name} placeholder="Full Name" />
                                     <input type="tel" name='phone_number' onChange={(e) => setPhone(e.target.value)} value={phone} placeholder="Phone Number" />

@@ -4602,7 +4602,11 @@ body {
 
 
 
-
+    .cash-method {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
 
 
@@ -4639,17 +4643,30 @@ body {
 
 
             .show-method {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
 
                 .west-money-sel {
-                    width: 180px;
+                    width: 48%;
                     height: 40px;
 
                     img {
                         width: 60px;
                     }
+                }
+
+                input {
+                    border-radius: 10px;
+                    height: 50px;
+                    margin-top: 20px;
+                    background-color: #f1f1f1;
+                    padding: 10px;
+                }
+
+                select {
+                    border-radius: 10px;
+                    height: 50px;
+                    margin-top: 20px;
+                    background-color: #f1f1f1;
+                    padding: 10px;
                 }
             }
 
@@ -4673,6 +4690,8 @@ body {
             height: auto;
             opacity: 1;
             display: block;
+
+
         }
 
         .select-div-pay {
@@ -4993,35 +5012,64 @@ body {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        flex-direction: column;
 
-        a {
-            width: auto;
-            height: 40px;
-            text-decoration: none;
-            text-transform: uppercase;
-            padding: 20px;
-            margin: 5px;
+
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: row;
+
+            a {
+                width: auto;
+                height: 40px;
+                text-decoration: none;
+                text-transform: uppercase;
+                padding: 20px;
+                margin: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px;
+                transition: all .3s ease;
+                cursor: pointer;
+
+
+                &:hover {
+                    transform: scale(.96);
+                    opacity: .7;
+                }
+
+                &:nth-child(1) {
+                    background-color: rgb(var(--heavy-color));
+                    color: rgb(var(--mid-color));
+                }
+
+                &:nth-child(2) {
+                    background-color: rgb(var(--mid-color));
+                    color: rgb(var(--heavy-color));
+                }
+            }
+        }
+
+        .write-review {
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 20px;
-            transition: all .3s ease;
-            cursor: pointer;
+            flex-direction: column;
+
+            margin-top: 50px;
 
 
-            &:hover {
-                transform: scale(.96);
-                opacity: .7;
-            }
-
-            &:nth-child(1) {
-                background-color: rgb(var(--heavy-color));
-                color: rgb(var(--mid-color));
-            }
-
-            &:nth-child(2) {
-                background-color: rgb(var(--mid-color));
-                color: rgb(var(--heavy-color));
+            textarea {
+                border: 2px solid rgb(var(--heavy-color));
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
             }
         }
 

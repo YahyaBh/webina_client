@@ -94,7 +94,9 @@ const Website = () => {
                         <div className='head__title'>
                             <h2>{websiteData.website_name}</h2>
                             <div className='head__feedback'>
-                                {websiteData.stars.map((object, i) => <AiFillStar />)}
+                                {Array.from(Array(websiteData.stars), (e, i) => {
+                                    return <AiFillStar key={i} />
+                                })}
                                 {/* <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /> */}
                                 <a href='/'>customers reviews</a>
                             </div>
@@ -161,14 +163,7 @@ const Website = () => {
                                     </div>
                                     <div className='light-back'>
                                         <div className='website__description__paragraph'>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                                when an unknown printer took a galley of type and scrambled it to make a type
-                                                specimen book. It has survived not only five centuries, but also the leap into
-                                                electronic typesetting, remaining essentially unchanged. It was popularised in
-                                                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                                and more recently with desktop publishing software like Aldus PageMaker
-                                                including versions of Lorem Ipsum.</p>
+                                            <p>{websiteData.description}</p>
                                         </div>
 
                                         <div className="website__design__section">
@@ -190,15 +185,11 @@ const Website = () => {
 
                                         <div className="website__technologies__used">
                                             <h3>Website Specifications</h3>
-
+                                            {console.log(websiteData.specifications)}
                                             <ul>
-                                                <li>Html</li>
-                                                <li>Css</li>
-                                                <li>JavaScript</li>
-                                                <li>JavaScript</li>
-                                                <li>JavaScript</li>
-                                                <li>JavaScript</li>
-                                                <li>JavaScript</li>
+                                                {websiteData.specifications.split(',').map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>

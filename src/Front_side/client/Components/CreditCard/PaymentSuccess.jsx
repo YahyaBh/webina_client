@@ -40,9 +40,23 @@ const PaymentSuccess = () => {
                 <div className='payment-success-container'>
                     <img src={SuccessGif} alt="success" />
                     <h2>Thank You For Your Order , It will be delivered to you shortly.</h2>
+
+
                     <div className='payment-success-button-container'>
-                        <a href='/'>Back To Home</a>
-                        <a href='/orders'>Check Orders</a>
+                        <div className='buttons'>
+                            <a href='/'>Back To Home</a>
+                            <a href='/orders'>Check Orders</a>
+                        </div>
+
+                        
+                        <div className='write-review'>
+                            <h3>Rate This Website</h3>
+
+                            <textarea name="review" id="review" cols="10" rows="20" placeholder='Write a review' />
+                            <button>Submit</button>
+                        </div>
+
+
                     </div>
                 </div>
             }
