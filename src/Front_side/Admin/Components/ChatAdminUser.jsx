@@ -11,11 +11,11 @@ const ChatAdminUser = () => {
     const [loading, setLoading] = useState();
 
 
-    const { admin_http } = AuthUser();
+    const { admin_http , getAdmin } = AuthUser();
 
     useEffect(() => {
 
-        if (Cookies.get('admin_token') && Cookies.get('admin')) {
+        if (admin_http && getAdmin) {
 
             getSenderData();
 
@@ -30,7 +30,7 @@ const ChatAdminUser = () => {
 
 
         senderDataForm.append('admin_token', Cookies.get('admin_token'));
-        senderDataForm.append('admin_id', JSON.parse(Cookies.get('admin')).id);
+        senderDataForm.append('admin_id', getAdmin.id);
         senderDataForm.append('sender_token', params.token);
 
 

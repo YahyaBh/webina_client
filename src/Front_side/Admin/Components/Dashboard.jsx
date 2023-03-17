@@ -60,13 +60,13 @@ export
         datasets: [
             {
                 label: 'Orders',
-                data: [var_orders.January, var_orders.February, var_orders.March, var_orders.April, var_orders.May, var_orders.June, var_orders.July, var_orders.August, var_orders.September, var_orders.October, var_orders.November, var_orders.December],
+                data: [var_orders?.January, var_orders?.February, var_orders?.March, var_orders?.April, var_orders?.May, var_orders?.June, var_orders?.July, var_orders?.August, var_orders?.September, var_orders?.October, var_orders?.November, var_orders?.December],
                 borderColor: '#ffe662',
                 backgroundColor: '#ffe662',
             },
             {
                 label: 'Users',
-                data: [var_users.January, var_users.February, var_users.March, var_users.April, var_users.May, var_users.June, var_users.July, var_users.August, var_users.September, var_users.October, var_users.November, var_users.December],
+                data: [var_users?.January, var_users?.February, var_users?.March, var_users?.April, var_users?.May, var_users?.June, var_users?.July, var_users?.August, var_users?.September, var_users?.October, var_users?.November, var_users?.December],
                 borderColor: '#2c2827',
                 backgroundColor: '#2c2827',
             },
@@ -81,7 +81,7 @@ export
             },
             title: {
                 display: true,
-                text: `Users and orders , ${var_orders.year && var_orders.year === var_users.year ? var_orders.year : '12 months'}`,
+                text: `Users and orders , ${var_orders?.year && var_orders?.year === var_users.year ? var_orders?.year : '12 months'}`,
 
             },
         },

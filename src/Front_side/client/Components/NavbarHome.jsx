@@ -10,7 +10,7 @@ import { MdOutlineSegment } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
 
 
-const NavbarHome = () => {
+const NavbarHome = (props) => {
 
 
     const navigate = useNavigate();
@@ -24,7 +24,12 @@ const NavbarHome = () => {
         if (user) {
             setUserData(user);
         }
+
+
     }, [])
+
+    console.log(props);
+
 
 
     const logoutUser = (e) => {
@@ -61,13 +66,16 @@ const NavbarHome = () => {
         }
     }
 
+
+
+
     return (
         <div>
             {!user ?
 
                 <>
 
-                    <nav className='m-navbar'>
+                    <nav className={props.navDark ? 'm-navbar dark' : 'm-navbar'} >
                         <a href='/'>
                             <img className='navbar-logo' src={WebInaLogo} alt="logo" width='40px' />
                         </a>
@@ -167,7 +175,7 @@ const NavbarHome = () => {
                 :
 
                 <>
-                    <nav className='m-navbar'>
+                    <nav className={props.navDark ? 'm-navbar dark' : 'm-navbar'}>
                         <a href='/'>
                             <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
                         </a>

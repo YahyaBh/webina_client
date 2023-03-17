@@ -58,6 +58,7 @@
 }
 
 
+
 .m-navbar {
 
     display: flex;
@@ -66,7 +67,9 @@
     padding: 15px 20px;
     width: 100%;
     position: fixed;
-    background-color: #111;
+    // background-color: rgba(var(--heavy-color) , 0.7);
+    background-color: transparent;
+    // backdrop-filter: blur(20px);
     z-index: 20;
 
     .navbar-logo {

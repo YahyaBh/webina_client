@@ -39,6 +39,31 @@ body {
 }
 
 
+.dark {
+    background-color: #11111196 !important;
+    animation: myAnim .3s linear 0s 1 alternate forwards;
+    -webkit-animation: myAnim .3s linear 0s 1 alternate forwards;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    backdrop-filter: blur(10px);
+
+
+    @keyframes myAnim {
+
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+
 
 
 
@@ -3149,7 +3174,7 @@ body {
 
     background-color: rgb(var(--mid-color));
     padding: 20px 0px;
-    height: 30dvh;
+    height: 50dvh;
     display: flex;
     justify-content: center;
     align-items: center;

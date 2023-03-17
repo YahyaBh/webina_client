@@ -17,7 +17,6 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -58,6 +57,9 @@ const Home = () => {
 
     const [active, setActive] = useState(true);
 
+    const [navDark, setNavDark] = useState(false);
+
+
     useLayoutEffect(() => {
         getStatus();
     }, [])
@@ -65,17 +67,30 @@ const Home = () => {
     useEffect(() => {
         getTestimonials_Categories();
         AOS.init();
+
+        onScroll();
+        window.addEventListener('scroll', onScroll);
+
     }, [])
+
+    const onScroll = () => {
+        if (window.scrollY >= 10) {
+            setNavDark(true);
+        } else {
+            setNavDark(false);
+        }
+    }
+
 
     const getStatus = async () => {
         await http.get('/api/website/status')
             .then(response => {
-                console.log(response);
                 if (response.data.status === 'active') {
                     setActive(true);
                     setLoading(false);
                 } else {
                     setActive(false);
+                    setLoading(false);
                 }
             })
     }
@@ -217,8 +232,7 @@ const Home = () => {
                         <header className="app__header" id="home">
 
 
-                            <NavbarHome userData={user} />
-
+                            <NavbarHome navDark={navDark} userData={user} />
 
                             <div className="app__header__content">
 
@@ -255,7 +269,7 @@ const Home = () => {
 
 
                                     <p>We will help you make your dreams come true by <br /> making you the most professional website among the market</p>
-                                    {!cookie.get('user') ?
+                                    {!getUser ?
                                         <Link to='/signup' className="app__header__title__sign">
                                             <span className="app__header__title__sign__get">GET STARTED</span>
                                             <svg width="13px" height="10px" viewBox="0 0 13 10">
