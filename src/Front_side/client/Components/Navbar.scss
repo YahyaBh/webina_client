@@ -64,6 +64,10 @@
     justify-content: space-around;
     align-items: center;
     padding: 15px 20px;
+    width: 100%;
+    position: fixed;
+    background-color: #111;
+    z-index: 20;
 
     .navbar-logo {
         width: 50px;

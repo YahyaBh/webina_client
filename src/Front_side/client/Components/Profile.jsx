@@ -25,16 +25,17 @@ const Profile = () => {
     const [firstname, setFirstName] = useState(null);
     const [lastname, setLastName] = useState(null);
     const [password, setPassword] = useState('');
-    const [newPass, setNewPass] = useState('');
     const [confirmnewPass, setConfirmNewPass] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [phonenumber, setPhoneNumber] = useState('');
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState(null);
     const [selected, setSelected] = useState(false);
 
+
     const navigate = useNavigate();
 
-    const { sec_http, image_upload, getUser, setUser, csrf, user , setAccessToken } = AuthUser();
+    const { sec_http, image_upload, getUser, setUser, csrf, user, setAccessToken } = AuthUser();
 
 
     useEffect(() => {
@@ -49,11 +50,14 @@ const Profile = () => {
                     .then(res => {
                         if (res.status === 200) {
                             setUserData(res.data.user);
+
                             setFirstName(res.data.user.first_name);
                             setLastName(res.data.user.last_name);
                             setEmail(res.data.user.email);
                             setImage(res.data.user.avatar);
                             setUser(res.data.user);
+                            setPhoneNumber(res.data.phonenumber);
+
                             setLoader(false);
                         }
 
@@ -89,25 +93,31 @@ const Profile = () => {
     const updateUser = (e) => {
         e.preventDefault();
 
+        if (email !== userData.email || phonenumber !== userData.phone || firstname !== userData.first_name || lastname !== userData.last_name) {
+            formData.append('email', userData.email);
+            formData.append('new_email' , email)
+            formData.append('phone', phonenumber);
+            formData.append('first_name' , firstname)
+            formData.append('last_name' , lastname)
+
+            try {
+                sec_http.post('/api/user/update', formData)
+                    .then(res => {
+                        setUserData(res.data.user);
+                        setFirstName(res.data.user.first_name);
+                        setLastName(res.data.user.last_name);
+                        setEmail(res.data.user.email);
+                        setImage(res.data.user.avatar);
+                        setUser(res.data.user);
+                        setPhoneNumber(res.data.user.phone);
+
+                        setLoader(false);
+                    })
+            } catch (err) {
+                console.error(err);
+            }
 
 
-
-        if (email || phonenumber || firstname || lastname) {
-            formData.append('remember_token', cookie.get('__ACCESS_TOKEN'));
-
-            if (email) {
-                formData.append('email', user.email);
-                formData.append('new_email', email);
-            }
-            if (phonenumber) {
-                formData.append('phone_number', phonenumber);
-            }
-            if (firstname) {
-                formData.append('first_name', firstname);
-            }
-            if (lastname) {
-                formData.append('last_name', lastname);
-            }
         } else {
             Swal.fire({
                 icon: 'info',
@@ -122,11 +132,11 @@ const Profile = () => {
                 .then(res => {
                     if (res.status === 200) {
                         setUserData(res.data.user);
+                        setUser(res.data.user);
                         setFirstName(res.data.user.first_name);
                         setLastName(res.data.user.last_name);
                         setEmail(res.data.user.email);
                         setImage(res.data.user.avatar);
-                        setUser(res.data.user);
 
                         if (res.status === 400) {
                             Swal.fire({
@@ -175,9 +185,9 @@ const Profile = () => {
         await sec_http.post(`/api/email/verifiction/check`, checkEmail)
             .then(res => {
                 if (res.status === 200) {
-                        setAccessToken(res.data.access_token)
-                        setUser(res.data.user);
-                        navigate(`/profile`);
+                    setAccessToken(res.data.access_token)
+                    setUser(res.data.user);
+                    navigate(`/profile`);
                 }
             })
             .catch((err) => {
@@ -229,10 +239,9 @@ const Profile = () => {
 
 
     const changePassword = (e) => {
-        if (confirmnewPass === newPass && confirmnewPass !== '' && newPass !== '') {
+        if (confirmnewPass === newPassword && confirmnewPass !== '' && newPassword !== '') {
             setLoader(true);
-
-            sec_http.post('/user/update/password', { passowrd: password, new_password: newPass })
+            sec_http.post('/user/update/password', { passowrd: password, new_password: newPassword })
                 .then(res => {
                     Swal.fire({
                         title: 'Success!',
@@ -306,7 +315,7 @@ const Profile = () => {
                                 <input type="text" name="password" value={password} onChange={e => setPassword(e.target.value)} />
 
                                 <label htmlFor="new-password">New Password</label>
-                                <input type="password" name='new-password' value={newPass} onChange={e => setNewPass(e.target.value)} />
+                                <input type="password" name='new-password' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
 
                                 <label htmlFor="new-password">Confrim New Password</label>
                                 <input type="password" name='confirm-new-password' value={confirmnewPass} onChange={e => setConfirmNewPass(e.target.value)} />

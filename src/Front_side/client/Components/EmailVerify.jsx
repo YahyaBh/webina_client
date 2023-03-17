@@ -28,13 +28,14 @@ const EmailVerify = () => {
             .then(res => {
                 if (res.data.user.role === 'user') {
                     setUser(res.data.user);
+                    setAccessToken(res.data.access_token);
                     navigate('/', { replace: true });
                 } else if (res.data.user.role === 'admin') {
                     navigate('/admin/dashboard', { replace: true });
                     setAdmin(res.data.user);
+                    setAccessToken(res.data.access_token);
                 }
                 setToken(res.data.token);
-                setAccessToken(res.data.token);
                 Swal.fire({
                     icon: 'success',
                     title: 'Email Verified',

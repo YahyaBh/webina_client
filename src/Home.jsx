@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
 import { TbBrandJavascript } from 'react-icons/tb';
@@ -56,11 +56,13 @@ const Home = () => {
     const [categories, setCategories] = useState([]);
     const [chatShown, setChatShown] = useState(false);
 
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(true);
 
+    useLayoutEffect(() => {
+        getStatus();
+    }, [])
 
     useEffect(() => {
-        getStatus();
         getTestimonials_Categories();
         AOS.init();
     }, [])
@@ -68,6 +70,7 @@ const Home = () => {
     const getStatus = async () => {
         await http.get('/api/website/status')
             .then(response => {
+                console.log(response);
                 if (response.data.status === 'active') {
                     setActive(true);
                     setLoading(false);
@@ -80,7 +83,7 @@ const Home = () => {
 
     const getTestimonials_Categories = async () => {
 
-        await http.get('/api/homepagetesti')
+        await http.get('/api/testimonials')
             .then((res) => {
                 if (res.status === 200) {
                     setLoading(false);
@@ -191,7 +194,7 @@ const Home = () => {
             loading ?
                 <Loading />
                 :
-                <div>
+                <div className='app__home'>
                     <section className='chat-with-us'>
                         <div className={chatShown ? 'chat-section' : 'chat-section-hidden'}>
                             <div className='text-chat-with-us'>
@@ -603,7 +606,7 @@ const Home = () => {
 
                         </section>
 
-                        <section className="app__skills" id='founders'>
+                        {/* <section className="app__skills" id='founders'>
 
                             <div className="app__skills__content">
                                 <div className="app__skills__title"><h2>WebIna Founders</h2></div>
@@ -696,7 +699,7 @@ const Home = () => {
                             </div >
 
 
-                        </section >
+                        </section > */}
 
 
                         <section className="app__testimonials" id='testimonials'>
