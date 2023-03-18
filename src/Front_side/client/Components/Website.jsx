@@ -77,6 +77,29 @@ const Website = () => {
 
     const downloadFiles = async () => {
 
+        const download = new FormData();
+
+        download.append('pdf_theme_name', websiteData.theme_document)
+
+        sec_http.post('/api/websites/download', download, {
+            responseType: 'blob'
+        })
+            .then(res => {
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `${websiteData.website_name}_Theme.pdf`); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error downloading',
+                    text: 'Something went wrong!',
+                })
+            })
+
     }
 
 
@@ -107,7 +130,7 @@ const Website = () => {
                                 <div className='head__image'>
                                     <div onClick={downloadFiles} className='image-download-container'>
                                         <h3><BiDownload /> Download Theme Preview</h3>
-                                        <img className={websiteData.image ? 'image_not_available' : ''} src={websiteData.image} alt={websiteData.website_name} />
+                                        <img className={websiteData.image ? 'image_not_available' : ''} src={`http://localhost:8000/uploads/websites/${websiteData.image}`} alt={websiteData.website_name} />
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +335,7 @@ const Website = () => {
                                     website.status === 'available' ?
                                         <SwiperSlide key={index + website.token + '1'}>
                                             <a href={`/website/${website.token}`} key={index + website.token + '1'}>
-                                                <img src={website.image} alt={website.name} />
+                                                <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                                                 <div className='app__swipper__website__details'>
                                                     <div>
                                                         <div className='main__details'>
@@ -336,7 +359,7 @@ const Website = () => {
                                         <SwiperSlide key={index + website.token + '2'}>
 
                                             <div style={{ filter: 'brightness(60%)', opacity: '.5' }} title="Not Availale">
-                                                <img src={website.image} alt={website.name} />
+                                                <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                                                 <div className='app__swipper__website__details'>
                                                     <div>
                                                         <div className='main__details'>

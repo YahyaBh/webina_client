@@ -35,6 +35,7 @@ import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
 import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate";
 
 import AuthUser from "./Front_side/context/AuthUser";
+import AdminContact from "./Front_side/Admin/Components/AdminContact";
 
 
 
@@ -66,6 +67,8 @@ function App() {
           <Route exact path='/admin/chat/:token' element={<ChatAdminUser />} />
           <Route exact path='/admin/websites' element={<AdminWebsites />} />
           <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
+          <Route exact path='/admin/contact/messages' element={<AdminContact />} />
+
 
           <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
 

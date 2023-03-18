@@ -292,7 +292,7 @@ const Profile = () => {
                                 <div className="modal-body modal-body-profile">
                                     <img style={{ margin: 'auto' }} src={selected ? imageValue : `http://localhost:8000/uploads/users/${image}`} alt={userData.full_name} />
                                     <div className='imageUploadContainer' >
-                                        <input type="file" accept="image/png, image/gif, image/jpeg" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
+                                        <input type="file" accept="image/*" id='buttonChangeImage' onChange={handleChangeImage} /><FiUpload />
                                     </div>
                                 </div>
                                 <div className="modal-footer">

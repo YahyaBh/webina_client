@@ -101,12 +101,12 @@ const AdminWebsites = () => {
                         <div className='admin-order-table-header'>
                             <div className='head-row row'>
                                 <div className='col-lg-1'><h4>Image</h4></div>
-                                <div className='col-lg-3'><h4>Token</h4></div>
+                                <div className='col-lg-4'><h4>Token</h4></div>
                                 <div className='col-lg-1'><h4>Name</h4></div>
                                 <div className='col-lg-1'><h4>Price</h4></div>
                                 <div className='col-lg-1'><h4>Available</h4></div>
                                 <div className='col-lg-1'><h4>Category</h4></div>
-                                <div className='col-lg-2'><h4>Developing Time</h4></div>
+                                <div className='col-lg-1'><h4>Developing Time</h4></div>
                                 <div className='col-lg-1'>
                                     <select className='select-input-orders' value={positionWebsites} onChange={e => changeTheValue(e.target.value)}>
                                         <option value="all">All</option>
@@ -121,13 +121,13 @@ const AdminWebsites = () => {
                         <div className='admin-order-table-body'>
                             {websites ? websites.map((website, index) => (
                                 <a href={`/admin/website/${website.token}`} className='admin-order-table-row row' key={index}>
-                                    <div className='col-lg-1'><img src={website.image} alt={website.website_name} width={'60px'} /></div>
-                                    <div className='col-lg-3'><h5>{website.token}</h5></div>
+                                    <div className='col-lg-1'><img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.website_name} width={'60px'} /></div>
+                                    <div className='col-lg-4'><h5>{website.token}</h5></div>
                                     <div className='col-lg-1'><h5>{website.website_name}</h5></div>
                                     <div className='col-lg-1'><h5>${website.price}</h5></div>
                                     <div className='col-lg-1'><h5>{website.status === 'available' ? 'Yes' : 'No'}</h5></div>
                                     <div className='col-lg-1'><h5>{website.category}</h5></div>
-                                    <div className='col-lg-2'><h5>{website.developing_Time}</h5></div>
+                                    <div className='col-lg-1'><h5>{website.developing_Time}</h5></div>
                                     <div className='col-lg-1'><h5 className={orderStatus(website.status)}>{website.status}</h5></div>
                                 </a>
                             )) :

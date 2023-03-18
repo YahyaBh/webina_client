@@ -47,7 +47,7 @@ const NavbarHome = () => {
 
                 <>
 
-                    <nav className='m-navbar'>
+                    <nav className='s-navbar'>
                         <a href='/'>
                             <img className='navbar-logo' src={WebInaLogo} alt="logo" width='40px' />
                         </a>
@@ -135,7 +135,7 @@ const NavbarHome = () => {
                 :
 
                 <>
-                    <nav className='m-navbar'>
+                    <nav className='s-navbar'>
                         <a href='/'>
                             <img className='navbar-logo' src={WebInaLogo} alt="logo" width='80px' />
                         </a>

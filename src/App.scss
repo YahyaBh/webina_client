@@ -5557,23 +5557,76 @@ body {
         width: 100%;
         height: 90vh;
         height: 100dvh;
-        ;
         max-height: 90vh;
         height: 100dvh;
-        ;
         display: flex;
         flex-flow: column nowrap;
 
 
         .chat-container-messages {
-            background-color: #1E1E1E;
+            background-color: #bbb;
             border-radius: 10px;
             height: 100%;
+            width: 100%;
             -webkit-border-radius: 10px;
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
+            padding: 20px;
 
+            .sender_message {
+                width: 100%;
+                float: right;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+                margin-bottom: 5px;
+
+                p {
+                    background-color: rgb(var(--mid-color));
+                    font-family: Louis-Bold;
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                    margin: 0;
+                    padding: 10px;
+                    min-width: 20px;
+                    min-height: 20px;
+                    max-width: 300px;
+                    flex-wrap: wrap;
+
+                }
+            }
+
+            .reciever_message {
+                width: 100%;
+                float: left;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 5px;
+
+
+                p {
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                    background-color: rgb(var(--white-color));
+                    color: rgb(var(--heavy-color));
+                    font-family: Louis-Bold;
+                    margin: 0;
+                    padding: 10px;
+                    min-width: 20px;
+                    min-height: 20px;
+                    max-width: 140px;
+                    flex-wrap: wrap;
+
+                }
+            }
         }
 
         form {

@@ -164,7 +164,7 @@ const Websites = () => {
                             website.status === 'available' ?
                                 <SwiperSlide key={index + website.token + '1'}>
                                     <a href={`/website/${website.token}`} key={index + website.token + '1'}>
-                                        <img src={website.image} alt={website.name} />
+                                        <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                                         <div className='app__swipper__website__details'>
                                             <div>
                                                 <div className='main__details'>

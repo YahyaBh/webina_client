@@ -57,16 +57,125 @@
     background-color: #444;
 }
 
-
-
 .m-navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 20px;
+    width: 100%;
+    // background-color: rgba(var(--heavy-color) , 0.7);
+    background-color: transparent;
+    // backdrop-filter: blur(20px);
+    z-index: 20;
+
+    .navbar-logo {
+        width: 50px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        li {
+            margin: 10px;
+
+            a,
+            button {
+                display: block;
+                color: rgb(var(--white-color));
+                background-color: transparent;
+                border: transparent;
+                outline: none;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+
+                transition: all .1s ease;
+
+                &:hover {
+                    transform: scale(.95);
+                    color: rgb(var(--mid-color));
+                }
+            }
+
+
+        }
+    }
+
+    svg {
+        display: none;
+    }
+
+
+
+
+    @media screen and (max-width:900px) {
+
+        padding: 20px 20px !important;
+        justify-content: space-between;
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            display: none;
+
+            li {
+                margin: 10px;
+
+                a,
+                button {
+                    display: block;
+                    color: rgb(var(--white-color));
+                    background-color: transparent;
+                    border: transparent;
+                    outline: none;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+
+                    transition: all .1s ease;
+
+                    &:hover {
+                        transform: scale(.95);
+                        color: rgb(var(--mid-color));
+                    }
+                }
+
+
+            }
+        }
+
+        svg {
+            display: block;
+            color: rgb(var(--white-color));
+            cursor: pointer;
+            font-size: 30px;
+        }
+    }
+}
+
+
+.s-navbar {
 
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 15px 20px;
     width: 100%;
-    position: fixed;
     // background-color: rgba(var(--heavy-color) , 0.7);
     background-color: transparent;
     // backdrop-filter: blur(20px);
