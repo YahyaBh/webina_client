@@ -42,7 +42,6 @@ import Loading from './Front_side/pages/Loading'
 
 const Home = () => {
     const { ref: svgRefCustomWebsite, inView: websiteSvgVisible } = useInView();
-
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [emailInput, setEmailInput] = useState('');
