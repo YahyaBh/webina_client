@@ -34,8 +34,8 @@ import User from "./Front_side/Admin/Components/User";
 import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
 import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate";
 
-import AuthUser from "./Front_side/context/AuthUser";
 import AdminContact from "./Front_side/Admin/Components/AdminContact";
+import AdminNews from "./Front_side/Admin/Components/AdminNews";
 
 
 
@@ -68,6 +68,7 @@ function App() {
           <Route exact path='/admin/websites' element={<AdminWebsites />} />
           <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
           <Route exact path='/admin/contact/messages' element={<AdminContact />} />
+          <Route exact path='/admin/news-letters' element={<AdminNews />} />
 
 
           <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
