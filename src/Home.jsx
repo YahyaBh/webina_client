@@ -120,10 +120,10 @@ const Home = () => {
     }
 
     const submitForm = function (e) {
+        e.preventDefault();
 
         if (name !== '' || emailInput !== '' || message !== '' || acceptEmail.checked !== false) {
 
-            e.preventDefault();
 
             const formData = new FormData()
 
@@ -131,56 +131,51 @@ const Home = () => {
             formData.append('email', emailInput)
             formData.append('message', message)
 
-            try {
-                http.post('/message/contact', formData)
-                    .then(res => {
-                        if (res.status === 200) {
-                            setName('');
-                            setEmailInput('');
-                            setMessage('');
-                            setSent(true);
+            http.post('/api/message/contact', formData)
+                .then(res => {
+                    if (res.status === 200) {
+                        setName('');
+                        setEmailInput('');
+                        setMessage('');
+                        setSent(true);
 
-                            Swal.fire({
-                                title: 'Success!',
-                                text: res.data.message,
-                                icon: <MdDone />,
-                                showConfirmButton: false,
-                                cancelButtonText: 'Thanks!',
-                                showCancelButton: true,
+                        Swal.fire({
+                            title: 'Success!',
+                            text: res.data.message,
+                            icon: <MdDone />,
+                            showConfirmButton: false,
+                            cancelButtonText: 'Thanks!',
+                            showCancelButton: true,
 
-                            })
-                        } else if (res.status === 401) {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: res.data.message,
-                                icon: <MdError />,
-                                showConfirmButton: false,
-                                confirmButtonText: 'Sign up!',
-                                showCancelButton: true,
+                        })
+                    } else if (res.status === 401) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: res.data.message,
+                            icon: <MdError />,
+                            showConfirmButton: false,
+                            confirmButtonText: 'Sign up!',
+                            showCancelButton: true,
 
-                            })
+                        })
 
-                        }
-
+                    }
 
 
-                    })
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: <MdError />,
-                    showConfirmButton: false,
-                    confirmButtonText: 'Sign up!',
-                    showCancelButton: true,
+
                 })
-
-            }
-
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: error.data.message,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        confirmButtonText: 'Sign up!',
+                        showCancelButton: true,
+                    })
+                })
         }
         else {
-            e.preventDefault();
-
             Swal.fire({
                 title: 'Error!',
                 text: 'Must not be empty!',

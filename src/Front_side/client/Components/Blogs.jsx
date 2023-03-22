@@ -58,7 +58,7 @@ const Blogs = () => {
                         blogs.map((blog, index) => (
                             <div className='app__blog__card' key={index}>
                                 <h3>{blog.title}</h3>
-                                <img src={blog.image} alt={blog.title} />
+                                <img src={`http://localhost:8000/uploads/blogs/images/${blog.image}`} alt={blog.title} />
                                 <p>{blog.body}</p>
                                 <p style={{ color: 'grey' }}>{blog.created_at ? moment(blog.created_at.split('T')[0] + ' ' + blog.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
                             </div>

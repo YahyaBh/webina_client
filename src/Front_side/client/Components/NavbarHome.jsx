@@ -24,11 +24,8 @@ const NavbarHome = (props) => {
         if (user) {
             setUserData(user);
         }
-
-
     }, [])
 
-    console.log(props);
 
 
 
