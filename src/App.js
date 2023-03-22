@@ -36,6 +36,7 @@ import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate
 
 import AdminContact from "./Front_side/Admin/Components/AdminContact";
 import AdminNews from "./Front_side/Admin/Components/AdminNews";
+import AdminBlogs from "./Front_side/Admin/Components/AdminBlogs";
 
 
 
@@ -69,6 +70,8 @@ function App() {
           <Route exact path='/admin/website/create' element={<AdminWebsiteCreate />} />
           <Route exact path='/admin/contact/messages' element={<AdminContact />} />
           <Route exact path='/admin/news-letters' element={<AdminNews />} />
+          <Route exact path='/admin/blogs' element={<AdminBlogs />} />
+
 
 
           <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
