@@ -3008,6 +3008,26 @@ body {
 }
 
 .app__websites__container {
+    img {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: sk_bg_animation;
+        animation-name: sk_bg_animation;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        background: #787879;
+        background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+        background-size: 800px 104px;
+        position: relative;
+        width: 400px;
+        height: 300px;
+        margin: 50px;
+    }
+
     padding: 40px;
     display: flex;
     justify-content: center;
