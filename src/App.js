@@ -37,6 +37,7 @@ import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate
 import AdminContact from "./Front_side/Admin/Components/AdminContact";
 import AdminNews from "./Front_side/Admin/Components/AdminNews";
 import AdminBlogs from "./Front_side/Admin/Components/AdminBlogs";
+import PaymentWestMoney from "./Front_side/client/Components/PaymentWestMoney";
 
 
 
@@ -91,6 +92,7 @@ function App() {
           <Route exact path="/orders" element={<Orders />} />
           <Route exact path="/order/:order_token" element={<Order />} />
           <Route exact path="/buy/website/:token" element={<Payment />} />
+          <Route exact path="/checkout/:method/:cash_token" element={<PaymentWestMoney />} />
           <Route exact path="/payment/:result" element={<PaymentSuccess />} />
           <Route exact path='/chat' element={<Chat />} />
           <Route exact path="/logout" element={<Logout />} />

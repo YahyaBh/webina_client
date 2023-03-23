@@ -12,13 +12,14 @@ import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
 import WU from '../../../Assets/Images/pngwing.com (1).png'
 import CreditCards from '../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
 import PayPal from '../../../Assets/Images/Paypal_2014_logo.png'
+import PhoneInput from 'react-phone-number-input';
 
 const Payment = () => {
 
 
     const params = useParams();
 
-    const { http, sec_http, getUser, accessToken } = AuthUser();
+    const { user, sec_http, getUser, accessToken } = AuthUser();
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [websiteData, setWebsiteData] = useState({});
@@ -26,9 +27,9 @@ const Payment = () => {
 
 
 
-    const [full_name, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [full_name, setFullName] = useState(user?.full_name);
+    const [email, setEmail] = useState(user?.email);
+    const [phone, setPhone] = useState(user?.phone ? user.phone : '');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [zipCode, setZipCode] = useState('');
@@ -42,7 +43,7 @@ const Payment = () => {
         if (getUser && accessToken && params.token) {
             getWebsite();
 
-            if(userData.phone) {
+            if (userData.phone) {
                 setPhone(userData.phone)
             }
         } else {
@@ -79,6 +80,37 @@ const Payment = () => {
 
     const submitMonWest = async (e) => {
         e.preventDefault();
+
+
+        const cashForm = new FormData();
+
+
+        cashForm.append('website_token', params.token);
+
+        cashForm.append('full_name', full_name);
+        cashForm.append('email', email);
+        cashForm.append('phone', phone);
+        cashForm.append('city', city);
+        cashForm.append('country', country);
+
+        sec_http.post('/api/checkout/cash', cashForm)
+            .then(res => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Payment Successful',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate(`/checkout/westernunion/${res.data.cash_payment_token}`, { replace: true });
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Payment Failed',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
 
     }
 
@@ -137,9 +169,9 @@ const Payment = () => {
 
                                 <div style={{ display: paymentMethods === 'westrenunion' || paymentMethods === 'moneygram' ? 'block' : 'none' }}>
                                     <form className='form-money-west' onSubmit={submitMonWest} >
-                                        <h4 style={{ fontFamily : 'Louis-Bold' , marginTop : '20px'}}>{paymentMethods === 'moneygram' ? 'MoneyGram' : 'WesternUnion'}</h4>
+                                        <h4 style={{ fontFamily: 'Louis-Bold', marginTop: '20px' }}>{paymentMethods === 'moneygram' ? 'MoneyGram' : 'WesternUnion'}</h4>
                                         <input type="text" name='full_name' onChange={(e) => setFullName(e.target.value)} value={full_name} placeholder="Full Name" />
-                                        <input type="tel" name='phone_number' onChange={(e) => setPhone(e.target.value)} value={phone} placeholder="Phone Number" />
+                                        <PhoneInput limitMaxLength={true} addInternationalOption={false} defaultCountry="MA" flagUrl='./Images/Flags/{XX}.svg' value={phone} onChange={setPhone} name='phone' />
                                         <input type="email" name='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email Address" />
                                         <select id="country" name="country" onChange={(e) => setCountry(e.target.value)} value={country}>
                                             <option>select country</option>
@@ -400,7 +432,7 @@ const Payment = () => {
                                         <input type="text" name='zip' onChange={(e) => setZipCode(e.target.value)} value={zipCode} placeholder="Zip Code" />
 
 
-                                        <button>Continue</button>
+                                        <button className='button-check'>Check Out</button>
                                     </form>
                                 </div>
                             </div>
