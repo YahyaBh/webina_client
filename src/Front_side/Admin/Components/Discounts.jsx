@@ -20,6 +20,7 @@ const Discounts = () => {
     const [endDate, setEndDate] = useState('');
     const [holder, setHolder] = useState('');
 
+    const [currentDiscount, setCurrentDiscount] = useState(null);
 
 
     useEffect(() => {
@@ -64,7 +65,29 @@ const Discounts = () => {
 
     }
 
+    const setModalDiscountId = async (e) => {
+
+        admin_http.post('/api/get/discount/', { 'discount_number': e })
+            .then(res => {
+                setCurrentDiscount(res.data.discount);
+            })
+            .catch(err => {
+                Swal.fire('error', err.message)
+            })
+
+    }
+
+
+    const disableDiscount = async () => {
+
+    }
+
+    const deleteDiscount = async () => {
+
+    }
+
     return (
+        
         loading ?
             <Loading />
             :
@@ -74,6 +97,34 @@ const Discounts = () => {
 
 
 
+                {currentDiscount ?
+
+                    <div className='current-discount-modal'>
+
+                        <div className='current-discount-modal-header'>
+                            <h2>Discount Id : {currentDiscount.id}</h2>
+                        </div>
+
+                        <div className='current-discount-modal-body'>
+                            <h3>Discount Holder : {currentDiscount.holder}</h3>
+                            <h3>Discount Token : {currentDiscount.token}</h3>
+                            <h3>Discount Amount : {currentDiscount.amount}</h3>
+                            <h3>Discount End Date : {currentDiscount.endDate}</h3>
+                        </div>
+
+                        <div className='current-discount-modal-footer'>
+                            <button onClick={setCurrentDiscount(null)}>Close</button>
+                            <div className='discount-par-buttons'>
+                                <button onClick={disableDiscount}>Disable</button>
+                                <button onClick={deleteDiscount}>Delete</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    : ''
+                }
+
 
                 <div className="discount-container">
                     <div className="discounts-sidebar">
@@ -81,7 +132,7 @@ const Discounts = () => {
 
                         <ul>
                             {discounts ? discounts?.map((discount, index) => (
-                                <li>{index} {discount.amount}</li>
+                                <li key={index} onClick={setModalDiscountId}>{discount.id}-{discount.amount}</li>
                             )) : <MdShoppingCart />}
                         </ul>
                     </div>

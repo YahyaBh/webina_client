@@ -142,8 +142,6 @@ const Payment = () => {
 
 
     const getDiscount = async () => {
-
-
         const discountForm = new FormData();
 
         discountForm.append('discount', discount);
@@ -152,14 +150,14 @@ const Payment = () => {
 
             sec_http.post('/api/checkout/discount', discountForm)
                 .then(res => {
-                    setDiscount_amount(res.data.discount.amount);
+                    setDiscount(res.data.discount);
                     setDiscountDis(true);
                 })
                 .catch(err => {
-                    setDiscountError(err.message);
+                    setDiscountError(err.response.data.message);
                     setTimeout(() => {
                         setDiscountError('')
-                    }, 2000)
+                    }, 5000)
                 });
 
         } else {
@@ -167,6 +165,8 @@ const Payment = () => {
         }
 
     }
+
+    console.log(discount);
 
     return (
         loading ?
@@ -498,19 +498,20 @@ const Payment = () => {
 
                                 <div className='info-holder-bet'>
                                     <h4>Website Price :</h4>
-                                    <h4>{websiteData.price}$</h4>
+                                    <h4>{websiteData?.price}$</h4>
                                 </div>
                                 <hr />
                                 <div className='info-holder-bet discount-bet'>
                                     <div className="discount-container">
                                         <h4>Discount :</h4>
-                                        <h4>0% (0.00$)</h4>
+                                        <h4>{discount ? discount.amount : '0'}% ({discount ? discount.amount : '0.00'}$)</h4>
                                     </div>
                                     <div className='discount-buttons'>
                                         <input type="text" value={discount} name='discount' placeholder='Discount Code' onChange={e => setDiscount(e.target.value)} disabled={discountDis ? true : false} />
                                         <input type="submit" value='REDEEM' onClick={getDiscount} />
                                     </div>
                                     <span style={{ color: 'red' }}>{discountError ? discountError : ''}</span>
+                                    <span style={{ color: 'green' }}>{discountDis ? 'Discount Applied' : ''}</span>
                                 </div>
 
                                 <hr />

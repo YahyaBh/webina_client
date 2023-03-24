@@ -6008,6 +6008,15 @@ body {
         height: 100dvh;
         background-color: #bbbbbb41;
         padding: 30px;
+
+        ul {
+            list-style: none;
+
+            li {
+                font-size: 25px;
+                font-family: Louis-Bold;
+            }
+        }
     }
 
     .discount-form-new {
