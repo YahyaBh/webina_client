@@ -1,13 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 
 
 import Users from "./Front_side/Admin/Components/Users";
-import Services from "./Front_side/Admin/Components/Services";
+import Discounts from "./Front_side/Admin/Components/Discounts";
 import Dashboard from "./Front_side/Admin/Components/Dashboard";
 import ChatAdmin from "./Front_side/Admin/Components/ChatAdmin";
-
-
 import Orders from "./Front_side/client/Components/Orders";
 import SignIn from "./Front_side/client/Components/SignIn";
 import SignUp from "./Front_side/client/Components/SignUp";
@@ -33,7 +31,6 @@ import AdminOrder from "./Front_side/Admin/Components/AdminOrder";
 import User from "./Front_side/Admin/Components/User";
 import AdminWebsites from "./Front_side/Admin/Components/AdminWebsites";
 import AdminWebsiteCreate from "./Front_side/Admin/Components/AdminWebsiteCreate";
-
 import AdminContact from "./Front_side/Admin/Components/AdminContact";
 import AdminNews from "./Front_side/Admin/Components/AdminNews";
 import AdminBlogs from "./Front_side/Admin/Components/AdminBlogs";
@@ -57,10 +54,9 @@ function App() {
 
         <Routes>
           <Route exact path='/' element={<Home />} />
-
           <Route exact path='/admin/*' element={<Dashboard />} />
           <Route exact path='/admin/dashboard' element={<Dashboard />} />
-          <Route exact path='/admin/services' element={<Services />} />
+          <Route exact path='/admin/Discounts' element={<Discounts />} />
           <Route exact path='/admin/orders' element={<AdminOrders />} />
           <Route exact path='/admin/orders/:type' element={<AdminOrders />} />
           <Route exact path='/admin/order/:id' element={<AdminOrder />} />
@@ -73,12 +69,7 @@ function App() {
           <Route exact path='/admin/contact/messages' element={<AdminContact />} />
           <Route exact path='/admin/news-letters' element={<AdminNews />} />
           <Route exact path='/admin/blogs' element={<AdminBlogs />} />
-
-
-
           <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
-
-
           <Route exact path='/websites' element={<Websites />} />
           <Route exact path='/website/:token' element={<Website />} />
           <Route exact path='/blogs' element={<Blogs />} />
@@ -97,7 +88,6 @@ function App() {
           <Route exact path='/chat' element={<Chat />} />
           <Route exact path="/logout" element={<Logout />} />
           <Route exact path='*' element={<Error />} />
-
         </Routes>
       </Fragment >
 

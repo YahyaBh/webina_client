@@ -35,6 +35,11 @@ const Payment = () => {
     const [zipCode, setZipCode] = useState('');
 
 
+    const [discount, setDiscount] = useState('');
+    const [discount_amount, setDiscount_amount] = useState('');
+    const [discountError, setDiscountError] = useState('');
+    const [discountDis, setDiscountDis] = useState(false);
+
     const navigate = useNavigate();
 
 
@@ -92,6 +97,7 @@ const Payment = () => {
         cashForm.append('phone', phone);
         cashForm.append('city', city);
         cashForm.append('country', country);
+        cashForm.append('discount', discount);
 
         sec_http.post('/api/checkout/cash', cashForm)
             .then(res => {
@@ -132,6 +138,34 @@ const Payment = () => {
                 })
             :
             navigate('/', { replace: true });
+    }
+
+
+    const getDiscount = async () => {
+
+
+        const discountForm = new FormData();
+
+        discountForm.append('discount', discount);
+
+        if (discount !== '' && discount.length > 5) {
+
+            sec_http.post('/api/checkout/discount', discountForm)
+                .then(res => {
+                    setDiscount_amount(res.data.discount.amount);
+                    setDiscountDis(true);
+                })
+                .catch(err => {
+                    setDiscountError(err.message);
+                    setTimeout(() => {
+                        setDiscountError('')
+                    }, 2000)
+                });
+
+        } else {
+            setDiscountError('Can not be empty');
+        }
+
     }
 
     return (
@@ -467,9 +501,16 @@ const Payment = () => {
                                     <h4>{websiteData.price}$</h4>
                                 </div>
                                 <hr />
-                                <div className='info-holder-bet'>
-                                    <h4>Discount :</h4>
-                                    <h4>0% (0.00$)</h4>
+                                <div className='info-holder-bet discount-bet'>
+                                    <div className="discount-container">
+                                        <h4>Discount :</h4>
+                                        <h4>0% (0.00$)</h4>
+                                    </div>
+                                    <div className='discount-buttons'>
+                                        <input type="text" value={discount} name='discount' placeholder='Discount Code' onChange={e => setDiscount(e.target.value)} disabled={discountDis ? true : false} />
+                                        <input type="submit" value='REDEEM' onClick={getDiscount} />
+                                    </div>
+                                    <span style={{ color: 'red' }}>{discountError ? discountError : ''}</span>
                                 </div>
 
                                 <hr />
