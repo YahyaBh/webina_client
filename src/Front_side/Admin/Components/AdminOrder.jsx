@@ -100,7 +100,7 @@ const AdminOrder = () => {
                             <div className='order-buttons'>
                                 <button className='confirmation-button' onClick={order?.status === 'processing' ? e => setStatus(order?.id, 'completed') : ''} disabled={order?.status === 'processing' ? order?.status === 'completed' ? true : false : true}>Confirm Order</button>
                                 <button className='process-button' onClick={ order?.status === 'processing' || order?.status === 'pending' ? e => setStatus(order?.id, 'processing') : 'nutt'} disabled={order?.status === 'processing' || order?.status === 'completed' ? true : false}>Process Order</button>
-                                <button className='cancel-button' onClick={e => setStatus(order?.id, 'declined')} disabled={order?.status === 'completed' || order?.status === 'processing' ? true : false}>Cancel Order</button>
+                                <button className='cancel-button' onClick={e => setStatus(order?.id, 'decline')} disabled={order?.status === 'completed' || order?.status === 'processing' ? true : false}>Cancel Order</button>
                             </div>
                         </div>
                     </div>

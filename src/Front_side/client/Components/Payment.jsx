@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import CreditCardForm from './CreditCard/CreditCardForm'
-import { BsArrowLeftShort, BsPaypal } from 'react-icons/bs';
+import { BsArrowLeftShort } from 'react-icons/bs';
 import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
 import WU from '../../../Assets/Images/pngwing.com (1).png'
 import CreditCards from '../../../Assets/Images/toppng.com-visa-mastercard-discover-png-visa-mastercard-american-express-discover-1105x175.png'
@@ -36,7 +36,6 @@ const Payment = () => {
 
 
     const [discount, setDiscount] = useState('');
-    const [discount_amount, setDiscount_amount] = useState('');
     const [discountError, setDiscountError] = useState('');
     const [discountDis, setDiscountDis] = useState(false);
 

@@ -10,7 +10,6 @@ const AdminWebsites = () => {
 
     const [positionWebsites, setPositionWebsites] = useState('all')
     const [websites, setWebsites] = useState([]);
-    const [users, setUsers] = useState([]);
 
     const [loading, setLoading] = useState(true)
 
@@ -33,8 +32,6 @@ const AdminWebsites = () => {
         await admin_http?.post('/api/admin/websites', { type: positionWebsites })
             .then(res => {
                 setWebsites(res.data.websites);
-                setUsers(res.data.users);
-
                 setLoading(false);
 
             })
@@ -95,7 +92,7 @@ const AdminWebsites = () => {
                     </div>
 
                     <div className='admin-order-table'>
-                        <a href='/admin/website/create'>
+                        <a className='add-website-button' href='/admin/website/create'>
                             Add New Website
                         </a>
                         <div className='admin-order-table-header'>

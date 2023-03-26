@@ -53,6 +53,8 @@ export
     const [var_orders, setvarOrders] = useState([]);
     const [var_users, setvarUsers] = useState([]);
 
+    const [websites, setWebsites] = useState([]);
+
 
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const data = {
@@ -127,6 +129,7 @@ export
                 setlatestUsers(res.data.recenetly_users);
                 setvarOrders(res.data.var_orders[0]);
                 setvarUsers(res.data.var_users[0]);
+                setWebsites(res.data.websites)
             })
             .catch(err => {
                 Swal.fire({
@@ -161,7 +164,6 @@ export
 
 
                     <div className="dashboard-first-container">
-
                         <div className="orders-head-dashboard">
                             <div className="last-orders-container">
                                 <h3>{orders_num} Orders</h3>
@@ -192,7 +194,10 @@ export
 
                         <div className="users-head-dashboard">
                             <div className="last-users-container">
-                                <h3>{users_num} Users</h3>
+                                <div className="header"> 
+                                    <h3>{users_num} Users</h3>
+                                    <a href="/admin/users">Check Users</a>
+                                </div>
                                 <div className="last-users-cards-container">
                                     {latest_users?.map((user, index) => (
                                         <a href={`/admin/user/${user.id}`} key={index} className="last-user-card">
@@ -262,7 +267,45 @@ export
 
                     </div>
 
+                    <hr />
 
+                    <div className="dashboard-first-container">
+                        <div className="orders-head-dashboard">
+                            <div className="last-orders-container">
+                                <div className="header">
+                                    <h3>{websites.length} Websites </h3>
+                                    <a className="add-website-button" href="/admin/website/create">Add Website</a>
+                                </div>
+                                {websites.length > 0 ? websites.map((website, index) => (
+                                    <a href={`/admin/website/${website.token}`} className="last-orders-cards-container" key={index}>
+                                        <div className="last-order-card">
+                                            <div className="last-order-card-content-title">
+                                                <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.website_name} />
+                                                <p>{website ? moment(website?.created_at?.split('T')[0] + ' ' + website?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</p>
+                                            </div>
+                                            <div className="last-order-card-content-price">
+                                                <h4>{website.price}$</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                )) :
+                                    <div className="last-orders-cards-container">
+                                        <div className="last-order-card">
+                                            <div className="last-order-card-content-title">
+                                                <p>No websites found</p>
+                                            </div>
+                                        </div>
+                                    </div>}
+                            </div>
+
+
+                        </div>
+
+                        <div className="-head-dashboard">
+                            
+                        </div>
+
+                    </div>
 
                 </div>
 

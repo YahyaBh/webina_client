@@ -5086,6 +5086,12 @@ body {
                     align-items: center;
                     flex-direction: column;
 
+                    .header {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
                     .last-orders-cards-container {
                         display: flex;
                         justify-content: space-evenly;
@@ -5146,6 +5152,39 @@ body {
                     justify-content: space-around;
                     align-items: center;
                     flex-direction: column;
+
+                    .header {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        a {
+                            padding: 10px;
+                            background-color: #c45656;
+                            color: rgb(var(--heavy-color));
+                            font-family: Louis-Bold;
+                            text-decoration: none;
+                            border-radius: 10px;
+                            -webkit-border-radius: 10px;
+                            -moz-border-radius: 10px;
+                            -ms-border-radius: 10px;
+                            -o-border-radius: 10px;
+                            margin-top: 10px;
+                            transition: all 0.3s ease;
+                            &:hover {
+                                -webkit-transition: all 0.3s ease;
+                                -moz-transition: all 0.3s ease;
+                                -ms-transition: all 0.3s ease;
+                                -o-transition: all 0.3s ease;
+                                opacity: 0.5;
+                                transform: scale(0.97);
+                                -webkit-transform: scale(0.97);
+                                -moz-transform: scale(0.97);
+                                -ms-transform: scale(0.97);
+                                -o-transform: scale(0.97);
+                            }
+                        }
+                    }
 
                     .last-users-cards-container {
                         display: flex;
@@ -5636,6 +5675,33 @@ body {
                 }
             }
         }
+    }
+}
+
+.add-website-button {
+    padding: 10px;
+    background-color: rgb(var(--mid-color));
+    color: rgb(var(--heavy-color));
+    font-family: Louis-Bold;
+    text-decoration: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    &:hover {
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        opacity: 0.5;
+        transform: scale(0.97);
+        -webkit-transform: scale(0.97);
+        -moz-transform: scale(0.97);
+        -ms-transform: scale(0.97);
+        -o-transform: scale(0.97);
     }
 }
 

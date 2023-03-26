@@ -12,7 +12,6 @@ const AdminOrders = () => {
     const [orders, setOrders] = useState([])
     const [websites, setWebsites] = useState([]);
     const [users, setUsers] = useState([]);
-    const [usersOrders, setUsersOrders] = useState([])
 
     const params = useParams();
 
