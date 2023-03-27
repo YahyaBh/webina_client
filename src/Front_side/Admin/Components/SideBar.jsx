@@ -2,7 +2,7 @@ import { AiOutlineUserAdd } from 'react-icons/ai'
 import { BsBoxSeam, BsNewspaper, BsReverseLayoutTextWindowReverse, BsChatLeftText, BsFillInboxFill } from 'react-icons/bs'
 import { BiDuplicate } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
-import { MdPayments, MdAnnouncement, MdManageAccounts , MdOutlineSpaceDashboard, MdDiscount} from 'react-icons/md'
+import { MdPayments, MdAnnouncement, MdManageAccounts , MdOutlineSpaceDashboard, MdDiscount, MdFeedback} from 'react-icons/md'
 import Logo from '../../../Assets/Images/WEBINA2.png'
 
 
@@ -25,7 +25,8 @@ const SideBar = () => {
                     <a href='/admin/news-letters'>News <BsNewspaper /></a>
                     <a href='/admin/blogs'>Blogs <BsReverseLayoutTextWindowReverse /></a>
                     <a href='/admin/announcemetns'>Announce <MdAnnouncement /></a>
-                    <a href='/admin/founders'>Founders <MdManageAccounts /></a>
+                    <a href='/admin/feedback'>FeedBack <MdFeedback /></a>
+                    {/* <a href='/admin/founders'>Founders <MdManageAccounts /></a> */}
                     <a href='/admin/chat'>Live Chat <BsChatLeftText /></a>
                     <a href='/admin/Discounts'>Discounts <MdDiscount /></a>
                     <a href='/admin/contact/messages'>Contact <BsFillInboxFill /></a>

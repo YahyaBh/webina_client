@@ -145,6 +145,8 @@ function App() {
         <Route exact path='/admin/contact/messages' element={<AdminContact />} />
         <Route exact path='/admin/news-letters' element={<AdminNews />} />
         <Route exact path='/admin/blogs' element={<AdminBlogs />} />
+        <Route exact path='/admin/feedback' element={<Payment />} />
+        
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
         <Route exact path='/websites' element={<Websites />} />
         <Route exact path='/website/:token' element={<Website />} />

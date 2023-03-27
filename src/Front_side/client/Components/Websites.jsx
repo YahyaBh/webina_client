@@ -141,8 +141,8 @@ const Websites = () => {
           slidesPerView={3}
           slidesPerGroup={1}
           spaceBetween={30}
-          loop={true}
-          loopFillGroupWithBlank={true}
+          loop={false}
+          loopFillGroupWithBlank={false}
           navigation={{
             nextEl: ".image-swiper-button-next",
             prevEl: ".image-swiper-button-prev",
@@ -278,7 +278,7 @@ const Websites = () => {
                 className="app__card__website"
                 key={index + website.token + "1"}
               >
-                <img src={website.image} alt={website.name} />
+                <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                 <div className="app__swipper__website__details">
                   <div>
                     <div className="main__details">

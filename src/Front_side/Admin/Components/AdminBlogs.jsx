@@ -1,4 +1,6 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react'
+import { MdDelete, MdEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthUser from '../../context/AuthUser';
@@ -17,6 +19,14 @@ const AdminBlogs = () => {
     const [image, setImage] = useState('');
     const [tempImage, setTempImage] = useState('');
     const [link, setLink] = useState('');
+
+
+
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
+    const [newImage, setNewImage] = useState('');
+    const [newTempImage, setNewTempImage] = useState('');
+    const [newLink, setNewLink] = useState('');
 
     const navigate = useNavigate();
 
@@ -74,6 +84,56 @@ const AdminBlogs = () => {
 
     }
 
+    const editBlogs = async (e) => {
+
+        const blogForm = new FormData();
+
+        blogForm.append('title', newTitle)
+        blogForm.append('description', newDescription)
+        blogForm.append('image', newImage)
+        blogForm.append('link', newLink)
+
+        setLoading(true);
+
+        await admin_http.post(`/api/admin/blogs/update/${e.id}`, blogForm, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(
+                res => {
+                    Swal.fire('success', res.data.message)
+                    setLoading(false);
+                    getBlogs();
+                }
+            )
+            .catch(err => {
+                Swal.fire('error', err.message)
+                setTimeout(() => {
+                    navigate('/admin/dashboard', { replace: true })
+                }, 3000);
+            })
+    }
+
+    const deleteBlogs = async (e) => {
+
+        setLoading(true);
+
+        await admin_http.post(`/api/admin/blogs/delete/${e.id}`)
+            .then(
+                res => {
+                    Swal.fire('success', res.data.message)
+                    setLoading(false);
+                    getBlogs();
+                }
+            )
+            .catch(err => {
+                Swal.fire('error', err.message)
+                setTimeout(() => {
+                    navigate('/admin/dashboard', { replace: true })
+                }, 3000);
+            })
+    }
 
     const changeImage = (e) => {
         setImage(e);
@@ -100,7 +160,12 @@ const AdminBlogs = () => {
                                     <h2>{blog.title}</h2>
                                     <p>{blog.body}</p>
 
-                                    <span>{blog.created_at}</span>
+                                    <span>{blog.created_at ? moment(blog?.created_at?.split('T')[0] + ' ' + blog?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : '' }</span>
+
+                                    <div>
+                                        <MdEdit onClick={editBlogs(blog)} />
+                                        <MdDelete onClick={deleteBlogs(blog)} />
+                                    </div>
                                 </div>
                             </div>
                         ))}
