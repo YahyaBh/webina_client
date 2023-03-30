@@ -204,7 +204,7 @@ const Payment = () => {
                                     <form className='form-money-west' onSubmit={submitMonWest} >
                                         <h4 style={{ fontFamily: 'Louis-Bold', marginTop: '20px' }}>{paymentMethods === 'moneygram' ? 'MoneyGram' : 'WesternUnion'}</h4>
                                         <input type="text" name='full_name' onChange={(e) => setFullName(e.target.value)} value={full_name} placeholder="Full Name" />
-                                        <PhoneInput limitMaxLength={true} addInternationalOption={false} defaultCountry="MA" flagUrl='./Images/Flags/{XX}.svg' value={phone} onChange={setPhone} name='phone' />
+                                        <PhoneInput limitMaxLength={true} addInternationalOption={false} defaultCountry="MA" flagUrl='../../Images/Flags/{XX}.svg' value={phone} onChange={setPhone} name='phone' />
                                         <input type="email" name='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email Address" />
                                         <select id="country" name="country" onChange={(e) => setCountry(e.target.value)} value={country}>
                                             <option>select country</option>
@@ -465,7 +465,7 @@ const Payment = () => {
                                         <input type="text" name='zip' onChange={(e) => setZipCode(e.target.value)} value={zipCode} placeholder="Zip Code" />
 
 
-                                        <button className='button-check'>Check Out</button>
+                                        <button className='button-check' type='submit' disabled={full_name === '' || email === '' || country === '' || city === '' || zipCode === '' ? true : false} >Check Out</button>
                                     </form>
                                 </div>
                             </div>

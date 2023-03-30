@@ -4441,6 +4441,12 @@ body {
                         -o-transform: scale(0.96);
                         opacity: 0.8;
                     }
+
+                    &:disabled {
+                        opacity: 0.5;
+                        background-color: gray;
+                        color: #000;
+                    }
                 }
 
                 input {
