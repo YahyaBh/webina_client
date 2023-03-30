@@ -96,6 +96,8 @@ const Payment = () => {
         cashForm.append('phone', phone);
         cashForm.append('city', city);
         cashForm.append('country', country);
+        cashForm.append('method', paymentMethods);
+        cashForm.append('postal_code', zipCode);
         cashForm.append('discount', discount);
 
         sec_http.post('/api/checkout/cash', cashForm)
