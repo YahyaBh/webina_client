@@ -52,7 +52,8 @@ const AdminBlogs = () => {
     }
 
 
-    const createBlogs = async () => {
+    const createBlogs = async (e) => {
+e.preventDefault();
         const blogForm = new FormData();
 
 
@@ -174,7 +175,7 @@ const AdminBlogs = () => {
 
 
                     <div className='blogs__new__blog'>
-                        <form onSubmit={createBlogs}>
+                        <form onSubmit={e => createBlogs(e)}>
 
                             <img src={tempImage} alt="" />
                             <label htmlFor="title">Title</label>

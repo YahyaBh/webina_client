@@ -215,9 +215,9 @@ const Website = () => {
                                             <h3>Website Specifications</h3>
                                             {console.log(websiteData.specifications)}
                                             <ul>
-                                                {websiteData.specifications.split(',').map((item, index) => (
+                                                {/* {websiteData.specifications.split(',').map((item, index) => (
                                                     <li key={index}>{item}</li>
-                                                ))}
+                                                ))} */}
                                             </ul>
                                         </div>
                                     </div>
