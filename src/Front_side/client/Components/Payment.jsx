@@ -195,14 +195,14 @@ const Payment = () => {
 
                     <div className='payment-methods-container'>
                         <div className='pay-with-cash'>
-                            <button onClick={e => setHandleShow('cash')} className={paymentMethods === 'cash' ? 'select-div-pay' : 'selected-div-pay'}>
+                            <button onClick={e => setHandleShow('cash')} className={paymentMethods === 'cash' || paymentMethods === 'westrenunion' || paymentMethods === 'moneygram' ? 'select-div-pay' : 'selected-div-pay'}>
                                 <h4>WestrenUnion Or MoneyGram</h4> <div className='div-west-images'><img src={WU} alt="westrenunion" /><img src={MoneyGram} alt="moneygram" /></div>
                             </button>
 
                             <div className={paymentMethods === 'cash' || paymentMethods === 'westrenunion' || paymentMethods === 'moneygram' ? 'show-method' : 'hide-method'}>
                                 <div className='cash-method'>
-                                    <button className='west-money-sel' onClick={e => setPaymentMethods('westrenunion')}>WestrenUnion <img src={WU} alt="westrenunion" /></button>
-                                    <button className='west-money-sel' onClick={e => setPaymentMethods('moneygram')}>MoneyGram <img src={MoneyGram} alt="moneygram" /></button>
+                                    <button className={paymentMethods === 'westrenunion' ? 'selected-west-money-sel' : 'west-money-sel'} onClick={e => setPaymentMethods('westrenunion')}>WestrenUnion <img src={WU} alt="westrenunion" /></button>
+                                    <button className={paymentMethods === 'moneygram' ? 'selected-west-money-sel' : 'west-money-sel'} onClick={e => setPaymentMethods('moneygram')}>MoneyGram <img src={MoneyGram} alt="moneygram" /></button>
                                 </div>
 
                                 <div style={{ display: paymentMethods === 'westrenunion' || paymentMethods === 'moneygram' ? 'block' : 'none' }}>
