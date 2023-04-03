@@ -37,11 +37,14 @@ const Website = () => {
     const [websiteData, setWebsiteData] = useState({});
     const [reviews, setReviews] = useState([]);
     const [reviewsTotalStars, setReviewsTotalStars] = useState([]);
-    const [totalUsers, setTotalUsers] = useState([]);
+    const [ratings, setRatings] = useState([]);
     const navigate = useNavigate();
 
-    const total_stars = `<AiFillStar />`.repeat(parseInt(totalUsers / reviews))
-    //  + (<AiFillStar />).repeat(5 - rating);
+    const calculateAverageRating = () => {
+        const total = ratings.reduce((acc, curr) => acc + curr, 0);
+        const average = total / ratings.length;
+        return average.toFixed(2);
+    };
 
     useEffect(() => {
 
@@ -61,8 +64,7 @@ const Website = () => {
                 setWebsiteData(res.data.website);
                 setRelatedWebsites(res.data.related_websites);
                 setReviews(res.data.reviews);
-                setTotalUsers(res.data.total_users);
-
+                setRatings(res.data.ratings);
 
                 Array.from(Array(websiteData.stars), (e, i) => (
                     setReviewsTotalStars(reviewsTotalStars + 1)
@@ -234,7 +236,7 @@ const Website = () => {
                                         <h4>Total Reviews  <span> {reviewsTotalStars}<AiFillStar style={{ color: 'rgb(var(--mid-color))' }} /></span></h4>
                                         <h5>({reviews.length}{reviews.length > 1 ? ' reviews' : ' review'})</h5>
                                         <div className="reviews__stars__container">
-                                            {total_stars}
+                                            {calculateAverageRating()}
                                         </div>
 
                                         <hr />
