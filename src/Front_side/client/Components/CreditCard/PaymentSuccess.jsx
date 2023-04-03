@@ -5,7 +5,6 @@ import Navbar from '../Navbar'
 import SuccessGif from '../../../../Assets/Images/1103-confetti-outline.gif'
 import ErrorGif from '../../../../Assets/Images/1140-error-outline.gif'
 import Swal from 'sweetalert2'
-import { icons } from 'react-icons/lib'
 import AuthUser from '../../../context/AuthUser'
 const PaymentSuccess = () => {
 
@@ -33,12 +32,16 @@ const PaymentSuccess = () => {
     const submitReview = () => {
         if(review !== '') {
 
-            sec_http.post('/api/review/create' , {review : review})
+            sec_http.post('/api/review/create' , {review : review , website_token : params.token_site})
             .then(
                 Swal.fire({
                     title : 'Review successfully added',
                     text : 'Thank you for your review',
                     icon : 'success'
+                }).then((res) => {
+                    if(res.isConfirmed) {
+                        navigate(`/website/${params.token_site}`);
+                    }
                 })
             )
             .catch(err => Swal.fire('error', err))
@@ -76,7 +79,7 @@ const PaymentSuccess = () => {
                         <div className='write-review'>
                             <h3>Rate This Website</h3>
 
-                            <textarea name="review" id="review" cols="20" rows="10" placeholder='Write a review' value={review} onChange={e => setReview(e.target.value)} />
+                            <textarea name="review" id="review" cols="10" rows="10" placeholder='Write a review' value={review} onChange={e => setReview(e.target.value)} />
                             <button onClick={submitReview}>Submit</button>
                         </div>
 

@@ -24,6 +24,7 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper";
 import moment from 'moment';
+import Review from './Review';
 
 
 const Website = () => {
@@ -36,9 +37,11 @@ const Website = () => {
     const [websiteData, setWebsiteData] = useState({});
     const [reviews, setReviews] = useState([]);
     const [reviewsTotalStars, setReviewsTotalStars] = useState([]);
+    const [totalUsers, setTotalUsers] = useState([]);
     const navigate = useNavigate();
 
-
+    const total_stars = `<AiFillStar />`.repeat(parseInt(totalUsers / reviews))
+    //  + (<AiFillStar />).repeat(5 - rating);
 
     useEffect(() => {
 
@@ -58,6 +61,7 @@ const Website = () => {
                 setWebsiteData(res.data.website);
                 setRelatedWebsites(res.data.related_websites);
                 setReviews(res.data.reviews);
+                setTotalUsers(res.data.total_users);
 
 
                 Array.from(Array(websiteData.stars), (e, i) => (
@@ -230,37 +234,14 @@ const Website = () => {
                                         <h4>Total Reviews  <span> {reviewsTotalStars}<AiFillStar style={{ color: 'rgb(var(--mid-color))' }} /></span></h4>
                                         <h5>({reviews.length}{reviews.length > 1 ? ' reviews' : ' review'})</h5>
                                         <div className="reviews__stars__container">
-                                            <AiFillStar />
-                                            <AiFillStar />
-                                            <AiFillStar />
-                                            <AiFillStar />
-                                            <AiFillStar />
+                                            {total_stars}
                                         </div>
 
                                         <hr />
 
                                         <div className='website__reviews__container'>
-                                            {reviews?.map((review, index) => (
-                                                <div key={index} className="website__review__card">
-                                                    <div className="name__time__sec">
-                                                        <span className='reviewer_name'>{review.full_name}</span>
-                                                        <span className='reviewer_time'>1 year ago</span>
-                                                    </div>
-
-                                                    <div className='stars_sec'>
-                                                        {
-                                                            review.stars.forEach((star, index) => {
-                                                                <AiFillStar key={index} />
-                                                            })
-                                                        }
-                                                    </div>
-
-                                                    <div className='review_sec'>
-                                                        <p>{review.message}</p>
-                                                    </div>
-
-
-                                                </div>
+                                            {reviews.map(review => (
+                                                <Review id={review.id} text={review.review} name={review.name} date={review.created_at} rating={review.rating} />
                                             ))}
                                         </div>
                                     </div>
