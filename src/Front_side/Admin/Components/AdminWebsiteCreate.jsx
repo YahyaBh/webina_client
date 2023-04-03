@@ -19,6 +19,10 @@ const AdminWebsiteCreate = () => {
     const [category, setCategory] = useState('');
     const [developing_time, setDevelopingTime] = useState('');
     const [specifications, setSpecifications] = useState('');
+    const [technologies, setTechnologies] = useState('');
+    const [tags, setTags] = useState('');
+    const [design, setDesign] = useState('');
+
 
     const [imageValue, setImageValue] = useState(null);
     const [image, setImage] = useState(null);
@@ -42,16 +46,20 @@ const AdminWebsiteCreate = () => {
 
         const websiteData = new FormData();
 
-        websiteData.append('website_name' ,website_name)
-        websiteData.append('description' ,description)
-        websiteData.append('price' ,website_price)
-        websiteData.append('image' ,image)
-        websiteData.append('website_old_price' ,website_old_price)
-        websiteData.append('theme' , theme)
-        websiteData.append('specifications' ,specifications)
-        websiteData.append('Developing_Time' , developing_time)
-        websiteData.append('stars' , stars)
-        websiteData.append('category' , category)
+        websiteData.append('website_name', website_name)
+        websiteData.append('description', description)
+        websiteData.append('price', website_price)
+        websiteData.append('image', image)
+        websiteData.append('website_old_price', website_old_price)
+        websiteData.append('theme', theme)
+        websiteData.append('specifications', specifications)
+        websiteData.append('Developing_Time', developing_time)
+        websiteData.append('stars', stars)
+        websiteData.append('category', category)
+        websiteData.append('technologies', technologies)
+        websiteData.append('design', design)
+        websiteData.append('tags', tags)
+
 
         admin_http.post('/api/admin/website/create', websiteData, {
             headers: {
@@ -99,30 +107,38 @@ const AdminWebsiteCreate = () => {
                                     <input type="file" name='theme_document' placeholder='Choose Theme Document' accept='pdf , psd , fig , jam' onChange={e => setTheme(e.target.files[0])} />
                                 </div>
                             </div>
-                            <label htmlFor="image">Website Name</label>
-                            <input type="text" name='website_name' placeholder='Website Name' onChange={e => setWebsite_name(e.target.value)} />
-                            <label htmlFor="image">Description</label>
-                            <textarea type="text" name='description' placeholder='Description' onChange={e => setDescription(e.target.value)} />
-                            <label htmlFor="image">Category</label>
-                            <input type="text" name='category' placeholder='Category' onChange={e => setCategory(e.target.value)} />
-                            <div className='two-in-one'>
-                                <div className="two">
-                                    <label htmlFor="image">Price</label>
-                                    <input type="number" name='price' placeholder='Price' onChange={e => setWebsite_price(e.target.value)} />
+                            <div>
+                                <label htmlFor="image">Website Name</label>
+                                <input type="text" name='website_name' placeholder='Website Name' onChange={e => setWebsite_name(e.target.value)} />
+                                <label htmlFor="image">Description</label>
+                                <textarea type="text" name='description' placeholder='Description' onChange={e => setDescription(e.target.value)} />
+                                <label htmlFor="image">Category</label>
+                                <input type="text" name='category' placeholder='Category' onChange={e => setCategory(e.target.value)} />
+                                <div className='two-in-one'>
+                                    <div className="two">
+                                        <label htmlFor="image">Price</label>
+                                        <input type="number" name='price' placeholder='Price' onChange={e => setWebsite_price(e.target.value)} />
+                                    </div>
+                                    <div className="two">
+                                        <label htmlFor="image">Old Price</label>
+                                        <input type="number" name='old_price' placeholder='Old Price' onChange={e => setWebsite_old_price(e.target.value)} />
+                                    </div>
                                 </div>
-                                <div className="two">
-                                    <label htmlFor="image">Old Price</label>
-                                    <input type="number" name='old_price' placeholder='Old Price' onChange={e => setWebsite_old_price(e.target.value)} />
-                                </div>
-                            </div>
-                            <label htmlFor="image">Stars</label>
-                            <input type="number" name='stars' placeholder='Starts' min={1} max={5} value={stars} onChange={e => setStars(e.target.value)} />
-                            <label htmlFor="image">Developing Time</label>
-                            <input type="text" name='developing_Time' placeholder='Developing Time' onChange={e => setDevelopingTime(e.target.value)} />
-                            <label htmlFor="image">Specifications</label>
-                            <input type="text" name='specifications' placeholder='Specifications' onChange={e => setSpecifications(e.target.value)} />
+                                <label htmlFor="image">Stars</label>
+                                <input type="number" name='stars' placeholder='Starts' min={1} max={5} value={stars} onChange={e => setStars(e.target.value)} />
+                                <label htmlFor="image">Developing Time</label>
+                                <input type="text" name='developing_Time' placeholder='Developing Time' onChange={e => setDevelopingTime(e.target.value)} />
+                                <label htmlFor="image">Specifications</label>
+                                <input type="text" name='specifications' placeholder='Specifications' onChange={e => setSpecifications(e.target.value)} />
+                                <label htmlFor="image">Technologies</label>
+                                <input type="text" name='technologies' placeholder='Technologies' onChange={e => setSpecifications(e.target.value)} />
+                                <label htmlFor="image">Tags</label>
+                                <input type="text" name='tags' placeholder='Tags' onChange={e => setSpecifications(e.target.value)} />
+                                <label htmlFor="image">Design</label>
+                                <input type="text" name='design' placeholder='Design' onChange={e => setSpecifications(e.target.value)} />
 
-                            <button type='submit'>Add Website</button>
+                                <button type='submit'>Add Website</button>
+                            </div>
                         </form>
                     </div>
                 </div>

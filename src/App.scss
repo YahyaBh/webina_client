@@ -5921,14 +5921,15 @@ body {
     align-items: center;
 
     .website__create__form__container {
-        width: 400px;
+        width: 70%;
 
         .website__create__form {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
             width: 100%;
+            padding: 20px;
 
             .two-in-one {
                 width: 100%;
