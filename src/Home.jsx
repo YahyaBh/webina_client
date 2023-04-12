@@ -1,12 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiFillHtml5, AiOutlineCamera, AiOutlineDatabase, AiOutlineCloudServer } from 'react-icons/ai';
-import { TbBrandJavascript } from 'react-icons/tb';
-import { FaLaravel } from 'react-icons/fa';
-import { DiMysql, DiNodejsSmall, DiReact, DiCss3, DiSass, DiPhp, DiPhotoshop, DiIllustrator, DiVisualstudio } from 'react-icons/di';
-import { SiTypescript, SiAdobepremierepro, SiAdobeaftereffects } from 'react-icons/si';
-import { MdDone, MdError, MdOutlineDesignServices, MdOutlineMiscellaneousServices } from 'react-icons/md';
-import { RiCustomerServiceLine, RiCustomerService2Line } from 'react-icons/ri';
+import { MdDone, MdError } from 'react-icons/md';
+import { RiCustomerService2Line } from 'react-icons/ri';
 import { BiChat, BiDollarCircle, BiTimeFive } from 'react-icons/bi';
 import { CgWebsite } from 'react-icons/cg'
 import { VscDebugAll } from 'react-icons/vsc'
@@ -22,15 +17,12 @@ import { Tooltip as ReactTooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import { useInView } from 'react-intersection-observer';
 import Scroll from 'react-scroll-to-element';
-
-
+import i18next from 'i18next'
+import { useTranslation } from "react-i18next";
 
 import videoHeader from './Assets/Videos/Blurred Video of Scripts Being Typed.mp4';
 import ImageAbout from './Assets/Images/vector_about.png';
 import ImageContact from './Assets/Images/vector_contact.png';
-import YahyaBouhsine from './Assets/Images/profile.b5697fde8b8a45586598.png';
-import Youness from './Assets/Images/youness.png';
-import Moujahid from './Assets/Images/FRAZZIX.png';
 
 
 import './App.scss'
@@ -196,7 +188,26 @@ const Home = () => {
         }
     }
 
+    // const languageMap = {
+    //     en: { label: "English", dir: "ltr", active: true },
+    //     ar: { label: "العربية", dir: "rtl", active: false },
+    // };
 
+    // const selected = localStorage.getItem("i18nextLng") || "en";
+    // const { t } = useTranslation();
+
+    // const [menuAnchor, setMenuAnchor] = useState(null);
+    // useEffect(() => {
+    //     document.body.dir = languageMap[selected].dir;
+    // }, [menuAnchor, selected]);
+
+
+
+    // <button onClick={() => i18next.changeLanguage('ar')}>ARABIC</button>
+    // <button onClick={() => i18next.changeLanguage('en')}>ENGLISH</button>
+
+
+    // {t('welcome_back')}
 
     return (
         active ?
@@ -250,7 +261,7 @@ const Home = () => {
                                         </div>
                                         :
                                         <div className="wrapper" data-aos="fade-right">
-                                            <h1>Welcome Back <span style={{ color: "rgb(var(--mid-color))" }}>
+                                            <h1>WELCOME BACK <span style={{ color: "rgb(var(--mid-color))" }}>
 
                                                 {user && user?.full_name !== null ? user?.full_name.length > 7 ?
                                                     `${user?.full_name.substring(0, 7)}...` : user?.full_name
@@ -316,6 +327,8 @@ const Home = () => {
                         <section className="app__more__about">
                             <div className="app__more__about__content">
                                 <h2 data-aos="fade-down">More About WebIna</h2>
+
+
                                 <p data-aos="fade-right">WebIna is a company that helps you make the business of your dreams come true and our job is to make it so much easier for you.
                                     All you have to do is choose a website from our lists and we assure you that we will finish it as soon as possible so your work goes in the best way possible.</p>
                                 <div className='app__more__about__cards__container'>

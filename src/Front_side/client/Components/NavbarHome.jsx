@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { MdOutlineSegment } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
+import i18next from "i18next";
 
 
 const NavbarHome = (props) => {
@@ -78,6 +79,7 @@ const NavbarHome = (props) => {
                         </a>
 
                         <ul>
+
                             <li>
                                 <Scroll type="id" element="about" offset={-100} timeout={100}>
                                     <button>About</button>
