@@ -1,4 +1,3 @@
-import React, { useLayoutEffect } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Fragment } from "react";
@@ -20,6 +19,7 @@ import Loading from "../../../Assets/Images/WEBINA2.png";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { FaHotjar } from "react-icons/fa"
 
 const Websites = () => {
   const navigate = useNavigate();
@@ -278,6 +278,10 @@ const Websites = () => {
                 className="app__card__website"
                 key={index + website.token + "1"}
               >
+                <div className="hot-badge">
+                  <FaHotjar />
+                  <h2>Hot</h2>
+                </div>
                 <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                 <div className="app__swipper__website__details">
                   <div>
@@ -304,20 +308,19 @@ const Websites = () => {
                   </div>
                 </div>
 
-                <div className="app__website__buttons">
-                  <a
-                    className="app__website__buttons__show"
-                    href={`/website/${website.token}`}
-                  >
-                    SHOW
-                  </a>
-                  <a
-                    className="app__website__buttons__buy"
-                    href={`/website/purchace/${website.token}`}
-                  >
-                    PURCHASE
-                  </a>
-                </div>
+                <a
+                  className="app__website__buttons__show"
+                  href={`/website/${website.token}`}
+                >
+                  SHOW
+                </a>
+                <a
+                  className="app__website__buttons__buy"
+                  href={`/website/purchace/${website.token}`}
+                >
+                  PURCHASE
+                </a>
+
               </div>
             ) : (
               <div
