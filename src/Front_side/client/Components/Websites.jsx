@@ -278,10 +278,11 @@ const Websites = () => {
                 className="app__card__website"
                 key={index + website.token + "1"}
               >
-                <div className="hot-badge">
-                  <FaHotjar />
-                  <h2>Hot</h2>
-                </div>
+                {website.hot === 'yes' ?
+                  <div className="hot-badge">
+                    <FaHotjar />
+                    <h2>Hot</h2>
+                  </div> : ''}
                 <img src={`http://localhost:8000/uploads/websites/${website.image}`} alt={website.name} />
                 <div className="app__swipper__website__details">
                   <div>
