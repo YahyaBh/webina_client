@@ -39,6 +39,7 @@ import AuthUser from "./Front_side/context/AuthUser";
 import Pusher from "pusher-js";
 import Swal from "sweetalert2";
 import Announcements from "./Front_side/client/Components/Announcments";
+import FAQ from "./Front_side/client/Components/FAQ";
 
 
 
@@ -153,6 +154,7 @@ function App() {
         <Route exact path='/website/:token' element={<Website />} />
         <Route exact path='/blogs' element={<Blogs />} />
         <Route exact path='/announcements' element={<Announcements />} />
+        <Route exact path='/frequent-asked-questions' element={<FAQ/>} />
         <Route exact path='/hiring' element={<Hire />} />
         <Route exact path='/about' element={<AboutUs />} />
         <Route exact path="/signin" element={<SignIn />} />
