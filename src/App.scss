@@ -6152,3 +6152,51 @@ body {
         color: #ff0000;
     }
 }
+
+.faq-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+    flex-direction: column;
+
+    .main-title {
+        font-family: Louis-Bold;
+        font-size: 40px;
+        text-transform: uppercase;
+    }
+
+    .section-faq-container {
+        h3 {
+            font-family: Louis-Bold;
+            font-size: 28px;
+        }
+
+        .questions-contianer {
+            .question-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+
+                .header-question {
+                    display: flex;
+                    flex-direction: row;
+                    background-color: rgb(var(--mid-color));
+                    padding: 5px;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    -o-border-radius: 5px;
+                    height: 40px;
+
+                    svg{
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

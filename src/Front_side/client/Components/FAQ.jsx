@@ -1,9 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import AuthUser from '../../context/AuthUser'
 import Loading from '../../../Assets/Images/WEBINA2.png'
 import Navbar from './Navbar';
-import moment from 'moment';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 
 
@@ -37,6 +35,65 @@ const FAQ = () => {
                 <div className="faq-container">
                     <div className="main-title">
                         <h1>Frequent Asked Questions</h1>
+                    </div>
+
+                    <div className='section-faq-container'>
+                        <h3>Services</h3>
+
+
+                        <div className='questions-contianer'>
+
+
+                            <div className="question-container">
+                                <div className="header-question">
+                                    <AiOutlinePlus/>
+                                    <h4>What services do you offer?</h4>
+                                </div>
+
+                                <div className="body-question">
+                                    <p>WebIna I</p>
+                                </div>
+
+                            </div>
+
+                            <div className="question-container">
+                                <div className="header-question">
+                                    <AiOutlinePlus/>
+                                    <h4>What services do you offer?</h4>
+                                </div>
+
+                                <div className="body-question">
+                                    <p>WebIna I</p>
+                                </div>
+
+                            </div>
+
+                            <div className="question-container">
+                                <div className="header-question">
+                                    <AiOutlinePlus/>
+                                    <h4>What services do you offer?</h4>
+                                </div>
+
+                                <div className="body-question">
+                                    <p>WebIna I</p>
+                                </div>
+
+                            </div>
+
+                            <div className="question-container">
+                                <div className="header-question">
+                                    <AiOutlinePlus/>
+                                    <h4>What services do you offer?</h4>
+                                </div>
+
+                                <div className="body-question">
+                                    <p>WebIna I</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
 
