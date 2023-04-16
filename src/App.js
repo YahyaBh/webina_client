@@ -38,6 +38,7 @@ import PaymentWestMoney from "./Front_side/client/Components/PaymentWestMoney";
 import AuthUser from "./Front_side/context/AuthUser";
 import Pusher from "pusher-js";
 import Swal from "sweetalert2";
+import Announcements from "./Front_side/client/Components/Announcments";
 
 
 
@@ -151,6 +152,7 @@ function App() {
         <Route exact path='/websites' element={<Websites />} />
         <Route exact path='/website/:token' element={<Website />} />
         <Route exact path='/blogs' element={<Blogs />} />
+        <Route exact path='/announcements' element={<Announcements />} />
         <Route exact path='/hiring' element={<Hire />} />
         <Route exact path='/about' element={<AboutUs />} />
         <Route exact path="/signin" element={<SignIn />} />
