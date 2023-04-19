@@ -40,6 +40,7 @@ import Pusher from "pusher-js";
 import Swal from "sweetalert2";
 import Announcements from "./Front_side/client/Components/Announcments";
 import FAQ from "./Front_side/client/Components/FAQ";
+import AdminPayments from "./Front_side/Admin/Components/AdminPayments";
 
 
 
@@ -148,6 +149,7 @@ function App() {
         <Route exact path='/admin/news-letters' element={<AdminNews />} />
         <Route exact path='/admin/blogs' element={<AdminBlogs />} />
         <Route exact path='/admin/feedback' element={<Payment />} />
+        <Route exact path='/admin/payments' element={<AdminPayments/>} />
         
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
         <Route exact path='/websites' element={<Websites />} />

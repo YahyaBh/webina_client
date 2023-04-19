@@ -5,6 +5,7 @@ import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar'
 import WesternUnion from '../../../Assets/Images/pngwing.com (1).png'
 import MoneyGram from '../../../Assets/Images/MoneyGram_Logo.svg.png'
+import Loading from '../../pages/Loading';
 
 const PaymentWestMoney = () => {
 
@@ -13,9 +14,7 @@ const PaymentWestMoney = () => {
 
     const { sec_http, getUser } = AuthUser()
 
-
-
-
+    const [loading , setLoading] = useState(true);
 
     useEffect(() => {
         if (getUser) {
@@ -26,9 +25,9 @@ const PaymentWestMoney = () => {
     }, [])
 
     const getCashToken = async () => {
-        await sec_http.get('/api/payment/westmoney')
+        await sec_http.post('/api/payment/westmoney')
             .then(res => {
-
+                setLoading(false);
             })
             .catch(err => {
                 Swal.fire('error', err)
@@ -37,6 +36,8 @@ const PaymentWestMoney = () => {
     }
 
     return (
+        loading ? <Loading/>:
+
         <div>
 
 

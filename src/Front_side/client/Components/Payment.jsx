@@ -111,14 +111,15 @@ const Payment = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate(`/checkout/westernunion/${res.data.cash_payment_token}`, { replace: true });
+                navigate(`/checkout/westernunion/${res.data.payment_token}`, { replace: true });
             })
             .catch(err => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Payment Failed',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    text: err.message
                 })
             })
 
