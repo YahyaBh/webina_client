@@ -39,7 +39,15 @@ const Chat = () => {
 
             const channel = pusher.subscribe("WebIna");
             channel.bind('user-message', function (data) {
-                setMessages(data.message);
+
+                var timestamp = Date.parse(data.timestamp);
+                var now = Date.now();
+                var diff = now - timestamp;
+                if (diff <= 600000) {
+                    setMessages(data.message);
+                } else {
+                    console.log('Timestamp expired:', timestamp, now);
+                }
             });
 
         } else {
