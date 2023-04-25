@@ -1,5 +1,6 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import JoditEditor from 'jodit-react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -7,7 +8,18 @@ import AuthUser from '../../context/AuthUser';
 import Loading from '../../pages/Loading'
 import SideBar from './SideBar'
 
-const AdminBlogs = () => {
+const AdminBlogs = ({ placeholder }) => {
+
+    const editor = useRef(null);
+    const [content, setContent] = useState('');
+
+    const config = useMemo(
+        {
+            readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+            placeholder: placeholder || 'Start typings...'
+        },
+        [placeholder]
+    );
 
     const [loading, setLoading] = useState(true);
 
@@ -53,7 +65,7 @@ const AdminBlogs = () => {
 
 
     const createBlogs = async (e) => {
-e.preventDefault();
+        e.preventDefault();
         const blogForm = new FormData();
 
 
@@ -161,7 +173,7 @@ e.preventDefault();
                                     <h2>{blog.title}</h2>
                                     <p>{blog.body}</p>
 
-                                    <span>{blog.created_at ? moment(blog?.created_at?.split('T')[0] + ' ' + blog?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : '' }</span>
+                                    <span>{blog.created_at ? moment(blog?.created_at?.split('T')[0] + ' ' + blog?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</span>
 
                                     <div>
                                         <MdEdit onClick={editBlogs(blog)} />
@@ -181,7 +193,14 @@ e.preventDefault();
                             <label htmlFor="title">Title</label>
                             <input type="text" placeholder="Title" name="title" id="title" onChange={e => setTitle(e.target.value)} />
                             <label htmlFor="description">Description</label>
-                            <input type="text" placeholder="Description" name="description" id="description" onChange={e => setDescription(e.target.value)} />
+                            <JoditEditor
+                                ref={editor}
+                                value={content}
+                                config={config}
+                                tabIndex={1} // tabIndex of textarea
+                                onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                                // onChange={newContent => { }}
+                            />
                             <label htmlFor="image">Image</label>
                             <input type="file" accept='image/*' name="image" id="image" multiple={false} onChange={e => changeImage(e.target.files[0])} />
 
