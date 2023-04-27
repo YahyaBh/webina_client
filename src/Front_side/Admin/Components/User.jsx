@@ -60,6 +60,24 @@ const User = () => {
             })
     }
 
+    const deleteUser = async () => {
+        admin_http.delete(`/api/admin/user/${params.id}`)
+            .then(res => {
+                navigate('/admin/users')
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Something went wrong',
+                    text: `Oops! ${err.message}`
+                })
+                    .then(res => {
+                        if (res.isConfirmed) {
+                            navigate('/admin/users');
+                        }
+                    })
+            })
+    }
+
 
 
     return (
@@ -86,7 +104,9 @@ const User = () => {
                     <h3><span>Joined At :</span> {user?.created_at}</h3>
                     <h3><span>Verified At :</span> {user?.email_verified_at}</h3>
 
-                    <button className='ban-button' onClick={banUser()}>Ban User</button>
+                    <button className='ban-button' onClick={banUser}>Ban User</button>
+                    <button className='del-button' onClick={deleteUser}>Delete User</button>
+
                 </section>
             </div>
 

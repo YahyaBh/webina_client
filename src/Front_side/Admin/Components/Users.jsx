@@ -13,7 +13,7 @@ const Users = () => {
     const [orderBy, setOrderBy] = useState('name');
     const [users, setUsers] = useState([]);
 
-    const { getAdmin, admin_http, accessToken } = AuthUser();
+    const { getAdmin, admin_http, accessToken , admin } = AuthUser();
 
     const navigate = useNavigate();
 
@@ -65,6 +65,7 @@ const Users = () => {
         }
     }
 
+
     return (
         loading ?
             <Loading />
@@ -101,16 +102,18 @@ const Users = () => {
                         </div>
                         <div className='admin-order-table-body'>
                             {users ? users.map((user, index) => (
-                                <a href={`/admin/user/${user.id}`} className='admin-order-table-row row' key={index}>
-                                    <div className='col-lg-2'><img width={'60px'} src={`http://localhost:8000/uploads/users/${user.avatar}`} alt={user.full_name} /></div>
-                                    <div className='col-lg-1'><h5>{user.id}</h5></div>
-                                    <div className='col-lg-1'><h5>{user.first_name}</h5></div>
-                                    <div className='col-lg-2'><h5>{user.email}</h5></div>
-                                    <div className='col-lg-2'><h5>{user.phone_number ? user.phone_number : 'Not Available'}</h5></div>
-                                    <div className='col-lg-1'><h5>{user.id}$</h5></div>
-                                    <div className='col-lg-2'><h5>{user ? moment(user?.created_at?.split('T')[0] + ' ' + user?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5></div>
-                                    <div className='col-lg-1'><h5>{user.is_banned ? 'Yes' : 'No'}</h5></div>
-                                </a>
+                                user.id !== admin.id ?
+                                    <a href={`/admin/user/${user.id}`} className='admin-order-table-row row' key={index}>
+                                        <div className='col-lg-2'><img width={'60px'} src={`http://localhost:8000/uploads/users/${user.avatar}`} alt={user.full_name} /></div>
+                                        <div className='col-lg-1'><h5>{user.id}</h5></div>
+                                        <div className='col-lg-1'><h5>{user.first_name}</h5></div>
+                                        <div className='col-lg-2'><h5>{user.email}</h5></div>
+                                        <div className='col-lg-2'><h5>{user.phone_number ? user.phone_number : 'Not Available'}</h5></div>
+                                        <div className='col-lg-1'><h5>{user.id}$</h5></div>
+                                        <div className='col-lg-2'><h5>{user ? moment(user?.created_at?.split('T')[0] + ' ' + user?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h5></div>
+                                        <div className='col-lg-1'><h5>{user.is_banned ? 'Yes' : 'No'}</h5></div>
+                                    </a>
+                                    : ''
                             )) :
                                 <div className='admin-order-table-row row'>
                                     <div className='col-lg-12'><h3>No orders Matching This Type Found</h3></div>
