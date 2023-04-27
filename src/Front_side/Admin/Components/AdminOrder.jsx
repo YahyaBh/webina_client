@@ -10,7 +10,7 @@ import SideBar from './SideBar';
 const AdminOrder = () => {
 
     const { id } = useParams();
-    const { admin_http, getAdmin, accessToken } = AuthUser();
+    const { admin_http, getAdmin, accessToken, file_upload } = AuthUser();
 
     const navigate = useNavigate();
 
@@ -77,6 +77,44 @@ const AdminOrder = () => {
             })
     }
 
+
+    const uploadFile = async (e) => {
+        setLoading(true);
+
+        const fileData = new FormData();
+
+        fileData.append('order_id', order.id)
+        fileData.append('file', e.target.files[0])
+
+
+
+        file_upload.post('/admin/sendFile/order', fileData)
+            .then(res => {
+                if (order.status !== 'completed') {
+                    setStatus(order.id, 'completed')
+                } else {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'File Successfully Uploaded'
+                    })
+                }
+                setLoading(false);
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.message,
+                })
+                    .then(res => {
+                        if (res.isConfirmed) {
+                            navigate('/admin/orders')
+                        }
+                    })
+            })
+
+    }
+
     return (
         loading ?
             <Loading />
@@ -96,12 +134,13 @@ const AdminOrder = () => {
                             <h4>Order Status : {order?.status}</h4>
                             <h4>Order Payment Method : {order?.payment_method}</h4>
                             <h4>Client Registration Date : {order ? moment(order?.created_at?.split('T')[0] + ' ' + order?.created_at?.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
-                            <h3 style={{ color : 'green' , fontFamily : 'Louis-Bold'}}>{order?.status ==='completed' ? 'Order is successfuly completed' : ''}</h3>
+                            <h3 style={{ color: 'green', fontFamily: 'Louis-Bold' }}>{order?.status === 'completed' ? 'Order is successfuly completed' : ''}</h3>
                             <div className='order-buttons'>
                                 <button className='confirmation-button' onClick={order?.status === 'processing' ? e => setStatus(order?.id, 'completed') : ''} disabled={order?.status === 'processing' ? order?.status === 'completed' ? true : false : true}>Confirm Order</button>
-                                <button className='process-button' onClick={ order?.status === 'processing' || order?.status === 'pending' ? e => setStatus(order?.id, 'processing') : 'nutt'} disabled={order?.status === 'processing' || order?.status === 'completed' ? true : false}>Process Order</button>
+                                <button className='process-button' onClick={order?.status === 'processing' || order?.status === 'pending' ? e => setStatus(order?.id, 'processing') : 'nutt'} disabled={order?.status === 'processing' || order?.status === 'completed' ? true : false}>Process Order</button>
                                 <button className='cancel-button' onClick={e => setStatus(order?.id, 'decline')} disabled={order?.status === 'completed' || order?.status === 'processing' ? true : false}>Cancel Order</button>
                             </div>
+                            <input className='file' type="file" name='file-website' id='file-website' onChange={e => uploadFile(e)} />
                         </div>
                     </div>
                     <div className='client-web-informations'>

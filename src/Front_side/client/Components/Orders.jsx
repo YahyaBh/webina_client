@@ -12,7 +12,7 @@ const Orders = () => {
 
     const navigate = useNavigate();
 
-    const { sec_http, user, getToken } = AuthUser();
+    const { sec_http, user } = AuthUser();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState(null);
     const [websites, setwebsites] = useState(null);
@@ -33,7 +33,7 @@ const Orders = () => {
             });
 
 
-            
+
 
 
         } else {
@@ -96,6 +96,34 @@ const Orders = () => {
     }
 
 
+    const donwloadWebsite = async (order) => {
+        setLoading(true);
+        const orderData = new FormData();
+
+
+        orderData.append('order_token', order.order_number);
+
+        sec_http.post('/api/websites/download', orderData, {
+            responseType: 'blob'
+        })
+            .then(res => {
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `${order.order_number}`); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+                setLoading(false)
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error downloading',
+                    text: 'Something went wrong!',
+                })
+            })
+    }
+
     return (
         loading ?
             <div className='loading-container'>
@@ -133,7 +161,7 @@ const Orders = () => {
                                         <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
                                         <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>
-                                        <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status}</h4>
+                                        <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status} {order.status === 'completed' ? <button onClick={e => donwloadWebsite(order)}>Download</button> : ''}</h4>
                                         <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
                                     </a>
 

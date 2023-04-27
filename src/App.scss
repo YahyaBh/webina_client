@@ -5859,6 +5859,10 @@ body {
             background-color: rgb(var(--mid-color));
         }
     }
+
+    .file {
+        margin-top: 20px;
+    }
 }
 
 .website__create__container {
@@ -6192,7 +6196,7 @@ body {
                     -o-border-radius: 5px;
                     height: 40px;
 
-                    svg{
+                    svg {
                         font-size: 25px;
                     }
                 }
@@ -6201,12 +6205,9 @@ body {
     }
 }
 
-
 .user-container {
     margin-left: 10%;
     padding: 30px;
-
-
 
     header {
         h1 {

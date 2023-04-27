@@ -57,6 +57,14 @@ export default function AuthUser() {
         }
     }) : null;
 
+    const file_upload = getAdmin ? axios.create({
+        baseURL: `${baseUrl}/api`,
+        headers: {
+            'content-type': 'multipart/form-data',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    }) : null;
+
     const admin_http = getAdmin ? axios.create({
         baseURL: baseUrl,
         headers: {
@@ -71,6 +79,7 @@ export default function AuthUser() {
         csrf,
         sec_http,
         image_upload,
+        file_upload,
         user,
         getUser,
         setUser,
