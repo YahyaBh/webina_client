@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import JoditEditor from 'jodit-react';
+import  JoditEditor from 'jodit-react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -8,18 +8,16 @@ import AuthUser from '../../context/AuthUser';
 import Loading from '../../pages/Loading'
 import SideBar from './SideBar'
 
-const AdminBlogs = ({ placeholder }) => {
 
-    const editor = useRef(null);
+
+const AdminBlogs = () => {
+
     const [content, setContent] = useState('');
 
-    const config = useMemo(
-        {
-            readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-            placeholder: placeholder || 'Start typings...'
-        },
-        [placeholder]
-    );
+    const handleChange = (value) => {
+        setContent(value);
+    }
+
 
     const [loading, setLoading] = useState(true);
 
@@ -193,14 +191,7 @@ const AdminBlogs = ({ placeholder }) => {
                             <label htmlFor="title">Title</label>
                             <input type="text" placeholder="Title" name="title" id="title" onChange={e => setTitle(e.target.value)} />
                             <label htmlFor="description">Description</label>
-                            <JoditEditor
-                                ref={editor}
-                                value={content}
-                                config={config}
-                                tabIndex={1} // tabIndex of textarea
-                                onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                                // onChange={newContent => { }}
-                            />
+                            <JoditEditor value={content} onChange={handleChange} />
                             <label htmlFor="image">Image</label>
                             <input type="file" accept='image/*' name="image" id="image" multiple={false} onChange={e => changeImage(e.target.files[0])} />
 
