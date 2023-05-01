@@ -137,7 +137,8 @@ const Websites = () => {
       <section className="app__websites__container">
         <h2 className="title-for-section-app-websites">Recently Added</h2>
 
-        <Swiper
+
+        {!websites ? <Swiper
           slidesPerView={3}
           slidesPerGroup={1}
           spaceBetween={30}
@@ -250,7 +251,10 @@ const Websites = () => {
             )
           )}
         </Swiper>
-      </section>
+        : 
+          <h2>No Websites Are Currently Available</h2>
+        }
+              </section>
 
       <section className="app__websites__all">
         <div className="title-container">
