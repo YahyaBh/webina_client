@@ -166,7 +166,7 @@ const Orders = () => {
                                             <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status}</h4>
                                             <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
                                         </a>
-                                        {order.status === 'completed' ? <button onClick={e => donwloadWebsite(e, order)}>Download</button> : ''}
+                                        {order.status === 'completed' ? <button className='download-project-button' onClick={e => donwloadWebsite(e, order)}>Download <span>{order?.notes}</span></button> : ''}
                                     </>
 
                                 ))
