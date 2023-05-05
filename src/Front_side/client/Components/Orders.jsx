@@ -104,7 +104,7 @@ const Orders = () => {
 
         orderData.append('order_token', order.order_number);
 
-        sec_http.post('/api/websites/download', orderData, {
+        sec_http.post('/api/order/download', orderData, {
             responseType: 'blob'
         })
             .then(res => {
