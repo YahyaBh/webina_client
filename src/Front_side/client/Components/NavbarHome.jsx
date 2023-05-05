@@ -3,12 +3,11 @@ import Scroll from 'react-scroll-to-element';
 import AuthUser from '../../context/AuthUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import WebInaLogo from '../../../Assets/Images/webinai.png';
+import WebInaLogo from '../../../Assets/Images/WEBINA2.png';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { MdOutlineSegment } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
-import i18next from "i18next";
 
 
 const NavbarHome = (props) => {

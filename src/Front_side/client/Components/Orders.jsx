@@ -96,10 +96,11 @@ const Orders = () => {
     }
 
 
-    const donwloadWebsite = async (order) => {
+    const donwloadWebsite = async (e, order) => {
         setLoading(true);
         const orderData = new FormData();
 
+        e.stopPropagation();
 
         orderData.append('order_token', order.order_number);
 
@@ -119,7 +120,7 @@ const Orders = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error downloading',
-                    text: 'Something went wrong!',
+                    text: err.message,
                 })
             })
     }
@@ -157,13 +158,16 @@ const Orders = () => {
                             </div>
                             {orders && orders.length > 0 ?
                                 orders.map((order, index) => (
-                                    <a key={index} className="order-data-each row" href={`/order/${order.order_number}`}>
-                                        <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
-                                        <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
-                                        <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>
-                                        <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status} {order.status === 'completed' ? <button onClick={e => donwloadWebsite(order)}>Download</button> : ''}</h4>
-                                        <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
-                                    </a>
+                                    <>
+                                        <a key={index} className="order-data-each row" href={`/order/${order.order_number}`}>
+                                            <h4 className='col-lg-4 col-md-12'><span className='small-screens'>Order Number : </span>{order.order_number}</h4>
+                                            <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Website Name : </span>{order?.notes}</h4>
+                                            <h4 className='col-lg-2 col-md-12'><span className='small-screens'>Total Price : </span>{order?.grand_total ? order.grand_total + '$' : ''}</h4>
+                                            <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status}</h4>
+                                            <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
+                                        </a>
+                                        {order.status === 'completed' ? <button onClick={e => donwloadWebsite(e, order)}>Download</button> : ''}
+                                    </>
 
                                 ))
                                 :
