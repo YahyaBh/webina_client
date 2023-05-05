@@ -83,7 +83,7 @@ const AdminOrder = () => {
 
         const fileData = new FormData();
 
-        fileData.append('order_id', order.id)
+        fileData.append('order_token', order.order_number)
         fileData.append('file', e.target.files[0])
 
 
@@ -140,7 +140,8 @@ const AdminOrder = () => {
                                 <button className='process-button' onClick={order?.status === 'processing' || order?.status === 'pending' ? e => setStatus(order?.id, 'processing') : 'nutt'} disabled={order?.status === 'processing' || order?.status === 'completed' ? true : false}>Process Order</button>
                                 <button className='cancel-button' onClick={e => setStatus(order?.id, 'decline')} disabled={order?.status === 'completed' || order?.status === 'processing' ? true : false}>Cancel Order</button>
                             </div>
-                            <input className='file' type="file" name='file-website' id='file-website' onChange={e => uploadFile(e)} />
+
+                            {order?.status === 'processing' ? <input className='file' type="file" name='file-website' id='file-website' onChange={e => uploadFile(e)} /> : ''}
                         </div>
                     </div>
                     <div className='client-web-informations'>

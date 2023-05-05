@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
+import './customSwal.scss'
 
 import Users from "./Front_side/Admin/Components/Users";
 import Discounts from "./Front_side/Admin/Components/Discounts";

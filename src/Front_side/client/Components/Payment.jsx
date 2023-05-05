@@ -85,65 +85,65 @@ const Payment = () => {
         }
     }
 
-    const submitMonWest = async (e) => {
-        e.preventDefault();
+    // const submitMonWest = async (e) => {
+    //     e.preventDefault();
 
 
-        const cashForm = new FormData();
+    //     const cashForm = new FormData();
 
 
-        cashForm.append('website_token', params.token);
+    //     cashForm.append('website_token', params.token);
 
-        cashForm.append('full_name', full_name);
-        cashForm.append('email', email);
-        cashForm.append('phone', phone);
-        cashForm.append('city', city);
-        cashForm.append('country', country);
-        cashForm.append('method', paymentMethods);
-        cashForm.append('postal_code', zipCode);
-        cashForm.append('discount', discount);
+    //     cashForm.append('full_name', full_name);
+    //     cashForm.append('email', email);
+    //     cashForm.append('phone', phone);
+    //     cashForm.append('city', city);
+    //     cashForm.append('country', country);
+    //     cashForm.append('method', paymentMethods);
+    //     cashForm.append('postal_code', zipCode);
+    //     cashForm.append('discount', discount);
 
-        sec_http.post('/api/checkout/cash', cashForm)
-            .then(res => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Payment Successful',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                navigate(`/checkout/westernunion/${res.data.payment_token}`, { replace: true });
-            })
-            .catch(err => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Payment Failed',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    text: err.message
-                })
-            })
+    //     sec_http.post('/api/checkout/cash', cashForm)
+    //         .then(res => {
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Payment Successful',
+    //                 showConfirmButton: false,
+    //                 timer: 1500
+    //             })
+    //             navigate(`/checkout/westernunion/${res.data.payment_token}`, { replace: true });
+    //         })
+    //         .catch(err => {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Payment Failed',
+    //                 showConfirmButton: false,
+    //                 timer: 1500,
+    //                 text: err.message
+    //             })
+    //         })
 
-    }
+    // }
 
-    const paypalCheckout = async (e) => {
+    // const paypalCheckout = async (e) => {
 
-        setHandleShow('paypal')
+    //     setHandleShow('paypal')
 
-        const websiteForm = new FormData();
+    //     const websiteForm = new FormData();
 
 
-        websiteForm.append('website_name', websiteData.website_name);
-        websiteForm.append('price', websiteData.price);
-        websiteForm.append('description', websiteData.description);
-        websiteForm.append('website_token', websiteData.token);
+    //     websiteForm.append('website_name', websiteData.website_name);
+    //     websiteForm.append('price', websiteData.price);
+    //     websiteForm.append('description', websiteData.description);
+    //     websiteForm.append('website_token', websiteData.token);
 
-        sec_http ?
-            await sec_http.post(`/api/checkout/paypal`, websiteForm)
-                .then((res) => {
-                })
-            :
-            navigate('/', { replace: true });
-    }
+    //     sec_http ?
+    //         await sec_http.post(`/api/checkout/paypal`, websiteForm)
+    //             .then((res) => {
+    //             })
+    //         :
+    //         navigate('/', { replace: true });
+    // }
 
 
     const getDiscount = async () => {
@@ -207,7 +207,7 @@ const Payment = () => {
                                 </div>
 
                                 <div style={{ display: paymentMethods === 'westrenunion' || paymentMethods === 'moneygram' ? 'block' : 'none' }}>
-                                    <form className='form-money-west' onSubmit={submitMonWest} >
+                                    {/* <form className='form-money-west' onSubmit={submitMonWest} >
                                         <h4 style={{ fontFamily: 'Louis-Bold', marginTop: '20px' }}>{paymentMethods === 'moneygram' ? 'MoneyGram' : 'WesternUnion'}</h4>
                                         <input type="text" name='full_name' onChange={(e) => setFullName(e.target.value)} value={full_name} placeholder="Full Name" />
                                         <PhoneInput limitMaxLength={true} addInternationalOption={false} defaultCountry="MA" flagUrl='../../Images/Flags/{XX}.svg' value={phone} onChange={setPhone} name='phone' />
@@ -472,7 +472,7 @@ const Payment = () => {
 
 
                                         <button className='button-check' type='submit' disabled={full_name === '' || email === '' || country === '' || city === '' || zipCode === '' ? true : false} >Check Out</button>
-                                    </form>
+                                    </form> */}
                                 </div>
                             </div>
                         </div>
@@ -486,7 +486,7 @@ const Payment = () => {
                             </div>
                         </div>
                         <div className="pay-with-paypal">
-                            <button onClick={paypalCheckout} className={paymentMethods === 'paypal' ? 'select-div-pay' : 'selected-div-pay'}>
+                            <button disabled={true} className={paymentMethods === 'paypal' ? 'select-div-pay' : 'selected-div-pay'}>
                                 <h4>PayPal</h4> <img src={PayPal} alt="payapl-png" width='40px' />
                             </button>
                         </div>

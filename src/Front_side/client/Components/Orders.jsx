@@ -2,6 +2,7 @@ import moment from 'moment';
 import Pusher from 'pusher-js';
 import { Fragment, useEffect, useState } from 'react';
 import { BsArrowLeftShort } from 'react-icons/bs';
+import { AiOutlineDownload } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loading from '../../../Assets/Images/WEBINA2.png';
@@ -111,10 +112,22 @@ const Orders = () => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', `${order.order_number}`); //or any other extension
+                link.setAttribute('download', `${order.file}`); //or any other extension
                 document.body.appendChild(link);
                 link.click();
-                setLoading(false)
+                setLoading(false);
+                Swal.fire({
+                    title: 'Downloaded Successfully',
+                    text: 'You have successfully downloaded your website to this computer !',
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'Okay !',
+                    customClass: {
+                        confirmButton: 'confirm-button-class',
+                        title: 'title-class',
+                        icon: 'icon-class'
+                    },
+                })
             })
             .catch(err => {
                 Swal.fire({
@@ -166,7 +179,7 @@ const Orders = () => {
                                             <h4 className={orderStatus(order.status)}><span className='small-screens'>Order Status : </span>{order.status}</h4>
                                             <h4 className='col-lg-2 col-md-12' ><span className='small-screens'>Order Date : </span>{order ? moment(order.created_at.split('T')[0] + ' ' + order.created_at.split('T')[1].slice(0, 8), "YYYY-MM-DD hh:mm:ss").fromNow() : ''}</h4>
                                         </a>
-                                        {order.status === 'completed' ? <button className='download-project-button' onClick={e => donwloadWebsite(e, order)}>Download <span>{order?.notes}</span></button> : ''}
+                                        {order.status === 'completed' ? <button className='download-project-button' onClick={e => donwloadWebsite(e, order)}>Download <span>{order?.notes}</span> <AiOutlineDownload /></button> : ''}
                                     </>
 
                                 ))

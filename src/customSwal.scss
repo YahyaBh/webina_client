@@ -1,0 +1,44 @@
+.confirm-button-class {
+    background-color: red !important;
+    color: white !important;
+    border: none !important;
+}
+
+.title-class {
+    font-size: 15px !important;
+}
+
+.icon-class {
+    font-size: 10px !important;
+}
+
+.confirm-button-class .swal2-icon svg {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+.swal2-actions .swal2-confirm {
+    background-color: #f1c40f !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-family: 'Louis-Bold';
+
+}
+
+.swal2-actions .swal2-cancel {
+    border-color: #f1c40f !important;
+    box-shadow: none !important;
+    border: none !important;
+    font-family: 'Louis-Bold';
+}
+
+.swal2-confirm:focus,
+.swal2-cancel:focus {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.swal2-actions button:hover {
+    border: none !important;
+}
