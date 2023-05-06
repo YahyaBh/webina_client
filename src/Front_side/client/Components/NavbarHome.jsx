@@ -104,7 +104,7 @@ const NavbarHome = (props) => {
                                 <a href='/frequent-asked-questions'>FAQ</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href='/' className='disabled' disabled={'disabled'}>Hire Me</a>
                             </li>
                             <li>
                                 <Scroll type="id" element="contact" offset={-100} timeout={100}>
@@ -153,7 +153,7 @@ const NavbarHome = (props) => {
                                 <a href='/frequent-asked-questions'>FAQs</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href='/' className='disabled' disabled={'disabled'}>Hire Me</a>
                             </li>
                             <li>
                                 <Scroll type="id" element="contact" offset={-100} timeout={100}>
@@ -203,7 +203,7 @@ const NavbarHome = (props) => {
                                 <a href='/frequent-asked-questions'>FAQ</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href='/' className='disabled' disabled={'disabled'}>Hire Me</a>
                             </li>
                             <li>
                                 <Scroll type="id" element="contact" offset={-100} timeout={100}>
@@ -262,7 +262,7 @@ const NavbarHome = (props) => {
                                 <a href='/frequent-asked-questions'>FAQs</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href='/' className='disabled' disabled={'disabled'}>Hire Me</a>
                             </li>
                             <li>
                                 <Scroll type="id" element="contact" offset={-100} timeout={100}>

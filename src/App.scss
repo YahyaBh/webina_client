@@ -2974,7 +2974,7 @@ body {
 .app__header__websites_container {
     background-color: rgb(var(--mid-color));
     padding: 20px 0px;
-    height: 50dvh;
+    height: 20dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3425,13 +3425,19 @@ body {
                 align-items: flex-start;
                 flex-direction: row;
                 justify-content: space-between;
+                gap: 4px;
+
 
                 h3 {
                     text-transform: capitalize;
+                    flex: 1;
+                
                 }
 
                 h4 {
                     font-size: 30px;
+                    font-family: Louis-Bold;
+                flex: 1;
                 }
             }
 

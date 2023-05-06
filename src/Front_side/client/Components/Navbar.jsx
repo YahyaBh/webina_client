@@ -1,7 +1,5 @@
 import './Navbar.scss'
-import Scroll from 'react-scroll-to-element';
 import AuthUser from '../../context/AuthUser';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import WebInaLogo from '../../../Assets/Images/WEBINA2.png';
 import { useEffect } from 'react';
@@ -74,7 +72,7 @@ const NavbarHome = () => {
                                 <a href='/frequent-asked-questions'>FAQ</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href='/' className='disabled' disabled={'disabled'}>Hire Me</a>
                             </li>
                             <li>
                                 <a href='/conatact'>Contact</a>
@@ -117,7 +115,7 @@ const NavbarHome = () => {
                                 <a href='/frequent-asked-questions'>FAQs</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href="/" className='disabled' disabled={"disabled"}>Hire Me</a>
                             </li>
                             <li>
                                 <a href='/contact'>Contact</a>
@@ -161,7 +159,7 @@ const NavbarHome = () => {
                                 <a href='/frequent-asked-questions'>FAQ</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href="/" className='disabled' disabled={"disabled"}>Hire Me</a>
                             </li>
                             <li>
                                 <a href='/contact'>Contact</a>
@@ -214,7 +212,7 @@ const NavbarHome = () => {
                                 <a href='/frequent-asked-questions'>FAQs</a>
                             </li>
                             <li>
-                                <a href='/hiring'>Hire Me</a>
+                                <a href="/" className='disabled' disabled={"disabled"}>Hire Me</a>
                             </li>
                             <li>
                                 <a href='/contact'>Contact</a>

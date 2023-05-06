@@ -152,12 +152,13 @@ function App() {
         <Route exact path='/admin/payments' element={<AdminPayments/>} />
         
         <Route exact path="/privacy&policy" element={<PrivacyPolicy />} />
+        <Route exact path='/websites/' element={<Websites />} />
         <Route exact path='/websites/:web_type' element={<Websites />} />
         <Route exact path='/website/:token' element={<Website />} />
         <Route exact path='/blogs' element={<Blogs />} />
         <Route exact path='/announcements' element={<Announcements />} />
         <Route exact path='/frequent-asked-questions' element={<FAQ/>} />
-        <Route exact path='/hiring' element={<Hire />} />
+        {/* <Route exact path='/hiring' element={<Hire />} /> */}
         <Route exact path='/about' element={<AboutUs />} />
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/signup" element={<SignUp />} />
