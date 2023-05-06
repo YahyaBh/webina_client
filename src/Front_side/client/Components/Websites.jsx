@@ -17,12 +17,13 @@ import Navbar from "./Navbar";
 import Loading from "../../../Assets/Images/WEBINA2.png";
 
 import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { FaHotjar } from "react-icons/fa"
 
 const Websites = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [websites, setWebsites] = useState([]);
   const [recentWebsites, setRecentWebsites] = useState([]);
 
@@ -37,11 +38,11 @@ const Websites = () => {
 
   useEffect(() => {
     getWebsites();
+
   }, []);
 
 
   useEffect(() => {
-
     if (activeFilter === "All") {
       if (filterWebsites === 'All') {
         return;
@@ -72,7 +73,12 @@ const Websites = () => {
             ]);
           }
 
-          setActiveFilter('All')
+
+          if (params.web_type) {
+            setActiveFilter(params.web_type);
+          } else {
+            setActiveFilter('All')
+          }
         } else {
           Swal.fire({
             title: "Oops...",
@@ -81,6 +87,7 @@ const Websites = () => {
           });
         }
       });
+
       await http.post("/api/recent/websites").then((res) => {
         setRecentWebsites(res.data.websites);
       });
@@ -112,6 +119,24 @@ const Websites = () => {
     }
 
   };
+
+
+  const StarRating = ({ rating }) => {
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<AiFillStar key={i} />);
+      } else {
+        stars.push(<AiOutlineStar key={i} />);
+      }
+    }
+
+    return <div className="starts-feed">{stars}</div>;
+  };
+
+
+
   return loading ? (
     <div className="loading-container">
       <img src={Loading} alt="loading-web" />
@@ -138,7 +163,7 @@ const Websites = () => {
         <h2 className="title-for-section-app-websites">Recently Added</h2>
 
 
-        {!websites ? <Swiper
+        {websites ? <Swiper
           slidesPerView={3}
           slidesPerGroup={1}
           spaceBetween={30}
@@ -154,9 +179,6 @@ const Websites = () => {
             delay: 5000,
             disableOnInteraction: false,
           }}
-          // pagination={{
-          //     null
-          // }}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
         >
@@ -176,15 +198,14 @@ const Websites = () => {
                       <div className="main__details">
                         <h3 title="website name">{website.website_name}</h3>
                         <h4 title="price">
-                          <span>{website.price}</span>
-                          {website.price}${" "}
+                          <span>{website.price}$</span>
                           {website.old_price ? (
                             <sub>
-                              <del>{website.old_price}</del>
+                              <del>{website.old_price}$</del>
                             </sub>
-                          ) : (
+                          ) : 
                             ""
-                          )}
+                          }
                         </h4>
                       </div>
                       <p title="description">
@@ -194,13 +215,7 @@ const Websites = () => {
                             : website.description
                           : ""}
                       </p>
-                      <h4 className="starts-feed">
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiOutlineStar />
-                      </h4>
+                      <StarRating rating={website.stars} />
                       <h4 className="app__website__category" title="category">
                         {website.category}
                       </h4>
@@ -230,7 +245,7 @@ const Websites = () => {
                           {website.price}${" "}
                           {website.old_price ? (
                             <sub>
-                              <del>{website.old_price}</del>
+                              <del>{website.old_price}$</del>
                             </sub>
                           ) : (
                             ""
@@ -251,10 +266,10 @@ const Websites = () => {
             )
           )}
         </Swiper>
-        : 
+          :
           <h2>No Websites Are Currently Available</h2>
         }
-              </section>
+      </section>
 
       <section className="app__websites__all">
         <div className="title-container">
@@ -296,15 +311,17 @@ const Websites = () => {
                         {website.price}${" "}
                         {website.old_price ? (
                           <sub>
-                            <del>{website.old_price}</del>
+                            <del>{website.old_price}$</del>
                           </sub>
                         ) : (
                           ""
                         )}
                       </h4>
                     </div>
-                    <p title="description">{website.description}</p>
-                    <h4 className="app__website__category" title="category">
+                    <p title="description">
+                      {website && website?.description !== null ? website?.description.length >= 28 ?
+                        `${website?.description.substring(0, 28)}...` : website?.description
+                        : ''}</p>                    <h4 className="app__website__category" title="category">
                       {website.category}
                     </h4>
                     <h4 className="app__website__dev_time">
@@ -343,14 +360,17 @@ const Websites = () => {
                         {website.price}${" "}
                         {website.old_price ? (
                           <sub>
-                            <del>{website.old_price}</del>
+                            <del>{website.old_price}$</del>
                           </sub>
                         ) : (
                           ""
                         )}
                       </h4>
                     </div>
-                    <p title="description">{website.description}</p>
+                    <p title="description">
+                      {website && website?.description !== null ? website?.description.length >= 12 ?
+                        `${website?.description.substring(0, 12)}...` : website?.description
+                        : ''}</p>
                     <h4 className="app__website__category" title="category">
                       {website.category}
                     </h4>

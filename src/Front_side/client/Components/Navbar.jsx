@@ -56,9 +56,9 @@ const NavbarHome = () => {
                             <li>
                                 <a href='/about'>About</a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href='/categories'>Categories</a>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <a href='/websites'>Websites</a>
@@ -99,9 +99,9 @@ const NavbarHome = () => {
                             <li>
                                 <a href='/about'>About</a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href='/categories'>Categories</a>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <a href='/websites'>Websites</a>
@@ -143,9 +143,9 @@ const NavbarHome = () => {
                             <li>
                                 <a href='/about'>About</a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href='/categories'>Categories</a>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <a href='/websites'>Websites</a>
@@ -196,9 +196,9 @@ const NavbarHome = () => {
                             <li>
                                 <a href='/about'>About</a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href='/categories'>Categories</a>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <a href='/websites'>Websites</a>

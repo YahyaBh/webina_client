@@ -575,7 +575,7 @@ const Home = () => {
 
                             <div className="app__categories__cards">
                                 <div className="app__categories__cards__sep">
-                                    <div data-aos="fade-right" className="app__categories__card">
+                                    <a href='/websites/e-commerce' data-aos="fade-right" className="app__categories__card">
                                         <div className="app__categories__card__content">
                                             <div className="app__categories__card__content__image">
                                                 <img className="app__categories__card__content" src="./Images/e-commerce.jpg" alt="e-commerce" />
@@ -584,8 +584,8 @@ const Home = () => {
 
                                             </div>
                                         </div>
-                                    </div>
-                                    <div data-aos="fade-right" className="app__categories__card">
+                                    </a>
+                                    <a href='/websites/landing' data-aos="fade-right" className="app__categories__card">
                                         <div className="app__categories__card__content">
                                             <div className="app__categories__card__content__image">
                                                 <img className="app__categories__card__content" src="./Images/landing.jpg" alt="landing-page" />
@@ -593,9 +593,9 @@ const Home = () => {
                                                 <div className="app__categories__card__content__description">Make a single web page that appears marketing promotions, marketing emails or an online advertisements.</div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
 
-                                    <div data-aos="fade-right" className="app__categories__card">
+                                    <a href='/websites/blogs' data-aos="fade-right" className="app__categories__card">
                                         <div className="app__categories__card__content">
                                             <div className="app__categories__card__content__image">
                                                 <img className="app__categories__card__content" src="./Images/blog.jpg" alt="blog" />
@@ -603,9 +603,9 @@ const Home = () => {
                                                 <div className="app__categories__card__content__description">Make single web page that appears marketing promotion, marketing email or an online advertisement.</div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
 
-                                    <div data-aos="fade-right" className="app__categories__card">
+                                    <a href='/websites/portfolio' data-aos="fade-right" className="app__categories__card">
                                         <div className="app__categories__card__content">
                                             <div className="app__categories__card__content__image">
                                                 <img className="app__categories__card__content" src="./Images/portfolio.jpg" alt="portfolio" />
@@ -613,7 +613,7 @@ const Home = () => {
                                                 <div className="app__categories__card__content__description">Make single web page that appears marketing promotion, marketing email or an online advertisement.</div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
 
 
                                 </div>

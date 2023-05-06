@@ -10,7 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color) !important;
   scroll-behavior: smooth;
+  text-decoration: none !important;
 }
+
 
 
 * {

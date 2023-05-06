@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import AuthUser from '../../context/AuthUser';
 import Navbar from './Navbar';
 import Loading from '../../pages/Loading'
+import Footer from './Footer';
 
 const Order = () => {
 
@@ -83,7 +84,22 @@ const Order = () => {
                     </div>
 
 
+                    <div className="options-user">
+                        {order && order.status === 'completed' && order.file ? <button>Download {website.website_name}</button> : `You Can Download ${website.website_name} Once It Is Available`}
+                    
+                        <a href='/contact'>Deploy My Website</a>
+
+                        <a href='/contact'>Having a problem ?</a>
+                    </div>
+
+                    <div className="remeber">
+                        <p>Please remember to save your website locally or in any other clouds , in order if any technical problems happened.</p>
+                        <p>If you have any problems , make sure to contact us</p>
+                    </div>
+
                 </div>
+
+                <Footer/>
 
             </div >
     )
