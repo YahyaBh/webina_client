@@ -62,16 +62,27 @@ const Order = () => {
                     <Navbar />
                 </div>
 
-                <h1>{website ? website.website_name : null}
-                </h1>
-                <br />
-                {order ? order.order_number : null}
 
-                <br />
+                <div className="order-container">
+                    <h2>{website ? website.website_name : null}</h2>
 
 
-                <div className='sk_bg big'>
-                    <img src={website ? website.image : null} alt='' />
+                    <div className="split-o-det">
+                        <div className="order-details">
+                            <h2>Order Number : {order ? order.order_number : null}</h2>
+                            <h2>Total Price : {order ? order.grand_total : null}$</h2>
+                            <h2>Is Paid : {order ? order.is_paid === 1 ? 'Yes' : 'Not Paid' : null}</h2>
+                            <h2>Payment Method : {order ? order.payment_method : null}</h2>
+                            <h2>Ordered At : {order ? order.created_at.substring(0 , 10) : null}</h2>
+                            <h2>Website Name : {website && order ? website.website_name : null}</h2>
+                        </div>
+
+                        <div className={website.image ? 'sk_bg' : 'image-container'}>
+                            <img src={website ? website.image : null} alt='' />
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>

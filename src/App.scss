@@ -4255,8 +4255,6 @@ body {
         align-items: center;
         box-shadow: 0 0 10px 0 rgba(var(--heavy-color), 0.05);
 
-        
-
         @media screen and (max-width: 900px) {
             display: none;
         }
@@ -4271,7 +4269,7 @@ body {
         font-size: 30px;
         border-radius: 30px;
         margin-bottom: 50px;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
 
         span {
             color: #000;
@@ -4280,7 +4278,7 @@ body {
         &:hover {
             background-color: #000;
             color: rgb(var(--mid-color));
-            transform: scale(.95);
+            transform: scale(0.95);
             span {
                 color: #fff;
             }
@@ -4934,9 +4932,6 @@ body {
             }
         }
     }
-}
-
-.single-order {
 }
 
 .sk_bg {
@@ -6279,6 +6274,56 @@ body {
             padding: 10px;
             width: 200px;
             font-family: Louis-Bold;
+        }
+    }
+}
+
+.order-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 0 0 0;
+
+    h2 {
+        font-size: 40px;
+        font-family: Louis-Bold;
+    }
+
+    .split-o-det {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 100px;
+
+        .order-details {
+            h2 {
+                font-family: Louis;
+                font-size: 25px;
+            }
+        }
+
+        .sk_bg {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-name: sk_bg_animation;
+            animation-name: sk_bg_animation;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            background: #787879;
+            background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+            background-size: 800px 104px;
+            position: relative;
+            width: 600px;
+            height: 300px;
+            margin: 50px;
         }
     }
 }
