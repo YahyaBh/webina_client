@@ -73,19 +73,19 @@ const Order = () => {
                             <h2>Total Price : {order ? order.grand_total : null}$</h2>
                             <h2>Is Paid : {order ? order.is_paid === 1 ? 'Yes' : 'Not Paid' : null}</h2>
                             <h2>Payment Method : {order ? order.payment_method : null}</h2>
-                            <h2>Ordered At : {order ? order.created_at.substring(0 , 10) : null}</h2>
+                            <h2>Ordered At : {order ? order.created_at.substring(0, 10) : null}</h2>
                             <h2>Website Name : {website && order ? website.website_name : null}</h2>
                         </div>
 
-                        <div className={website.image ? 'sk_bg' : 'image-container'}>
-                            <img src={website ? website.image : null} alt='' />
+                        <div className={website ? 'image-container' : 'sk_bg'}>
+                            < img src={website ? `http://localhost:8000/uploads/websites/${website.image}` : null} alt='' />
                         </div>
                     </div>
 
 
                 </div>
 
-            </div>
+            </div >
     )
 }
 
